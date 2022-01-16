@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.webp">
-  <title>Yosoro | Mikyi喵喵呜~</title>
+  <title>Hive 常用函数 | Mikyi喵喵呜~</title>
   <meta name="author" content="Mikyi" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="律己" />
+    <meta name="keywords" content="Functions, Hive/Spark, Short-cuts" />
   
-  <meta name="description" content="失格A - antifragile : 永远谨记克服自己的脆弱性 D - determine : 遇事五分钟内做出决定 F - family : 家庭需要理解 ( understanding ) 来维持，但更需要表达 ( expressing )">
+  <meta name="description" content="字符串函数instr(stringA, stringB) 返回从 1 开始找到的 stringB 的下标号，若未找到则返回 0 substr(string, start, length) 返回子串，结合上方函数可执行定向截取 注意如 “2314124_001” 若需要截取 “_“ 之前的则用 **substr(s,1,instr(s,’_’)-1)**，即 substr 函数会取到左右的闭区间 J">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Yosoro">
-<meta property="og:url" content="http://remedios14.github.io/2021/12/15/Yosoro/index.html">
+<meta property="og:title" content="Hive 常用函数">
+<meta property="og:url" content="http://remedios14.github.io/2022/01/16/Hive-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="Mikyi喵喵呜~">
-<meta property="og:description" content="失格A - antifragile : 永远谨记克服自己的脆弱性 D - determine : 遇事五分钟内做出决定 F - family : 家庭需要理解 ( understanding ) 来维持，但更需要表达 ( expressing )">
+<meta property="og:description" content="字符串函数instr(stringA, stringB) 返回从 1 开始找到的 stringB 的下标号，若未找到则返回 0 substr(string, start, length) 返回子串，结合上方函数可执行定向截取 注意如 “2314124_001” 若需要截取 “_“ 之前的则用 **substr(s,1,instr(s,’_’)-1)**，即 substr 函数会取到左右的闭区间 J">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
-<meta property="article:published_time" content="2021-12-15T15:34:17.000Z">
-<meta property="article:modified_time" content="2021-12-27T13:27:42.379Z">
+<meta property="article:published_time" content="2022-01-16T12:50:44.000Z">
+<meta property="article:modified_time" content="2022-01-16T13:38:09.340Z">
 <meta property="article:author" content="Mikyi">
-<meta property="article:tag" content="律己">
+<meta property="article:tag" content="Hive&#x2F;Spark">
+<meta property="article:tag" content="Functions">
+<meta property="article:tag" content="Short-cuts">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
 <meta name="twitter:site" content="@null">
@@ -155,17 +157,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">Yosoro</h1>
+                <h1 class="kratos-entry-title text-center">Hive 常用函数</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2021-12-15</li>
+                <li><i class="fa fa-calendar"></i> 2022-01-16</li>
                 <li><i class="fa fa-user"></i> 作者 Mikyi</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        124
+                        ~2.20K
                     
                     字
                 </li>
@@ -174,13 +176,51 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1640611662379"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1642340289340"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h1 id="失格"><a href="#失格" class="headerlink" title="失格"></a>失格</h1><p><strong>A</strong> - antifragile : 永远谨记克服自己的脆弱性</p>
-<p><strong>D</strong> - determine : 遇事五分钟内做出决定</p>
-<p><strong>F</strong> - family : 家庭需要理解 ( understanding ) 来维持，但更需要表达 ( expressing )</p>
+            <h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><p>instr(stringA, stringB) 返回从 1 开始找到的 stringB 的下标号，若未找到则返回 0</p>
+<p>substr(string, start, length) 返回子串，结合上方函数可执行定向截取</p>
+<p>注意如 “2314124_001” 若需要截取 “_“ 之前的则用 **substr(s,1,instr(s,’_’)-1)**，即 substr 函数会取到左右的闭区间</p>
+<h2 id="Json-解析"><a href="#Json-解析" class="headerlink" title="Json 解析"></a>Json 解析</h2><h3 id="get-json-object-函数"><a href="#get-json-object-函数" class="headerlink" title="get_json_object 函数"></a>get_json_object 函数</h3><p>用法如 <code>get_json_object(json_format_str,&#39;$.key1.key2[n].key3&#39;) </code> 得到指定层级下的值，对列表值可以用 <code>[*]</code> 表示列表内的所有元素而非单个元素</p>
+<h3 id="json-tuple-函数"><a href="#json-tuple-函数" class="headerlink" title="json_tuple 函数"></a>json_tuple 函数</h3><p>用法如 <code>json_tuple(json_format_str,&#39;key1&#39;,&#39;key2&#39;)</code> 得到一个该 json 字段指定的一级 key 构成的表，是一个 <strong>UDTF</strong>，因此要结合 <code>Lateral View</code> 函数，例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">    a.first,</span><br><span class="line">    b.filtertype,</span><br><span class="line">    b.filtersubtype,</span><br><span class="line">    b.filtername</span><br><span class="line">    <span class="keyword">from</span> aaa a</span><br><span class="line">    <span class="keyword">lateral</span> <span class="keyword">view</span></span><br><span class="line">    json_tuple(flist,<span class="string">&#x27;filtertype&#x27;</span>,<span class="string">&#x27;filtersubtype&#x27;</span>,<span class="string">&#x27;filtername&#x27;</span>) b</span><br><span class="line">    <span class="keyword">as</span> `filtertype`, `filtersubtype`, `filtername`</span><br></pre></td></tr></table></figure>
+
+<h3 id="Explode"><a href="#Explode" class="headerlink" title="Explode"></a>Explode</h3><p>官方解释：explode() 函数接受一个 array 或 map 类型的数据作为输入，然后将 array 或 map 里面的元素按照每行的形式输出（可见能快速处理 json 格式的字段）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">hive (<span class="keyword">default</span>)<span class="operator">&gt;</span> <span class="keyword">select</span> explode(<span class="keyword">array</span>(<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,));</span><br><span class="line">OK</span><br><span class="line">A</span><br><span class="line">B</span><br><span class="line">C</span><br><span class="line"><span class="type">Time</span> taken: <span class="number">4.188</span> seconds, Fetched: <span class="number">3</span> <span class="type">row</span>(s)</span><br><span class="line">hive (<span class="keyword">default</span>)<span class="operator">&gt;</span> <span class="keyword">select</span> explode(map(<span class="string">&#x27;a&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>, <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>, <span class="number">3</span>));</span><br><span class="line">OK</span><br><span class="line">key <span class="keyword">value</span></span><br><span class="line">a <span class="number">1</span></span><br><span class="line">b <span class="number">2</span></span><br><span class="line">c <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>get_json_object 函数中可以用 <code>[*]</code> 表示列表格式内所有元素而非单个元素，后面能继续跟上 ‘key’ 得到对应 ‘value’ 的列表，形成一个 json 格式的字符串</p>
+<p>同时结合正则表达式去除两端的大中括号，使用 split 后套上 explode 完成分解</p>
+<p><strong>Explode</strong> 是一个 UDTF，即由单行字段得到一个数据表的函数，不能直接和其他字段一起使用，因此需要结合 <code>Lateral View</code></p>
+<h3 id="Lateral-View"><a href="#Lateral-View" class="headerlink" title="Lateral View"></a>Lateral View</h3><p>用法如 <code>LATERAL VIEW udtf(expression) tableAlias As columnAlias</code> </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">    username,</span><br><span class="line">    role</span><br><span class="line">    <span class="keyword">from</span> ods.ods_actor_data</span><br><span class="line">    <span class="keyword">LATERAL</span> <span class="keyword">VIEW</span> explode(split(userrole,<span class="string">&#x27;,&#x27;</span>)) tmpTable <span class="keyword">as</span> role;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 原表</span></span><br><span class="line">刘德华 演员，导演，制片人</span><br><span class="line">李小龙 演员，导演，制片人，幕后，武术指导</span><br><span class="line">李连杰 演员，武术指导</span><br><span class="line">刘亦菲 演员</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 结果表</span></span><br><span class="line">刘德华 演员</span><br><span class="line">刘德华 导演</span><br><span class="line">刘德华 制片人</span><br><span class="line">李小龙 演员</span><br><span class="line">李小龙 导演</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>Lateral View Outer 可以像表连接一样取 outer join</p>
+<h2 id="窗口函数"><a href="#窗口函数" class="headerlink" title="窗口函数"></a>窗口函数</h2><p>几个名儿，看到就会了，格式如 <code>func(col_if_needs) over(partition by col1, col2, ... order by col3, ...)</code></p>
+<ol>
+<li>排序函数<ol>
+<li>row_number() —— 行严格递增</li>
+<li>rank() —— 相同值取最高名次且占位</li>
+<li>dense_rank() —— 相同值取最高但不占位</li>
+<li>ntile(n) —— 将 partition 后的数据平均分成 n 个组，返回组序号</li>
+</ol>
+</li>
+<li>偏移函数<ol>
+<li>first_value() 和 last_value() 传入字段名，会随着数据的读入动态变化</li>
+<li>lead(col, n, inplc) 和 lag(col, n, inplc) 向下或向上 n 行取值，若为空可替换为 inplc （可不指定则为 null） </li>
+</ol>
+</li>
+<li>聚合函数<ol>
+<li>函数略，用法可结合 rows between n preceding and m following —— 默认情况下都是 unbounded ，会聚合 partition 的整组，可替换前后为 current row </li>
+</ol>
+</li>
+<li>分布函数<ol>
+<li>cume_dist() 累计分布函数，闭区间</li>
+<li>percent_rank() (当前行 -1) / (总行数 - 1)</li>
+</ol>
+</li>
+</ol>
 
         </div>
         
@@ -234,7 +274,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://remedios14.github.io/2021/12/15/Yosoro/",
+                text: "http://remedios14.github.io/2022/01/16/Hive-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -246,11 +286,11 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://remedios14.github.io/2021/12/15/Yosoro/";
-            const title         = "「Yosoro」";
-            const excerpt       = `失格A - antifragile : 永远谨记克服自己的脆弱性
-D - determine : 遇事五分钟内做出决定
-F - family : 家庭需要理解 ( understanding ) 来维持，但更需要表达 ( expres...`;
+            const hostUrl       = "http://remedios14.github.io/2022/01/16/Hive-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/";
+            const title         = "「Hive 常用函数」";
+            const excerpt       = `字符串函数instr(stringA, stringB) 返回从 1 开始找到的 stringB 的下标号，若未找到则返回 0
+substr(string, start, length) 返回子串，结合上方函数可执行定向截取
+注意如 ...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -269,10 +309,10 @@ F - family : 家庭需要理解 ( understanding ) 来维持，但更需要表达
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/%E5%BE%8B%E5%B7%B1/" rel="tag">律己</a>
+                    <a class="tag-none-link" href="/tags/Functions/" rel="tag">Functions</a>, <a class="tag-none-link" href="/tags/Hive-Spark/" rel="tag">Hive/Spark</a>, <a class="tag-none-link" href="/tags/Short-cuts/" rel="tag">Short-cuts</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2021-12-27</span>
+                <span>最后编辑：2022-01-16</span>
                 </div>
             </div>
         </footer>
@@ -281,13 +321,9 @@ F - family : 家庭需要理解 ( understanding ) 来维持，但更需要表达
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" Brief Tips" href="/2021/12/15/hello-hexo/">&lt; 上一篇</a>
+                <a title=" 瞎编一篇" href="/2021/12/26/interview/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" 瞎编一篇" href="/2021/12/26/interview/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
