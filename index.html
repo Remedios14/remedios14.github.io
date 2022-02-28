@@ -1,1613 +1,983 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"remedios14.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.webp">
+  <title>Mikyi喵喵呜~</title>
+  <meta name="author" content="Mikyi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="" />
+  
   <meta property="og:type" content="website">
 <meta property="og:title" content="Mikyi喵喵呜~">
 <meta property="og:url" content="http://remedios14.github.io/index.html">
 <meta property="og:site_name" content="Mikyi喵喵呜~">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:author" content="Mikyi">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://remedios14.github.io/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>Mikyi喵喵呜~</title>
+<meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
+<meta name="twitter:site" content="@null">
   
-
-
-
-
-
-
-  <noscript>
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
   <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
   </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Mikyi喵喵呜~</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">So we beat on, boats against the current, borne back ceaselessly into the past.</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Mikyi喵喵呜~</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Mikyi喵喵呜~</h2> <br />
+                        <span>So we beat on, boats against the current, borne back ceaselessly into the past.</span>
+                        <!--<span class="typeWriter" data-end="3000" data-text='["So we beat on, boats against the current, borne back ceaselessly into the past.", "我们奋力前行,小舟逆水而上,不断地被浪潮推回到过去。", "Aureliano, está lloviendo en Macondo.", "演者はセリフの傀儡だ"]'></span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
 
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
 
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
+        
 
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+            <section class="col-md-8">
 
-  </li>
-        <li class="menu-item menu-item-archives">
+        
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://remedios14.github.io/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/">
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/27/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/Alg-Tricks/">Alg-Tricks</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/27/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/">回溯算法整理</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                回溯法又称回溯搜索法，是一种递归过程中回溯观测者状态的算法，只要使用回溯必定是在递归函数中
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mikyi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mikyi喵喵呜~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">机器学习基础-降维算法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-23 14:08:41 / 修改时间：14:52:26" itemprop="dateCreated datePublished" datetime="2022-02-23T14:08:41+08:00">2022-02-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine-Learning</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-27
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/%E6%8A%98%E7%A3%A8/" rel="tag">折磨</a>, <a class="tag-none-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a>, <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/27/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
 
     
     
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/26/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/Alg-Tricks/">Alg-Tricks</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/26/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/">二叉树算法整理</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                递归法总体思路流程：
+1. 确定函数的参数和返回，明确每次递归转移的传递值
+2. 考虑终止条件，遇到哪些情况终止动规，考虑周全后一般确保剩下的都不是终止情况
+3. 在递归的转移中也可以分多种情况，但都要转移
+递归的入参和返回如果要遍历...
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-26
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/%E6%8A%98%E7%A3%A8/" rel="tag">折磨</a>, <a class="tag-none-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a>, <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/26/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
     
-    <div class="post-body" itemprop="articleBody">
 
-      
-          <p>不同于基于方差和相关程度的特征选择，特征降维可以通过矩阵分解的方法将特征之间的共同作用也提取出来，并尽可能保留他们的分布，最终得到维数降低而方差变化不大的新特征组合，<strong>新特征通常是原特征的线性组合，一般不具有解释性</strong>。</p>
-<p>关于降维算法使用 主成分分析 PCA 通常就够，再进一步可以尝试 奇异值分解 SVD </p>
-<h2 id="主成分分析-PCA"><a href="#主成分分析-PCA" class="headerlink" title="主成分分析 PCA"></a>主成分分析 PCA</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line">pca = PCA(n_components=<span class="number">5</span>) <span class="comment"># 指定降维后的维数，不能大于矩阵的较小维</span></span><br><span class="line">pca = pca.fit_transform(data)</span><br><span class="line"></span><br><span class="line">pca.explained_variance_ <span class="comment"># 新维度各特征的可解释性方差大小，递减排序</span></span><br><span class="line">pca.explained_variance_ratio_ <span class="comment"># 新维度信息量占原数据的百分比，又称可解释方差贡献率</span></span><br></pre></td></tr></table></figure>
-<h3 id="确认目标维数"><a href="#确认目标维数" class="headerlink" title="确认目标维数"></a>确认目标维数</h3><p>几种方法取其一即可</p>
-<ol>
-<li>绘制累积可解释方差贡献率曲线，选取达到足够贡献率的前 k 个即可</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">pca_line = PCA().fit(X) <span class="comment"># 不传参数默认取尽可能大，即不降维</span></span><br><span class="line">plt.plot([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],np.cumsum(pca_line.explained_variance_ratio_))</span><br><span class="line">plt.xticks([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]) <span class="comment">#这是为了限制坐标轴显示为整数</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;number of components after dimension reduction&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;cumulative explained variance ratio&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<ol>
-<li>最大似然估计方法</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pca_mle = PCA(n_comonents=<span class="string">&quot;mle&quot;</span>) <span class="comment"># 用最大似然方法确定目标数</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>根据信息量占卜选超参数，输入所需最少信息量</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pca_f = PCA(n_components=<span class="number">0.97</span>, svd_solver=<span class="string">&quot;full&quot;</span>)</span><br><span class="line">X_f = pca_f.fit_transform(X)</span><br></pre></td></tr></table></figure>
-<p>其中 <code>svd_solver</code> 参数通常就选择 ‘auto’</p>
-<h3 id="逆变换"><a href="#逆变换" class="headerlink" title="逆变换"></a>逆变换</h3><p>由于 PCA 方法实际上是进行矩阵的运算随后选取其中重要性最高的几个维度，因此可以认为逆变换能保留大部分的原数据信息，而被舍弃的信息则无法由逆变换还原</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/25/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/Alg-Tricks/">Alg-Tricks</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/25/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/">栈与队列算法整理</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                栈和队列分别是后进先出和先进先出的数据结构，在 c++ 中可以使用 std::stack&lt;int&gt; 实例化栈对象，其内部默认使用 deque 作为数据容器，也可以指定 vector 或 ist ，对外提供接口 push()...
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-25
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/%E6%8A%98%E7%A3%A8/" rel="tag">折磨</a>, <a class="tag-none-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a>, <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/25/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
 
-      
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/24/%E5%8F%8C%E6%8C%87%E9%92%88%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/Alg-Tricks/">Alg-Tricks</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/24/%E5%8F%8C%E6%8C%87%E9%92%88%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/">双指针算法整理</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                双指针算法经常用于处理链表或字符串问题，用于匹配或定位操作
+
+
+移除元素：给定数组 nums 和值 val，原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度
+解法：快慢双指针，慢指针遇到等于 val 的停下，和快指针的...
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-24
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/%E6%8A%98%E7%A3%A8/" rel="tag">折磨</a>, <a class="tag-none-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a>, <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/24/%E5%8F%8C%E6%8C%87%E9%92%88%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6-xgboost/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/Machine-Learning/">Machine-Learning</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6-xgboost/">机器学习进阶-xgboost</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                基于 Boosting 思想实现的强学习器
+123$ pip install xgboost$ pip install --upgrade xgboostimport xgboost as xgb
+大致建模流程：
+
+读取数据：xgb....
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-24
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/xgboost/" rel="tag">xgboost</a>, <a class="tag-none-link" href="/tags/%E6%8F%90%E5%8D%87%E7%AE%97%E6%B3%95/" rel="tag">提升算法</a>, <a class="tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6-xgboost/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/Machine-Learning/">Machine-Learning</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">机器学习基础-线性回归</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                最简单的回归模型，基于矩阵运算和最小二乘优化实现
+位于 sklearn.linear_model 中
+
+
+
+
+类/函数
+含义
+
+
+
+
+LinearRegression
+最小二乘法回归
+
+
+Ridge
+岭回归，加上了 L2 正则化
+
+
+...
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-24
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>, <a class="tag-none-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/Machine-Learning/">Machine-Learning</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/">机器学习基础-支持向量机</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                支持向量机被认为是最强大的传统机器学习算法，一般对数据尝试随机森林，支持向量机，xgboost，lgbm 即可
+操作1234567from sklearn.svm import SVC # 分类器clf = SVC(kernel = ...
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-24
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" rel="tag">支持向量机</a>, <a class="tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/Machine-Learning/">Machine-Learning</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/">机器学习基础-聚类算法</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                聚类是一种典型的无监督学习，每一个样本都没有一个标准的所属类判断（无人为监督）
+K-Means 聚类可以认为是最简单的聚类，甚至是最简单的机器学习算法
+K-Means 聚类具体流程：
+
+随机抽取 K 个样本作为最初的质心
+循环，每轮遍...
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-23
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>, <a class="tag-none-link" href="/tags/%E8%81%9A%E7%B1%BB/" rel="tag">聚类</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/Machine-Learning/">Machine-Learning</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/">机器学习基础-降维算法</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                不同于基于方差和相关程度的特征选择，特征降维可以通过矩阵分解的方法将特征之间的共同作用也提取出来，并尽可能保留他们的分布，最终得到维数降低而方差变化不大的新特征组合，新特征通常是原特征的线性组合，一般不具有解释性。
+关于降维算法使用 ...
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-23
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>, <a class="tag-none-link" href="/tags/%E9%99%8D%E7%BB%B4/" rel="tag">降维</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%A2%84%E5%A4%84%E7%90%86/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/Machine-Learning/">Machine-Learning</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%A2%84%E5%A4%84%E7%90%86/">机器学习基础-预处理</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                数据不完善（噪声、缺失、偏态），再高级的算法都得不到好的效果
+一下数据预处理方法基本都可以独立使用再组合，因此每处将介绍并补充操作方法。
+数据预处理sklearn.preprocessing 模块基本包含所有的数据预处理内容
+数据无量...
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-23
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>, <a class="tag-none-link" href="/tags/%E9%A2%84%E5%A4%84%E7%90%86/" rel="tag">预处理</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%A2%84%E5%A4%84%E7%90%86/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+
+
+    <div class='text-center pagination'>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
     </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://remedios14.github.io/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%A2%84%E5%A4%84%E7%90%86/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mikyi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mikyi喵喵呜~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%A2%84%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">机器学习基础-预处理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-23 08:47:52 / 修改时间：14:52:04" itemprop="dateCreated datePublished" datetime="2022-02-23T08:47:52+08:00">2022-02-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine-Learning</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>数据不完善（噪声、缺失、偏态），再高级的算法都得不到好的效果</p>
-<p>一下数据预处理方法基本都可以独立使用再组合，因此每处将介绍并补充操作方法。</p>
-<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p><code>sklearn.preprocessing</code> 模块基本包含所有的数据预处理内容</p>
-<h3 id="数据无量纲化"><a href="#数据无量纲化" class="headerlink" title="数据无量纲化"></a>数据无量纲化</h3><p>不同量纲下计量的数据其分布可能由较大的差异，如 m 和 km 计量下的方差差距很大；或者计算特征下欧式距离时也会由量纲不合适的特征影响过大</p>
-<p>线性的无量纲化：中心化、缩放</p>
-<p>在使用中，<code>fit</code> 时都会略过空值 <code>Nan</code>，而 <code>transform</code> 时保留</p>
-<h4 id="缩放-MinMaxScaler"><a href="#缩放-MinMaxScaler" class="headerlink" title="缩放 MinMaxScaler"></a>缩放 MinMaxScaler</h4><p>即将数据按照差值比例缩放到指定范围内（默认[0,1]）</p>
-<script type="math/tex; mode=display">
-x^{*}=\frac{x-\min (x)}{\max (x)-\min (x)}</script><p>sklearn 会自动将各列（即一个特征）进行缩放返回</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"></span><br><span class="line">scaler = MinMaxScaler(feature_range=[<span class="number">0</span>,<span class="number">1</span>]) <span class="comment"># 实例化，同模型</span></span><br><span class="line">scaler = scaler.fit(data) <span class="comment"># 至少二维 arr-like 数据</span></span><br><span class="line">res = scaler.transform(data) <span class="comment"># 可以用于转变其他数据</span></span><br><span class="line"></span><br><span class="line">res_ = scaler.fit_transform(data) <span class="comment"># 直接一步转换当前数据</span></span><br><span class="line"></span><br><span class="line">scaler.inverse_transform(res) <span class="comment"># 逆变换</span></span><br><span class="line"></span><br><span class="line">scaler = scaler.partial_fit(data) <span class="comment"># 特征数太多时用这个</span></span><br></pre></td></tr></table></figure>
-<h4 id="中心化-StandardScaler"><a href="#中心化-StandardScaler" class="headerlink" title="中心化 StandardScaler"></a>中心化 StandardScaler</h4><p>当作正态分布来中心化</p>
-<script type="math/tex; mode=display">
-x^{*}=\frac{x-\mu}{\sigma}</script><p>即是统计该特征下所有样本的均值和样本方差进行中心化</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"></span><br><span class="line">scaler = StandardScaler()</span><br><span class="line">scaler.fit(data)</span><br><span class="line"></span><br><span class="line">scaler.mean_</span><br><span class="line">scaler.var_</span><br><span class="line"><span class="comment"># 其他接口与上面一致</span></span><br></pre></td></tr></table></figure>
-<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><ul>
-<li>MaxAbsScaler：按最大值的绝对值压缩至[-1,1]，不改变 0 值</li>
-<li>RobustScaler：按照分位数压缩</li>
-</ul>
-<h3 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h3><p>一般的缺失值填充（均值、中位数填充）用 pandas 的 <code>fillna()</code> 方法即可处理，也可以用 sklearn 的内置类来处理</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.impute <span class="keyword">import</span> SimpleImputer</span><br><span class="line"></span><br><span class="line">imp_mean = SimpleImputer()</span><br><span class="line">age = imp_mean.fit_transform(age)</span><br></pre></td></tr></table></figure>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>含义&amp;输入</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>missing_values</td>
-<td>描述数据中什么认为是空值，默认 np.nan</td>
-</tr>
-<tr>
-<td>strategy</td>
-<td>默认均值填充；可选 “mean”,”median”,”most_frequent”,”constant”</td>
-</tr>
-<tr>
-<td>fill_value</td>
-<td>当用常数填充时指定这个常数，常用 0</td>
-</tr>
-<tr>
-<td>copy</td>
-<td>是否返回副本，默认 True （最好不要修改到原数据）</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="分类型特征处理"><a href="#分类型特征处理" class="headerlink" title="分类型特征处理"></a>分类型特征处理</h3><p>大多数算法只能处理数值型数据，通常将文字分类型特征转为数值型或哑变量，也即独热编码</p>
-<h4 id="标签编码"><a href="#标签编码" class="headerlink" title="标签编码"></a>标签编码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder <span class="comment"># 处理标签，允许一维输入</span></span><br><span class="line">data.iloc[:,-<span class="number">1</span>] = LabelEncoder().fit_transform(data.iloc[:,-<span class="number">1</span>])</span><br><span class="line"><span class="comment"># 也可实例化后 fit 、 transform 、inverse_transform 等</span></span><br></pre></td></tr></table></figure>
-<h4 id="特征编码"><a href="#特征编码" class="headerlink" title="特征编码"></a>特征编码</h4><p>特征可能是有级别先后的关系，也可能是名义上的分类，互相之间没有比较关系</p>
-<h5 id="单纯数值转换"><a href="#单纯数值转换" class="headerlink" title="单纯数值转换"></a>单纯数值转换</h5><p>按照可取的值分配整数，可能产生出并不符合实际的数值关系</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OrdinalEncoder</span><br><span class="line">OrdinalEncoder().fit(data_.iloc[:,<span class="number">1</span>:-<span class="number">1</span>]).categories_ <span class="comment"># 查看转换的映射</span></span><br><span class="line">data.iloc[:,<span class="number">1</span>:-<span class="number">1</span>] = OrdinalEncoder().fit_transform(data.iloc[:,<span class="number">1</span>:-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-<h5 id="独热编码转换"><a href="#独热编码转换" class="headerlink" title="独热编码转换"></a>独热编码转换</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder</span><br><span class="line">x = data.iloc[:,<span class="number">1</span>:-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">enc = OneHotEncoder(categories=<span class="string">&#x27;auto&#x27;</span>).fit(x)</span><br><span class="line">res = enc.transform(x).toarray()</span><br><span class="line">pd.DataFrame(enc.inverse_transform(res))</span><br><span class="line"></span><br><span class="line">enc.get_feature_names() <span class="comment"># 查看将哪些特诊转为哪几列了</span></span><br></pre></td></tr></table></figure>
-<h3 id="连续型特征处理"><a href="#连续型特征处理" class="headerlink" title="连续型特征处理"></a>连续型特征处理</h3><p>二值化和分箱，即按照一些值将连续性转换为几个组实现分类，后续再独热编码或其他操作</p>
-<h4 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h4><p>可以认为是将数值转化为是否的特征</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> Binarizer</span><br><span class="line">x = data.iloc[:,<span class="number">0</span>].values.reshape(-<span class="number">1</span>,<span class="number">1</span>) <span class="comment"># 需要是二维的</span></span><br><span class="line">Binarizer(threshold=<span class="number">30</span>).fit_transform(x)</span><br></pre></td></tr></table></figure>
-<h4 id="分箱"><a href="#分箱" class="headerlink" title="分箱"></a>分箱</h4><p>可以指定数来分区间（不好确定），或者按照数据分布的分位数或样本数量的分位数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> KBinsDiscretizer</span><br><span class="line">x = data.iloc[:,<span class="number">0</span>].values.reshape(-<span class="number">1</span>,<span class="number">1</span>) <span class="comment"># 需要是二维的</span></span><br><span class="line">est = KBinsDiscretizer(n_bins=<span class="number">3</span>, encode=<span class="string">&#x27;ordinal&#x27;</span>, strategy=<span class="string">&#x27;uniform&#x27;</span>)</span><br><span class="line">est.fit_transform(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>(est.fit_transform(x).ravel()) <span class="comment"># 查看分成哪几箱</span></span><br></pre></td></tr></table></figure>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>含义&amp;输入</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>n_bins</td>
-<td>每个特征的分箱数，默认 5</td>
-</tr>
-<tr>
-<td>encode</td>
-<td>编码方式，默认 “onehot”，返回稀疏矩阵；可选”ordinal”编码为整数；”onehot-dense”哑变量返回密集数组</td>
-</tr>
-<tr>
-<td>strategy</td>
-<td>定义箱宽方式，默认”quantile”：样本数等位分箱；”uniform”：数值分布等宽分箱；”kmeans”：按聚类分箱</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h2><p>第一步是<strong>理解数据</strong>，大致判断哪些数据对要判断的结果有较强的关联，此时通常将关联性较弱的特征舍弃，将关联性强的特征可以适当拓展</p>
-<h3 id="Filter-过滤法"><a href="#Filter-过滤法" class="headerlink" title="Filter 过滤法"></a>Filter 过滤法</h3><p>根据一些统计检验的指标来选择特征</p>
-<h4 id="方差过滤"><a href="#方差过滤" class="headerlink" title="方差过滤"></a>方差过滤</h4><p>按照<strong>特征本身</strong>的样本方差来过滤，方差低说明变化很小，与样本类别关系不大</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> VarianceThreshold</span><br><span class="line">selector = VarianceThreshold(threshold=<span class="number">0</span>) <span class="comment"># 默认仅过滤方差为 0 的</span></span><br><span class="line">x_var0 = selector.fit_transform(x)</span><br></pre></td></tr></table></figure>
-<h4 id="相关性过滤"><a href="#相关性过滤" class="headerlink" title="相关性过滤"></a>相关性过滤</h4><p>通过检查特征与标签的相关性来考虑过滤条件</p>
-<h5 id="卡方过滤"><a href="#卡方过滤" class="headerlink" title="卡方过滤"></a>卡方过滤</h5><p>基于卡方检验来评估特征与标签地相关性的方法，其中简单介绍<strong>卡方检验</strong>：</p>
-<ol>
-<li><p>首先明确卡方检验通常用于<strong>离散变量</strong>，即要求至少标签为分类变量（否则分箱）</p>
-</li>
-<li><p>原假设 $H_0$ ：特征的分布与离散分布 F(x) 独立，此处的 F(x) 由标签的频率近似，设标签有 k 个取值，共 n 个样本，各标签含 $n * p_i$ 个样本</p>
-</li>
-<li><p>将特征分成 k 个箱，每个有频数 $f_i$ ，从而有统计量</p>
-<script type="math/tex; mode=display">
-\chi^2=\sum^k_{i=1}\frac{(f_i-np_i)^2}{np_i}</script><p>在原假设成立情况下服从自由度 k-1 的卡方分布</p>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> SelectKBest <span class="comment"># 依据某规则选出k个特征</span></span><br><span class="line"></span><br><span class="line">X_fschi = SelectionKBest(chi2, k=<span class="number">300</span>).fit_transform(X_fsvar, y)</span><br><span class="line"><span class="comment"># 传入规则和数量，后续 fit 传入样本特征和标签</span></span><br><span class="line">cross_val_score(RFC(n_estimators=<span class="number">10</span>,random_state=<span class="number">0</span>),X_fschi,y,cv=<span class="number">5</span>).mean()</span><br><span class="line"><span class="comment"># 查看过滤后在交叉验证下的效果</span></span><br></pre></td></tr></table></figure>
-<h6 id="如何确定-k"><a href="#如何确定-k" class="headerlink" title="如何确定 k"></a>如何确定 k</h6><p>可以绘制曲线比较交叉验证效果（不推荐）</p>
-<p>实际卡方检验推断两组数据分布的差异，返回卡方值和 P 值，通常基于 P 值判断是否相互独立</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>P 值</th>
-<th>&lt;=0.05 或 0.01</th>
-<th>&gt;0.05 或 0.01</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>数据差异</td>
-<td>差异不是自然形成的</td>
-<td>差异是样本误差</td>
-</tr>
-<tr>
-<td>相关性</td>
-<td>数据相关</td>
-<td>独立</td>
-</tr>
-<tr>
-<td>原假设</td>
-<td>拒绝原假设</td>
-<td>接受原假设</td>
-</tr>
-</tbody>
-</table>
-</div>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> chi2</span><br><span class="line"></span><br><span class="line">chivalue, pvalues_chi = chi2(X_fsvar, y) <span class="comment"># 分别返回特征的 卡方 和 P值</span></span><br><span class="line"></span><br><span class="line">k = chivalue.shape[<span class="number">0</span>] - (pvalues_chi &gt; <span class="number">0.05</span>).<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
-<h5 id="F-检验"><a href="#F-检验" class="headerlink" title="F 检验"></a>F 检验</h5><p>又称方差齐性检验，勋章数据之间的<strong>线性关系</strong>，可以用于<strong>分类和回归</strong>，分别用<code>feature_selection.f_classif</code> 和 <code>feature_selection.f_regression</code></p>
-<p>适合处理正态分布数据（可以先标准化）,根据 p 值确定保留多少特征，再结合 SeletKBest 来过滤</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> f_classif</span><br><span class="line">F, pvalues_f = f_classif(X_fsvar,y)</span><br><span class="line">k = F.shape[<span class="number">0</span>] - (pvalues_f &gt; <span class="number">0.05</span>).<span class="built_in">sum</span>()</span><br><span class="line">X_fsF = SelectKBest(f_classif, k=k).fit_transform(X_fsvar, y)</span><br></pre></td></tr></table></figure>
-<h5 id="互信息法"><a href="#互信息法" class="headerlink" title="互信息法"></a>互信息法</h5><p>可以捕获线性和非线性关系，用于回归和分类，分别由类 <code>feature_selection.mutual_info_classif</code> 和 <code>feature_selection.mutual_info_regression</code> 完成，返回每个特征与目标之间的互信息量的估计，在 [0,1] 取值，0 表示独立，1 表示完全相关</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> feature_selection <span class="keyword">import</span> mutual_info_classif <span class="keyword">as</span> MIC</span><br><span class="line">result = MIC(X_fsvr, y)</span><br><span class="line">k = result.shape[<span class="number">0</span>] - <span class="built_in">sum</span>(result &lt;= <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="Embedded-嵌入法"><a href="#Embedded-嵌入法" class="headerlink" title="Embedded 嵌入法"></a>Embedded 嵌入法</h3><p>暂略</p>
-<h3 id="Wrapper-包装法"><a href="#Wrapper-包装法" class="headerlink" title="Wrapper 包装法"></a>Wrapper 包装法</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://remedios14.github.io/2022/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mikyi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mikyi喵喵呜~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" class="post-title-link" itemprop="url">机器学习基础-随机森林</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-22 18:41:36" itemprop="dateCreated datePublished" datetime="2022-02-22T18:41:36+08:00">2022-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-23 14:51:59" itemprop="dateModified" datetime="2022-02-23T14:51:59+08:00">2022-02-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine-Learning</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简单介绍一下集成学习的思想和随机森林在 sklearn 中的用法</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>集成算法相关主要在 <code>sklearn.ensemble</code> 模块中</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="comment"># 由于随机森林采用决策树做基，故决策树可用的超参数都可以用</span></span><br><span class="line">rfc = RandomForestClassifier(n_estimators=<span class="number">10</span></span><br><span class="line">                    ,n_jobs=-<span class="number">1</span></span><br><span class="line">                    ,bootstrap=<span class="literal">True</span> <span class="comment"># 默认采用拔靴自助样本训练各个不同的树，则会有部分样本完全没有参与训练</span></span><br><span class="line">                    ,oob_score=<span class="literal">True</span> <span class="comment"># 可以用未参与训练的样本测试</span></span><br><span class="line">                    )</span><br><span class="line">rfc.fit(data,label)</span><br><span class="line">rfc.oob_score_ <span class="comment"># 查看在袋外数据的评分</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 实际每个树对样本产生其分为各类的概率，最终对概率平均再得结果</span></span><br><span class="line">rfc.predict(Xtest)</span><br><span class="line">rfc.predict_proba(Xtest) <span class="comment"># 每个样本被分为各类的概率，shape = n * k</span></span><br></pre></td></tr></table></figure>
-<p>观察 决策树数目 的学习曲线</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">superpa = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">200</span>):</span><br><span class="line">    rfc = RandomForestClassifier(n_estimators=i+<span class="number">1</span>,n_jobs=-<span class="number">1</span>)</span><br><span class="line">    rfc_s = cross_val_score(rfc,wine.data,wine.target,cv=<span class="number">10</span>).mean()</span><br><span class="line">    superpa.append(rfc_s)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">max</span>(superpa),superpa.index(<span class="built_in">max</span>(superpa)))</span><br><span class="line">plt.figure(figsize=[<span class="number">20</span>,<span class="number">5</span>])</span><br><span class="line">plt.plot(<span class="built_in">range</span>(<span class="number">1</span>,<span class="number">201</span>),superpa)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p>指定 <code>random_state</code> 参数可以控制每次生成一组固定的树，但这些树互相也是不同的；</p>
-<p>一般认为，生成各个树的随机性越大，随机森林的效果越好</p>
-<p><code>rfc.estimators</code> 返回训练后的各个决策树对象列表，可以取索引定位到对象</p>
-<h2 id="集成算法"><a href="#集成算法" class="headerlink" title="集成算法"></a>集成算法</h2><p>比较经典的继承方法大致分为 bagging 和 boosting，还有 stacking，其核心在于以多个有差异的学习器来处理数据，汇总得到一个综合的结果，期望获取比单个模型更好的回归或分类表现。其中</p>
-<ul>
-<li>bagging ：核心是构建多个<strong>相互独立</strong>的学习器（比如修改超参或随机种子），然后对预测结果平均或投票（随机森林）</li>
-<li>boosting ：学习器按照顺序构建，对单次难以评估的样本提高学习权重进行深入的训练（GBDT、XGBoost）</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://remedios14.github.io/2022/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E7%BB%BC%E8%BF%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mikyi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mikyi喵喵呜~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E7%BB%BC%E8%BF%B0/" class="post-title-link" itemprop="url">机器学习基础-综述</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-22 15:24:26" itemprop="dateCreated datePublished" datetime="2022-02-22T15:24:26+08:00">2022-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-23 14:51:53" itemprop="dateModified" datetime="2022-02-23T14:51:53+08:00">2022-02-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine-Learning</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>综述一些机器学习思想和 sklearn 中常用的命令形式</p>
-<h2 id="工程流程"><a href="#工程流程" class="headerlink" title="工程流程"></a>工程流程</h2><ol>
-<li>获取数据，明确判断目标（分类、回归等），查看特征的缺失情况和统计分布</li>
-<li>数据预处理，特征选择<ol>
-<li>适当地处理缺失值（填充或放弃特征），将名义变量进行编码，先尝试一些通用模型查看基础效果</li>
-<li>根据特征量确定是否要过滤，若要过滤则推荐先方差过滤，然后根据互信息过滤，并再过滤过程中观察交叉验证比较平均效果</li>
-</ol>
-</li>
-</ol>
-<h3 id="模型性质"><a href="#模型性质" class="headerlink" title="模型性质"></a>模型性质</h3><p>最近邻 KNN，决策树，支持向量机 SVM，神经网络，回归算法，都需要遍历特征或升维来进行运算，此类算法在应用前的特征选择尤为重要</p>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>sklearn 的训练和测试基本遵循一个流程：</p>
-<ol>
-<li>从模型对应的子模块下实例化（指定一些模型超参）</li>
-<li>用实例化对象学习训练数据集（.fit(trainX,trainY)）</li>
-<li>观察当前训练结果在测试集上的表现（.score(testX,testY)）</li>
-<li>直至感觉对了后用于模型预测或其他（.predict(realX,realY)）</li>
-</ol>
-<h3 id="评分指标"><a href="#评分指标" class="headerlink" title="评分指标"></a>评分指标</h3><p>可以查看所有可用于评估模型效果的指标</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sklearn</span><br><span class="line"><span class="built_in">sorted</span>(sklearn.metrics.SCORERS.keys())</span><br></pre></td></tr></table></figure>
-<p>在交叉验证中用 <code>scoring=...</code> 传入</p>
-<h3 id="数据划分"><a href="#数据划分" class="headerlink" title="数据划分"></a>数据划分</h3><p>对于监督学习，通常我们拥有一部分已经标注完成的数据，希望从此处学习到一些特征性来预测未进行标注的新数据，而为了评估学习器的成果，我们也只能在已经标注好的数据中取部分来评估，因此在最终预测前总是在和已标注数据玩儿</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split <span class="comment"># 导入该函数</span></span><br><span class="line">Xtrain, Xtest, Ytrain, Ytest = train_test_split(data, label, test_size=<span class="number">0.3</span>) <span class="comment"># 输出顺序要注意</span></span><br></pre></td></tr></table></figure>
-<p>手动划分通常也需要进行多次不同的划分来取平均的结果，因此可以采用交叉验证来快速实现</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line">cross_val_score(model, data, label, cv=n, scoring=...) </span><br></pre></td></tr></table></figure>
-<p>按照传入的交叉验证次数 n 随机均分数据集，每次取其中一份作为测试集，其余为训练集来学习，最终返回各次在测试集上的得分，此处若不指定 <code>scoring</code> 参数则会按照模型自己的评分来给出</p>
-<p>交叉验证也可以用于选择合适的超参数，若在当前组的交叉验证结果都比较相近，说明模型的效果不依赖于样本的划分，可以具有较好的泛化性能，此时若测试效果可以接受，则能一定程度上接纳超参数</p>
-<h3 id="超参数确定"><a href="#超参数确定" class="headerlink" title="超参数确定"></a>超参数确定</h3><p>基本所有的模型超参数以及一些随机数种子都在实例化时候指定，为了搜索合适的超参数通常都是在一定值的范围内去控制变量将结果绘图</p>
-<p>在一般时期（理解不深，时间充裕）情况下可以采用遍历绘图或网格搜索来检索测试集上最优的参数；而对模型参数有较深理解后，可以根据当前的模型表现来平衡偏差和方差</p>
-<h4 id="网格搜索"><a href="#网格搜索" class="headerlink" title="网格搜索"></a>网格搜索</h4><p>。。。</p>
-<h4 id="偏差方差平衡"><a href="#偏差方差平衡" class="headerlink" title="偏差方差平衡"></a>偏差方差平衡</h4><script type="math/tex; mode=display">
-E(f ; D)=\operatorname{bias}^{2}(x)+\operatorname{var}(x)+\varepsilon^{2}</script><ul>
-<li>偏差：模型的预测值与真实值之间的差异，过拟合时通常偏差较低，此时方差接近数据本身分布情况</li>
-<li>方差：模型预测结果与该次预测平均的误差水平（解释的不如不解释），欠拟合的时候容易方差较低（比如唯一值预测）</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th>偏差大</th>
-<th>偏差小</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>方差大</td>
-<td>模型对此数据不合适，换模型</td>
-<td>过拟合；模型太复杂；</td>
-</tr>
-<tr>
-<td>方差小</td>
-<td>欠拟合；模型太简单；预测稳定但很不准确</td>
-<td>非常理想的模型适配</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://remedios14.github.io/2022/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E5%86%B3%E7%AD%96%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mikyi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mikyi喵喵呜~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E5%86%B3%E7%AD%96%E6%A0%91/" class="post-title-link" itemprop="url">机器学习基础-决策树</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-22 14:40:25" itemprop="dateCreated datePublished" datetime="2022-02-22T14:40:25+08:00">2022-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-23 14:52:08" itemprop="dateModified" datetime="2022-02-23T14:52:08+08:00">2022-02-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine-Learning</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简单介绍一下决策树原理（目标自己理解为主）和 sklearn 中的用法</p>
-<h2 id="分类树用法"><a href="#分类树用法" class="headerlink" title="分类树用法"></a>分类树用法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"></span><br><span class="line">clf = tree.DecisionTreeClassifier(criterion=<span class="string">&quot;entropy&quot;</span> <span class="comment"># &quot;gini&quot;</span></span><br><span class="line">    ,random_state=<span class="number">25</span> <span class="comment"># 本身带有随机种子</span></span><br><span class="line">    ,splitter=<span class="string">&quot;random&quot;</span> <span class="comment"># &quot;best&quot; 分支时是否倾向于选取最重要的特征</span></span><br><span class="line">)</span><br><span class="line">clf = clf.fit(Xtrain, Ytrain)</span><br><span class="line">score = clf.score(Xtest, Ytest)</span><br><span class="line"></span><br><span class="line">clf.apply(Xtest) <span class="comment"># 返回每个测试样本所在叶子节点的索引</span></span><br><span class="line"></span><br><span class="line">clf.predict(Xtest) <span class="comment"># 返回测试样本分类/回归结果</span></span><br><span class="line"></span><br><span class="line">clf.feature_importances_</span><br><span class="line"></span><br><span class="line">[*<span class="built_in">zip</span>(feature_name,clf.feature_importances_)] <span class="comment"># 查看惰性对象</span></span><br></pre></td></tr></table></figure>
-<h3 id="搜索合适的超参数"><a href="#搜索合适的超参数" class="headerlink" title="搜索合适的超参数"></a>搜索合适的超参数</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>max_depth</th>
-<th>严格限制深度，建议从 3 开始</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>min_samples_leaf &amp; min_samples_split</td>
-<td>前者限制分枝后的叶子含样本数（不满足则不分枝）；后者限制分之前的节点样本数，小则不分支</td>
-</tr>
-<tr>
-<td>max_feature &amp; min_impurity_decrease</td>
-<td>前者限制分支使用的总特征数（比较玄学），后者限制进行分支的增益下限</td>
-</tr>
-<tr>
-<td>class_weight &amp; min_weight_fraction_leaf</td>
-<td>处理样本不平衡，用到再查</td>
-</tr>
-</tbody>
-</table>
-</div>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib,pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">test = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    clf = tree.DecisionTreeClassifier(max_depth=i+<span class="number">1</span></span><br><span class="line">        ,criterion=<span class="string">&quot;entropy&quot;</span></span><br><span class="line">        ,random_state=<span class="number">25</span></span><br><span class="line">        ,splitter=<span class="string">&quot;random&quot;</span></span><br><span class="line">        )</span><br><span class="line">    clf = clf.fit(Xtrain, Ytrain)</span><br><span class="line">    score = clf.score(Xtest, Ytest)</span><br><span class="line">    test.append(score)</span><br><span class="line">plt.plot(<span class="built_in">range</span>(<span class="number">1</span>,<span class="number">11</span>), test, color=<span class="string">&quot;red&quot;</span>, label=<span class="string">&quot;max_depth&quot;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<h3 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h3><p>可以看到树的结构，不过帮助不大</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> graphviz</span><br><span class="line">dot_data = tree.export_graphviz(clf <span class="comment"># 实例对象</span></span><br><span class="line">	,feature_names=feature_name <span class="comment"># 特征名的列表</span></span><br><span class="line">	,class_names=class_name <span class="comment"># 类名列表</span></span><br><span class="line">	,filled=<span class="literal">True</span></span><br><span class="line">	,rounded=<span class="literal">True</span></span><br><span class="line">)</span><br><span class="line">graph = graphviz.Source(dot_data)</span><br><span class="line">graph</span><br></pre></td></tr></table></figure>
-<h2 id="分类树原理"><a href="#分类树原理" class="headerlink" title="分类树原理"></a>分类树原理</h2><p>通常有分类树和回归树，主要原理基本一致，分类树为在每一个层级选择信息增益最大的属性作为划分属性形成分支</p>
-<h3 id="核心优化目标"><a href="#核心优化目标" class="headerlink" title="核心优化目标"></a>核心优化目标</h3><p>决策树的每一次分支主要核心在于尽可能最大化信息增益（ID.3 或 C4.5决策树）、或者最小化基尼系数（CART决策树）</p>
-<h4 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h4><p>对一组样本集合 D，已知其分类有 k 类（有监督），各类所占比例为 $p_k$，则有其信息熵为</p>
-<script type="math/tex; mode=display">
-Entropy(D) = -\sum p_k\log_2p_k</script><p>同时，若样本的属性 A 具有 v 个取值（A 为离散属性或连续属性按区间划分），对 D 采用属性 A 划分后的下一层每一组设有 $D^v$ 作为子样本集，此时可以计算每个 $D^v$ 的信息熵，最终得到信息增益：</p>
-<script type="math/tex; mode=display">
-Gain(D,A)=Entropy(D) - \sum^v\frac{|D^v|}{|D|}Entropy(D^v)</script><p>ID.3 决策树即选择最大化信息增益来作为分支标准；</p>
-<p>类似的有增益率：</p>
-<script type="math/tex; mode=display">
-Gain-ratio(D,A)=\frac{Gain(D,A)}{IV(A)}\\
-其中IV(A)=-\sum^v\frac{\abs {D^v}}{\abs {D}}\log_2\frac{\abs {D^v}}{\abs {D}}由属性A确定</script><h4 id="基尼系数"><a href="#基尼系数" class="headerlink" title="基尼系数"></a>基尼系数</h4><p>同样在样本集 D 下有 k 个分类，此时基尼系数为</p>
-<script type="math/tex; mode=display">
-Gini(D)=\sum_k\sum_{k'\neq k}p_kp_{k'}=1-\sum p_k^2</script><h2 id="回归树用法"><a href="#回归树用法" class="headerlink" title="回归树用法"></a>回归树用法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> crosswalk_val_score</span><br><span class="line"></span><br><span class="line">rgr = tree.DecisionTreeRegressor(random_state=<span class="number">25</span>) <span class="comment"># 实例化</span></span><br><span class="line">cross_val_score(rgr, data, label, cv=<span class="number">10</span>, scoring=<span class="string">&quot;neg_mean_squared_error&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 后续 fit score predict 类似</span></span><br></pre></td></tr></table></figure>
-<p>实例化并进行交叉验证，返回交叉验证 10 次的 均方误差，观察模型在此数据集上的稳定性</p>
-<h3 id="回归树的评分"><a href="#回归树的评分" class="headerlink" title="回归树的评分"></a>回归树的评分</h3><p><code>rgr.score(Xtest)</code> 默认返回的是 R 平方，其定义如下：</p>
-<script type="math/tex; mode=display">
-\begin{gathered}
-R^{2}=1-\frac{u}{v} \\
-u=\sum_{i=1}^{N}\left(f_{i}-y_{i}\right)^{2} \quad v=\sum_{i=1}^{N}\left(y_{i}-\hat{y}\right)^{2}
-\end{gathered}</script><p>其中 $f_i$ 为各样本模型预测值，$y_i$ 为样本真实值，$\hat y$ 为样本真实值的均值，而习惯上我们通常采用均方误差 MSE 评估回归的结果</p>
-<script type="math/tex; mode=display">
-MSE=\frac{1}{N}\sum^N_{i=1}(f_i-y_i)^2</script><p>可以指定 <code>scoring=&quot;neg_mean_squared_error&quot;</code> 以<strong>负均方误差</strong>作为评估指标</p>
-<h2 id="回归树原理"><a href="#回归树原理" class="headerlink" title="回归树原理"></a>回归树原理</h2><p>回归数为在每个节点划分后的预测数值和节点内数据真实数值的总体偏差尽可能小，此偏差有几种计量选择</p>
-<h3 id="核心优化目标-1"><a href="#核心优化目标-1" class="headerlink" title="核心优化目标"></a>核心优化目标</h3><p>回归即是指连续值的预测计算，因此每个节点给出一个值，而节点内数据各自有真实值，要最小化真实值和节点预测值的偏差</p>
-<ol>
-<li>“mse”：选取均方误差作为分支优化目标</li>
-<li>“friedman_mse”：费尔德曼均方误差</li>
-<li>“mae”：绝对平均误差</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://remedios14.github.io/2022/02/22/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mikyi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mikyi喵喵呜~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/22/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">字符串常用解法整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-22 11:00:49 / 修改时间：11:11:32" itemprop="dateCreated datePublished" datetime="2022-02-22T11:00:49+08:00">2022-02-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Alg-Tricks/" itemprop="url" rel="index"><span itemprop="name">Alg-Tricks</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在 python 中字符串可以类似列表进行索引切片操作，且其添加也非常方便；在 Java 中操作字符串要注意使用 String 对象方法，如取索引用 <code>.charAt(i)</code>，构建需要拼接的字符串时也注意创建 StringBuffer 或 StringBuilder</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://remedios14.github.io/2022/02/19/Hadoop-%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mikyi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mikyi喵喵呜~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/19/Hadoop-%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">Hadoop 架构简介</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-19 09:22:55 / 修改时间：10:34:07" itemprop="dateCreated datePublished" datetime="2022-02-19T09:22:55+08:00">2022-02-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/data/" itemprop="url" rel="index"><span itemprop="name">data</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记录部分课程内容</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Hadoop 具有：</p>
-<ol>
-<li>高可靠性：Hadoop 底层维护多个数据副本，所以即使 Hadoop 某个计算元素或存储出现故障，也不会导致数据的丢失</li>
-<li>高扩展性：啊哎集群间分配任务数据，可方便地扩展数以千计的节点</li>
-<li>高效性：在 MapReduce 的思想下，Hadoop 是并行工作的，以加快任务处理速度</li>
-<li>高容错性：能够自动将失败的任务重新分配</li>
-</ol>
-<h3 id="Hadoop-组成"><a href="#Hadoop-组成" class="headerlink" title="Hadoop 组成"></a>Hadoop 组成</h3><p><img src="../_pics/Hadoop-Constitute.png" alt=""></p>
-<h3 id="HDFS-架构概述"><a href="#HDFS-架构概述" class="headerlink" title="HDFS 架构概述"></a>HDFS 架构概述</h3><p>HDFS —— Hadoop Distrubuted File System，是一个分布式文件系统</p>
-<p>NameNode ：储存文件的元数据，如文件名，目录结构，文件属性（生成时间、副本数、文件权限），以及每个文件的块列表和块所在的 DataNode 等</p>
-<p>DataNode ：再本地文件系统存储文件块数据，以及快数据的校验和。</p>
-<p>Secondary NameNode(2nn) ：每隔一段时间对 NameNode 元数据备份。</p>
-<h3 id="YARN-架构概述"><a href="#YARN-架构概述" class="headerlink" title="YARN 架构概述"></a>YARN 架构概述</h3><p>YARN —— Yet Another Resource Negotiator，另一种资源协调这，是 Hadoop 的资源管理器</p>
-<p><img src="../_pics/Yarn-Constitute.png" alt=""></p>
-<ol>
-<li>Resource Manager（RM）：整个集群资源（内存、CPU 等）的管理者</li>
-<li>Node Manager（NM）：单个节点服务器资源管理者</li>
-<li>Application Master（AM）：单个任务运行的管理者</li>
-<li>Container：容器，相当于一台独立的服务器，里面封装了任务运行所需要的资源，如<strong>内存、CPU、磁盘、网络等</strong></li>
-</ol>
-<h3 id="MapReduce-架构概述"><a href="#MapReduce-架构概述" class="headerlink" title="MapReduce 架构概述"></a>MapReduce 架构概述</h3><p>将计算过程分为两个阶段：Map 和 Reduce</p>
-<ol>
-<li>Map 阶段并行处理输入数据</li>
-<li>Reduce 阶段对 Map 结果进行汇总</li>
-</ol>
-<h3 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h3><ol>
-<li>客户端向 Hadoop 发起任务时，先传入 Yarn 中的 Resource Manager</li>
-<li>管理资源向 Node Manager，进入其中的容器来开启 Map 任务和 Reduce 任务</li>
-<li>完成任务后存储数据到 DataNode，并在 NameNode 上记录</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://remedios14.github.io/2022/02/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E9%9D%A2%E7%BB%8F%E6%95%B4%E7%90%86%EF%BC%88%E4%B8%9A%E5%8A%A1%E9%A2%98%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mikyi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mikyi喵喵呜~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E9%9D%A2%E7%BB%8F%E6%95%B4%E7%90%86%EF%BC%88%E4%B8%9A%E5%8A%A1%E9%A2%98%EF%BC%89/" class="post-title-link" itemprop="url">数据分析面经整理（业务题）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-19 09:10:05" itemprop="dateCreated datePublished" datetime="2022-02-19T09:10:05+08:00">2022-02-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-22 11:07:20" itemprop="dateModified" datetime="2022-02-22T11:07:20+08:00">2022-02-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文<del>尽量</del>持续更新从公开交流网上浏览到的数据分析岗位面经业务类题，考核内容视岗位关联电商交易额或平台用户活跃度等</p>
-<h3 id="名词概念"><a href="#名词概念" class="headerlink" title="名词概念"></a>名词概念</h3><ul>
-<li>DAU ：日活，具体如下</li>
-<li>MAU ：Monthly Active User, 月活，具体为一个月内（统计周期）去重后的登录或使用某产品的用户数量</li>
-<li>ROI ：投资回报率</li>
-<li>GMV ：Gross Merchandise Volume 商品交易总额，一定时间段内交易总额</li>
-</ul>
-<h3 id="简答题"><a href="#简答题" class="headerlink" title="简答题"></a>简答题</h3><ul>
-<li>DAU 下降了怎么检查原因<ul>
-<li>总体思路流程：检查数据准确性；多维度拆分数据；假设原因；确定原因。大体先确定哪一部分的用户减少占主要因素，再确定相应的原因</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>检查数据准确性：是否有硬件异常；系统统计是否出错；相关联的指标是否有异常</li>
-<li>多维度拆分数据：通常分为 <strong>用户、渠道、产品</strong><ol>
-<li>用户可见属性有：新/老用户（新用户引流、老用户留存）、用户渠道（app、小程序、客户端）、用户地区（国家、省份）</li>
-<li>登录渠道属性：平台（ios/android、或是某类型手机设备有问题？）、入口（客户端、外链访问）</li>
-<li>产品属性：新/旧版本（可能更新功能后变动不佳、或旧版本有遗留问题）、时间点上（是否符合往常的月度/年度周期、</li>
-</ol>
-</li>
-<li>计算影响系数：（维度今日量-维度昨日量）/（今日总量-昨日总量） —— 最好各个维度完全独立且构成全集，即完全分割用户群</li>
-<li>建立假设后</li>
-</ol>
-<p>外因包括：政策原因、竞品的运营活动、社会事件或评价</p>
-<ul>
-<li><p>漏斗模型：略</p>
-</li>
-<li><p>哪些指标测度 app 的健康度（什么是健康度）</p>
-<ul>
-<li>用户规模和质量：活跃用户指标（统计周期内使用人数）；新增用户指标（周期内首次启用）；用户构成指标（活跃用户中活跃程度分类统计，如连续活跃，回流用户等）；用户留存率指标（新增用户一段时间内仍使用）；每用户总活跃天数指标</li>
-<li>参与度：启动次数；使用时长；访问页面数；使用间隔</li>
-<li>渠道分析：</li>
-</ul>
-</li>
-<li>引入新功能后，如何评价该新功能的有效性</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://remedios14.github.io/2022/02/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E9%9D%A2%E7%BB%8F%E6%95%B4%E7%90%86%EF%BC%88%E6%8A%80%E6%9C%AF%E9%A2%98%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mikyi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mikyi喵喵呜~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E9%9D%A2%E7%BB%8F%E6%95%B4%E7%90%86%EF%BC%88%E6%8A%80%E6%9C%AF%E9%A2%98%EF%BC%89/" class="post-title-link" itemprop="url">数据分析面经整理（技术题）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-19 09:07:14" itemprop="dateCreated datePublished" datetime="2022-02-19T09:07:14+08:00">2022-02-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-22 21:14:18" itemprop="dateModified" datetime="2022-02-22T21:14:18+08:00">2022-02-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文<del>尽量</del>持续更新从公开交流网上浏览到的数据分析岗位面经技术类题，考核内容以 sql/hive 相关的查询语句为主</p>
-<h2 id="Sql-语法题"><a href="#Sql-语法题" class="headerlink" title="Sql 语法题"></a>Sql 语法题</h2><p>包括一些例题和常用函数解析</p>
-<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><ul>
-<li>连接两个表后算 30 天内的新用户数量，30 天回购率，人均消费</li>
-<li>计算每个用户首次购买的订单</li>
-<li>给定用户表，求次日留存率</li>
-<li>开播三分钟内无人进入的直播房间号</li>
-</ul>
-<p>先 group by 后窗口函数聚合</p>
-<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><p>case when 可以替换为 if(condition,true_val,false_val)</p>
-<h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><p>通常在查询语句中的 <code>order by</code> 指定一行以此增序排列，加上 <code>DESC</code> 改为降序；当排序字段相同时可能乱序</p>
-<h4 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h4><p>date(str) ：返回年-月-日格式日期<br>datediff(date1,date2) ：返回 date1 - date2 得到的天数<br>date_format(date,format) ：例如 ‘%Y-%m-%d %H:%i:%s’<br>timestampdiff(unit,ts1,ts2) ：返回 ts2 - ts1 转为指定时间单位结果</p>
-<h4 id="窗口函数"><a href="#窗口函数" class="headerlink" title="窗口函数"></a>窗口函数</h4><p>func() over(partition by … order by … range/rows between <unbounded> preceding and <unbounded> following)</p>
-<p>注意点：</p>
-<ul>
-<li>rows 和 range 的区别：<ul>
-<li>rows ：框架由开始行和结束行的位置来定义，偏移量是行号与当前行号的差异。比较常用</li>
-<li>range ：框架由值范围内的行定义，偏移量是行值与当前行值的差异。不太常用</li>
-</ul>
-</li>
-<li>order by 的影响：无 order by 时窗口范围是整个分区；有 order by 时窗口范围从首行到当前行</li>
-<li>和 group by 同时出现时会先 group by 再进行窗口函数的聚合</li>
-<li>一般窗口中用 rows 时最好逆序取 following（因为 preceding 时容易发生前面为空而报错）</li>
-</ul>
-<h5 id="窗口序数"><a href="#窗口序数" class="headerlink" title="窗口序数"></a>窗口序数</h5><ul>
-<li>row_number() ：唯一序数</li>
-<li>rank() ：相等值取考前并略过空</li>
-<li><p>dense_rank() ：不略过空</p>
-</li>
-<li><p>percent_rank() ：百分位排序，(rank-1)/(total-1)</p>
-</li>
-<li>cume_dist() ：累积分布序，row_number()/total</li>
-</ul>
-<h5 id="跳跃取值"><a href="#跳跃取值" class="headerlink" title="跳跃取值"></a>跳跃取值</h5><ul>
-<li>lag(exp_col, offset, default)</li>
-<li>lead()</li>
-<li>first_value()</li>
-<li>last_value()</li>
-</ul>
-<h2 id="Excel-函数"><a href="#Excel-函数" class="headerlink" title="Excel 函数"></a>Excel 函数</h2><ul>
-<li></li>
-<li>sumif(条件区域，条件，&lt;求和区域&gt;)</li>
-<li>sumifs(求和区域，条件区域，条件，…)</li>
-</ul>
-<h2 id="Pandas"><a href="#Pandas" class="headerlink" title="Pandas"></a>Pandas</h2><p>pivot_table ：<code>pd.pivot_table(dataframe,index=[cols],columns=[cols],values=[cols],aggfunc=[funcs])</code><br>没用过，主要是转换多级索引然后进行一定的聚合</p>
-<h2 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h2><p>假设检验概念为主：</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://remedios14.github.io/2022/01/20/Pandas-Intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mikyi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mikyi喵喵呜~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/20/Pandas-Intro/" class="post-title-link" itemprop="url">Pandas Intro</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-01-20 13:56:10" itemprop="dateCreated datePublished" datetime="2022-01-20T13:56:10+08:00">2022-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-23 09:57:41" itemprop="dateModified" datetime="2022-02-23T09:57:41+08:00">2022-02-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/data/" itemprop="url" rel="index"><span itemprop="name">data</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>虽然说是 intro ，但是准备把常用指令都存进来<del>并且后续应该懒得补充深入的内容了</del></p>
-<h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><p>通常数据分析都谈到 numpy, pandas, matplotlib, 以及可能使用到的 seabon, sklearn；不过 pandas 基本集成了 numpy 的数值运算内容，超值</p>
-<h3 id="数据读取或创建"><a href="#数据读取或创建" class="headerlink" title="数据读取或创建"></a>数据读取或创建</h3><p>pandas 可以读取的数据格式包括 execl, csv, table 等，读入后形成数据类型 DataFrame，常用读取函数为 <code>read_csv</code> 和 <code>read_excel</code>，传入参数主要为文件路径，类比 <code>open()</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;trial.txt&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(df.head())</span><br><span class="line"></span><br><span class="line">pd.Series(np.arange(<span class="number">12</span>))</span><br><span class="line">pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>),index=<span class="built_in">list</span>(<span class="string">&quot;abc&quot;</span>),columns=<span class="built_in">list</span>(<span class="string">&quot;wxyz&quot;</span>)) <span class="comment"># 从 np 数组创建，传入列表的行列索引名</span></span><br></pre></td></tr></table></figure>
-<p>csv 是一种（通常）以英文半角逗号为列分割符，以换行符为行分隔符的纯文本数据格式</p>
-<p>Series 可以当作从 DataFrame 中取出的一行或一列</p>
-<p>DataFrame 的轴向 axis=0 表示各行，axis=1 表示各列（通常2维）</p>
-<h3 id="数据概览"><a href="#数据概览" class="headerlink" title="数据概览"></a>数据概览</h3><p>B 话不多说直接上代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">df.shape <span class="comment"># 属性，n * m 大小</span></span><br><span class="line">df.dtypes <span class="comment"># 列数据类型</span></span><br><span class="line">df.ndim <span class="comment"># 维数</span></span><br><span class="line">df.index <span class="comment"># 行索引</span></span><br><span class="line">df.columns <span class="comment"># 所有列名的 list</span></span><br><span class="line">df.values <span class="comment"># 二维 ndarry 数组</span></span><br><span class="line"></span><br><span class="line">df.head() <span class="comment"># 默认显示前 5 行，可传入 n</span></span><br><span class="line">df.tail() <span class="comment"># 默认显示后 5 行</span></span><br><span class="line">df.info() <span class="comment"># 数据类型等概览</span></span><br><span class="line">df.describe() <span class="comment"># 数值统计概览</span></span><br></pre></td></tr></table></figure>
-<h3 id="数据定位"><a href="#数据定位" class="headerlink" title="数据定位"></a>数据定位</h3><p>简单的索引操作：</p>
-<ul>
-<li>获取 index：<code>df.index</code></li>
-<li>指定 index：<code>df.index=[&quot;x&quot;,&quot;y&quot;]</code></li>
-<li>重新设置 index：<code>df.reindex(list(&quot;abcdef&quot;))</code></li>
-<li>指定某一列作为 index：<code>df.set_index(col,drop=False)</code></li>
-<li>返回 index 的唯一值：<code>df.set_index(col+).index.unique()</code></li>
-</ul>
-<p>直接进行<strong>切片</strong>（针对行）或<strong>字典</strong>（针对列）索引</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df[:<span class="number">20</span>] <span class="comment"># 取前20行的子 dataframe</span></span><br><span class="line">df[<span class="string">&quot;w&quot;</span>] <span class="comment"># 传入列名或列名的列表</span></span><br><span class="line">df[[<span class="string">&quot;w&quot;</span>,<span class="string">&quot;z&quot;</span>]]</span><br><span class="line">df[:<span class="number">20</span>][<span class="string">&quot;w&quot;</span>] <span class="comment"># 链式操作</span></span><br></pre></td></tr></table></figure>
-<h4 id="布尔索引"><a href="#布尔索引" class="headerlink" title="布尔索引"></a>布尔索引</h4><p>上述方法可以传入一个布尔值 array-like 对象（如列表或 Series）来进行索引，例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[df[<span class="string">&quot;w&quot;</span>]&gt;<span class="number">800</span>&amp;df[<span class="string">&quot;w&quot;</span>]&lt;<span class="number">1000</span>] <span class="comment"># 其实是两个布尔 Series 取交</span></span><br><span class="line">df[df[<span class="string">&quot;s&quot;</span>].<span class="built_in">str</span>.<span class="built_in">len</span>()&gt;<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
-<p>对 Series 调用 .str 方法可以得到字符串类型的 Se，用于调用内置方法获取布尔类型的 Se</p>
-<p>可以结合缺失值的判断 pd.isnull() 和 pd.notnull() 来进行处理</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df(pd.isnull(df[<span class="string">&quot;w&quot;</span>])) <span class="comment"># 注意还是传入一个 array-like 来索引</span></span><br></pre></td></tr></table></figure>
-<h4 id="定位索引"><a href="#定位索引" class="headerlink" title="定位索引"></a>定位索引</h4><p>通常先行后列，可处理多级索引</p>
-<p>另外常用 <code>loc</code> 和 <code>iloc</code> ，有些微的区别：</p>
-<ul>
-<li>loc : works on the labels in the index —— 按照标签取数据</li>
-<li>iloc : works on the positions in the index (so it only takes integers)，即只接受整数位来索引</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df.loc[<span class="number">1</span>] <span class="comment"># 传入一个值取行形成 Series，此处取第 2 行数据</span></span><br><span class="line">df.loc[<span class="number">2</span>:<span class="number">4</span>] <span class="comment"># 可传入切片或列表来取出多行</span></span><br><span class="line">df.loc[[<span class="number">1</span>,<span class="number">4</span>]] <span class="comment"># 传入列表和传入切片的形式有一点不同，不可以对换</span></span><br><span class="line">rows = k / n:m / [k1,k2,...]</span><br><span class="line">cols = col_name / [col1, col2, ...] <span class="comment"># 字符串形式</span></span><br><span class="line">df.loc[rows, cols] <span class="comment"># 行索引后可以加上列名或 列名 list</span></span><br></pre></td></tr></table></figure>
-<h3 id="数据合并"><a href="#数据合并" class="headerlink" title="数据合并"></a>数据合并</h3><p><code>df1.join(df2)</code> 默认把两个 df 按照<strong>行索引</strong>相同的值左右合并</p>
-<p><code>t1.merge(t2,left_on=&quot;O&quot;,right_on=&quot;X&quot;,how=&quot;outer&quot;)</code> 指定列将两个 df 按照命令形式合并，这个才类似 SQL 中的 join</p>
-<p><code>pd.concat(df1,df2,axis=0)</code> 类似 <code>union</code> 按照列合并，需要相同列，改变 <code>axis</code> 参数改变合并方向</p>
-<h3 id="数据分组和聚合"><a href="#数据分组和聚合" class="headerlink" title="数据分组和聚合"></a>数据分组和聚合</h3><p><code>df.groupby(by=col+)</code> 返回一个 <code>GourpBy</code> 对象，对此对象可以进行 for 循环遍历，每个元素是一个分组后的一个 tuple ，此 tuple 第一个值为分组的组标题，第二个值为一个子 DataFrame</p>
-<h4 id="GroupBy-对象"><a href="#GroupBy-对象" class="headerlink" title="GroupBy 对象"></a>GroupBy 对象</h4><p>形如 <code>gp[col+]</code> 任然返回一个 GroupBy 对象，表示分组后取某些列；</p>
-<p>事实上可以和 DataFrame 一样取索引</p>
-<p>有一些方法：</p>
-<ul>
-<li><code>gp.count()</code> </li>
-<li><code>gp.max()</code> 等聚合</li>
-</ul>
-<h3 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[col].rolling(windows=n).aggfunc()</span><br></pre></td></tr></table></figure>
-<h3 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h3><ol>
-<li>删除缺失值所在行或列 <code>dropna(axis=0,how=&#39;any&#39;,inplace=False)</code></li>
-<li>填充数据 <code>se.fillna(value=se.mean())</code></li>
-</ol>
-<h3 id="统计方法"><a href="#统计方法" class="headerlink" title="统计方法"></a>统计方法</h3><p>不多bb直接上例子</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">se.mean()</span><br><span class="line">se.<span class="built_in">max</span>()</span><br><span class="line">se.median() <span class="comment"># 此类都会自动略过 Nan</span></span><br><span class="line">se.unique() <span class="comment"># 返回唯一值的列表</span></span><br><span class="line"></span><br><span class="line">se.argmax() <span class="comment"># 返回对应的索引值</span></span><br><span class="line">se.argmin()</span><br></pre></td></tr></table></figure>
-<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p>pandas 在读入数据存储为 DataFrame 或 Series 时会将值转为相应的类型，如下有对应 pandas 内和 python 原生：</p>
-<ul>
-<li>object : string</li>
-<li>int : integer</li>
-<li>float : float</li>
-<li>datetime : time</li>
-<li>bool : boolean</li>
-</ul>
-<p><code>var.dtype</code> 查看变量的 dtype</p>
-<h4 id="字符串-Series-方法"><a href="#字符串-Series-方法" class="headerlink" title="字符串 Series 方法"></a>字符串 Series 方法</h4><p>其中模式指正则表达式</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>cat</td>
-<td>实现元素级的字符串连接操作，可指定分隔符</td>
-</tr>
-<tr>
-<td>contains</td>
-<td>返回表示各字符串是否含有指定模式的布尔型数组</td>
-</tr>
-<tr>
-<td>count</td>
-<td>模式的出现次数</td>
-</tr>
-<tr>
-<td>endwith、startwith</td>
-<td>相当于对各个元素执行末、始位判断</td>
-</tr>
-<tr>
-<td>findall</td>
-<td>计算各字符串的模式列表</td>
-</tr>
-<tr>
-<td>get</td>
-<td>获取各元素的第一个字符</td>
-</tr>
-<tr>
-<td>join</td>
-<td>根据指定的分隔符将 Series 中各元素的字符串连接起来</td>
-</tr>
-<tr>
-<td>len</td>
-<td>长度</td>
-</tr>
-<tr>
-<td>lower、upper</td>
-<td>逐元素转换大小写</td>
-</tr>
-<tr>
-<td>match</td>
-<td>正则匹配，逐元素 re.match</td>
-</tr>
-<tr>
-<td>pad</td>
-<td>在字符串的左或右或左右添加空格</td>
-</tr>
-<tr>
-<td>center</td>
-<td>相当于 pad(side=’both’)</td>
-</tr>
-<tr>
-<td>repeat</td>
-<td>各元素重复</td>
-</tr>
-<tr>
-<td>replace</td>
-<td>各元素替换</td>
-</tr>
-<tr>
-<td>slice</td>
-<td>各元素截取子串</td>
-</tr>
-<tr>
-<td>split</td>
-<td>各元素指定分隔符拆分</td>
-</tr>
-<tr>
-<td>strip、rstrip、lstrip</td>
-<td>去除空白符</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>案例：</p>
-<p>有形如 <code>&quot;type1, type2, ...&quot;</code> 形式字符串作为每个值的一列，统计其中每个 type 的出现个数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">total_list = df[<span class="string">&quot;type_col&quot;</span>].<span class="built_in">str</span>.split(<span class="string">&quot;,&quot;</span>).tolist()</span><br><span class="line">type_list = <span class="built_in">list</span>(<span class="built_in">set</span>([i <span class="keyword">for</span> j <span class="keyword">in</span> total_list <span class="keyword">for</span> i <span class="keyword">in</span> j]))</span><br><span class="line">st = pd.DataFrame(np.zeros(<span class="built_in">len</span>(total_list),<span class="built_in">len</span>(type_list)),columns=type_list)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(total_list)):</span><br><span class="line">    st.loc[i,total_list[i]] = <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">st.<span class="built_in">sum</span>(axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Mikyi</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
+    <div class="hidden">
+        <!-- 加载文章阅读对应的统计功能，评论自带的那种 -->
         
-          <span class="site-state-item-count">13</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">5</span>
-        <span class="site-state-item-name">分类</span>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">23</span>
-        <span class="site-state-item-name">标签</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
     </div>
+
+
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/data/">data</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/interview/">interview</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
-  <div id="sidebar-dimmer"></div>
 
 
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.6em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/smp-cmd/" style="font-size: 0.6em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.6em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 0.6em;">决策树</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%A2%98/" style="font-size: 0.6em;">技术题</a> <a href="/tags/%E6%8A%98%E7%A3%A8/" style="font-size: 0.8em;">折磨</a> <a href="/tags/%E6%8F%90%E5%8D%87%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">提升算法</a> <a href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" style="font-size: 0.6em;">支持向量机</a>
       </div>
-    </main>
+  </aside>
 
-    <footer class="footer">
-      <div class="footer-inner">
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
         
-
         
+          
+          
+            <a class="list-group-item" href="/2022/02/27/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 回溯算法整理</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/26/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 二叉树算法整理</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/25/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 栈与队列算法整理</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/24/%E5%8F%8C%E6%8C%87%E9%92%88%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 双指针算法整理</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6-xgboost/"><i class="fa  fa-book"></i> 机器学习进阶-xgboost</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
 
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Mikyi</span>
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Remedios14"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2022 Mikyi喵喵呜~ 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Mikyi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-      
-
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
 <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
 </script>
 
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
     
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2377259266"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
 
-  
 
-</body>
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
 </html>
