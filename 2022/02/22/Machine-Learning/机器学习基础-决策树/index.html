@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-02-22T06:40:25.000Z">
-<meta property="article:modified_time" content="2022-03-01T02:59:47.583Z">
+<meta property="article:modified_time" content="2022-03-03T11:18:08.717Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="决策树">
@@ -166,7 +166,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~2.86K
+                        ~2.85K
                     
                     字
                 </li>
@@ -175,7 +175,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646103587583"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1646306288717"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -205,7 +205,7 @@
 </tbody>
 </table>
 </div>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib,pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">test = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    clf = tree.DecisionTreeClassifier(max_depth=i+<span class="number">1</span></span><br><span class="line">        ,criterion=<span class="string">&quot;entropy&quot;</span></span><br><span class="line">        ,random_state=<span class="number">25</span></span><br><span class="line">        ,splitter=<span class="string">&quot;random&quot;</span></span><br><span class="line">        )</span><br><span class="line">    clf = clf.fit(Xtrain, Ytrain)</span><br><span class="line">    score = clf.score(Xtest, Ytest)</span><br><span class="line">    test.append(score)</span><br><span class="line">plt.plot(<span class="built_in">range</span>(<span class="number">1</span>,<span class="number">11</span>), test, color=<span class="string">&quot;red&quot;</span>, label=<span class="string">&quot;max_depth&quot;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">test = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    clf = tree.DecisionTreeClassifier(max_depth=i+<span class="number">1</span></span><br><span class="line">        ,criterion=<span class="string">&quot;entropy&quot;</span></span><br><span class="line">        ,random_state=<span class="number">25</span></span><br><span class="line">        ,splitter=<span class="string">&quot;random&quot;</span></span><br><span class="line">        )</span><br><span class="line">    clf = clf.fit(Xtrain, Ytrain)</span><br><span class="line">    score = clf.score(Xtest, Ytest)</span><br><span class="line">    test.append(score)</span><br><span class="line">plt.plot(<span class="built_in">range</span>(<span class="number">1</span>,<span class="number">11</span>), test, color=<span class="string">&quot;red&quot;</span>, label=<span class="string">&quot;max_depth&quot;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <h3 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h3><p>可以看到树的结构，不过帮助不大</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> graphviz</span><br><span class="line">dot_data = tree.export_graphviz(clf <span class="comment"># 实例对象</span></span><br><span class="line">	,feature_names=feature_name <span class="comment"># 特征名的列表</span></span><br><span class="line">	,class_names=class_name <span class="comment"># 类名列表</span></span><br><span class="line">	,filled=<span class="literal">True</span></span><br><span class="line">	,rounded=<span class="literal">True</span></span><br><span class="line">)</span><br><span class="line">graph = graphviz.Source(dot_data)</span><br><span class="line">graph</span><br></pre></td></tr></table></figure>
 <h2 id="分类树原理"><a href="#分类树原理" class="headerlink" title="分类树原理"></a>分类树原理</h2><p>通常有分类树和回归树，主要原理基本一致，分类树为在每一个层级选择信息增益最大的属性作为划分属性形成分支</p>
@@ -220,7 +220,7 @@ Gain(D,A)=Entropy(D) - \sum^v\frac{|D^v|}{|D|}Entropy(D^v)</script><p>ID.3 决�
 Gain-ratio(D,A)=\frac{Gain(D,A)}{IV(A)}\\
 其中IV(A)=-\sum^v\frac{\abs {D^v}}{\abs {D}}\log_2\frac{\abs {D^v}}{\abs {D}}由属性A确定</script><h4 id="基尼系数"><a href="#基尼系数" class="headerlink" title="基尼系数"></a>基尼系数</h4><p>同样在样本集 D 下有 k 个分类，此时基尼系数为</p>
 <script type="math/tex; mode=display">
-Gini(D)=\sum_k\sum_{k'\neq k}p_kp_{k'}=1-\sum p_k^2</script><h2 id="回归树用法"><a href="#回归树用法" class="headerlink" title="回归树用法"></a>回归树用法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> crosswalk_val_score</span><br><span class="line"></span><br><span class="line">rgr = tree.DecisionTreeRegressor(random_state=<span class="number">25</span>) <span class="comment"># 实例化</span></span><br><span class="line">cross_val_score(rgr, data, label, cv=<span class="number">10</span>, scoring=<span class="string">&quot;neg_mean_squared_error&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 后续 fit score predict 类似</span></span><br></pre></td></tr></table></figure>
+Gini(D)=\sum_k\sum_{k'\neq k}p_kp_{k'}=1-\sum p_k^2</script><h2 id="回归树用法"><a href="#回归树用法" class="headerlink" title="回归树用法"></a>回归树用法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"></span><br><span class="line">rgr = tree.DecisionTreeRegressor(random_state=<span class="number">25</span>) <span class="comment"># 实例化</span></span><br><span class="line">cross_val_score(rgr, data, label, cv=<span class="number">10</span>, scoring=<span class="string">&quot;neg_mean_squared_error&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 后续 fit score predict 类似</span></span><br></pre></td></tr></table></figure>
 <p>实例化并进行交叉验证，返回交叉验证 10 次的 均方误差，观察模型在此数据集上的稳定性</p>
 <h3 id="回归树的评分"><a href="#回归树的评分" class="headerlink" title="回归树的评分"></a>回归树的评分</h3><p><code>rgr.score(Xtest)</code> 默认返回的是 R 平方，其定义如下：</p>
 <script type="math/tex; mode=display">
@@ -327,7 +327,7 @@ MSE=\frac{1}{N}\sum^N_{i=1}(f_i-y_i)^2</script><p>可以指定 <code>scoring=&qu
                     <a class="tag-none-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a>, <a class="tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-01</span>
+                <span>最后编辑：2022-03-03</span>
                 </div>
             </div>
         </footer>
@@ -379,7 +379,7 @@ MSE=\frac{1}{N}\sum^N_{i=1}(f_i-y_i)^2</script><p>可以指定 <code>scoring=&qu
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -388,7 +388,7 @@ MSE=\frac{1}{N}\sum^N_{i=1}(f_i-y_i)^2</script><p>可以指定 <code>scoring=&qu
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.6em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/smp-cmd/" style="font-size: 0.6em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.6em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 0.6em;">决策树</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%A2%98/" style="font-size: 0.6em;">技术题</a> <a href="/tags/%E6%8A%98%E7%A3%A8/" style="font-size: 0.8em;">折磨</a> <a href="/tags/%E6%8F%90%E5%8D%87%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">提升算法</a> <a href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" style="font-size: 0.6em;">支持向量机</a>
+        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/smp-cmd/" style="font-size: 0.6em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.6em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a> <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">优化算法</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 0.6em;">决策树</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%A2%98/" style="font-size: 0.6em;">技术题</a> <a href="/tags/%E6%8A%98%E7%A3%A8/" style="font-size: 0.8em;">折磨</a> <a href="/tags/%E6%8F%90%E5%8D%87%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">提升算法</a>
       </div>
   </aside>
 
@@ -402,34 +402,48 @@ MSE=\frac{1}{N}\sum^N_{i=1}(f_i-y_i)^2</script><p>可以指定 <code>scoring=&qu
         
           
           
-            <a class="list-group-item" href="/2022/03/01/Alg-Tricks/%E5%93%88%E5%B8%8C%E8%A1%A8%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 哈希表算法整理</a>
+            <a class="list-group-item" href="/2022/03/03/Data/Python-%E6%95%B0%E6%8D%AE%E5%9B%BE%E8%A1%A8/"><i class="fa  fa-book"></i> Python-数据图标</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/01/Alg-Tricks/%E9%93%BE%E8%A1%A8%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 链表算法整理</a>
+            <a class="list-group-item" href="/2022/03/03/%E7%AE%97%E6%B3%95%E9%A2%98%E8%87%AA%E5%88%B7%E6%80%BB%E7%BB%93/"><i class="fa  fa-book"></i> 算法题自刷总结</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/01/Alg-Tricks/%E6%95%B0%E7%BB%84%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 数组算法整理</a>
+            <a class="list-group-item" href="/2022/03/02/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"><i class="fa  fa-book"></i> 机器学习基础-优化算法</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/02/27/Alg-Tricks/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 回溯算法整理</a>
+            <a class="list-group-item" href="/2022/03/02/Alg-Tricks/%E5%8D%95%E8%B0%83%E6%A0%88%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 单调栈算法整理</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/02/26/Alg-Tricks/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 二叉树算法整理</a>
+            <a class="list-group-item" href="/2022/03/02/Alg-Tricks/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89/"><i class="fa  fa-book"></i> 动态规划算法整理（二）</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

@@ -15,16 +15,16 @@
   
     <meta name="keywords" content="机器学习, 线性回归" />
   
-  <meta name="description" content="最简单的回归模型，基于矩阵运算和最小二乘优化实现 位于 sklearn.linear_model 中     类&#x2F;函数 含义     LinearRegression 最小二乘法回归   Ridge 岭回归，加上了 L2 正则化   Lasso 加上了 L1 正则化     岭回归和 Lasso 都可以一定程度缓解多重共线性造成的困扰 创建12345from sklearn.linear_mode">
+  <meta name="description" content="最简单的回归模型，基于矩阵运算和最小二乘优化实现 原理假设目标值和特征之间线性相关，建立线性关系式：  \widehat{y}&#x3D;w x+b作为回归问题采用均方误差作为损失：  L&#x3D;\frac{1}{n} \sum_{i&#x3D;1}^{n}\left(\hat{y}_{i}-y_{i}\right)^{2}采用最小二乘法或梯度下降法来求解损失最小的参数或调整参数更新（其实都是求导），具体导数表达式  \b">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习基础-线性回归">
 <meta property="og:url" content="http://remedios14.github.io/2022/02/24/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/index.html">
 <meta property="og:site_name" content="Mikyi喵喵呜~">
-<meta property="og:description" content="最简单的回归模型，基于矩阵运算和最小二乘优化实现 位于 sklearn.linear_model 中     类&#x2F;函数 含义     LinearRegression 最小二乘法回归   Ridge 岭回归，加上了 L2 正则化   Lasso 加上了 L1 正则化     岭回归和 Lasso 都可以一定程度缓解多重共线性造成的困扰 创建12345from sklearn.linear_mode">
+<meta property="og:description" content="最简单的回归模型，基于矩阵运算和最小二乘优化实现 原理假设目标值和特征之间线性相关，建立线性关系式：  \widehat{y}&#x3D;w x+b作为回归问题采用均方误差作为损失：  L&#x3D;\frac{1}{n} \sum_{i&#x3D;1}^{n}\left(\hat{y}_{i}-y_{i}\right)^{2}采用最小二乘法或梯度下降法来求解损失最小的参数或调整参数更新（其实都是求导），具体导数表达式  \b">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-02-24T04:41:25.000Z">
-<meta property="article:modified_time" content="2022-03-01T03:00:02.859Z">
+<meta property="article:modified_time" content="2022-03-02T13:25:15.364Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="线性回归">
@@ -166,7 +166,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        712
+                        1150
                     
                     字
                 </li>
@@ -175,11 +175,21 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646103602859"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1646227515364"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
             <p>最简单的回归模型，基于矩阵运算和最小二乘优化实现</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>假设目标值和特征之间线性相关，建立线性关系式：</p>
+<script type="math/tex; mode=display">
+\widehat{y}=w x+b</script><p>作为回归问题采用均方误差作为损失：</p>
+<script type="math/tex; mode=display">
+L=\frac{1}{n} \sum_{i=1}^{n}\left(\hat{y}_{i}-y_{i}\right)^{2}</script><p>采用最小二乘法或梯度下降法来求解损失最小的参数或调整参数更新（其实都是求导），具体导数表达式</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+\frac{\partial L}{\partial w}=2\left(w \sum_{i=1}^{n} x^{2}-\sum_{i=1}^{n} x_{i}\left(y_{i}-b\right)\right) \\
+\frac{\partial L}{\partial b}=2\left(n b-\sum_{i=1}^{n}\left(y_{i}-w x_{i}\right)\right)
+\end{gathered}</script><p>衍生的岭回归和 Lasso 即对参数执行了 L2 和 L1 正则化</p>
 <p>位于 <code>sklearn.linear_model</code> 中</p>
 <div class="table-container">
 <table>
@@ -206,8 +216,8 @@
 </table>
 </div>
 <p>岭回归和 Lasso 都可以一定程度缓解多重共线性造成的困扰</p>
-<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression <span class="keyword">as</span> LR</span><br><span class="line"></span><br><span class="line">rgr = LR(fit_intercept=<span class="literal">True</span>).fit(X,y) <span class="comment"># 默认带截距项</span></span><br><span class="line">rgr.coef_ <span class="comment"># 查看系数</span></span><br><span class="line">rgr.intercept_ <span class="comment"># 查看截距项</span></span><br></pre></td></tr></table></figure>
-<h3 id="岭回归"><a href="#岭回归" class="headerlink" title="岭回归"></a>岭回归</h3><p>加上了 L2 正则项</p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression <span class="keyword">as</span> LR</span><br><span class="line"></span><br><span class="line">rgr = LR(fit_intercept=<span class="literal">True</span>).fit(X,y) <span class="comment"># 默认带截距项</span></span><br><span class="line">rgr.coef_ <span class="comment"># 查看系数</span></span><br><span class="line">rgr.intercept_ <span class="comment"># 查看截距项</span></span><br></pre></td></tr></table></figure>
+<h4 id="岭回归"><a href="#岭回归" class="headerlink" title="岭回归"></a>岭回归</h4><p>加上了 L2 正则项</p>
 <script type="math/tex; mode=display">
 \min _{w}\|\boldsymbol{X} \boldsymbol{w}-\boldsymbol{y}\|_{2}^{2}+\alpha\|\boldsymbol{w}\|_{2}^{2}</script><p>求导结果</p>
 <script type="math/tex; mode=display">
@@ -312,26 +322,11 @@
             const hostUrl       = "http://remedios14.github.io/2022/02/24/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/";
             const title         = "「机器学习基础-线性回归」";
             const excerpt       = `最简单的回归模型，基于矩阵运算和最小二乘优化实现
-位于 sklearn.linear_model 中
+原理假设目标值和特征之间线性相关，建立线性关系式：
 
+\widehat{y}=w x+b作为回归问题采用均方误差作为损失：
 
-
-
-类/函数
-含义
-
-
-
-
-LinearRegression
-最小二乘法回归
-
-
-Ridge
-岭回归，加上了 L2 正则化
-
-
-...`;
+L=\frac{1}{n} \sum_{i=1}^{n}\...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -353,7 +348,7 @@ Ridge
                     <a class="tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>, <a class="tag-none-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-01</span>
+                <span>最后编辑：2022-03-02</span>
                 </div>
             </div>
         </footer>
@@ -405,7 +400,7 @@ Ridge
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -414,7 +409,7 @@ Ridge
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.6em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/smp-cmd/" style="font-size: 0.6em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.6em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 0.6em;">决策树</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%A2%98/" style="font-size: 0.6em;">技术题</a> <a href="/tags/%E6%8A%98%E7%A3%A8/" style="font-size: 0.8em;">折磨</a> <a href="/tags/%E6%8F%90%E5%8D%87%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">提升算法</a> <a href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" style="font-size: 0.6em;">支持向量机</a>
+        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/smp-cmd/" style="font-size: 0.6em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.6em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a> <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">优化算法</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 0.6em;">决策树</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%A2%98/" style="font-size: 0.6em;">技术题</a> <a href="/tags/%E6%8A%98%E7%A3%A8/" style="font-size: 0.8em;">折磨</a> <a href="/tags/%E6%8F%90%E5%8D%87%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">提升算法</a>
       </div>
   </aside>
 
@@ -428,34 +423,48 @@ Ridge
         
           
           
-            <a class="list-group-item" href="/2022/03/01/Alg-Tricks/%E5%93%88%E5%B8%8C%E8%A1%A8%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 哈希表算法整理</a>
+            <a class="list-group-item" href="/2022/03/03/Data/Python-%E6%95%B0%E6%8D%AE%E5%9B%BE%E8%A1%A8/"><i class="fa  fa-book"></i> Python-数据图标</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/01/Alg-Tricks/%E9%93%BE%E8%A1%A8%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 链表算法整理</a>
+            <a class="list-group-item" href="/2022/03/03/%E7%AE%97%E6%B3%95%E9%A2%98%E8%87%AA%E5%88%B7%E6%80%BB%E7%BB%93/"><i class="fa  fa-book"></i> 算法题自刷总结</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/01/Alg-Tricks/%E6%95%B0%E7%BB%84%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 数组算法整理</a>
+            <a class="list-group-item" href="/2022/03/02/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"><i class="fa  fa-book"></i> 机器学习基础-优化算法</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/02/27/Alg-Tricks/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 回溯算法整理</a>
+            <a class="list-group-item" href="/2022/03/02/Alg-Tricks/%E5%8D%95%E8%B0%83%E6%A0%88%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 单调栈算法整理</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/02/26/Alg-Tricks/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 二叉树算法整理</a>
+            <a class="list-group-item" href="/2022/03/02/Alg-Tricks/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89/"><i class="fa  fa-book"></i> 动态规划算法整理（二）</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           
