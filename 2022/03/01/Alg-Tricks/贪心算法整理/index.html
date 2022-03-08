@@ -15,16 +15,16 @@
   
     <meta name="keywords" content="折磨, 算法题, 面试" />
   
-  <meta name="description" content="注：主要编题顺序及算法模板来自公众号「代码随想录」，强推！ 贪心算法即选择每一阶段的局部最优，从而达到全局最优，一般分为如下四个步骤：  分解为若干个子问题 找出适合的贪心策略 求解每一个子问题的最优解 将局部最优解堆叠成全局最优解  自定义排序由于用到的比较多，在这里标上，下方都是递增排序  C++  1234static bool cmp(const vector&lt;int&gt;&amp;amp">
+  <meta name="description" content="注：主要编题顺序及算法模板来自公众号「代码随想录」，强推！ 贪心算法即选择每一阶段的局部最优，从而达到全局最优，一般分为如下四个步骤：  分解为若干个子问题 找出适合的贪心策略 求解每一个子问题的最优解 将局部最优解堆叠成全局最优解  自定义排序由于用到的比较多，在这里标上，下方都是递增排序  C++：第一个参数要排在第二个参数前时返回 true  1234static bool cmp(cons">
 <meta property="og:type" content="article">
 <meta property="og:title" content="贪心算法整理">
 <meta property="og:url" content="http://remedios14.github.io/2022/03/01/Alg-Tricks/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/index.html">
 <meta property="og:site_name" content="Mikyi喵喵呜~">
-<meta property="og:description" content="注：主要编题顺序及算法模板来自公众号「代码随想录」，强推！ 贪心算法即选择每一阶段的局部最优，从而达到全局最优，一般分为如下四个步骤：  分解为若干个子问题 找出适合的贪心策略 求解每一个子问题的最优解 将局部最优解堆叠成全局最优解  自定义排序由于用到的比较多，在这里标上，下方都是递增排序  C++  1234static bool cmp(const vector&lt;int&gt;&amp;amp">
+<meta property="og:description" content="注：主要编题顺序及算法模板来自公众号「代码随想录」，强推！ 贪心算法即选择每一阶段的局部最优，从而达到全局最优，一般分为如下四个步骤：  分解为若干个子问题 找出适合的贪心策略 求解每一个子问题的最优解 将局部最优解堆叠成全局最优解  自定义排序由于用到的比较多，在这里标上，下方都是递增排序  C++：第一个参数要排在第二个参数前时返回 true  1234static bool cmp(cons">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-03-01T05:58:13.000Z">
-<meta property="article:modified_time" content="2022-03-02T12:56:28.222Z">
+<meta property="article:modified_time" content="2022-03-08T02:52:20.973Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="算法题">
@@ -167,7 +167,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~5.85K
+                        ~6.27K
                     
                     字
                 </li>
@@ -176,7 +176,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646225788222"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1646707940973"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -190,13 +190,34 @@
 </ol>
 <h3 id="自定义排序"><a href="#自定义排序" class="headerlink" title="自定义排序"></a>自定义排序</h3><p>由于用到的比较多，在这里标上，下方都是递增排序</p>
 <ul>
-<li>C++</li>
+<li>C++：第一个参数要排在第二个参数前时返回 true</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> vector&lt;<span class="keyword">int</span>&gt;&amp; a, <span class="keyword">const</span> vector&lt;<span class="keyword">int</span>&gt;&amp; b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a[<span class="number">0</span>] &lt; b[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(arr.<span class="built_in">begin</span>(), arr.<span class="built_in">end</span>(), cmp);</span><br></pre></td></tr></table></figure>
 <ul>
-<li>Java 返回的是 a &gt; b</li>
+<li>Java 由于是继承自 Comparable 接口覆写 compareTo 方法，所以实际上的比较总是符合 x.compareTo(y) 的规则</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(arr, (a, b) -&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (a[<span class="number">0</span>] == b[<span class="number">0</span>]) <span class="keyword">return</span> a[<span class="number">1</span>] - b[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> a[<span class="number">0</span>] - b[<span class="number">0</span>];</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="注意题"><a href="#注意题" class="headerlink" title="注意题"></a>注意题</h3><ul>
+<li><ol>
+<li>根据身高重建队列：一个二维数组表示已经排好的队列被打乱了，每个元素第一个值为该成员的身高，第二个元素表示原队列中在他前方有 ki 个身高不小于他的人；目标还原队列顺序<ul>
+<li>解法：先按照身高降序排列，然后遍历按照 ki 插入新队列，插入操作 <code>vec.insert(pos, val)</code> 同字符串的插入</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>多为数组排序题：<ul>
+<li>区间排序：例如 452. 用最少数量的箭引爆气球；435. 无重叠区间；二维数组每个元素表示一个区间，此类问题通常要求尽可能重叠或不重叠<ul>
+<li>尽可能重叠：通常按照同侧排序和遍历起始，即如 按左边界排序，从左到右遍历</li>
+<li>尽可能不重叠：通常相反，因为右边界越小，留给其他区间的可用空间就越大，即如 按右边界排序，从左到右遍历</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ol>
+<li>监控二叉树：好难，有空再说</li>
+</ol>
+</li>
+</ul>
 <h3 id="基础题"><a href="#基础题" class="headerlink" title="基础题"></a>基础题</h3><ul>
 <li><ol>
 <li>分发饼干：假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。<br>对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。<ul>
@@ -420,7 +441,7 @@
                     <a class="tag-none-link" href="/tags/%E6%8A%98%E7%A3%A8/" rel="tag">折磨</a>, <a class="tag-none-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a>, <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-02</span>
+                <span>最后编辑：2022-03-08</span>
                 </div>
             </div>
         </footer>
@@ -472,7 +493,7 @@
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -481,7 +502,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/smp-cmd/" style="font-size: 0.6em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.6em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a> <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">优化算法</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 0.6em;">决策树</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%A2%98/" style="font-size: 0.6em;">技术题</a> <a href="/tags/%E6%8A%98%E7%A3%A8/" style="font-size: 0.8em;">折磨</a> <a href="/tags/%E6%8F%90%E5%8D%87%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">提升算法</a>
+        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.8em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/smp-cmd/" style="font-size: 0.6em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.6em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a> <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">优化算法</a> <a href="/tags/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/" style="font-size: 0.6em;">入门介绍</a> <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" style="font-size: 0.6em;">八股文</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 0.6em;">决策树</a>
       </div>
   </aside>
 
@@ -495,34 +516,42 @@
         
           
           
+            <a class="list-group-item" href="/2022/03/07/Data/Matplot-Intro/"><i class="fa  fa-book"></i> Matplot-Intro</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/03/05/Alg-Tricks/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 排序算法整理</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/03/04/Interview/%E7%AE%97%E6%B3%95%E5%85%AB%E8%82%A1%E6%96%87/"><i class="fa  fa-book"></i> 算法八股文</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/03/03/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（1）</a>
+            
+          
+        
+          
+          
             <a class="list-group-item" href="/2022/03/03/Data/Python-%E6%95%B0%E6%8D%AE%E5%9B%BE%E8%A1%A8/"><i class="fa  fa-book"></i> Python-数据图标</a>
             
           
         
           
-          
-            <a class="list-group-item" href="/2022/03/03/%E7%AE%97%E6%B3%95%E9%A2%98%E8%87%AA%E5%88%B7%E6%80%BB%E7%BB%93/"><i class="fa  fa-book"></i> 算法题自刷总结</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/03/02/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"><i class="fa  fa-book"></i> 机器学习基础-优化算法</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/03/02/Alg-Tricks/%E5%8D%95%E8%B0%83%E6%A0%88%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 单调栈算法整理</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/03/02/Alg-Tricks/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89/"><i class="fa  fa-book"></i> 动态规划算法整理（二）</a>
             
-          
-        
           
             
           
