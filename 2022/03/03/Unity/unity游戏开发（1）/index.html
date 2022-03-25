@@ -13,20 +13,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="入门介绍" />
+    <meta name="keywords" content="入门介绍, 基本元素" />
   
-  <meta name="description" content="编辑界面： Project 项目面板：项目内的资源文件 Scene 场景视图：以可视化的形式展示游戏内容 Game 游戏视图：对游戏进行播放预览 Hierarchy 层级面板：以树状形式显示游戏中的对象 Inspector 属性面板：显示资源和游戏对象的属性 Console 控制台：用于游戏代码的打印输出调试  Assets 资源目录： Scenes 可以创建场景用于切换 图片、音频、脚本等资源可">
+  <meta name="description" content="运行顺序：创建各种资源对象-&gt;生成对象的各种组件（Sprite、Script 等）-&gt;实例化脚本的对象-&gt;调用脚本对象方法 编辑界面： Project 项目面板：项目内的资源文件 Scene 场景视图：以可视化的形式展示游戏内容 Game 游戏视图：对游戏进行播放预览 Hierarchy 层级面板：以树状形式显示游戏中的对象 Inspector 属性面板：显示资源和游戏对象的属性">
 <meta property="og:type" content="article">
 <meta property="og:title" content="unity游戏开发（1）">
 <meta property="og:url" content="http://remedios14.github.io/2022/03/03/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/index.html">
 <meta property="og:site_name" content="Mikyi喵喵呜~">
-<meta property="og:description" content="编辑界面： Project 项目面板：项目内的资源文件 Scene 场景视图：以可视化的形式展示游戏内容 Game 游戏视图：对游戏进行播放预览 Hierarchy 层级面板：以树状形式显示游戏中的对象 Inspector 属性面板：显示资源和游戏对象的属性 Console 控制台：用于游戏代码的打印输出调试  Assets 资源目录： Scenes 可以创建场景用于切换 图片、音频、脚本等资源可">
+<meta property="og:description" content="运行顺序：创建各种资源对象-&gt;生成对象的各种组件（Sprite、Script 等）-&gt;实例化脚本的对象-&gt;调用脚本对象方法 编辑界面： Project 项目面板：项目内的资源文件 Scene 场景视图：以可视化的形式展示游戏内容 Game 游戏视图：对游戏进行播放预览 Hierarchy 层级面板：以树状形式显示游戏中的对象 Inspector 属性面板：显示资源和游戏对象的属性">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-03-03T15:34:23.000Z">
-<meta property="article:modified_time" content="2022-03-07T15:43:22.260Z">
+<meta property="article:modified_time" content="2022-03-18T15:38:33.832Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="入门介绍">
+<meta property="article:tag" content="基本元素">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
 <meta name="twitter:site" content="@null">
@@ -165,7 +166,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        585
+                        1463
                     
                     字
                 </li>
@@ -174,11 +175,12 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646667802260"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1647617913832"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h3 id="编辑界面："><a href="#编辑界面：" class="headerlink" title="编辑界面："></a>编辑界面：</h3><ul>
+            <p>运行顺序：创建各种资源对象-&gt;生成对象的各种组件（Sprite、Script 等）-&gt;实例化脚本的对象-&gt;调用脚本对象方法</p>
+<h1 id="编辑界面："><a href="#编辑界面：" class="headerlink" title="编辑界面："></a>编辑界面：</h1><ul>
 <li>Project 项目面板：项目内的资源文件</li>
 <li>Scene 场景视图：以可视化的形式展示游戏内容</li>
 <li>Game 游戏视图：对游戏进行播放预览</li>
@@ -190,12 +192,42 @@
 <li>Scenes 可以创建场景用于切换</li>
 <li>图片、音频、脚本等资源可以直接拖拽进来，或者右击 <code>Import New Assets</code> </li>
 </ul>
-<h3 id="对象操作："><a href="#对象操作：" class="headerlink" title="对象操作："></a>对象操作：</h3><p>从资源文件夹内可以拖动置入对象到游戏图层中，不处于摄像机范围内的对象不会被玩家观测到，但应该是占用内存的<br>左上角可以以不同形式选中对象，用于执行如移动、旋转、缩放等操作<br>对象的存储并不会黏附到 scene 上，而是存储一些参数和路径指向其资源位置</p>
+<h2 id="对象概念"><a href="#对象概念" class="headerlink" title="对象概念"></a>对象概念</h2><p>游戏中所有可交互内容都应当做成一个对象，后续通过脚本操作在执行某些键盘按键或交互动作时对游戏对象的参数进行修改，甚至是对象的删除和创建</p>
+<h3 id="对象操作："><a href="#对象操作：" class="headerlink" title="对象操作："></a>对象操作：</h3><ul>
+<li>从资源文件夹内可以拖动置入对象到游戏图层中，不处于摄像机范围内的对象不会被玩家观测到，但应该是占用内存的</li>
+<li>左上角可以以不同形式选中对象，用于执行如移动、旋转、缩放等操作</li>
+<li>对象的存储并不会黏附到 scene 上，而是存储一些参数和路径指向其资源位置</li>
+<li>对象的重命名和删除都可以在 Hierarchy 界面右击来进行，而在游戏进程中则要通过脚本来实现</li>
+</ul>
+<h3 id="对象层叠"><a href="#对象层叠" class="headerlink" title="对象层叠"></a>对象层叠</h3><p>背景图片也是一个对象，因此可以调整层级来掩盖或避免掩盖其他对象，修改对象的层级可以通过两个值的修改实现</p>
+<ul>
+<li>order in layer ：越小的值处于越下层</li>
+<li>z 值 ：对于 2d 游戏可以直接增大 z 值来远离摄像机，实现降低层级</li>
+</ul>
+<h3 id="对象轴心"><a href="#对象轴心" class="headerlink" title="对象轴心"></a>对象轴心</h3><p>修改对象位置及旋转是在都是以对象轴心做参照，默认轴心点通常都取导入对象图片的几何中心，而对一些扇形对象我们通常不期望这样</p>
+<ul>
+<li>修改轴心：选中对象，Inspector -&gt; Sprite Editor 手动修改 / 或者修改 pivot 为 Custom 指定 x、y 的比例（脚本可以这样改）</li>
+</ul>
+<h3 id="对象父子关系"><a href="#对象父子关系" class="headerlink" title="对象父子关系"></a>对象父子关系</h3><p>可以实现修改父对象时同步修改子对象，而修改子对象时则不会变动父对象</p>
+<ul>
+<li>Hierarchy 区域拖动对象可实现父子关系定义</li>
+<li>对象的坐标及旋转总是相对父对象的坐标来定义的，无父对象的可以当成以完整画布为父对象</li>
+</ul>
 <h3 id="摄像机操作："><a href="#摄像机操作：" class="headerlink" title="摄像机操作："></a>摄像机操作：</h3><p>在左侧选中 Main Camera 对象可以在右侧 Inspecor 中修改属性，其中 background 表示范围内没有对象图层时使用什么填充</p>
 <ul>
 <li>位置：对于 2d 游戏通常会将摄像头的 z 轴值稍微调值 <strong>负值</strong>，表示高于当前图层（负值更靠近玩家）</li>
 <li>显示尺寸：从 Scene 切到 Game 后修改 Free Aspect 能固定尺寸显示（通常 16：9），否则会根据窗口大小动态调整；配合调整 size 参数来显示不同像素大小的视角</li>
 </ul>
+<h2 id="图片素材"><a href="#图片素材" class="headerlink" title="图片素材"></a>图片素材</h2><p>通常使用 jpg 作为背景素材，使用周边透明的 png 作为对象素材</p>
+<h3 id="图片切割"><a href="#图片切割" class="headerlink" title="图片切割"></a>图片切割</h3><p>偶尔会获取到一张图片上有多个子素材可以使用，此时需要进行分割</p>
+<ol>
+<li>选中素材，将 Sprite Mode 修改为 Multiple</li>
+<li>打开 Sprite Editor，执行 Slice 切割后 Apply 应用</li>
+<li>使用 Sprite 素材</li>
+</ol>
+<h3 id="图片渲染"><a href="#图片渲染" class="headerlink" title="图片渲染"></a>图片渲染</h3><p>Sprite Renderer 本质上是对象的一个 功能组件，负责对象的显示内容，可以直接进行拖拽修改</p>
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>右击 Scene 可以选择新建空对象然后添加功能组件，或者直接置入素材来形成一个预设的带组件的对象；</p>
+<p>选中对象后可以在 Inspector 中加挂/移除组件</p>
 
         </div>
         
@@ -263,12 +295,10 @@
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "http://remedios14.github.io/2022/03/03/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/";
             const title         = "「unity游戏开发（1）」";
-            const excerpt       = `编辑界面：
+            const excerpt       = `运行顺序：创建各种资源对象-&gt;生成对象的各种组件（Sprite、Script 等）-&gt;实例化脚本的对象-&gt;调用脚本对象方法
+编辑界面：
 Project 项目面板：项目内的资源文件
-Scene 场景视图：以可视化的形式展示游戏内容
-Game 游戏视图：对游戏进行播放预览
-Hierarchy 层级面板：以树状形式显示游戏中的对象
-Inspector 属性面板：...`;
+Scene 场景视图：以可视化的形式...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -287,10 +317,10 @@ Inspector 属性面板：...`;
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/" rel="tag">入门介绍</a>
+                    <a class="tag-none-link" href="/tags/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/" rel="tag">入门介绍</a>, <a class="tag-none-link" href="/tags/%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0/" rel="tag">基本元素</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-07</span>
+                <span>最后编辑：2022-03-18</span>
                 </div>
             </div>
         </footer>
@@ -299,7 +329,7 @@ Inspector 属性面板：...`;
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" Python-数据图标" href="/2022/03/03/Data/Python-数据图表/">&lt; 上一篇</a>
+                <a title=" 算法题自刷总结" href="/2022/03/03/Alg-Tricks/算法题自刷总结/">&lt; 上一篇</a>
             </div>
             
             
@@ -342,7 +372,7 @@ Inspector 属性面板：...`;
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -351,7 +381,7 @@ Inspector 属性面板：...`;
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.8em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/smp-cmd/" style="font-size: 0.6em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.6em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a> <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">优化算法</a> <a href="/tags/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/" style="font-size: 0.6em;">入门介绍</a> <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" style="font-size: 0.6em;">八股文</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 0.6em;">决策树</a>
+        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.8em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a> <a href="/tags/python/" style="font-size: 0.6em;">python</a> <a href="/tags/smp-cmd/" style="font-size: 0.7em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.8em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a>
       </div>
   </aside>
 
@@ -365,34 +395,44 @@ Inspector 属性面板：...`;
         
           
           
-            <a class="list-group-item" href="/2022/03/07/Data/Matplot-Intro/"><i class="fa  fa-book"></i> Matplot-Intro</a>
+            <a class="list-group-item" href="/2022/03/21/Linux/Linux%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/"><i class="fa  fa-book"></i> Linux命令速查手册速查手册</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/05/Alg-Tricks/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 排序算法整理</a>
+            <a class="list-group-item" href="/2022/03/20/Web-Crawler/Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%EF%BC%881%EF%BC%89/"><i class="fa  fa-book"></i> Python网络爬虫（1）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/04/Interview/%E7%AE%97%E6%B3%95%E5%85%AB%E8%82%A1%E6%96%87/"><i class="fa  fa-book"></i> 算法八股文</a>
+            <a class="list-group-item" href="/2022/03/16/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（2）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/03/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（1）</a>
+            <a class="list-group-item" href="/2022/03/15/Interview/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9-%E6%95%B0%E5%AD%A6/"><i class="fa  fa-book"></i> 面试知识点-数学</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/03/Data/Python-%E6%95%B0%E6%8D%AE%E5%9B%BE%E8%A1%A8/"><i class="fa  fa-book"></i> Python-数据图标</a>
+            <a class="list-group-item" href="/2022/03/11/Data/Numpy-Intro/"><i class="fa  fa-book"></i> Numpy-Intro</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.webp">
-  <title>Python-数据图标 | Mikyi喵喵呜~</title>
+  <title>unity游戏开发（2） | Mikyi喵喵呜~</title>
   <meta name="author" content="Mikyi" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,21 +13,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="Pre-Process, 数据展示" />
+    <meta name="keywords" content="入门介绍, 游戏脚本" />
   
-  <meta name="description" content="常用的数据图表绘制工具有 matplotlib 和 seaborn 等，他们都能比较好地适配 numpy 数组或者 pandas 的 DataFrame，用常见的图表展示数据的分布 持续更新中… Seaborn以下都保持 import seaborn as sns 条形图表 sns.barplot(x&#x3D;col1, hue&#x3D;col2, data&#x3D; df1, order&#x3D;[val1, val2, va">
+  <meta name="description" content="区分于游戏的基本元素，所有的动态交互行为都由脚本负责完成 推荐在 Assets 资源目录下创建 Scripts 目录专门保存脚本，根据功能不同还可以继续深入目录层级 脚本使用醒目注意Unity 中一般使用 float 而非 double，在脚本中指定参数时要使用 f 结尾，如 0.8f  脚本构成创建一个 脚本文件 后会自动继承 MonoBehaviour 父类（规定所有脚本都需要），其中会自带一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python-数据图标">
-<meta property="og:url" content="http://remedios14.github.io/2022/03/03/Data/Python-%E6%95%B0%E6%8D%AE%E5%9B%BE%E8%A1%A8/index.html">
+<meta property="og:title" content="unity游戏开发（2）">
+<meta property="og:url" content="http://remedios14.github.io/2022/03/16/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/index.html">
 <meta property="og:site_name" content="Mikyi喵喵呜~">
-<meta property="og:description" content="常用的数据图表绘制工具有 matplotlib 和 seaborn 等，他们都能比较好地适配 numpy 数组或者 pandas 的 DataFrame，用常见的图表展示数据的分布 持续更新中… Seaborn以下都保持 import seaborn as sns 条形图表 sns.barplot(x&#x3D;col1, hue&#x3D;col2, data&#x3D; df1, order&#x3D;[val1, val2, va">
+<meta property="og:description" content="区分于游戏的基本元素，所有的动态交互行为都由脚本负责完成 推荐在 Assets 资源目录下创建 Scripts 目录专门保存脚本，根据功能不同还可以继续深入目录层级 脚本使用醒目注意Unity 中一般使用 float 而非 double，在脚本中指定参数时要使用 f 结尾，如 0.8f  脚本构成创建一个 脚本文件 后会自动继承 MonoBehaviour 父类（规定所有脚本都需要），其中会自带一">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
-<meta property="article:published_time" content="2022-03-03T07:37:56.000Z">
-<meta property="article:modified_time" content="2022-03-03T08:15:48.634Z">
+<meta property="article:published_time" content="2022-03-16T15:56:00.000Z">
+<meta property="article:modified_time" content="2022-03-23T15:55:27.065Z">
 <meta property="article:author" content="Mikyi">
-<meta property="article:tag" content="Pre-Process">
-<meta property="article:tag" content="数据展示">
+<meta property="article:tag" content="入门介绍">
+<meta property="article:tag" content="游戏脚本">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
 <meta name="twitter:site" content="@null">
@@ -156,17 +156,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">Python-数据图标</h1>
+                <h1 class="kratos-entry-title text-center">unity游戏开发（2）</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2022-03-03</li>
+                <li><i class="fa fa-calendar"></i> 2022-03-16</li>
                 <li><i class="fa fa-user"></i> 作者 Mikyi</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        359
+                        1086
                     
                     字
                 </li>
@@ -175,24 +175,40 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646295348634"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1648050927065"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <p>常用的数据图表绘制工具有 matplotlib 和 seaborn 等，他们都能比较好地适配 numpy 数组或者 pandas 的 DataFrame，用常见的图表展示数据的分布</p>
-<p><strong>持续更新中…</strong></p>
-<h2 id="Seaborn"><a href="#Seaborn" class="headerlink" title="Seaborn"></a>Seaborn</h2><p>以下都保持 <code>import seaborn as sns</code></p>
-<h3 id="条形图表"><a href="#条形图表" class="headerlink" title="条形图表"></a>条形图表</h3><ul>
-<li><code>sns.barplot(x=col1, hue=col2, data= df1, order=[val1, val2, val3, ...])</code> <ul>
-<li>传入的 data 为 DataFrame 或 array</li>
-<li>要求 x 要传入，y 或 hue 传入值为 data 中变量名或者单独成向量型</li>
-<li>order 或 hue_order 可以用列表指定行标顺序</li>
-<li>orient 传入 “v” / “h” 用于垂直或水平显示</li>
+            <p>区分于游戏的基本元素，所有的动态交互行为都由脚本负责完成</p>
+<p>推荐在 Assets 资源目录下创建 Scripts 目录专门保存脚本，根据功能不同还可以继续深入目录层级</p>
+<h2 id="脚本使用"><a href="#脚本使用" class="headerlink" title="脚本使用"></a>脚本使用</h2><h3 id="醒目注意"><a href="#醒目注意" class="headerlink" title="醒目注意"></a>醒目注意</h3><p>Unity 中一般使用 float 而非 double，在脚本中指定参数时要使用 f 结尾，如 <code>0.8f</code> </p>
+<h3 id="脚本构成"><a href="#脚本构成" class="headerlink" title="脚本构成"></a>脚本构成</h3><p>创建一个 <em>脚本文件</em> 后会自动继承 <code>MonoBehaviour</code> 父类（规定所有脚本都需要），其中会自带一些必须要覆写的事件方法</p>
+<ul>
+<li><code>void Start()</code> : 脚本初始化（在第一帧更新之前）时会执行一次</li>
+<li><code>void Update()</code> : 每一帧都会调用一次，Unity 会尽可能快地刷新游戏，但帧率基本不固定</li>
 </ul>
+<p>可以自行补充的事件方法</p>
+<ul>
+<li><h3 id="脚本挂载"><a href="#脚本挂载" class="headerlink" title="脚本挂载"></a>脚本挂载</h3></li>
+</ul>
+<p>选中对象后在其 Inspector 中增加组件可以挂载脚本；或者直接拖拽完成</p>
+<h2 id="脚本常用命令"><a href="#脚本常用命令" class="headerlink" title="脚本常用命令"></a>脚本常用命令</h2><p>因为 C# 的语法也像 C++ 一样有命名空间，在此用这个分组来记录常用功能，对应功能的使用需要在变量名前加上或者在文件头部加上 <code>using ...;</code></p>
+<h3 id="通用编写"><a href="#通用编写" class="headerlink" title="通用编写"></a>通用编写</h3><h4 id="操作挂载对象"><a href="#操作挂载对象" class="headerlink" title="操作挂载对象"></a>操作挂载对象</h4><p><code>this</code> 变量总是指向该脚本挂载的对象，也像类内部编写一样可以在无歧义时省略，可以调用其 <code>GetComponent</code> 方法来获取并实例化其组件，其中涉及到泛型，例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SpriteRenderer renderer = this.GetComponent&lt;SpriteRender&gt;();</span><br></pre></td></tr></table></figure>
+<h4 id="获取任意对象"><a href="#获取任意对象" class="headerlink" title="获取任意对象"></a>获取任意对象</h4><ul>
+<li>按照名字来获取对象：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GameObject obj = GameObjet.Find(&quot;/path/of/target&quot;); // 具体路径根据 Scene 中目录确定</span><br></pre></td></tr></table></figure>
 </li>
-<li><code>sns.countplot()</code></li>
 </ul>
-
+<h4 id="获取当前的父、子对象"><a href="#获取当前的父、子对象" class="headerlink" title="获取当前的父、子对象"></a>获取当前的父、子对象</h4><p>由于 Unity 中与位置有关的操作都是相对于一个父对象的（默认画布对象），因此获取父子对象都在 transform 中实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GameObject parent = this.transform.parent.GameObject;</span><br><span class="line">// 遍历子对象</span><br><span class="line">foreach (Transform child in transform) &#123;</span><br><span class="line">    child.position += Vector3.up * 10.0f;</span><br><span class="line">&#125;</span><br><span class="line">// 修改父节点</span><br><span class="line">this.transform.SetParent(null); // 挂载到场景根节点</span><br></pre></td></tr></table></figure>
+<h3 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h3><p>全局变量</p>
+<ul>
+<li>targetFrameRate : 给出固定值则全局尽可能以此帧率</li>
+</ul>
+<h3 id="Time"><a href="#Time" class="headerlink" title="Time"></a>Time</h3><ul>
+<li>deltaTime : 显示距前一次执行的时间差</li>
+</ul>
+<h3 id="UnityEngine"><a href="#UnityEngine" class="headerlink" title="UnityEngine"></a>UnityEngine</h3>
         </div>
         
             <div class="kratos-copyright text-center clearfix">
@@ -245,7 +261,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://remedios14.github.io/2022/03/03/Data/Python-%E6%95%B0%E6%8D%AE%E5%9B%BE%E8%A1%A8/",
+                text: "http://remedios14.github.io/2022/03/16/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -257,11 +273,11 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://remedios14.github.io/2022/03/03/Data/Python-%E6%95%B0%E6%8D%AE%E5%9B%BE%E8%A1%A8/";
-            const title         = "「Python-数据图标」";
-            const excerpt       = `常用的数据图表绘制工具有 matplotlib 和 seaborn 等，他们都能比较好地适配 numpy 数组或者 pandas 的 DataFrame，用常见的图表展示数据的分布
-持续更新中…
-Seaborn以下都保持 import...`;
+            const hostUrl       = "http://remedios14.github.io/2022/03/16/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/";
+            const title         = "「unity游戏开发（2）」";
+            const excerpt       = `区分于游戏的基本元素，所有的动态交互行为都由脚本负责完成
+推荐在 Assets 资源目录下创建 Scripts 目录专门保存脚本，根据功能不同还可以继续深入目录层级
+脚本使用醒目注意Unity 中一般使用 float 而非 doubl...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -280,10 +296,10 @@ Seaborn以下都保持 import...`;
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/Pre-Process/" rel="tag">Pre-Process</a>, <a class="tag-none-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%B1%95%E7%A4%BA/" rel="tag">数据展示</a>
+                    <a class="tag-none-link" href="/tags/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/" rel="tag">入门介绍</a>, <a class="tag-none-link" href="/tags/%E6%B8%B8%E6%88%8F%E8%84%9A%E6%9C%AC/" rel="tag">游戏脚本</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-03</span>
+                <span>最后编辑：2022-03-23</span>
                 </div>
             </div>
         </footer>
@@ -292,12 +308,12 @@ Seaborn以下都保持 import...`;
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 算法题自刷总结" href="/2022/03/03/Alg-Tricks/算法题自刷总结/">&lt; 上一篇</a>
+                <a title=" 面试知识点-数学" href="/2022/03/15/Interview/面试知识点-数学/">&lt; 上一篇</a>
             </div>
             
             
             <div class="nav-next clearfix">
-                <a title=" unity游戏开发（1）" href="/2022/03/03/Unity/unity游戏开发（1）/">下一篇 &gt;</a>
+                <a title=" Python网络爬虫（1）" href="/2022/03/20/Web-Crawler/Python网络爬虫（1）/">下一篇 &gt;</a>
             </div>
             
         </nav>
@@ -335,7 +351,7 @@ Seaborn以下都保持 import...`;
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -344,7 +360,7 @@ Seaborn以下都保持 import...`;
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.8em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/smp-cmd/" style="font-size: 0.6em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.6em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a> <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">优化算法</a> <a href="/tags/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/" style="font-size: 0.6em;">入门介绍</a> <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" style="font-size: 0.6em;">八股文</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 0.6em;">决策树</a>
+        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.8em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a> <a href="/tags/python/" style="font-size: 0.6em;">python</a> <a href="/tags/smp-cmd/" style="font-size: 0.7em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.8em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a>
       </div>
   </aside>
 
@@ -358,34 +374,44 @@ Seaborn以下都保持 import...`;
         
           
           
-            <a class="list-group-item" href="/2022/03/07/Data/Matplot-Intro/"><i class="fa  fa-book"></i> Matplot-Intro</a>
+            <a class="list-group-item" href="/2022/03/21/Linux/Linux%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/"><i class="fa  fa-book"></i> Linux命令速查手册速查手册</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/05/Alg-Tricks/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 排序算法整理</a>
+            <a class="list-group-item" href="/2022/03/20/Web-Crawler/Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%EF%BC%881%EF%BC%89/"><i class="fa  fa-book"></i> Python网络爬虫（1）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/04/Interview/%E7%AE%97%E6%B3%95%E5%85%AB%E8%82%A1%E6%96%87/"><i class="fa  fa-book"></i> 算法八股文</a>
+            <a class="list-group-item" href="/2022/03/16/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（2）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/03/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（1）</a>
+            <a class="list-group-item" href="/2022/03/15/Interview/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9-%E6%95%B0%E5%AD%A6/"><i class="fa  fa-book"></i> 面试知识点-数学</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/03/Data/Python-%E6%95%B0%E6%8D%AE%E5%9B%BE%E8%A1%A8/"><i class="fa  fa-book"></i> Python-数据图标</a>
+            <a class="list-group-item" href="/2022/03/11/Data/Numpy-Intro/"><i class="fa  fa-book"></i> Numpy-Intro</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

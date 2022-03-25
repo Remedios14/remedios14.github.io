@@ -15,16 +15,16 @@
   
     <meta name="keywords" content="技术题, 数据分析, 面试" />
   
-  <meta name="description" content="本文尽量持续更新从公开交流网上浏览到的数据分析岗位面经技术类题，考核内容以 sql&#x2F;hive 相关的查询语句为主 Sql 语法题包括一些例题和常用函数解析 使用中注意点Tips 聚合相关 count() 中可以写成 count(distinct col) 来计数不同的个数    例题 连接两个表后算 30 天内的新用户数量，30 天回购率，人均消费 计算每个用户首次购买的订单 给定用户表，求次日留">
+  <meta name="description" content="本文尽量持续更新从公开交流网上浏览到的数据分析岗位面经技术类题，考核内容以 sql&#x2F;hive 相关的查询语句为主 Sql 语法题包括一些例题和常用函数解析 使用中注意点Tips 聚合相关 聚合操作最好在最里层先完成 count() 中可以写成 count(distinct col) 来计数不同的个数 collect_list 、collect_set 也是一种聚合函数，可以将分组构成一个列表字段或">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据分析面经整理（技术题）">
 <meta property="og:url" content="http://remedios14.github.io/2022/02/19/Interview/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E9%9D%A2%E7%BB%8F%E6%95%B4%E7%90%86%EF%BC%88%E6%8A%80%E6%9C%AF%E9%A2%98%EF%BC%89/index.html">
 <meta property="og:site_name" content="Mikyi喵喵呜~">
-<meta property="og:description" content="本文尽量持续更新从公开交流网上浏览到的数据分析岗位面经技术类题，考核内容以 sql&#x2F;hive 相关的查询语句为主 Sql 语法题包括一些例题和常用函数解析 使用中注意点Tips 聚合相关 count() 中可以写成 count(distinct col) 来计数不同的个数    例题 连接两个表后算 30 天内的新用户数量，30 天回购率，人均消费 计算每个用户首次购买的订单 给定用户表，求次日留">
+<meta property="og:description" content="本文尽量持续更新从公开交流网上浏览到的数据分析岗位面经技术类题，考核内容以 sql&#x2F;hive 相关的查询语句为主 Sql 语法题包括一些例题和常用函数解析 使用中注意点Tips 聚合相关 聚合操作最好在最里层先完成 count() 中可以写成 count(distinct col) 来计数不同的个数 collect_list 、collect_set 也是一种聚合函数，可以将分组构成一个列表字段或">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-02-19T01:07:14.000Z">
-<meta property="article:modified_time" content="2022-03-02T15:14:46.975Z">
+<meta property="article:modified_time" content="2022-03-17T02:55:33.488Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="数据分析">
@@ -167,7 +167,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        1285
+                        ~2.23K
                     
                     字
                 </li>
@@ -176,7 +176,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646234086975"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1647485733488"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -184,8 +184,27 @@
 <h2 id="Sql-语法题"><a href="#Sql-语法题" class="headerlink" title="Sql 语法题"></a>Sql 语法题</h2><p>包括一些例题和常用函数解析</p>
 <h3 id="使用中注意点"><a href="#使用中注意点" class="headerlink" title="使用中注意点"></a>使用中注意点</h3><h4 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h4><ul>
 <li>聚合相关<ul>
+<li>聚合操作最好在最里层先完成</li>
 <li>count() 中可以写成 <code>count(distinct col)</code> 来计数不同的个数</li>
+<li>collect_list 、collect_set 也是一种聚合函数，可以将分组构成一个列表字段或者去重后（即集合）的列表字段</li>
 </ul>
+</li>
+<li>连接相关<ul>
+<li>对于如取最近日期作为当日、不同 id 计数类的操作，可以从原表获取后连接来实现单值字段</li>
+</ul>
+</li>
+<li>合并相关<ul>
+<li>对于将 in_time 和 out_time 时段视作活跃行为的查询，都可以对两者取出日期然后 union，这样同一天完成 in 和 out 的就归为一条活跃行为，而跨日的也可以当作两天</li>
+</ul>
+</li>
+<li><p>行列互换操作：pivot、unpivot 函数，需要修改数据库兼容级别至 90</p>
+<ul>
+<li>pivot 将列值转为列名，用法如 <code>tb_src pivot (aggfunc(value_column) for pivot_column in (&lt;column_list&gt;))</code></li>
+<li>unpivot 将列名转为列值，用法如 <code>tb_src unpivot (value_column for pivot_column in (&lt;column_list&gt;))</code><br>| 姓名 | 课程 | 分数 |<br>|—|—|—|<br>|张三|语文|74|<br>|张三|数学|83|<br>|张三|物理|93|<br>|李四|语文|74|<br>|李四|数学|84|<br>|李四|物理|94|<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb pivot(<span class="built_in">max</span>(`分数`) <span class="keyword">for</span> `课程` <span class="keyword">in</span> (&quot;语文&quot;，&quot;数学&quot;，&quot;物理&quot;)) a</span><br></pre></td></tr></table></figure>
+结果<br>|姓名|语文|数学|物理|<br>|—|—|—|—|<br>|李四|74|84|94|<br>|张三|74|83|93|</li>
+</ul>
+</li>
+<li><p>SQL 语句执行顺序：from -&gt; join -&gt; on -&gt; where -&gt; group by -&gt; agg -&gt; having -&gt; select -&gt; distinct -&gt; order by -&gt; limit ，其中从 group by 开始可以使用字段别名（如由聚合操作得到的）</p>
 </li>
 </ul>
 <h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><ul>
@@ -197,7 +216,7 @@
 <p>先 group by 后窗口函数聚合</p>
 <h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><p>case when 可以替换为 if(condition,true_val,false_val)</p>
 <h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><p>通常在查询语句中的 <code>order by</code> 指定一行以此增序排列，加上 <code>DESC</code> 改为降序；当排序字段相同时可能乱序</p>
-<h4 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h4><p>date(str) ：返回年-月-日格式日期<br>datediff(date1,date2) ：返回 date1 - date2 得到的天数<br>date_format(date,format) ：例如 ‘%Y-%m-%d %H:%i:%s’<br>timestampdiff(unit,ts1,ts2) ：返回 ts2 - ts1 转为指定时间单位结果</p>
+<h4 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h4><p>date(str) ：返回年-月-日格式日期<br>datepart(form, col) ：将传入的日期列返回指定 form 值，例如 指定 weekday 返回 1-7 的周几含义，指定 m 返回月份<br>datediff(date1,date2) ：返回 date1 - date2 得到的天数<br>date_format(date,format) ：例如 ‘%Y-%m-%d %H:%i:%s’<br>timestampdiff(unit,ts1,ts2) ：返回 ts2 - ts1 转为指定时间单位结果</p>
 <h4 id="窗口函数"><a href="#窗口函数" class="headerlink" title="窗口函数"></a>窗口函数</h4><p>func() over(partition by … order by … range/rows between <unbounded> preceding and <unbounded> following)</p>
 <p>注意点：</p>
 <ul>
@@ -303,7 +322,8 @@
 Sql 语法题包括一些例题和常用函数解析
 使用中注意点Tips
 聚合相关
-count() 中可以写成 count(dis...`;
+聚合操作最好在最里层先完成
+count() 中...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -325,7 +345,7 @@ count() 中可以写成 count(dis...`;
                     <a class="tag-none-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%A2%98/" rel="tag">技术题</a>, <a class="tag-none-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a>, <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-02</span>
+                <span>最后编辑：2022-03-17</span>
                 </div>
             </div>
         </footer>
@@ -377,7 +397,7 @@ count() 中可以写成 count(dis...`;
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -386,7 +406,7 @@ count() 中可以写成 count(dis...`;
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.8em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/smp-cmd/" style="font-size: 0.6em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.6em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a> <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">优化算法</a> <a href="/tags/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/" style="font-size: 0.6em;">入门介绍</a> <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" style="font-size: 0.6em;">八股文</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 0.6em;">决策树</a>
+        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.8em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a> <a href="/tags/python/" style="font-size: 0.6em;">python</a> <a href="/tags/smp-cmd/" style="font-size: 0.7em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.8em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a>
       </div>
   </aside>
 
@@ -400,34 +420,44 @@ count() 中可以写成 count(dis...`;
         
           
           
-            <a class="list-group-item" href="/2022/03/07/Data/Matplot-Intro/"><i class="fa  fa-book"></i> Matplot-Intro</a>
+            <a class="list-group-item" href="/2022/03/21/Linux/Linux%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/"><i class="fa  fa-book"></i> Linux命令速查手册速查手册</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/05/Alg-Tricks/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 排序算法整理</a>
+            <a class="list-group-item" href="/2022/03/20/Web-Crawler/Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%EF%BC%881%EF%BC%89/"><i class="fa  fa-book"></i> Python网络爬虫（1）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/04/Interview/%E7%AE%97%E6%B3%95%E5%85%AB%E8%82%A1%E6%96%87/"><i class="fa  fa-book"></i> 算法八股文</a>
+            <a class="list-group-item" href="/2022/03/16/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（2）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/03/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（1）</a>
+            <a class="list-group-item" href="/2022/03/15/Interview/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9-%E6%95%B0%E5%AD%A6/"><i class="fa  fa-book"></i> 面试知识点-数学</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/03/Data/Python-%E6%95%B0%E6%8D%AE%E5%9B%BE%E8%A1%A8/"><i class="fa  fa-book"></i> Python-数据图标</a>
+            <a class="list-group-item" href="/2022/03/11/Data/Numpy-Intro/"><i class="fa  fa-book"></i> Numpy-Intro</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

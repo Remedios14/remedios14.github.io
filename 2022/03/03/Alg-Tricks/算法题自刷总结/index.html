@@ -15,16 +15,16 @@
   
     <meta name="keywords" content="折磨, 算法题, 面试" />
   
-  <meta name="description" content="常用提示常量在遍历求最值时经常使用  C++：INT_MAX，INT_MIN Java：&#96;Integer.  大小比较 C++：max(val_1, val_2)  Java：Math.max(val_1, val_2)  列表排序 C++：sort(vec.begin(), vec.end()) 排序 vector 容器 Java：Arrays.sort(arr) 排序数组  容器类栈 C++：">
+  <meta name="description" content="常用提示遍历索引遍历就不写了，C++ 和 Java 都有 for each 遍历  C++：for (char c : str) 或 for (string str : strs) Java：for (int num : nums)  常量在遍历求最值时经常使用  C++：INT_MAX，INT_MIN Java：Integer.Max，Integer.Min  大小比较 C++：max(val_">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法题自刷总结">
 <meta property="og:url" content="http://remedios14.github.io/2022/03/03/Alg-Tricks/%E7%AE%97%E6%B3%95%E9%A2%98%E8%87%AA%E5%88%B7%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Mikyi喵喵呜~">
-<meta property="og:description" content="常用提示常量在遍历求最值时经常使用  C++：INT_MAX，INT_MIN Java：&#96;Integer.  大小比较 C++：max(val_1, val_2)  Java：Math.max(val_1, val_2)  列表排序 C++：sort(vec.begin(), vec.end()) 排序 vector 容器 Java：Arrays.sort(arr) 排序数组  容器类栈 C++：">
+<meta property="og:description" content="常用提示遍历索引遍历就不写了，C++ 和 Java 都有 for each 遍历  C++：for (char c : str) 或 for (string str : strs) Java：for (int num : nums)  常量在遍历求最值时经常使用  C++：INT_MAX，INT_MIN Java：Integer.Max，Integer.Min  大小比较 C++：max(val_">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-03-03T02:19:03.000Z">
-<meta property="article:modified_time" content="2022-03-05T14:47:38.143Z">
+<meta property="article:modified_time" content="2022-03-25T04:29:09.399Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="算法题">
@@ -167,7 +167,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~4.29K
+                        ~6.37K
                     
                     字
                 </li>
@@ -176,14 +176,19 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646491658143"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1648182549399"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h2 id="常用提示"><a href="#常用提示" class="headerlink" title="常用提示"></a>常用提示</h2><h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>在遍历求最值时经常使用</p>
+            <h2 id="常用提示"><a href="#常用提示" class="headerlink" title="常用提示"></a>常用提示</h2><h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>索引遍历就不写了，C++ 和 Java 都有 for each 遍历</p>
+<ul>
+<li>C++：<code>for (char c : str)</code> 或 <code>for (string str : strs)</code></li>
+<li>Java：<code>for (int num : nums)</code></li>
+</ul>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>在遍历求最值时经常使用</p>
 <ul>
 <li>C++：<code>INT_MAX</code>，<code>INT_MIN</code></li>
-<li>Java：`Integer.</li>
+<li>Java：<code>Integer.Max</code>，<code>Integer.Min</code></li>
 </ul>
 <h3 id="大小比较"><a href="#大小比较" class="headerlink" title="大小比较"></a>大小比较</h3><ul>
 <li>C++：<code>max(val_1, val_2)</code> </li>
@@ -192,6 +197,10 @@
 <h3 id="列表排序"><a href="#列表排序" class="headerlink" title="列表排序"></a>列表排序</h3><ul>
 <li>C++：<code>sort(vec.begin(), vec.end())</code> 排序 vector 容器</li>
 <li>Java：<code>Arrays.sort(arr)</code> 排序数组</li>
+</ul>
+<h3 id="动规数组创建"><a href="#动规数组创建" class="headerlink" title="动规数组创建"></a>动规数组创建</h3><ul>
+<li>C++：<code>vector&lt;vector&lt;int&gt;&gt; dp(m, vector&lt;int&gt;(n));</code></li>
+<li>Java： <code>int[][] dp = new int[m][n];</code></li>
 </ul>
 <h3 id="容器类"><a href="#容器类" class="headerlink" title="容器类"></a>容器类</h3><h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><ul>
 <li>C++：<code>stack&lt;int&gt; st</code><ul>
@@ -216,6 +225,19 @@
 <li><code>dq.removeLast() / dq.removeFirst()</code></li>
 <li><code>dq.peekLast() / dq.peekFirst()</code></li>
 <li><code>dq.size()</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h4><p>内部用堆结构存储，可以自定义优先级用于排序，总是最高优先级的在堆顶</p>
+<ul>
+<li>C++：先要 <code>#include &lt;queue&gt;</code> 创建格式 <code>priority_queue&lt;T, Container, Functional&gt;</code> 用于自定义数据类型，使用基本类型则不需要；感觉自定义排序很乱，记住优先队列的排序方法和 sort 相反就行了<ul>
+<li><code>priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; c;</code> 创建小顶堆，或者传入 <code>less&lt;int&gt;</code> 创建大顶堆（不传默认大顶）</li>
+<li>方法：<code>top() / empty() / size() / push(v) / emplace(v) / pop() / swap(v1, v2)</code><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span> <span class="comment">// 小顶堆</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&amp; m, pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&amp; n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m.second &gt; n.second;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        priority_queue&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, vector&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;, <span class="keyword">decltype</span>(&amp;cmp)&gt; <span class="built_in">q</span>(cmp);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>Java：在 <code>java.util.*</code> 内，使用 <code>new PriorityQueue&lt;T&gt;()</code> 默认创建小顶堆，而大顶堆则要传入相反的 Comparator<ul>
+<li>方法：<code>add(e)</code> 返回 boolean、<code>peek()</code> 返回堆顶但不删除、<code>poll()</code> 获取并删除、<code>size()</code> 返回大小、<code>remove(o)</code> 指定移除<br>、能从 大小 或 peek 检查是否为空<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PriorityQueue&lt;Integer&gt; maxHeap = <span class="keyword">new</span> PriorityQueue&lt;&gt;(<span class="number">11</span>, <span class="keyword">new</span> Comparator&lt;Integer&gt;()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer i1, Integer i2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> i2 - i1;</span><br><span class="line">        <span class="comment">// 当 i2 &gt; i1 时，认为 i1 往后排，从而变成大顶</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 </ul>
@@ -278,6 +300,28 @@
 </ol>
 </li>
 </ul>
+<h3 id="数学逻辑"><a href="#数学逻辑" class="headerlink" title="数学逻辑"></a>数学逻辑</h3><ul>
+<li><p>给出一个三角形三个点的坐标，写一个函数可以输出三角形内随机一个点：</p>
+<ul>
+<li>确定一个顶点出发的两个边向量，各乘一个随机数然后两个向量随机比例相加就行</li>
+</ul>
+</li>
+<li><p>牛顿迭代法求函数近似值：给出一个函数 f(x) 并期望求其根的近似值，例如 f(x) = x^2 - a，则 a 的平方根即为函数的一个根，牛顿迭代法任取一个起始点 k， 计算在 k 处的导数，取切线和 x 轴的交点作为下一轮的 k，最后当 k 值更新量较小时结束</p>
+<ul>
+<li>由切线表达式 q(x) = f’(k)(x-k) + f(k) 得到切线和 x 轴的交点横坐标为 k1 = k - f(k)/f’(k)<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NewtonSqrt</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> k = <span class="number">1.0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">abs</span>(k*k-a)&gt;<span class="number">1e-9</span>) &#123;</span><br><span class="line">        k=(k+a/k)/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> k;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>给出矩形坐标和一个圆心加半径，判断是否有重叠：</p>
+<ul>
+<li>先把圆根据矩形的长款中线翻转到第一象限内</li>
+<li>取两个向量分别为矩形中心到圆心和矩形中心到矩形顶点 v 和 h</li>
+<li>计算向量 u = v - h 且对负值取 0，负值即表示相应轴向和矩形重合</li>
+<li>计算 u 的模与 r 比较即可</li>
+</ul>
+</li>
+</ul>
+<h3 id="差分数组"><a href="#差分数组" class="headerlink" title="差分数组"></a>差分数组</h3><p>差分数组记录了一个数组中当前值和前一个值的差值，凡是对于一个长数组要反复取其中连续的一段子数组进行统一操作的都可以考虑差分数组；例如一个长数组多次输出两个左右边界和数值 x，进行边界内所有数都加上 x，使用差分数组只需要修改左右边界处的值，再累加还原即可</p>
 
         </div>
         
@@ -345,16 +389,10 @@
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "http://remedios14.github.io/2022/03/03/Alg-Tricks/%E7%AE%97%E6%B3%95%E9%A2%98%E8%87%AA%E5%88%B7%E6%80%BB%E7%BB%93/";
             const title         = "「算法题自刷总结」";
-            const excerpt       = `常用提示常量在遍历求最值时经常使用
+            const excerpt       = `常用提示遍历索引遍历就不写了，C++ 和 Java 都有 for each 遍历
 
-C++：INT_MAX，INT_MIN
-Java：\`Integer.
-
-大小比较
-C++：max(val_1, val_2) 
-Java：Math.max(val_1, val_2)
-
-列表排序
+C++：for (char c : str) 或 for (string str : strs)
+Java：for (int num : nums)
 ...`;
             let _URL;
             switch (dest) {
@@ -377,7 +415,7 @@ Java：Math.max(val_1, val_2)
                     <a class="tag-none-link" href="/tags/%E6%8A%98%E7%A3%A8/" rel="tag">折磨</a>, <a class="tag-none-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a>, <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-05</span>
+                <span>最后编辑：2022-03-25</span>
                 </div>
             </div>
         </footer>
@@ -391,7 +429,7 @@ Java：Math.max(val_1, val_2)
             
             
             <div class="nav-next clearfix">
-                <a title=" Python-数据图标" href="/2022/03/03/Data/Python-数据图表/">下一篇 &gt;</a>
+                <a title=" unity游戏开发（1）" href="/2022/03/03/Unity/unity游戏开发（1）/">下一篇 &gt;</a>
             </div>
             
         </nav>
@@ -429,7 +467,7 @@ Java：Math.max(val_1, val_2)
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -438,7 +476,7 @@ Java：Math.max(val_1, val_2)
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.8em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/smp-cmd/" style="font-size: 0.6em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.6em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a> <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" style="font-size: 0.6em;">优化算法</a> <a href="/tags/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/" style="font-size: 0.6em;">入门介绍</a> <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" style="font-size: 0.6em;">八股文</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 0.6em;">决策树</a>
+        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.8em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a> <a href="/tags/python/" style="font-size: 0.6em;">python</a> <a href="/tags/smp-cmd/" style="font-size: 0.7em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.8em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a>
       </div>
   </aside>
 
@@ -452,34 +490,44 @@ Java：Math.max(val_1, val_2)
         
           
           
-            <a class="list-group-item" href="/2022/03/07/Data/Matplot-Intro/"><i class="fa  fa-book"></i> Matplot-Intro</a>
+            <a class="list-group-item" href="/2022/03/21/Linux/Linux%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/"><i class="fa  fa-book"></i> Linux命令速查手册速查手册</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/05/Alg-Tricks/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"><i class="fa  fa-book"></i> 排序算法整理</a>
+            <a class="list-group-item" href="/2022/03/20/Web-Crawler/Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%EF%BC%881%EF%BC%89/"><i class="fa  fa-book"></i> Python网络爬虫（1）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/04/Interview/%E7%AE%97%E6%B3%95%E5%85%AB%E8%82%A1%E6%96%87/"><i class="fa  fa-book"></i> 算法八股文</a>
+            <a class="list-group-item" href="/2022/03/16/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（2）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/03/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（1）</a>
+            <a class="list-group-item" href="/2022/03/15/Interview/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9-%E6%95%B0%E5%AD%A6/"><i class="fa  fa-book"></i> 面试知识点-数学</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/03/Data/Python-%E6%95%B0%E6%8D%AE%E5%9B%BE%E8%A1%A8/"><i class="fa  fa-book"></i> Python-数据图标</a>
+            <a class="list-group-item" href="/2022/03/11/Data/Numpy-Intro/"><i class="fa  fa-book"></i> Numpy-Intro</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           
