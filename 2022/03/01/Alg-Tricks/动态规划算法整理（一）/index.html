@@ -15,16 +15,16 @@
   
     <meta name="keywords" content="折磨, 算法题, 面试" />
   
-  <meta name="description" content="注：主要编题顺序及算法模板来自公众号「代码随想录」，强推！ 动态规划，Dynamic Programming ，如果某一问题有很多重叠子问题，使用动态规划是最有效的。 动态规划中每一个状态一定是由上一个状态推导出来的 取或不取得问题通常可以抽象成 0-1 背包问题，明确各物品的价值和取物品的容量 阶段分类 位置转移：包括在已知转移花费时确定总花费、已知位置时确定路径数等 取舍问题：典型的背包问题延">
+  <meta name="description" content="注：主要编题顺序及算法模板来自公众号「代码随想录 」，强推！ 动态规划，Dynamic Programming ，如果某一问题有很多重叠子问题，使用动态规划是最有效的。 动态规划中每一个状态一定是由上一个状态推导出来的 取或不取得问题通常可以抽象成 0-1 背包问题，明确各物品的价值和取物品的容量 阶段分类 位置转移：包括在已知转移花费时确定总花费、已知位置时确定路径数等 取舍问题：典型的背包问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动态规划算法整理">
 <meta property="og:url" content="http://remedios14.github.io/2022/03/01/Alg-Tricks/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
 <meta property="og:site_name" content="Mikyi喵喵呜~">
-<meta property="og:description" content="注：主要编题顺序及算法模板来自公众号「代码随想录」，强推！ 动态规划，Dynamic Programming ，如果某一问题有很多重叠子问题，使用动态规划是最有效的。 动态规划中每一个状态一定是由上一个状态推导出来的 取或不取得问题通常可以抽象成 0-1 背包问题，明确各物品的价值和取物品的容量 阶段分类 位置转移：包括在已知转移花费时确定总花费、已知位置时确定路径数等 取舍问题：典型的背包问题延">
+<meta property="og:description" content="注：主要编题顺序及算法模板来自公众号「代码随想录 」，强推！ 动态规划，Dynamic Programming ，如果某一问题有很多重叠子问题，使用动态规划是最有效的。 动态规划中每一个状态一定是由上一个状态推导出来的 取或不取得问题通常可以抽象成 0-1 背包问题，明确各物品的价值和取物品的容量 阶段分类 位置转移：包括在已知转移花费时确定总花费、已知位置时确定路径数等 取舍问题：典型的背包问题">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-03-01T11:46:01.000Z">
-<meta property="article:modified_time" content="2022-03-08T12:08:47.634Z">
+<meta property="article:modified_time" content="2022-04-02T05:39:06.824Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="算法题">
@@ -176,11 +176,11 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646741327634"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1648877946824"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <p><strong>注：主要编题顺序及算法模板来自公众号「<a target="_blank" rel="noopener" href="https://programmercarl.com/">代码随想录</a>」，强推！</strong></p>
+            <p><strong>注：主要编题顺序及算法模板来自公众号「<a target="_blank" rel="noopener" href="https://programmercarl.com/">代码随想录</a> 」，强推！</strong></p>
 <p>动态规划，Dynamic Programming ，如果某一问题有很多重叠子问题，使用动态规划是最有效的。</p>
 <p>动态规划中每一个状态一定是由上一个状态推导出来的</p>
 <p>取或不取得问题通常可以抽象成 0-1 背包问题，明确各物品的价值和取物品的容量</p>
@@ -316,7 +316,7 @@
 <li>目标和：给定一个非负整数数组，a1, a2, …, an, 和一个目标数，S。现在你有两个符号 + 和 -。对于数组中的任意一个整数，你都可以从 + 或 -中选择一个符号添加在前面。返回可以使最终数组和为目标数 S 的所有添加符号的方法数。<ul>
 <li>解法：回溯法超时；抽象成 0-1 背包，分两组 left - right = target = left - (sum - left) =&gt; left = (sum + target) / 2 ；这里的 left 即应当分为正组的和</li>
 <li>抽象步骤：<ol>
-<li>明确数组：dp[j] 表示要达成和为 j 有 dp[j] 中组合方法</li>
+<li>明确数组：dp[j] 表示要达成和为 j 有 dp[j] 种组合方法</li>
 <li>递推公式：dp[j] += dp[j-nums[i]]，即对所有不大于 j 的 nums[i]，都可由 dp[j-nums[i]] 对应一种组合，从而要全部累加</li>
 <li>初始化：dp[0] 表示达成和为 0 的正数组合，不取正数即得到，因此为 1</li>
 <li>确定遍历顺序：nums 在外，target 在内且倒序</li>
@@ -458,10 +458,10 @@
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "http://remedios14.github.io/2022/03/01/Alg-Tricks/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89/";
             const title         = "「动态规划算法整理」";
-            const excerpt       = `注：主要编题顺序及算法模板来自公众号「代码随想录」，强推！
+            const excerpt       = `注：主要编题顺序及算法模板来自公众号「代码随想录 」，强推！
 动态规划，Dynamic Programming ，如果某一问题有很多重叠子问题，使用动态规划是最有效的。
 动态规划中每一个状态一定是由上一个状态推导出来的
-取或不取得问题通...`;
+取或不取得问题...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -483,7 +483,7 @@
                     <a class="tag-none-link" href="/tags/%E6%8A%98%E7%A3%A8/" rel="tag">折磨</a>, <a class="tag-none-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a>, <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-08</span>
+                <span>最后编辑：2022-04-02</span>
                 </div>
             </div>
         </footer>
@@ -535,7 +535,7 @@
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -544,7 +544,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.8em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a> <a href="/tags/python/" style="font-size: 0.6em;">python</a> <a href="/tags/smp-cmd/" style="font-size: 0.7em;">smp-cmd</a> <a href="/tags/tips/" style="font-size: 0.8em;">tips</a> <a href="/tags/xgboost/" style="font-size: 0.6em;">xgboost</a> <a href="/tags/%E4%B8%9A%E5%8A%A1%E9%A2%98/" style="font-size: 0.6em;">业务题</a>
+        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/functional/" style="font-size: 0.6em;">functional</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a> <a href="/tags/oop/" style="font-size: 0.6em;">oop</a>
       </div>
   </aside>
 
@@ -558,34 +558,44 @@
         
           
           
-            <a class="list-group-item" href="/2022/03/21/Linux/Linux%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/"><i class="fa  fa-book"></i> Linux命令速查手册速查手册</a>
+            <a class="list-group-item" href="/2022/04/02/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"><i class="fa  fa-book"></i> Cpp面向对象</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/20/Web-Crawler/Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%EF%BC%881%EF%BC%89/"><i class="fa  fa-book"></i> Python网络爬虫（1）</a>
+            <a class="list-group-item" href="/2022/03/30/C++/Cpp%E5%87%BD%E6%95%B0%E7%BB%BC%E5%90%88/"><i class="fa  fa-book"></i> Cpp函数综合</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/16/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（2）</a>
+            <a class="list-group-item" href="/2022/03/29/Career-Intro/%E8%81%8C%E4%B8%9A%E6%A6%82%E8%BF%B0-%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"><i class="fa  fa-book"></i> 职业概述-测试开发</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/15/Interview/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9-%E6%95%B0%E5%AD%A6/"><i class="fa  fa-book"></i> 面试知识点-数学</a>
+            <a class="list-group-item" href="/2022/03/28/C++/Cpp%E5%9F%BA%E7%A1%80/"><i class="fa  fa-book"></i> Cpp基础</a>
             
           
         
           
           
-            <a class="list-group-item" href="/2022/03/11/Data/Numpy-Intro/"><i class="fa  fa-book"></i> Numpy-Intro</a>
+            <a class="list-group-item" href="/2022/03/28/C++/Cpp%E5%AE%B9%E5%99%A8%E7%B1%BB/"><i class="fa  fa-book"></i> Cpp容器类</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           
