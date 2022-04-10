@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-03-05T11:32:51.000Z">
-<meta property="article:modified_time" content="2022-03-05T13:49:03.324Z">
+<meta property="article:modified_time" content="2022-04-08T09:07:07.588Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="算法题">
@@ -167,7 +167,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~2.48K
+                        ~3.62K
                     
                     字
                 </li>
@@ -176,7 +176,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646488143324"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1649408827588"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -189,6 +189,8 @@
 </ul>
 <p>快速排序的效率很大程度上受到选取 pivot 的影响，例如固定选择第一个数作为 pivot 时，对降序的数组则进行了 O(n^2) 水平的排序；因此考虑到平均效率，通常都会<strong>随机生成一个中间索引，和第一个值交换</strong>后开始快排</p>
 <p>代码示例：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l &gt;= r) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> pl = l, pr = r;</span><br><span class="line">        <span class="keyword">int</span> pivot = nums[l];</span><br><span class="line">        <span class="keyword">while</span> (pl &lt; pr) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pl &lt; pr &amp;&amp; nums[pr] &gt;= pivot) &#123;</span><br><span class="line">                pr--;</span><br><span class="line">            &#125;</span><br><span class="line">            nums[pl] = nums[pr];</span><br><span class="line">            <span class="keyword">while</span> (pl &lt; pr &amp;&amp; nums[pl] &lt;= pivot) &#123;</span><br><span class="line">                pl++;</span><br><span class="line">            &#125;</span><br><span class="line">            nums[pr] = nums[pl];</span><br><span class="line">        &#125;</span><br><span class="line">        nums[pl] = pivot;</span><br><span class="line">        <span class="built_in">quickSort</span>(nums, l, pl - <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">quickSort</span>(nums, pl + <span class="number">1</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">quickSort</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>要取随机数可以使用 rand() 产生一个 0 到最大随机数的任意整数，最大随机数通常是系统给的固定较大值</p>
+<p>随机选取示例：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(vectot&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> pivot = nums[right];</span><br><span class="line">		<span class="keyword">int</span> i = left - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = left; j &lt;= right - <span class="number">1</span>; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (nums[j] &lt;= pivot) &#123;</span><br><span class="line">				i++;</span><br><span class="line">				<span class="built_in">swap</span>(nums[i], nums[j]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">swap</span>(nums[i+<span class="number">1</span>], nums[right]);</span><br><span class="line">		<span class="keyword">return</span> i+<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">rand_partition</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i = <span class="built_in">rand</span>() &amp; (right - left + <span class="number">1</span>) + left;</span><br><span class="line">		<span class="built_in">swap</span>(nums[right], nums[i]);</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">partition</span>(nums, left, right);</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">rand_qs</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (l &lt; r) &#123;</span><br><span class="line">			<span class="keyword">int</span> pos = <span class="built_in">rand_partition</span>(nums, left, right);</span><br><span class="line">			<span class="built_in">rand_qs</span>(nums, left, pos - <span class="number">1</span>);</span><br><span class="line">			<span class="built_in">rand_qs</span>(nums, pos + <span class="number">1</span>, right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; &amp;nums)</span> </span>&#123;</span><br><span class="line">		<span class="built_in">srand</span>((<span class="keyword">unsigned</span>)<span class="built_in">time</span>(<span class="literal">NULL</span>));</span><br><span class="line">		<span class="built_in">rand_qs</span>(nums, <span class="number">0</span>, (<span class="keyword">int</span>)nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">return</span> nums;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>也是一种典型的递归排序法，将数组分为较均的两侧，分别排序后合并，其中被划分的两侧数组递归地调用排序函数即可，具体流程可思考 Carl 的递归（回溯）三部曲:</p>
 <ul>
 <li>确定输出和参数：通常需要另一个数组用于在合并的时候比较填入，可以做一个与原数组等长的临时数组全局变量用于填充，或者作为返回参数在每一层递归合并返回的数组</li>
@@ -196,6 +198,7 @@
 <li>完成合并操作：这个没什么好说的，两个指针分别跑，对比填入</li>
 </ul>
 <p>代码示例：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span>; <span class="comment">// 单值不用再排序</span></span><br><span class="line">        <span class="keyword">int</span> m = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">        <span class="built_in">mergeSort</span>(nums, l, mid);</span><br><span class="line">        <span class="built_in">mergeSort</span>(nums, mid + <span class="number">1</span>, r);</span><br><span class="line">        <span class="keyword">int</span> i = l, j = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= r) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &lt;= nums[j]) &#123;</span><br><span class="line">                tmp[cnt++] = nums[i++];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                tmp[cnt++] = nums[j++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 其中一侧排完了</span></span><br><span class="line">        <span class="keyword">while</span> (i &lt;= mid) &#123;</span><br><span class="line">            tmp[cnt++] = nums[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (j &lt;= r) &#123;</span><br><span class="line">            tmp[cnt++] = nums[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; r - l + <span class="number">1</span>; i++) &#123;</span><br><span class="line">            nums[i + l] = tmp[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sort</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        tmp.<span class="built_in">resize</span>((<span class="keyword">int</span>)nums.<span class="built_in">size</span>(), <span class="number">0</span>);</span><br><span class="line">        <span class="built_in">mergeSort</span>(nums, <span class="number">0</span>, (<span class="keyword">int</span>)nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>上一版借助了足够长的临时数组来用于合并操作；也可以在归并过程中每次复制数组 <code>vector&lt;int&gt; left(nums.begin() + l, nums.begin() + mid + 1);</code> 然后合并返回</p>
 
         </div>
         
@@ -288,7 +291,7 @@
                     <a class="tag-none-link" href="/tags/%E6%8A%98%E7%A3%A8/" rel="tag">折磨</a>, <a class="tag-none-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a>, <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-05</span>
+                <span>最后编辑：2022-04-08</span>
                 </div>
             </div>
         </footer>
@@ -340,7 +343,7 @@
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -349,7 +352,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/functional/" style="font-size: 0.6em;">functional</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a> <a href="/tags/oop/" style="font-size: 0.6em;">oop</a>
+        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/functional/" style="font-size: 0.6em;">functional</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a>
       </div>
   </aside>
 
@@ -363,7 +366,25 @@
         
           
           
-            <a class="list-group-item" href="/2022/04/02/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"><i class="fa  fa-book"></i> Cpp面向对象</a>
+            <a class="list-group-item" href="/2022/04/10/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> OpenCV简述及接口（一）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/04/06/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/"><i class="fa  fa-book"></i> 机器学习基础-提升方法</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/04/06/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%BA%8C%EF%BC%89/"><i class="fa  fa-book"></i> Cpp面向对象（二）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/04/02/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> Cpp面向对象（一）</a>
             
           
         
@@ -374,23 +395,9 @@
           
         
           
-          
-            <a class="list-group-item" href="/2022/03/29/Career-Intro/%E8%81%8C%E4%B8%9A%E6%A6%82%E8%BF%B0-%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"><i class="fa  fa-book"></i> 职业概述-测试开发</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/03/28/C++/Cpp%E5%9F%BA%E7%A1%80/"><i class="fa  fa-book"></i> Cpp基础</a>
             
-          
-        
-          
-          
-            <a class="list-group-item" href="/2022/03/28/C++/Cpp%E5%AE%B9%E5%99%A8%E7%B1%BB/"><i class="fa  fa-book"></i> Cpp容器类</a>
-            
-          
-        
           
             
           

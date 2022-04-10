@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.webp">
-  <title>机器学习进阶-xgboost | Mikyi喵喵呜~</title>
+  <title>机器学习基础-提升方法 | Mikyi喵喵呜~</title>
   <meta name="author" content="Mikyi" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,22 +13,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="xgboost, 提升算法, 机器学习" />
+    <meta name="keywords" content="boosting, 机器学习" />
   
-  <meta name="description" content="基于 Boosting 思想实现的强学习器 由 GBDT 优化衍生而来，在其后还有 LightGBM 123$ pip install xgboost$ pip install --upgrade xgboostimport xgboost as xgb 大致建模流程：  读取数据：xgb.DMatrix() 设置参数：param&#x3D;&amp;#123;&amp;#125; 推荐用字典在外部完成后传入 训练模型：b">
+  <meta name="description" content="boosting 为一大集成学习方法，在多种模型上都可以应用，大致思想是提升误分类样本的权重，再进行后续轮次的学习 几种比较基础的提升算法应用模型  AdaBoost：初始化样本权重，用于训练弱分类器，然后降低正确分类样本权重，提升误分类样本权重，用于同一模型进行后续训练，最终得到强分类器 提升树：迭代多棵回归树，通常采用平方误差函数，每一棵树学习之前所有树的结论和残差，形成当前的残杀回归树，最后">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习进阶-xgboost">
-<meta property="og:url" content="http://remedios14.github.io/2022/02/24/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6-xgboost/index.html">
+<meta property="og:title" content="机器学习基础-提升方法">
+<meta property="og:url" content="http://remedios14.github.io/2022/04/06/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="Mikyi喵喵呜~">
-<meta property="og:description" content="基于 Boosting 思想实现的强学习器 由 GBDT 优化衍生而来，在其后还有 LightGBM 123$ pip install xgboost$ pip install --upgrade xgboostimport xgboost as xgb 大致建模流程：  读取数据：xgb.DMatrix() 设置参数：param&#x3D;&amp;#123;&amp;#125; 推荐用字典在外部完成后传入 训练模型：b">
+<meta property="og:description" content="boosting 为一大集成学习方法，在多种模型上都可以应用，大致思想是提升误分类样本的权重，再进行后续轮次的学习 几种比较基础的提升算法应用模型  AdaBoost：初始化样本权重，用于训练弱分类器，然后降低正确分类样本权重，提升误分类样本权重，用于同一模型进行后续训练，最终得到强分类器 提升树：迭代多棵回归树，通常采用平方误差函数，每一棵树学习之前所有树的结论和残差，形成当前的残杀回归树，最后">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
-<meta property="article:published_time" content="2022-02-24T05:04:51.000Z">
-<meta property="article:modified_time" content="2022-03-03T13:19:58.715Z">
+<meta property="article:published_time" content="2022-04-06T04:15:53.000Z">
+<meta property="article:modified_time" content="2022-04-06T04:29:15.023Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="机器学习">
-<meta property="article:tag" content="xgboost">
-<meta property="article:tag" content="提升算法">
+<meta property="article:tag" content="boosting">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
 <meta name="twitter:site" content="@null">
@@ -157,17 +156,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">机器学习进阶-xgboost</h1>
+                <h1 class="kratos-entry-title text-center">机器学习基础-提升方法</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2022-02-24</li>
+                <li><i class="fa fa-calendar"></i> 2022-04-06</li>
                 <li><i class="fa fa-user"></i> 作者 Mikyi</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        728
+                        1247
                     
                     字
                 </li>
@@ -176,11 +175,22 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646313598715"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1649219355023"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <p>基于 Boosting 思想实现的强学习器</p>
+            <p>boosting 为一大集成学习方法，在多种模型上都可以应用，大致思想是提升误分类样本的权重，再进行后续轮次的学习</p>
+<p>几种比较基础的提升算法应用模型</p>
+<ul>
+<li>AdaBoost：初始化样本权重，用于训练弱分类器，然后降低正确分类样本权重，提升误分类样本权重，用于同一模型进行后续训练，最终得到强分类器</li>
+<li>提升树：迭代多棵回归树，通常采用平方误差函数，每一棵树学习之前所有树的结论和残差，形成当前的残杀回归树，最后所有树的预测结果累加<ul>
+<li>GBDT：梯度提升树。利用损失函数的负梯度作为残差近似值，当前树模型学习一个提升方向</li>
+<li>XGBoost：从 GBDT 基础上做出较大提升，基于 C++ 通过多线程实现了回归树的并行构建，在目标函数增加了包含叶子节点个数的正则化项，每个叶子节点上输出分数的 L2 模平方和，对目标函数进行二阶泰勒展开，算法运行更快（采用 level-wise 分裂策略，每一层节点无差别分裂；使用 exact 算法）</li>
+<li>LightGBM：同水平的高质量算法模型，采用 leaf-wise 分裂策略，在当前所有叶子节点中选择分裂收益最大的，更容易过拟合；使用了基于 histogram 的决策树算法，内存和时间性能更优</li>
+</ul>
+</li>
+</ul>
+<h2 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h2><p>基于 Boosting 思想实现的强学习器</p>
 <p>由 GBDT 优化衍生而来，在其后还有 LightGBM</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pip install xgboost</span><br><span class="line">$ pip install --upgrade xgboost</span><br><span class="line"><span class="keyword">import</span> xgboost <span class="keyword">as</span> xgb</span><br></pre></td></tr></table></figure>
 <p>大致建模流程：</p>
@@ -252,7 +262,7 @@ min(\sum^N_{i=1}L(y_i,f_{m-1}(x_i)+T(x_i,\theta_m))) \\
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://remedios14.github.io/2022/02/24/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6-xgboost/",
+                text: "http://remedios14.github.io/2022/04/06/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -264,11 +274,12 @@ min(\sum^N_{i=1}L(y_i,f_{m-1}(x_i)+T(x_i,\theta_m))) \\
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://remedios14.github.io/2022/02/24/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6-xgboost/";
-            const title         = "「机器学习进阶-xgboost」";
-            const excerpt       = `基于 Boosting 思想实现的强学习器
-由 GBDT 优化衍生而来，在其后还有 LightGBM
-123$ pip install xgboost$ pip install --upgrade xgboostimport xgbo...`;
+            const hostUrl       = "http://remedios14.github.io/2022/04/06/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/";
+            const title         = "「机器学习基础-提升方法」";
+            const excerpt       = `boosting 为一大集成学习方法，在多种模型上都可以应用，大致思想是提升误分类样本的权重，再进行后续轮次的学习
+几种比较基础的提升算法应用模型
+
+AdaBoost：初始化样本权重，用于训练弱分类器，然后降低正确分类样本权重，提升误...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -287,10 +298,10 @@ min(\sum^N_{i=1}L(y_i,f_{m-1}(x_i)+T(x_i,\theta_m))) \\
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/xgboost/" rel="tag">xgboost</a>, <a class="tag-none-link" href="/tags/%E6%8F%90%E5%8D%87%E7%AE%97%E6%B3%95/" rel="tag">提升算法</a>, <a class="tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>
+                    <a class="tag-none-link" href="/tags/boosting/" rel="tag">boosting</a>, <a class="tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-03</span>
+                <span>最后编辑：2022-04-06</span>
                 </div>
             </div>
         </footer>
@@ -299,12 +310,12 @@ min(\sum^N_{i=1}L(y_i,f_{m-1}(x_i)+T(x_i,\theta_m))) \\
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 机器学习基础-线性回归" href="/2022/02/24/Machine-Learning/机器学习基础-线性回归/">&lt; 上一篇</a>
+                <a title=" Cpp面向对象（二）" href="/2022/04/06/C++/Cpp面向对象（二）/">&lt; 上一篇</a>
             </div>
             
             
             <div class="nav-next clearfix">
-                <a title=" 双指针算法整理" href="/2022/02/24/Alg-Tricks/双指针算法整理/">下一篇 &gt;</a>
+                <a title=" OpenCV简述及接口（一）" href="/2022/04/10/OpenCV/OpenCV简述及接口（一）/">下一篇 &gt;</a>
             </div>
             
         </nav>
@@ -342,7 +353,7 @@ min(\sum^N_{i=1}L(y_i,f_{m-1}(x_i)+T(x_i,\theta_m))) \\
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -351,7 +362,7 @@ min(\sum^N_{i=1}L(y_i,f_{m-1}(x_i)+T(x_i,\theta_m))) \\
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/functional/" style="font-size: 0.6em;">functional</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a> <a href="/tags/oop/" style="font-size: 0.6em;">oop</a>
+        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/functional/" style="font-size: 0.6em;">functional</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a>
       </div>
   </aside>
 
@@ -365,7 +376,25 @@ min(\sum^N_{i=1}L(y_i,f_{m-1}(x_i)+T(x_i,\theta_m))) \\
         
           
           
-            <a class="list-group-item" href="/2022/04/02/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"><i class="fa  fa-book"></i> Cpp面向对象</a>
+            <a class="list-group-item" href="/2022/04/10/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> OpenCV简述及接口（一）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/04/06/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/"><i class="fa  fa-book"></i> 机器学习基础-提升方法</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/04/06/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%BA%8C%EF%BC%89/"><i class="fa  fa-book"></i> Cpp面向对象（二）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/04/02/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> Cpp面向对象（一）</a>
             
           
         
@@ -376,23 +405,9 @@ min(\sum^N_{i=1}L(y_i,f_{m-1}(x_i)+T(x_i,\theta_m))) \\
           
         
           
-          
-            <a class="list-group-item" href="/2022/03/29/Career-Intro/%E8%81%8C%E4%B8%9A%E6%A6%82%E8%BF%B0-%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"><i class="fa  fa-book"></i> 职业概述-测试开发</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/03/28/C++/Cpp%E5%9F%BA%E7%A1%80/"><i class="fa  fa-book"></i> Cpp基础</a>
             
-          
-        
-          
-          
-            <a class="list-group-item" href="/2022/03/28/C++/Cpp%E5%AE%B9%E5%99%A8%E7%B1%BB/"><i class="fa  fa-book"></i> Cpp容器类</a>
-            
-          
-        
           
             
           
