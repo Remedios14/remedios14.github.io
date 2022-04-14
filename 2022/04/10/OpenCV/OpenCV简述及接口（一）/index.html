@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-04-10T15:06:21.000Z">
-<meta property="article:modified_time" content="2022-04-10T15:06:21.437Z">
+<meta property="article:modified_time" content="2022-04-13T14:40:46.286Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="opencv">
@@ -166,7 +166,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~6.73K
+                        ~7.77K
                     
                     字
                 </li>
@@ -175,7 +175,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1649603181437"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1649860846286"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -202,7 +202,8 @@
 <li>HSL：也是一种色彩空间，只是其 Saturation 及 Lightness 有点差异</li>
 <li>YUV：是一种颜色编码方法</li>
 </ul>
-<h2 id="交互操作简介"><a href="#交互操作简介" class="headerlink" title="交互操作简介"></a>交互操作简介</h2><h3 id="图像视频的加载和显式"><a href="#图像视频的加载和显式" class="headerlink" title="图像视频的加载和显式"></a>图像视频的加载和显式</h3><p><strong>注意</strong>：凡是创建了捕获或者写入的对象，在完成之后都要调用 release 释放资源，类似文件操作</p>
+<h2 id="交互操作简介"><a href="#交互操作简介" class="headerlink" title="交互操作简介"></a>交互操作简介</h2><p><strong>注意</strong>：OpenCV 中用到 Mat 的尺寸时总是接收先横后纵，而用 shape 则按照 np 的顺序显示，要注意调换</p>
+<h3 id="图像视频的加载和显式"><a href="#图像视频的加载和显式" class="headerlink" title="图像视频的加载和显式"></a>图像视频的加载和显式</h3><p><strong>注意</strong>：凡是创建了捕获或者写入的对象，在完成之后都要调用 release 释放资源，类似文件操作</p>
 <h4 id="创建和显示窗口"><a href="#创建和显示窗口" class="headerlink" title="创建和显示窗口"></a>创建和显示窗口</h4><p>下面略去函数前的包名 cv2</p>
 <ul>
 <li>namedWindow(wd_name, cv2.WINDOW_NORMAL) ：创建一个 window_normal 对象，wd_name 传入名称字符串</li>
@@ -226,7 +227,9 @@
 <h4 id="读取摄像头"><a href="#读取摄像头" class="headerlink" title="读取摄像头"></a>读取摄像头</h4><ul>
 <li>VideoCapture(0) ：传入摄像头编号，一般用 0，返回一个摄像头捕获对象，后续可以调用该对象的方法来进行操作；这里使用 cap 变量</li>
 <li>cap.isOpened() ：摄像头是否打开</li>
-<li>cap.read() ：两个返回值，前者为是否正确读取，后者为读取到的帧，用于 imshow<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cv2.namedWindow(<span class="string">&#x27;vedio&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;vedio&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ret:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    cv2.imshow(<span class="string">&#x27;vedio&#x27;</span>, frame)</span><br><span class="line">    key = cv2.waitKey(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<li>cap.read() ：两个返回值，前者为是否正确读取，后者为读取到的帧，用于 imshow</li>
+<li>cap.open() ：打开摄像头</li>
+<li>cap.get(…) / cap.set(…) 可以获取和设置摄像头参数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cv2.namedWindow(<span class="string">&#x27;vedio&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;vedio&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ret:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    cv2.imshow(<span class="string">&#x27;vedio&#x27;</span>, frame)</span><br><span class="line">    key = cv2.waitKey(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><strong>注意</strong>：上面每两次循环中等待了 10 毫秒，相当于帧率相当高</p>
@@ -284,7 +287,30 @@
 </li>
 </ul>
 <h4 id="色彩空间的转换"><a href="#色彩空间的转换" class="headerlink" title="色彩空间的转换"></a>色彩空间的转换</h4><ul>
-<li>cvtColor(img, c_space) ：将图片转为指定的色彩空间，返回转换后的对象，不修改原对象，常量全部以 <code>COLOR</code> 开头，使用提示方便点<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">callback</span>(<span class="params">val</span>):</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;cspace&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;cspace&#x27;</span>, <span class="number">640</span>, <span class="number">480</span>)</span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./resource/cat.jpeg&#x27;</span>)</span><br><span class="line">color_space = [</span><br><span class="line">	cv2.COLOR_BGR2RGBA, cv2.COLOR_BGR2BGRA,</span><br><span class="line">	cv2.COLOR_BGR2GRAY, cv2.COLOR_BGR2HSV,</span><br><span class="line">	cv2.COLOR_BGR2YUV</span><br><span class="line">]</span><br><span class="line">cv2.createTrackbar(<span class="string">&#x27;spaceidx&#x27;</span>, <span class="string">&#x27;cspace&#x27;</span>, <span class="number">0</span>, <span class="number">4</span>, callback)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">	idx = cv2.getTrackbarPos(<span class="string">&#x27;spaceidx&#x27;</span>, <span class="string">&#x27;cspace&#x27;</span>)</span><br><span class="line">	cvt_img = cv2.cvtColor(img, color_space[idx])</span><br><span class="line">	cv2.imshow(<span class="string">&#x27;cspace&#x27;</span>, cvt_img)</span><br><span class="line">	key = cv2.waitKey(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">if</span> key == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">		<span class="keyword">break</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure></li>
+<li>cvtColor(img, c_space) ：将图片转为指定的色彩空间，返回转换后的对象，不修改原对象，常量全部以 <code>COLOR</code> 开头，使用提示方便点<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">callback</span>(<span class="params">val</span>):</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;cspace&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;cspace&#x27;</span>, <span class="number">640</span>, <span class="number">480</span>)</span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./resource/cat.jpeg&#x27;</span>)</span><br><span class="line">color_space = [</span><br><span class="line">	cv2.COLOR_BGR2RGBA, cv2.COLOR_BGR2BGRA,</span><br><span class="line">	cv2.COLOR_BGR2GRAY, cv2.COLOR_BGR2HSV,</span><br><span class="line">	cv2.COLOR_BGR2YUV</span><br><span class="line">]</span><br><span class="line">cv2.createTrackbar(<span class="string">&#x27;spaceidx&#x27;</span>, <span class="string">&#x27;cspace&#x27;</span>, <span class="number">0</span>, <span class="number">4</span>, callback)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">	idx = cv2.getTrackbarPos(<span class="string">&#x27;spaceidx&#x27;</span>, <span class="string">&#x27;cspace&#x27;</span>)</span><br><span class="line">	cvt_img = cv2.cvtColor(img, color_space[idx])</span><br><span class="line">	cv2.imshow(<span class="string">&#x27;cspace&#x27;</span>, cvt_img)</span><br><span class="line">	key = cv2.waitKey(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">if</span> key == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">		<span class="keyword">break</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h4><ul>
+<li>threshold(src, thresh, maxval, type[, dst]) 图像二值化，将像素点值大于某阈值的归为 255（白色），反之归为 0，用于实现大致的分划<ul>
+<li>thresh 用于判断的阈值</li>
+<li>maxval 高于阈值时赋予的新值</li>
+<li>type 由 THRESH 开头的几种类型<ul>
+<li>使用 cv2.THRESH_OTSU 可以自行搜索灰度图上比较好的二值化阈值，针对双峰图像效果显著</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, bockSize, C[, dst]) 自适应阈值，动态选择一个区域，取该区域的均值作为阈值来划分二值<ul>
+<li>adaptiveMethod 自适应方法<ul>
+<li>ADAPTIVE_THRESH_MEAN_C ：区域内均值</li>
+<li>ADAPTIVE_THRESH_GAUSSIAN_C ：用高斯分布加权均值</li>
+</ul>
+</li>
+<li>tType 赋值方法，只有 THRESH_BINARY 和 THRESH_BINART_INV</li>
+<li>blockSize 规定区域大小（正方形区域，给单值）</li>
+<li>C 常数，阈值等于均值或加权均值减去该常数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">g_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">rr, nn_img = cv2.threshold(g_img, <span class="number">150</span>, <span class="number">255</span>, cv2.THRESH_BINARY)</span><br><span class="line"><span class="built_in">print</span>(ret)</span><br><span class="line">rrr, nnn_img = cv2.threshold(g_img, <span class="number">0</span>, <span class="number">255</span>, cv2.THRESH_BINARY + cv2.THRESH_OTSU)</span><br><span class="line"><span class="built_in">print</span>(rrr)</span><br><span class="line"><span class="comment"># ad_img = cv2.adaptiveThreshold(g_img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 0)</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;twd&#x27;</span>, np.hstack((g_img, nn_img, nnn_img)))</span><br><span class="line"><span class="comment"># cv2.imshow(&#x27;ada&#x27;, ad_img)</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -376,7 +402,7 @@
                     <a class="tag-none-link" href="/tags/opencv/" rel="tag">opencv</a>, <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-04-10</span>
+                <span>最后编辑：2022-04-13</span>
                 </div>
             </div>
         </footer>
@@ -428,7 +454,7 @@
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -448,6 +474,12 @@
   <div class="tab-content">
       <ul class="list-group">
         
+        
+          
+          
+            <a class="list-group-item" href="/2022/04/12/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%89%EF%BC%89/"><i class="fa  fa-book"></i> OpenCV简述及接口（三）</a>
+            
+          
         
           
           
@@ -474,11 +506,7 @@
           
         
           
-          
-            <a class="list-group-item" href="/2022/04/02/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> Cpp面向对象（一）</a>
             
-          
-        
           
             
           
