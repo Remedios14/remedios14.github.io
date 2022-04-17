@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-04-12T04:11:58.000Z">
-<meta property="article:modified_time" content="2022-04-14T04:20:54.374Z">
+<meta property="article:modified_time" content="2022-04-17T14:00:29.491Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="opencv">
@@ -166,7 +166,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~6.19K
+                        ~6.99K
                     
                     字
                 </li>
@@ -175,7 +175,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1649910054374"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1650204029491"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -307,7 +307,40 @@
 <p>分别卷积扫描（padding=1）后得到两个同大小的新矩阵；对两个分量进行均方求和或者绝对值求和来近似梯度</p>
 <ul>
 <li>Sobel(src, ddepth, dx, dy[, dst, ksize, scale, delta, borderType])<ul>
-<li>ksize 设置为 -1 就得到 Scharr 算子<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">dx = cv2.Sobel(img, -<span class="number">1</span>, dx=<span class="number">1</span>, dy=<span class="number">0</span>, ksize=<span class="number">3</span>)</span><br><span class="line">dy = cv2.Sobel(img, -<span class="number">1</span>, dx=<span class="number">0</span>, dy=<span class="number">1</span>, ksize=<span class="number">3</span>)</span><br><span class="line">sm_grad = cv2.addWeighted(dx, <span class="number">0.5</span>, dy, <span class="number">0.5</span>, gamma=<span class="number">0</span>)</span><br><span class="line">sq_grad = (dx ** <span class="number">2</span> + dy ** <span class="number">2</span>) ** <span class="number">0.5</span> <span class="comment"># 貌似这个运算改变了数据类型</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;cmp&#x27;</span>, np.hstack((img, dx, dy)))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;grad&#x27;</span>, np.hstack((sm_grad, sq_grad)))</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### Scharr 算子</span></span><br><span class="line"></span><br><span class="line">当内核大小为 <span class="number">3</span> 时，Sobel 算子误差较大；Scharr 算子针对 <span class="number">3</span> 大小做了优化，使用了不同的 kernel（水平如下，纵向类似）</span><br><span class="line"></span><br><span class="line">\[\[-<span class="number">3</span>, <span class="number">0</span>, +<span class="number">3</span>],</span><br><span class="line">\[-<span class="number">10</span>, <span class="number">0</span>, +<span class="number">10</span>],</span><br><span class="line">\[-<span class="number">3</span>, <span class="number">0</span>, +<span class="number">3</span>]]</span><br><span class="line"></span><br><span class="line">- Scharr(src, ddepth, dx, dy\[, dst, scale, delta, borderType]) 不允许修改卷积核大小，仅允许 <span class="number">3</span> × <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#### 拉普拉斯算子</span></span><br><span class="line"></span><br><span class="line">寻找二阶导数为 <span class="number">0</span> 的位置判断为边缘（但二阶导为 <span class="number">0</span> 也可能是噪声点，可以之后结合高斯滤波处理）</span><br><span class="line"></span><br><span class="line">- 拉普拉斯算子求导（卷积核为左阵，用它去点乘感受野）</span><br><span class="line">![](../../_pics/Laplace-Twice-grad.png)</span><br><span class="line"></span><br><span class="line">- Laplacian(src, ddepth\[, dst, ksize, scale, delta, borderType]) 同时求两个方向的边缘</span><br><span class="line">	- 对噪声敏感，一般需要结合去噪的滤波算法</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 边缘检测 Canny</span></span><br><span class="line"></span><br><span class="line">- 由 John F. Canny 于 <span class="number">1986</span> 年开发的多级边缘检测算法，被认为是最优的；边缘检测的三个主要评价标准：</span><br><span class="line">	- 低错误率：标识出尽可能多的实际边缘，同时尽可能的减少噪声产生</span><br><span class="line">	- 高定位性：标识出的边缘要与图像中的实际边缘尽可能接近</span><br><span class="line">	- 最小响应：图像中的边缘只能标识一次</span><br><span class="line">- 执行算法的一般步骤</span><br><span class="line">	- 去噪：边缘检测容易受到噪声影响，一般先使用高斯滤波去噪</span><br><span class="line">	- 计算梯度：对平滑后的图像采用 sobel 算子计算梯度和方向</span><br><span class="line">		- $G = \sqrt &#123;G^2_x+G^2_y&#125;$ 为了方便一般可用绝对值</span><br><span class="line">		- $\theta = arctan(\frac&#123;G_y&#125;&#123;G_x&#125;)$</span><br><span class="line">		- 梯度方向被归为四类：竖直，水平，和两个对角线方向</span><br><span class="line">	- 非极大值抑制：扫描所有计算后的像素点，检查该点是否是其梯度方向上的极大值，若是则保留到下一阶段，若不是则抑制（置为<span class="number">0</span>）</span><br><span class="line">	- 磁滞阈值：设置上下阈值 maxVal 和 minVal，大于上阈值必定为边缘点，小于必定非边缘，范围内的点根据连通性归类（是否与边缘点相连通）</span><br><span class="line"></span><br><span class="line">- Canny(image, threshold1, threshold2\[, edges, apertureSize, L2gradient]) 调用 Canny 算法进行边缘检测</span><br><span class="line">	- 两个阈值依次为 minVal 和 maxVal</span><br><span class="line">	- apertureSize 标识过程中 Sobel 算子的核大小</span><br><span class="line">	- L2gradient 表示计算梯度方法，默认 <span class="literal">False</span> 使用绝对值和</span><br><span class="line">```python</span><br><span class="line">cny_img = cv2.Canny(img, <span class="number">100</span>, <span class="number">200</span>) <span class="comment"># 会得到仅二维的结果</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;org&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;grad&#x27;</span>, cny_img)</span><br></pre></td></tr></table></figure>
+<li>ksize 设置为 -1 就得到 Scharr 算子<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">dx = cv2.Sobel(img, -<span class="number">1</span>, dx=<span class="number">1</span>, dy=<span class="number">0</span>, ksize=<span class="number">3</span>)</span><br><span class="line">dy = cv2.Sobel(img, -<span class="number">1</span>, dx=<span class="number">0</span>, dy=<span class="number">1</span>, ksize=<span class="number">3</span>)</span><br><span class="line">sm_grad = cv2.addWeighted(dx, <span class="number">0.5</span>, dy, <span class="number">0.5</span>, gamma=<span class="number">0</span>)</span><br><span class="line">sq_grad = (dx ** <span class="number">2</span> + dy ** <span class="number">2</span>) ** <span class="number">0.5</span> <span class="comment"># 貌似这个运算改变了数据类型</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;cmp&#x27;</span>, np.hstack((img, dx, dy)))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;grad&#x27;</span>, np.hstack((sm_grad, sq_grad)))</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### Scharr 算子</span></span><br><span class="line"></span><br><span class="line">当内核大小为 <span class="number">3</span> 时，Sobel 算子误差较大；Scharr 算子针对 <span class="number">3</span> 大小做了优化，使用了不同的 kernel（水平如下，纵向类似）</span><br><span class="line"></span><br><span class="line">\[\[-<span class="number">3</span>, <span class="number">0</span>, +<span class="number">3</span>],</span><br><span class="line">\[-<span class="number">10</span>, <span class="number">0</span>, +<span class="number">10</span>],</span><br><span class="line">\[-<span class="number">3</span>, <span class="number">0</span>, +<span class="number">3</span>]]</span><br><span class="line"></span><br><span class="line">- Scharr(src, ddepth, dx, dy\[, dst, scale, delta, borderType]) 不允许修改卷积核大小，仅允许 <span class="number">3</span> × <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#### 拉普拉斯算子</span></span><br><span class="line"></span><br><span class="line">寻找二阶导数为 <span class="number">0</span> 的位置判断为边缘（但二阶导为 <span class="number">0</span> 也可能是噪声点，可以之后结合高斯滤波处理）</span><br><span class="line"></span><br><span class="line">- 拉普拉斯算子求导（卷积核为左阵，用它去点乘感受野）</span><br><span class="line">![](../../_pics/Laplace-Twice-grad.png)</span><br><span class="line"></span><br><span class="line">- Laplacian(src, ddepth\[, dst, ksize, scale, delta, borderType]) 同时求两个方向的边缘</span><br><span class="line">	- 对噪声敏感，一般需要结合去噪的滤波算法</span><br><span class="line"></span><br><span class="line"><span class="comment">### 边缘检测 Canny</span></span><br><span class="line"></span><br><span class="line">- 由 John F. Canny 于 <span class="number">1986</span> 年开发的多级边缘检测算法，被认为是最优的；边缘检测的三个主要评价标准：</span><br><span class="line">	- 低错误率：标识出尽可能多的实际边缘，同时尽可能的减少噪声产生</span><br><span class="line">	- 高定位性：标识出的边缘要与图像中的实际边缘尽可能接近</span><br><span class="line">	- 最小响应：图像中的边缘只能标识一次</span><br><span class="line">- 执行算法的一般步骤</span><br><span class="line">	<span class="number">1.</span> 使用高斯滤波器，以平滑图像，滤除噪声</span><br><span class="line">	<span class="number">2.</span> 计算图像中每个像素点的梯度强度和方向：对平滑后的图像采用 sobel 算子计算梯度和方向</span><br><span class="line">		- $G = \sqrt &#123;G^2_x+G^2_y&#125;$ 为了方便一般可用绝对值</span><br><span class="line">		- $\theta = arctan(\frac&#123;G_y&#125;&#123;G_x&#125;)$</span><br><span class="line">		- 梯度方向被归为四类：竖直，水平，和两个对角线方向</span><br><span class="line">	<span class="number">3.</span> 应用非极大值（Non-Maximum Suppression）抑制，以消除边缘检测带来的杂散响应：扫描所有计算后的像素点，检查该点是否是其梯度方向（分解成四种）上的极大值，若是则保留到下一阶段，若不是则抑制（置为<span class="number">0</span>）</span><br><span class="line">	<span class="number">4.</span> 应用双阈值（Double-Threshold）检测来确定真实的和潜在的边缘：设置上下阈值 maxVal 和 minVal，大于上阈值必定为边缘点，小于下阈值必定非边缘，范围内的点根据连通性归类（是否与边缘点相连通）</span><br><span class="line">	<span class="number">5.</span> 通过抑制孤立的弱边缘最终完成边缘检测</span><br><span class="line"></span><br><span class="line">- Canny(image, threshold1, threshold2\[, edges, apertureSize, L2gradient]) 调用 Canny 算法进行边缘检测</span><br><span class="line">	- 两个阈值依次为 minVal 和 maxVal</span><br><span class="line">	- apertureSize 标识过程中 Sobel 算子的核大小</span><br><span class="line">	- L2gradient 表示计算梯度方法，默认 <span class="literal">False</span> 使用绝对值和</span><br><span class="line">```python</span><br><span class="line">cny_img = cv2.Canny(img, <span class="number">100</span>, <span class="number">200</span>) <span class="comment"># 会得到仅二维的结果</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;org&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;grad&#x27;</span>, cny_img)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="形态学转换"><a href="#形态学转换" class="headerlink" title="形态学转换"></a>形态学转换</h3><p>将原始图像上区分度较高的形状执行一定变换的操作，通常在二进制图像上执行</p>
+<h4 id="侵蚀"><a href="#侵蚀" class="headerlink" title="侵蚀"></a>侵蚀</h4><p>大致是侵蚀前景物体的边界（尽量使前景保持白色），去除图像中的一部分；大致实现是使用一个卷积核滑动，在感受野中所有实际像素为 1 的当前像素被认为是 1，否则被侵蚀为 0 —— 舍弃边缘</p>
+<ul>
+<li>erode(src, kernel)</li>
+</ul>
+<h4 id="扩张"><a href="#扩张" class="headerlink" title="扩张"></a>扩张</h4><p>与侵蚀相反，大致当感受野内存在 1 时就被认为是 1</p>
+<ul>
+<li>dilate(src, kernel)</li>
+</ul>
+<h4 id="形态学-Ex-操作"><a href="#形态学-Ex-操作" class="headerlink" title="形态学 Ex 操作"></a>形态学 Ex 操作</h4><p>相当于先侵蚀在扩张来还原；对消除噪音有帮助（对比高斯模糊）</p>
+<ul>
+<li>morphologyEx(src, op, kernel) 其中的 op 是以 MORPH 开头的一类操作，一下取值分别有几种效果<ul>
+<li>MORPH_OPEN 开运算，相当于先侵蚀在扩张来还原；对消除噪音有帮助（对比高斯模糊）</li>
+<li>MORPH_CLOSE 闭运算，先扩张后侵蚀</li>
+<li>MORPH_GRADIENT 形态学梯度，对比扩张和侵蚀得到的结果，看上去像求轮廓</li>
+<li>MORPH_TOPHAT 顶帽，是原图像和开运算图像之差</li>
+<li>MORPH_BLACKHAT 黑帽，是闭运算和原图像之差</li>
+</ul>
+</li>
+</ul>
+<h4 id="快捷-kernel"><a href="#快捷-kernel" class="headerlink" title="快捷 kernel"></a>快捷 kernel</h4><p>一般使用 kernel 可以自己创建 ndarray 对象，OpenCV 也提供了几个快捷的形状</p>
+<ul>
+<li>getStructuringElement(shape, ksize) 返回指定形状的 ndarray<ul>
+<li>ksize 为二元组</li>
+<li>shape 可选<ul>
+<li>MORPH_RECT 全 1 填充矩形</li>
+<li>MORPH_ELLIPSE 椭圆形填充 1</li>
+<li>MORPH_CROSS 十字形填充 1</li>
+</ul>
 </li>
 </ul>
 </li>
@@ -416,7 +449,7 @@ warpAffine(src, M,...`;
                     <a class="tag-none-link" href="/tags/opencv/" rel="tag">opencv</a>, <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-04-14</span>
+                <span>最后编辑：2022-04-17</span>
                 </div>
             </div>
         </footer>
@@ -428,6 +461,10 @@ warpAffine(src, M,...`;
                 <a title=" OpenCV简述及接口（二）" href="/2022/04/11/OpenCV/OpenCV简述及接口（二）/">&lt; 上一篇</a>
             </div>
             
+            
+            <div class="nav-next clearfix">
+                <a title=" OpenCV简述及接口（四）" href="/2022/04/14/OpenCV/OpenCV简述及接口（四）/">下一篇 &gt;</a>
+            </div>
             
         </nav>
     
@@ -464,7 +501,7 @@ warpAffine(src, M,...`;
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -487,6 +524,18 @@ warpAffine(src, M,...`;
         
           
           
+            <a class="list-group-item" href="/2022/04/16/OpenCV/OpenCV%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%8F%8A%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> OpenCV功能分类链接</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/04/14/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E5%9B%9B%EF%BC%89/"><i class="fa  fa-book"></i> OpenCV简述及接口（四）</a>
+            
+          
+        
+          
+          
             <a class="list-group-item" href="/2022/04/12/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%89%EF%BC%89/"><i class="fa  fa-book"></i> OpenCV简述及接口（三）</a>
             
           
@@ -504,17 +553,9 @@ warpAffine(src, M,...`;
           
         
           
-          
-            <a class="list-group-item" href="/2022/04/06/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/"><i class="fa  fa-book"></i> 机器学习基础-提升方法</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/04/06/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%BA%8C%EF%BC%89/"><i class="fa  fa-book"></i> Cpp面向对象（二）</a>
             
-          
-        
           
             
           
@@ -726,21 +767,5 @@ warpAffine(src, M,...`;
 <!-- Extra support for third-party plguins  -->
 
 
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-</body>
+    </body>
 </html>

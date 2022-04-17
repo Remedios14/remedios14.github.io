@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-04-10T15:06:21.000Z">
-<meta property="article:modified_time" content="2022-04-14T04:38:15.965Z">
+<meta property="article:modified_time" content="2022-04-17T14:06:19.186Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="opencv">
@@ -166,7 +166,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~8.14K
+                        ~9.95K
                     
                     字
                 </li>
@@ -175,7 +175,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1649911095965"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1650204379186"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -201,6 +201,7 @@
 </li>
 <li>HSL：也是一种色彩空间，只是其 Saturation 及 Lightness 有点差异</li>
 <li>YUV：是一种颜色编码方法</li>
+<li>掩码：图像掩码通过将<strong>纯黑色的一定区域修改成白色</strong>实现，使用该掩码与其他图像执行 bitwise_and 操作即可仅保留白色区域</li>
 </ul>
 <h2 id="交互操作简介"><a href="#交互操作简介" class="headerlink" title="交互操作简介"></a>交互操作简介</h2><p><strong>注意</strong>：OpenCV 中用到 Mat 的尺寸时总是接收先横后纵，而用 shape 则按照 np 的顺序显示，要注意调换</p>
 <h3 id="图像视频的加载和显式"><a href="#图像视频的加载和显式" class="headerlink" title="图像视频的加载和显式"></a>图像视频的加载和显式</h3><p><strong>注意</strong>：凡是创建了捕获或者写入的对象，在完成之后都要调用 release 释放资源，类似文件操作</p>
@@ -216,8 +217,9 @@
 <p>其中 ord 是返回字符 ascii 码的函数</p>
 <p>可以使用 pandas.DataFrame 来统计不同的像素点个数</p>
 <h4 id="读取图片对象"><a href="#读取图片对象" class="headerlink" title="读取图片对象"></a>读取图片对象</h4><ul>
-<li>imread ：传入图片路径，以及可选的读入模式，默认 BGR 彩色；返回像素点上的 BGR 值构成的 ndarray，即实际应为三维<ul>
+<li>imread(filename[, flags]) ：传入图片路径，以及可选的读入模式，默认 BGR 彩色；返回像素点上的 BGR 值构成的 ndarray，即实际应为三维<ul>
 <li>可以借助 matplotlib 来展示图片（但其按照 RGB 显示，会不一致）</li>
+<li>flags 可选 IMREAD_COLOR 或 IMREAD_GRAYSCALE 等彩色或灰度图</li>
 </ul>
 </li>
 <li>imshow(im_name, im_var) ：显示图片对象<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat = cv2.imread(<span class="string">&#x27;./cat.jepg&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cv_show</span>(<span class="params">name, img</span>):</span></span><br><span class="line">	cv2.imshow(name, img)</span><br><span class="line">	key = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">		cv2.destroyAllWindows()</span><br><span class="line">cv_show(<span class="string">&#x27;cat&#x27;</span>, cat)</span><br></pre></td></tr></table></figure>
@@ -250,7 +252,7 @@
 <li>vw.release() ：释放资源<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">&#x27;mp4v&#x27;</span>)</span><br><span class="line">vw = cv2.VideoWriter(<span class="string">&#x27;./resource/camera410.mp4&#x27;</span>, fourcc, <span class="number">30</span>, (<span class="number">640</span>, <span class="number">480</span>))</span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ret:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    vw.write(frame)</span><br><span class="line">    cv2.imshow(<span class="string">&#x27;frame&#x27;</span>, frame)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1000</span> // <span class="number">30</span>) == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cap.release()</span><br><span class="line">vw.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="控制鼠标"><a href="#控制鼠标" class="headerlink" title="控制鼠标"></a>控制鼠标</h4><p>OpenCV 允许我们对窗口上的鼠标动作做出响应，调用 set… 来对窗体绑定操作，可以实现框选和点击等操作</p>
+<h3 id="对象控制"><a href="#对象控制" class="headerlink" title="对象控制"></a>对象控制</h3><h4 id="控制鼠标"><a href="#控制鼠标" class="headerlink" title="控制鼠标"></a>控制鼠标</h4><p>OpenCV 允许我们对窗口上的鼠标动作做出响应，调用 set… 来对窗体绑定操作，可以实现框选和点击等操作</p>
 <ul>
 <li>setMouseCallback(wd_name, callback, userdata) <ul>
 <li>wd_name 即对应窗口体的名称</li>
@@ -294,10 +296,15 @@
 </li>
 </ul>
 <h4 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h4><ul>
-<li>threshold(src, thresh, maxval, type[, dst]) 图像二值化，将像素点值大于某阈值的归为 255（白色），反之归为 0，用于实现大致的分划<ul>
+<li>threshold(src, thresh, maxval, type[, dst]) 图像二值化，将像素点值大于某阈值的归为 255（白色），用于实现大致的分划<ul>
 <li>thresh 用于判断的阈值</li>
 <li>maxval 高于阈值时赋予的新值</li>
 <li>type 由 THRESH 开头的几种类型<ul>
+<li>THRESH_BINARY 二值化，大于阈值为 255，小于为 0</li>
+<li>THRESH_BINARY_INV 上一条反过来</li>
+<li>THRESH_TRUNC 大于阈值部分设为阈值，否则不修改（截断）</li>
+<li>THRESH_TOZERO 大于阈值部分不变，否则改为 0</li>
+<li>THRESH_TOZERO_INV 上一条反过来，大于阈值的改为 0</li>
 <li>使用 cv2.THRESH_OTSU 可以自行搜索灰度图上比较好的二值化阈值，针对双峰图像效果显著</li>
 </ul>
 </li>
@@ -311,11 +318,18 @@
 </li>
 <li>tType 赋值方法，只有 THRESH_BINARY 和 THRESH_BINART_INV</li>
 <li>blockSize 规定区域大小（正方形区域，给单值）</li>
-<li>C 常数，阈值等于均值或加权均值减去该常数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">g_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">rr, nn_img = cv2.threshold(g_img, <span class="number">150</span>, <span class="number">255</span>, cv2.THRESH_BINARY)</span><br><span class="line"><span class="built_in">print</span>(ret)</span><br><span class="line">rrr, nnn_img = cv2.threshold(g_img, <span class="number">0</span>, <span class="number">255</span>, cv2.THRESH_BINARY + cv2.THRESH_OTSU)</span><br><span class="line"><span class="built_in">print</span>(rrr)</span><br><span class="line"><span class="comment"># ad_img = cv2.adaptiveThreshold(g_img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 0)</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;twd&#x27;</span>, np.hstack((g_img, nn_img, nnn_img)))</span><br><span class="line"><span class="comment"># cv2.imshow(&#x27;ada&#x27;, ad_img)</span></span><br></pre></td></tr></table></figure></li>
+<li>C 常数，阈值等于均值或加权均值减去该常数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">g_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">rr, nn_img = cv2.threshold(g_img, <span class="number">150</span>, <span class="number">255</span>, cv2.THRESH_BINARY)</span><br><span class="line"><span class="built_in">print</span>(ret)</span><br><span class="line">rrr, nnn_img = cv2.threshold(g_img, <span class="number">0</span>, <span class="number">255</span>, cv2.THRESH_BINARY + cv2.THRESH_OTSU)</span><br><span class="line"><span class="built_in">print</span>(rrr)</span><br><span class="line"><span class="comment"># ad_img = cv2.adaptiveThreshold(g_img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 0)</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;twd&#x27;</span>, np.hstack((g_img, nn_img, nnn_img)))</span><br><span class="line"><span class="comment"># cv2.imshow(&#x27;ada&#x27;, ad_img)</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 </ul>
-
+<h3 id="高级显示"><a href="#高级显示" class="headerlink" title="高级显示"></a>高级显示</h3><h4 id="图像金字塔"><a href="#图像金字塔" class="headerlink" title="图像金字塔"></a>图像金字塔</h4><p>将同一图像按照不同分辨率堆叠排列（不是实际叠在一起，只是组合显示）</p>
+<p>有两种图像金字塔 1）高斯金字塔 2）拉普拉斯金字塔；其中拉普拉斯金字塔由高斯金字塔形成，仅描绘边缘图像，大多数元素为 0</p>
+<h5 id="高斯金字塔"><a href="#高斯金字塔" class="headerlink" title="高斯金字塔"></a>高斯金字塔</h5><p>高斯金字塔是从高分辨率（低级别）图像中删除连续行和列得到低分辨率（高级别）图像；较高级别的每个像素由基础级别的 5 个像素贡献及高斯权重形成，原始 M×N 图像变成 M/2×N/2 图像，成为一次 Octave 操作；反之亦然<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lower = cv2.pyrDown(img)</span><br><span class="line">ret = cv2.pyrUp(lower)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;org&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;lower&#x27;</span>, lower)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;ret&#x27;</span>, ret)</span><br></pre></td></tr></table></figure></p>
+<p>一旦降低了分辨率，就会丢失信息，还原后和原图不会一样</p>
+<p>向上采样即先每个像素填充三个 0 来放大到两倍，然后用一致于向下采样的卷积核作用得到</p>
+<h5 id="拉普拉斯金字塔"><a href="#拉普拉斯金字塔" class="headerlink" title="拉普拉斯金字塔"></a>拉普拉斯金字塔</h5><p>假设列表 gl 存入逐渐高级的高斯金字塔，一个拉普拉斯金字塔由 <code>cv2.subtract(gl[i-1], cv2.pyrUp(gl[i]))</code> 得到，因此最高级的高斯金字塔保留原状</p>
+<h5 id="合成例子"><a href="#合成例子" class="headerlink" title="合成例子"></a>合成例子</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">A = cv.imread(<span class="string">&#x27;apple.jpg&#x27;</span>)</span><br><span class="line">B = cv.imread(<span class="string">&#x27;orange.jpg&#x27;</span>)</span><br><span class="line"><span class="comment"># 生成A的高斯金字塔</span></span><br><span class="line">G = A.copy()</span><br><span class="line">gpA = [G]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">6</span>):</span><br><span class="line">    G = cv.pyrDown(G)</span><br><span class="line">    gpA.append(G)</span><br><span class="line"><span class="comment"># 生成B的高斯金字塔</span></span><br><span class="line">G = B.copy()</span><br><span class="line">gpB = [G]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">6</span>):</span><br><span class="line">    G = cv.pyrDown(G)</span><br><span class="line">    gpB.append(G)</span><br><span class="line"><span class="comment"># 生成A的拉普拉斯金字塔</span></span><br><span class="line">lpA = [gpA[<span class="number">5</span>]]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">5</span>,<span class="number">0</span>,-<span class="number">1</span>):</span><br><span class="line">    GE = cv.pyrUp(gpA[i])</span><br><span class="line">    L = cv.subtract(gpA[i-<span class="number">1</span>],GE)</span><br><span class="line">    lpA.append(L)</span><br><span class="line"><span class="comment"># 生成B的拉普拉斯金字塔</span></span><br><span class="line">lpB = [gpB[<span class="number">5</span>]]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">5</span>,<span class="number">0</span>,-<span class="number">1</span>):</span><br><span class="line">    GE = cv.pyrUp(gpB[i])</span><br><span class="line">    L = cv.subtract(gpB[i-<span class="number">1</span>],GE)</span><br><span class="line">    lpB.append(L)</span><br><span class="line"><span class="comment"># 现在在每个级别中添加左右两半图像 </span></span><br><span class="line">LS = []</span><br><span class="line"><span class="keyword">for</span> la,lb <span class="keyword">in</span> <span class="built_in">zip</span>(lpA,lpB):</span><br><span class="line">    rows,cols,dpt = la.shape</span><br><span class="line">    ls = np.hstack((la[:,<span class="number">0</span>:cols/<span class="number">2</span>], lb[:,cols/<span class="number">2</span>:]))</span><br><span class="line">    LS.append(ls)</span><br><span class="line"><span class="comment"># 现在重建</span></span><br><span class="line">ls_ = LS[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1</span>,<span class="number">6</span>):</span><br><span class="line">    ls_ = cv.pyrUp(ls_)</span><br><span class="line">    ls_ = cv.add(ls_, LS[i])</span><br><span class="line"><span class="comment"># 图像与直接连接的每一半</span></span><br><span class="line">real = np.hstack((A[:,:cols/<span class="number">2</span>],B[:,cols/<span class="number">2</span>:]))</span><br><span class="line">cv.imwrite(<span class="string">&#x27;Pyramid_blending2.jpg&#x27;</span>,ls_)</span><br><span class="line">cv.imwrite(<span class="string">&#x27;Direct_blending.jpg&#x27;</span>,real)</span><br></pre></td></tr></table></figure>
         </div>
         
             <div class="kratos-copyright text-center clearfix">
@@ -405,7 +419,7 @@
                     <a class="tag-none-link" href="/tags/opencv/" rel="tag">opencv</a>, <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-04-14</span>
+                <span>最后编辑：2022-04-17</span>
                 </div>
             </div>
         </footer>
@@ -457,7 +471,7 @@
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -480,6 +494,18 @@
         
           
           
+            <a class="list-group-item" href="/2022/04/16/OpenCV/OpenCV%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%8F%8A%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> OpenCV功能分类链接</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/04/14/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E5%9B%9B%EF%BC%89/"><i class="fa  fa-book"></i> OpenCV简述及接口（四）</a>
+            
+          
+        
+          
+          
             <a class="list-group-item" href="/2022/04/12/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%89%EF%BC%89/"><i class="fa  fa-book"></i> OpenCV简述及接口（三）</a>
             
           
@@ -497,17 +523,9 @@
           
         
           
-          
-            <a class="list-group-item" href="/2022/04/06/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/"><i class="fa  fa-book"></i> 机器学习基础-提升方法</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/04/06/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%BA%8C%EF%BC%89/"><i class="fa  fa-book"></i> Cpp面向对象（二）</a>
             
-          
-        
           
             
           
@@ -719,21 +737,5 @@
 <!-- Extra support for third-party plguins  -->
 
 
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-</body>
+    </body>
 </html>
