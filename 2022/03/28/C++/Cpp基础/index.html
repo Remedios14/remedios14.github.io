@@ -15,19 +15,19 @@
   
     <meta name="keywords" content="cpp, tips" />
   
-  <meta name="description" content="复合数据类型在基本的整型、浮点型、字符之外的复合数据类型，包括数组、字符串等 数组声明如 typeName arrName[arrSize]; ，只有在声明时可以初始化，其后只能通过赋值来操作，例句 char tlifs[4] &amp;#123;&#39;h&#39;, &#39;i&#39;, 112, &#39;\0&#39;&amp;#125;; 字符串传统的 C 式字符串是 char 数组，并且在存储中">
+  <meta name="description" content="编辑环境配置及三方库安装 一般安装第三方库时先使用 MSYS 的命令检索 pacman -Ss keywords 找到之后根据操作系统对应的编译器来选择安装，Windows 下为 mingw64，在其子环境下安装 cmake 使用 pacman -S mingw-w64-x86_64-cmake 补充 ：使用 msys 安装的外部库在 VSC 中不能立刻看到代码提示，此时需要 ctrl+shift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cpp基础">
 <meta property="og:url" content="http://remedios14.github.io/2022/03/28/C++/Cpp%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Mikyi喵喵呜~">
-<meta property="og:description" content="复合数据类型在基本的整型、浮点型、字符之外的复合数据类型，包括数组、字符串等 数组声明如 typeName arrName[arrSize]; ，只有在声明时可以初始化，其后只能通过赋值来操作，例句 char tlifs[4] &amp;#123;&#39;h&#39;, &#39;i&#39;, 112, &#39;\0&#39;&amp;#125;; 字符串传统的 C 式字符串是 char 数组，并且在存储中">
+<meta property="og:description" content="编辑环境配置及三方库安装 一般安装第三方库时先使用 MSYS 的命令检索 pacman -Ss keywords 找到之后根据操作系统对应的编译器来选择安装，Windows 下为 mingw64，在其子环境下安装 cmake 使用 pacman -S mingw-w64-x86_64-cmake 补充 ：使用 msys 安装的外部库在 VSC 中不能立刻看到代码提示，此时需要 ctrl+shift">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-03-28T11:35:48.000Z">
-<meta property="article:modified_time" content="2022-04-08T01:31:08.231Z">
+<meta property="article:modified_time" content="2022-05-21T12:48:42.936Z">
 <meta property="article:author" content="Mikyi">
-<meta property="article:tag" content="cpp">
 <meta property="article:tag" content="tips">
+<meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
 <meta name="twitter:site" content="@null">
@@ -166,7 +166,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~7.50K
+                        ~8.04K
                     
                     字
                 </li>
@@ -175,11 +175,27 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1649381468231"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1653137322936"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h2 id="复合数据类型"><a href="#复合数据类型" class="headerlink" title="复合数据类型"></a>复合数据类型</h2><p>在基本的整型、浮点型、字符之外的复合数据类型，包括数组、字符串等</p>
+            <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/401188789">编辑环境配置及三方库安装</a></p>
+<p>一般安装第三方库时先使用 MSYS 的命令检索 <code>pacman -Ss keywords</code> 找到之后根据操作系统对应的编译器来选择安装，Windows 下为 mingw64，在其子环境下安装 cmake 使用 <code>pacman -S mingw-w64-x86_64-cmake</code></p>
+<p><strong>补充</strong> ：使用 msys 安装的外部库在 VSC 中不能立刻看到代码提示，此时需要 ctrl+shift+p 搜索 “edit configuration” 编辑 C/C++ 的配置，在其 <code>includePath</code> 条目下追加上 <code>**/msys64/mingw64/include</code> 具体目录视自身情况修改，大致是这个位置</p>
+<h2 id="编写习惯"><a href="#编写习惯" class="headerlink" title="编写习惯"></a>编写习惯</h2><h3 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h3><p>通常使用 <strong>驼峰命名法</strong></p>
+<ul>
+<li>小驼峰：在一个完整标识符中第二个单词起首字母大写，常用于函数、方法名</li>
+<li>大驼峰：每个单词首字母大写，常用于类名、命名空间等</li>
+</ul>
+<p>个人习惯：对于属性变量使用下划线命名法，私有属性在末尾再加一个下划线以作区分</p>
+<h3 id="编辑格式"><a href="#编辑格式" class="headerlink" title="编辑格式"></a>编辑格式</h3><ul>
+<li>运算符、括号 等符号总是留出空格方便阅读</li>
+<li>代码块的左括号置于关键词或函数行末，右括号另起一行（个人习惯）</li>
+<li>命名空间结束行位置追加注释</li>
+<li>文件末尾留单空行</li>
+<li>引入文件总是按首字母字典序，且库文件在前，工程文件在后</li>
+</ul>
+<h2 id="复合数据类型"><a href="#复合数据类型" class="headerlink" title="复合数据类型"></a>复合数据类型</h2><p>在基本的整型、浮点型、字符之外的复合数据类型，包括数组、字符串等</p>
 <h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>声明如 <code>typeName arrName[arrSize];</code> ，只有在声明时可以初始化，其后只能通过赋值来操作，例句</p>
 <p><code>char tlifs[4] &#123;&#39;h&#39;, &#39;i&#39;, 112, &#39;\0&#39;&#125;;</code></p>
 <h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>传统的 C 式字符串是 char 数组，并且在存储中严格要求以 <code>&#39;\0&#39;</code> 字符作为结尾，即长度总是比字符数多一个</p>
@@ -396,9 +412,8 @@
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "http://remedios14.github.io/2022/03/28/C++/Cpp%E5%9F%BA%E7%A1%80/";
             const title         = "「Cpp基础」";
-            const excerpt       = `复合数据类型在基本的整型、浮点型、字符之外的复合数据类型，包括数组、字符串等
-数组声明如 typeName arrName[arrSize]; ，只有在声明时可以初始化，其后只能通过赋值来操作，例句
-char tlifs[4] &#1...`;
+            const excerpt       = `编辑环境配置及三方库安装
+一般安装第三方库时先使用 MSYS 的命令检索 pacman -Ss keywords 找到之后根据操作系统对应的编译器来选择安装，Windows 下为 mingw64，在其子环境下安装 cmake 使用 p...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -420,7 +435,7 @@ char tlifs[4] &#1...`;
                     <a class="tag-none-link" href="/tags/cpp/" rel="tag">cpp</a>, <a class="tag-none-link" href="/tags/tips/" rel="tag">tips</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-04-08</span>
+                <span>最后编辑：2022-05-21</span>
                 </div>
             </div>
         </footer>
@@ -472,7 +487,7 @@ char tlifs[4] &#1...`;
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphic/">Games-Graphic</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -481,7 +496,7 @@ char tlifs[4] &#1...`;
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/functional/" style="font-size: 0.6em;">functional</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a>
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/functional/" style="font-size: 0.6em;">functional</a> <a href="/tags/games/" style="font-size: 0.6em;">games</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a>
       </div>
   </aside>
 
@@ -492,6 +507,18 @@ char tlifs[4] &#1...`;
   <div class="tab-content">
       <ul class="list-group">
         
+        
+          
+          
+            <a class="list-group-item" href="/2022/05/23/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> Games101-计算机图形学（一）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/04/30/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（3）</a>
+            
+          
         
           
           
@@ -512,17 +539,9 @@ char tlifs[4] &#1...`;
           
         
           
-          
-            <a class="list-group-item" href="/2022/04/11/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%BA%8C%EF%BC%89/"><i class="fa  fa-book"></i> OpenCV简述及接口（二）</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/04/10/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> OpenCV简述及接口（一）</a>
             
-          
-        
           
             
           
