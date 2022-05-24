@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-04-12T04:11:58.000Z">
-<meta property="article:modified_time" content="2022-05-24T07:20:42.484Z">
+<meta property="article:modified_time" content="2022-05-24T11:27:09.815Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="opencv">
@@ -59,6 +59,7 @@
   <!-- 不得不预先加载的一些JS文件 -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  <script id="MathJax-script" <strong>async</strong>src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
   
     <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
   
@@ -166,7 +167,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~6.99K
+                        ~6.97K
                     
                     字
                 </li>
@@ -175,15 +176,15 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1653376842484"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1653391629815"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
             <p>本篇主要摘录 OpenCV 中对 mat 的数学变换</p>
 <h2 id="OpenCV-数学操作"><a href="#OpenCV-数学操作" class="headerlink" title="OpenCV 数学操作"></a>OpenCV 数学操作</h2><h3 id="仿射变换"><a href="#仿射变换" class="headerlink" title="仿射变换"></a>仿射变换</h3><p>仿射变换主要描述的是旋转、缩放、平移的总称，具体的做法是通过一个矩阵和原图片坐标进行计算，得到新的坐标</p>
 <h4 id="图像平移"><a href="#图像平移" class="headerlink" title="图像平移"></a>图像平移</h4><ul>
-<li>warpAffine(src, M, dsize[, flags, borderMode, borderValue]) 执行仿射变换，若希望将原来点 (x, y) 处的像素点移动至 (x + t_x, y + t_y)，实际上可以看作进行以此矩阵乘法<br><img src="/images/OpenCV/affine-translation.png" alt=""><ul>
-<li>M ：上方乘法中的变换矩阵，精度至少是 float32，二维 2 × 3</li>
+<li>warpAffine(src, M, dsize[, flags, borderMode, borderValue]) 执行仿射变换，若希望将原来点 (x, y) 处的像素点移动至 (x + t_x, y + t_y)，实际上可以看作进行以此矩阵乘法<ul>
+<li>M ：变换矩阵，精度至少是 float32，二维 2 × 3</li>
 <li>dsize ：输出图片的大小（注意横纵）</li>
 <li>flag ：与 resize 中的插值算法一致，INTER_…</li>
 <li>mode ：边界外推法标志</li>
@@ -263,12 +264,12 @@
 <li>blur(src, ksize[, dst, anchor, borderType]) 均值滤波，没有位深参数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new_img = cv2.boxFilter(img, -<span class="number">1</span>, (<span class="number">5</span>, <span class="number">5</span>), normalize=<span class="literal">True</span>)</span><br><span class="line">mean_img = cv2.blur(img, (<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;cmp&#x27;</span>, np.hstack((img, new_img, mean_img)))</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="高斯滤波"><a href="#高斯滤波" class="headerlink" title="高斯滤波"></a>高斯滤波</h4><p>使用符合<strong>二维高斯分布</strong>的矩阵滤波器来进行滤波操作(通常取相同的方差且不相关情形)<br><img src="/images/OpenCV/Twice-Gauss.png" alt=""></p>
+<h4 id="高斯滤波"><a href="#高斯滤波" class="headerlink" title="高斯滤波"></a>高斯滤波</h4><p>使用符合<strong>二维高斯分布</strong>的矩阵滤波器来进行滤波操作(通常取相同的方差且不相关情形)</p>
 <p>要使用高斯滤波的重点在于计算符合高斯分布的卷积核（高斯模板）</p>
 <p>通常假定中心点坐标为 (0,0) 并自行选取一个 $\sigma$</p>
 <p>例如对 3 × 3 卷积核取 1.5 做标准差，代入计算得到</p>
-<p><img src="/images/OpenCV/Gauss-Model.png" alt=""></p>
-<p>为了符合卷积核的概率形式通常对计算出的高斯模板归一化</p>
+<p><img src="/images/OpenCV/Gauss-Model-Filter.png" alt=""></p>
+<p>为了符合卷积核的概率形式需要对计算出的高斯模板<strong>归一化</strong></p>
 <h5 id="接口示例"><a href="#接口示例" class="headerlink" title="接口示例"></a>接口示例</h5><ul>
 <li>GaussianBlur(src, ksize, sigmaX[, dst, sigmaY, borderType])<ul>
 <li>ksize 高斯核的大小</li>
@@ -300,10 +301,7 @@
 <h3 id="算子"><a href="#算子" class="headerlink" title="算子"></a>算子</h3><p>主要用于识别图像边缘，边缘是像素值发生跃迁的位置，是图像的显著特征之一；在图像特征提取，对象检测，模式识别等方面都有重要的作用</p>
 <h4 id="Sobel-算子"><a href="#Sobel-算子" class="headerlink" title="Sobel 算子"></a>Sobel 算子</h4><p>对图像求一阶导数：因为图像的灰度值都是离散的数字，sobel 算子采用离散差分算子计算图像像素点亮度值的近似梯度</p>
 <p>为了近似地求出一个像素点处的梯度，使用横纵向两个卷积核扫描得到两个方向上的亮度变化情况，然后综合得到梯度</p>
-<ul>
-<li>水平方向：<br><img src="/images/OpenCV/X-Dir-Grad.png" alt=""></li>
-<li>竖直方向：<br><img src="/images/OpenCV/Y-Dir-Grad.png" alt=""></li>
-</ul>
+<p><img src="/images/OpenCV/Sobel-Grad-Kernel.png" alt=""></p>
 <p>分别卷积扫描（padding=1）后得到两个同大小的新矩阵；对两个分量进行均方求和或者绝对值求和来近似梯度</p>
 <ul>
 <li>Sobel(src, ddepth, dx, dy[, dst, ksize, scale, delta, borderType])<ul>
