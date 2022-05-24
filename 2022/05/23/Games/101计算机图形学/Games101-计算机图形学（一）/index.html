@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-05-23T09:10:11.000Z">
-<meta property="article:modified_time" content="2022-05-23T09:10:11.693Z">
+<meta property="article:modified_time" content="2022-05-24T05:13:40.591Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="games">
 <meta property="article:tag" content="计算机图形学">
@@ -175,7 +175,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1653297011693"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1653369220591"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -202,7 +202,7 @@
 <h2 id="线代-Linear-Algebra"><a href="#线代-Linear-Algebra" class="headerlink" title="线代 Linear Algebra"></a>线代 Linear Algebra</h2><p>基础概念不作赘述</p>
 <ul>
 <li>向量内积（点乘）计算夹角余弦值：两个向量计算得到标量值</li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/minmindianzi/article/details/100056129">向量叉积</a> （cross product）用于构建符合右手坐标系的向量 —— 向量到向量<br><img src="../_pics/CG-Cross-Product.png" alt=""><br>也可以在运算时转换为矩阵<br><img src="../_pics/CG-Dual-Matrix.png" alt=""><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/minmindianzi/article/details/100056129">向量叉积</a> （cross product）用于构建符合右手坐标系的向量 —— 向量到向量<br><img src="../../../_pics/CG-Cross-Product.png" alt=""><br>也可以在运算时转换为矩阵<br><img src="../../../_pics/CG-Dual-Matrix.png" alt=""><ul>
 <li>可用于判断一个点是否在三角形内侧 —— 循环向量对点做叉积判断是否同号</li>
 </ul>
 </li>
@@ -210,7 +210,7 @@
 </ul>
 <h2 id="变换-Transformation"><a href="#变换-Transformation" class="headerlink" title="变换 Transformation"></a>变换 Transformation</h2><p>包括旋转、缩放、切变，都可以用一个变换矩阵左乘原向量得到</p>
 <ul>
-<li>逆时针旋转 θ 角度 <img src="../_pics/CG-Rotation-Matrix.png" alt=""></li>
+<li>逆时针旋转 θ 角度 <img src="../../../_pics/CG-Rotation-Matrix.png" alt=""></li>
 </ul>
 <p>在线性变换基础上加上常数项向量完成平移，但为了保持线性变换的一致性，在原本的坐标上抽象一维常数维构成齐次坐标</p>
 <p>例如原本的</p>
@@ -219,28 +219,28 @@
 <li>点 (x, y) -&gt; (x, y, w) 抽象维 w 通常配合 x、y 缩放至 1</li>
 </ul>
 <p>此时在齐次坐标下的仿射变换可以拥有和线性变换一致的写法</p>
-<p><img src="../_pics/CG-Affine-Homogenous.png" alt=""></p>
+<p><img src="../../../_pics/CG-Affine-Homogenous.png" alt=""></p>
 <h3 id="逆变换"><a href="#逆变换" class="headerlink" title="逆变换"></a>逆变换</h3><p>在已知上方的变换矩阵时，左乘一个逆矩阵即可回归到原来的坐标</p>
 <h3 id="三维变换"><a href="#三维变换" class="headerlink" title="三维变换"></a>三维变换</h3><p>也参考二维向量上对齐次坐标的抽象，构建 (x, y, z, w) 表示点坐标以及 (x, y, z, 0) 表示向量</p>
 <p>通常延坐标轴旋转的变换矩阵可以直接退化成二维平面的旋转来计算；考虑任意的旋转，实际上也是以一个三维向量为轴线进行一定角度的变换，现有计算公式如下（以向量 n 为轴逆时针旋转角度 α）</p>
-<p><img src="../_pics/CG-ThreeD-Rotation.png" alt=""></p>
+<p><img src="../../../_pics/CG-ThreeD-Rotation.png" alt=""></p>
 <h4 id="视图变换-Viewport-Transformation"><a href="#视图变换-Viewport-Transformation" class="headerlink" title="视图变换 Viewport Transformation"></a>视图变换 Viewport Transformation</h4><p>首先通过平移、缩放操作将空间中任意矩形变换到 [-1,1]^3 的正方体区域，然后通过 viewport 变换到屏幕上以像素单位来显示，当确定屏幕的 宽高值 n_x、n_y 之后即可通过简单的先缩放后平移变换完成</p>
-<p><img src="../_pics/CG-Viewport-Transform.png" alt=""></p>
+<p><img src="../../../_pics/CG-Viewport-Transform.png" alt=""></p>
 <p>（上面用 n_x-1 是由于像素从 0 开始计数）</p>
 <h4 id="正交投影变换-Orthographic-Porjection-Transformation"><a href="#正交投影变换-Orthographic-Porjection-Transformation" class="headerlink" title="正交投影变换 Orthographic Porjection Transformation"></a>正交投影变换 Orthographic Porjection Transformation</h4><p>正交投影可以理解为在三维上舍弃掉一维，将较远平面的坐标投影到一个较近平面得到的视图，投影过程中不进行缩放变换</p>
 <p>对空间任意一个长方体，都可以通过先平移再缩放的变换得到单位正方体，具体变换矩阵如下</p>
-<p><img src="../_pics/CG-Orthographic-Projection.png" alt=""></p>
+<p><img src="../../../_pics/CG-Orthographic-Projection.png" alt=""></p>
 <h4 id="相机变换-Camera-Transformation"><a href="#相机变换-Camera-Transformation" class="headerlink" title="相机变换 Camera Transformation"></a>相机变换 Camera Transformation</h4><p>由当前视角所处位置坐标 e 以及其视线向量的正向<br>g 和上方朝向 t 来确定一个 View</p>
 <p>习惯上总是通过变换将摄像视角置于三维空间原点，以 -Z 方向（符合右手系）为视角方向，Y 方向为正上方，因此以坐标 e 为原点重新构建右手系 (u, v, w)</p>
-<p><img src="../_pics/CG-Camera-Coordinates.png" alt=""></p>
+<p><img src="../../../_pics/CG-Camera-Coordinates.png" alt=""></p>
 <p>容易计算得到 (u, v, w) 的向量表示</p>
-<p><img src="../_pics/CG-uvw-Coordinates.png" alt=""></p>
+<p><img src="../../../_pics/CG-uvw-Coordinates.png" alt=""></p>
 <p>要计算将 (u, v, w) 系变换到坐标中心的变换矩阵，只需要考虑其逆变换的变换矩阵然后取逆即可</p>
-<p><img src="../_pics/CG-Camera-Transformation.png" alt=""></p>
+<p><img src="../../../_pics/CG-Camera-Transformation.png" alt=""></p>
 <h4 id="透视投影-Perspective-Projection"><a href="#透视投影-Perspective-Projection" class="headerlink" title="透视投影 Perspective Projection"></a>透视投影 Perspective Projection</h4><p>最常用的一种投影变换，需要确定两个与视线向量垂直的平面，将远平面的点投影到近平面上，由此可得相似性</p>
-<p><img src="../_pics/CG-Perspective-Similarity.png" alt=""></p>
+<p><img src="../../../_pics/CG-Perspective-Similarity.png" alt=""></p>
 <p>在以上的投影操作下，我们可以确保近平面上的点经过变换不发生变化，而远平面上的点经过变换其 z 值不发生变化， 此时假定近平面到视角点的距离为 n ，远平面到视角点的距离为 f ，即容易计算出缩放的变换矩阵</p>
-<p><img src="../_pics/CG-Perspective-Matrix.png" alt=""></p>
+<p><img src="../../../_pics/CG-Perspective-Matrix.png" alt=""></p>
 <p>最终确定的透视变换矩阵即为 $M_{per} = M_{orth}*P$</p>
 <p>即先通过矩阵 P 比例缩放变换然后执行正交投影得到透视变换</p>
 <p>综上，完成一个完整的透视变换：</p>
@@ -256,7 +256,7 @@
 <li>视角到屏幕上边界的仰角大小 <code>θ / 2</code></li>
 </ol>
 <p>最终的画面呈现即空间中的坐标投影到该视域上的结果</p>
-<p><img src="../_pics/CG-Field-of-View-Plane.png" alt=""></p>
+<p><img src="../../../_pics/CG-Field-of-View-Plane.png" alt=""></p>
 <h2 id="光栅化-Rasterization"><a href="#光栅化-Rasterization" class="headerlink" title="光栅化 Rasterization"></a>光栅化 Rasterization</h2><p>光栅 Raster 即德语中的 screen；光栅化即为将物体绘制在屏幕上的过程，其中主要涉及到的计数难点有反走样和 Z-buffering（针对模型前后重叠的显示）</p>
 <p>像素 pixel 为屏幕上的最小单位，通常将其视为网格图中的各个方格，最左下角的顶点为 (0,0) 坐标，而每个像素中心点的坐标都为 ‘.5’</p>
 <h3 id="采样-Sampling"><a href="#采样-Sampling" class="headerlink" title="采样 Sampling"></a>采样 Sampling</h3><p>在光栅化工作时，我们得到的输入通常以 <strong>三角形</strong> 区域来限定色彩（使用三角形能实现渐变等功能），而对于三角形包围的像素格，可以使用采样方法来判断其颜色</p>
@@ -392,7 +392,7 @@
                     <a class="tag-none-link" href="/tags/games/" rel="tag">games</a>, <a class="tag-none-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag">计算机图形学</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-05-23</span>
+                <span>最后编辑：2022-05-24</span>
                 </div>
             </div>
         </footer>
