@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-04-16T09:36:14.000Z">
-<meta property="article:modified_time" content="2022-04-19T09:35:32.602Z">
+<meta property="article:modified_time" content="2022-06-05T08:46:06.189Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="opencv">
@@ -168,7 +168,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        1248
+                        1408
                     
                     字
                 </li>
@@ -177,7 +177,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1650360932602"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1654418766189"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -209,31 +209,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="项目一：信用卡数字识别"><a href="#项目一：信用卡数字识别" class="headerlink" title="项目一：信用卡数字识别"></a>项目一：信用卡数字识别</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>信用卡上的数字可见的都是由一种字体格式写出的，现有十个数字的模板以及一组银行卡的图片，设计输出银行卡编号</p>
-<h4 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h4><ol>
-<li>银行卡图片不一定规整，需要适当的旋转、透视操作来得到水平的一行数字</li>
-<li>存在到期日数字的干扰，可能影响模板匹配</li>
-<li>实际提供的模板中每个数字大小和银行卡大小难以匹配，一般使用轮廓检测然后 resize</li>
-</ol>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="核心处理逻辑"><a href="#核心处理逻辑" class="headerlink" title="核心处理逻辑"></a>核心处理逻辑</h4><ol>
-<li>预处理模板<ol>
-<li>模板图以灰度图形式读取，执行二值化（findContours 仅接受二值图作为输入）</li>
-<li>调用 findContours 和 drawContours 检索和绘制轮廓，找到合适的参数</li>
-<li>对轮廓进行排序（sorted 函数）然后存入字典，以实现数字和矩形区域图片的对应</li>
-</ol>
-</li>
-<li>处理目标图像<ol>
-<li>转为灰度图，通过顶帽、求梯度、闭运算、二值化等操作将合适的轮廓识别出来（目标每段连续的数字组成一个子图）</li>
-<li>辨识后保留可能是数字的轮廓（根据一些尺寸关系确定）</li>
-<li>遍历处理每个轮廓，使用模板去计算比较匹配分数来完成数字识别</li>
-</ol>
-</li>
-</ol>
-<h4 id="功能包装"><a href="#功能包装" class="headerlink" title="功能包装"></a>功能包装</h4><ol>
-<li>图片展示可以包装一个简短的函数，完成 imshow 和关闭窗体的操作</li>
-<li>模板图处理可以内部完成，借助 <code>argparse</code> 模块读取不同信用卡图片的路径来分别处理</li>
-</ol>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># TODO : 提供的项目代码运行起来识别效果不佳，按照核心逻辑重新编写并调整参数比对效果</span></span><br></pre></td></tr></table></figure>
+<h2 id="常用功能组"><a href="#常用功能组" class="headerlink" title="常用功能组"></a>常用功能组</h2><h3 id="前后对比识别"><a href="#前后对比识别" class="headerlink" title="前后对比识别"></a>前后对比识别</h3><p>参考别人完成的聊天窗口识别，当前后发生足够的偏差（有人发出新消息）后再执行，其中对比工作通过计算图像直方图的方差完成，大致代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">histCompare</span>(<span class="params">img1, img2, layer = <span class="number">0</span></span>):</span></span><br><span class="line">    hist1 = cv2.calcHist([img1], [layer], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">    hist2 = cv2.calcHist([img2], [layer], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">    </span><br><span class="line">    h1 = hist1[:, <span class="number">0</span>]</span><br><span class="line">    h2 = hist2[:, <span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line">    res = math.sqrt(reduce(operator.add, </span><br><span class="line">        <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> a, b:(a-b)**<span class="number">2</span>, h1, h2))) / <span class="built_in">len</span>(h1))</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<hr>
+<p>感觉上面的不好阅读，而且使用中没找到合适的阈值用于检测；实际上可以直接利用 numpy 的 array 运算完成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">varCompare</span>(<span class="params">pre, cur, l = <span class="number">0</span></span>):</span></span><br><span class="line">    hist1 = cv2.calcHist([pre], [l], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">    hist2 = cv2.calcHist([cur], [l], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">    </span><br><span class="line">    h1 = hist1[:, <span class="number">0</span>]</span><br><span class="line">    h2 = hist2[:, <span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line">    res = (h2 - h1).var() / <span class="number">256</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
         </div>
         
             <div class="kratos-copyright text-center clearfix">
@@ -326,7 +306,7 @@
                     <a class="tag-none-link" href="/tags/opencv/" rel="tag">opencv</a>, <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>, <a class="tag-none-link" href="/tags/short-cuts/" rel="tag">short-cuts</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-04-19</span>
+                <span>最后编辑：2022-06-05</span>
                 </div>
             </div>
         </footer>
@@ -378,7 +358,7 @@
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphic/">Games-Graphic</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphic/">Games-Graphic</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -387,7 +367,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.67em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/functional/" style="font-size: 0.6em;">functional</a> <a href="/tags/games/" style="font-size: 0.73em;">games</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a>
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/functional/" style="font-size: 0.6em;">functional</a> <a href="/tags/games/" style="font-size: 0.8em;">games</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a>
       </div>
   </aside>
 
@@ -398,6 +378,24 @@
   <div class="tab-content">
       <ul class="list-group">
         
+        
+          
+          
+            <a class="list-group-item" href="/2022/06/04/C++/Cpp%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B/"><i class="fa  fa-book"></i> Cpp环境配置及编译流程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/06/04/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E5%85%AD%EF%BC%89/"><i class="fa  fa-book"></i> Games101-计算机图形学（六）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/06/02/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E4%BA%94%EF%BC%89/"><i class="fa  fa-book"></i> Games101-计算机图形学（五）</a>
+            
+          
         
           
           
@@ -412,23 +410,11 @@
           
         
           
-          
-            <a class="list-group-item" href="/2022/05/28/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E4%BA%8C%EF%BC%89/"><i class="fa  fa-book"></i> Games101-计算机图形学（二）</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/05/23/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> Games101-计算机图形学（一）</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/04/30/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（3）</a>
             
-          
-        
           
             
           

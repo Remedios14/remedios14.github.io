@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-05-31T05:52:31.000Z">
-<meta property="article:modified_time" content="2022-05-31T05:54:54.666Z">
+<meta property="article:modified_time" content="2022-06-01T15:19:15.794Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="games">
 <meta property="article:tag" content="计算机图形学">
@@ -167,7 +167,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~6.97K
+                        ~9.91K
                     
                     字
                 </li>
@@ -176,7 +176,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1653976494666"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1654096755794"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -206,7 +206,7 @@
 \mathbf{p}:(\mathbf{p}-\mathbf{p}')\cdot\mathbf{N}=0 \\
 (\mathbf{o}+t\mathbf{d}-\mathbf{p}')  \cdot\mathbf{N}=0
 \end{align}</script></li>
-<li>而针对三角形求交还有一个更快的方法，借助重心坐标表示来求出重心坐标的三个系数，只要三个系数均为正则交点在三角形内</li>
+<li><strong>Moller-Trumbore</strong> 算法 ：而针对三角形求交还有一个更快的方法，借助重心坐标表示来求出重心坐标的三个系数，只要三个系数均为正则交点在三角形内</li>
 </ul>
 <p><img src="/images/CG/Moller-Trumbore-Algorithm.png" alt=""></p>
 <p>然而实际操作中，模型表面有巨量的三角形，更何况场景中有很多物体，且成像平面也有众多像素点，若逐一运算判断交点效率太低，因此需要加速方法</p>
@@ -223,7 +223,8 @@
 <p>完成划分后，一条光线即沿着树的根节点开始搜索，只要在某个节点处判断光线进入包围盒，就需要检查该节点的子节点，直到到达叶子节点</p>
 <p><strong>注意</strong>：由于 KD-Tree 仍有较多问题，如一个物体可能出现在多个节点处、建树方法并不容易等，因此现代已基本不再使用其来划分</p>
 <ul>
-<li>Bounding Volume Hierarchy (BVH) 层级式地分割物体为两组创建新一级的包围盒<ol>
+<li><p>Bounding Volume Hierarchy (BVH) 层级式地分割物体为两组创建新一级的包围盒</p>
+<ol>
 <li>全部物体划分进一个包围盒，相当于根节点</li>
 <li>递归地将物体集分割成两个子集</li>
 <li>重新计算创建子集的包围盒（可以有重叠）</li>
@@ -234,6 +235,8 @@
 <li>启发式的分割算法：总是选择最长的轴来进行分割；每次分割尽可能等分<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Intersect(Ray ray, BVH node) &#123;</span><br><span class="line">	if (ray misses node.bbox) return;</span><br><span class="line">	if (node is a leaf node) &#123;</span><br><span class="line">		text intersection with all objs;</span><br><span class="line">		return closest intersection;</span><br><span class="line">	&#125;</span><br><span class="line">	hit1 = Intersect(ray, node.child1);</span><br><span class="line">	hit2 = Intersect(ray, node.child2);</span><br><span class="line">	return the closer of hit1, hit2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+</li>
+<li><p>Surface Area Heuristic (SAH) 一个同样非常不错的提升效率算法，自行搜索补充</p>
 </li>
 </ul>
 <h2 id="辐射度量学-Basic-Radiometry"><a href="#辐射度量学-Basic-Radiometry" class="headerlink" title="辐射度量学 Basic Radiometry"></a>辐射度量学 Basic Radiometry</h2><p>相当于为光照建立了一个完整的度量体系和单位，有以下几个新增术语</p>
@@ -260,7 +263,7 @@ E(\mathbf{x})\equiv \frac{d\Phi(\mathbf{x})}{dA}\space [\frac{W}{m^2}][\frac{lm}
 <p><img src="/images/CG/IrradianceVsRadiance.png" alt=""></p>
 <h4 id="双向反射分布函数"><a href="#双向反射分布函数" class="headerlink" title="双向反射分布函数"></a>双向反射分布函数</h4><p>Bidirectional Reflectance Distribution Function；规定了从某个方向 $\omega_i$ 入射的 radiance 经过物体表面反射到某个方向 $\omega_r$ 得到的 radiance 的运算函数，相当于描述了一个材质用于实现着色效果</p>
 <script type="math/tex; mode=display">
-f_r(\omega_i \rightarrow \omega_r) = \frac{dL_r(\omega_r)}{dE_i(\omega_i)}=\frac{dL_r(\omega_r)}{L_i(\omega_i)cos\theta_i d\omega_i} \space [\frac{1}{sr}]</script><p>将所有半球方向的入射光线经过 BRDF 反射到摄像机方向即得到总体反射的效果</p>
+f_r(\omega_i \rightarrow \omega_r) = \frac{dL_r(\omega_r)}{dE_i(\omega_i)}=\frac{dL_r(\omega_r)}{L_i(\omega_i)cos\theta_i d\omega_i} \space [\frac{1}{sr}]</script><p>将所有半球方向的入射光线经过 <strong>BRDF</strong> 反射到摄像机方向即得到总体反射的效果</p>
 <p><img src="/images/CG/Ray-Reflection-Equation.png" alt="光追中的光线反射"></p>
 <p>在此基础上，再考虑环境中其他物体反射到该点的光就会更复杂</p>
 <h4 id="渲染方程-The-Rendering-Equation"><a href="#渲染方程-The-Rendering-Equation" class="headerlink" title="渲染方程 The Rendering Equation"></a>渲染方程 The Rendering Equation</h4><p>在反射的基础上加上物体自身可能辐射的值得到渲染方程，式中的 p 表示着色点（其中为了计算方便几个出入向量 ω 都取向外）：</p>
@@ -285,7 +288,7 @@ L_o(p, \omega_o)=L_e(p,\omega_o)+\int_{\Omega^+} L_i(p,\omega_i)f_r(p,\omega_i,\
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ray_generation(camPos, pixel)</span><br><span class="line">	Uniformly choose N sample positions within the pixel</span><br><span class="line">	pixel_radiance = 0.0</span><br><span class="line">	For each sample in the pixel</span><br><span class="line">		Shoot a ray r(camPos, cam_to_sample)</span><br><span class="line">		if ray r hit the scene at p</span><br><span class="line">			pixel_radiance += 1 / N * shade(p, sample_to_cam)</span><br><span class="line">	Return pixel_radiance</span><br></pre></td></tr></table></figure>
 <ul>
-<li><strong>引入生存概率</strong>：引入一个伯努利分布服从参数 P_RR，在每一步递归中，都从 [0, 1] 中取随机数 ksi，若该值大于 P_RR 则认为光线“消亡”而终止递归，否则将原本的返回值除以 P_RR，此方法具体的返回值期望为 $E(Lo) = P <em> Lo / P + (1 - P) </em> 0.0 = Lo$ 与原值无差异</li>
+<li><strong>引入生存概率</strong>：引入一个伯努利分布服从参数 P_RR，在每一步递归中，都从 [0, 1] 中取随机数 ksi，若该值大于 P_RR 则认为光线“消亡”而终止递归，否则将原本的返回值除以 P_RR，此方法具体的返回值期望为 $E(Lo) = P \times Lo / P + (1 - P) \times 0.0 = Lo$ 与原值无差异</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Manually specify a probability P_RR</span><br><span class="line">shade(p, wo)</span><br><span class="line">	Randomly select ksi in a uniform dist. in [0, 1]</span><br><span class="line">	if (ksi &gt; P_RR) return 0.0;</span><br><span class="line">	</span><br><span class="line">	Randomly choose One direction wi-pdf(w)</span><br><span class="line">	Trace a ray r(p, wi)</span><br><span class="line">	If ray r hit the light</span><br><span class="line">		Return L_i * f_r * cosine / pdf(wi) / P_RR</span><br><span class="line">	Else if ray r hit an object at q</span><br><span class="line">		Return shade(q, -wi) * f_r * cosine / pdf(wi) / P_RR</span><br></pre></td></tr></table></figure>
 <p>至此得到了正确的路径追踪算法</p>
@@ -309,6 +312,13 @@ L_o(p, \omega_o)=L_e(p,\omega_o)+\int_{\Omega^+} L_i(p,\omega_i)f_r(p,\omega_i,\
 <ol>
 <li>空间划分 + 射线与面相交判断</li>
 <li>物体表面着色 + 像素点采样成像</li>
+</ol>
+<h3 id="射线与-AABB-相交判断"><a href="#射线与-AABB-相交判断" class="headerlink" title="射线与 AABB 相交判断"></a>射线与 AABB 相交判断</h3><p>分三个轴向计算进入和离开时间，根据逻辑判断即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Bounds3::IntersectP</span><span class="params">(<span class="keyword">const</span> Ray&amp; ray, <span class="keyword">const</span> Vector3f&amp; invDir, <span class="keyword">const</span> std::array&lt;<span class="keyword">int</span>, <span class="number">3</span>&gt;&amp; dirIsNeg)</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// invDir: ray direction(x,y,z), invDir=(1.0/x,1.0/y,1.0/z), use this because Multiply is faster that Division</span></span><br><span class="line">    <span class="comment">// dirIsNeg: ray direction(x,y,z), dirIsNeg=[int(x&gt;0),int(y&gt;0),int(z&gt;0)], use this to simplify your logic</span></span><br><span class="line">    <span class="keyword">float</span> tEnter = - std::numeric_limits&lt;<span class="keyword">float</span>&gt;::<span class="built_in">infinity</span>();</span><br><span class="line">    <span class="keyword">float</span> tExit = std::numeric_limits&lt;<span class="keyword">float</span>&gt;::<span class="built_in">infinity</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">float</span> <span class="keyword">in_t</span> = (pMin[i] - ray.origin[i]) * invDir[i];</span><br><span class="line">        <span class="keyword">float</span> <span class="keyword">out_t</span> = (pMax[i] - ray.origin[i]) * invDir[i];</span><br><span class="line">        <span class="keyword">if</span> (!dirIsNeg[i]) &#123;</span><br><span class="line">            std::<span class="built_in">swap</span>(<span class="keyword">in_t</span>, <span class="keyword">out_t</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        tEnter = std::<span class="built_in">max</span>(tEnter, <span class="keyword">in_t</span>);</span><br><span class="line">        tExit = std::<span class="built_in">min</span>(tExit, <span class="keyword">out_t</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tEnter &lt; tExit &amp;&amp; tExit &gt;= <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="递归的路径追踪函数"><a href="#递归的路径追踪函数" class="headerlink" title="递归的路径追踪函数"></a>递归的路径追踪函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Vector3f <span class="title">Scene::castRay</span><span class="params">(<span class="keyword">const</span> Ray &amp;ray, <span class="keyword">int</span> depth)</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TO DO Implement Path Tracing Algorithm here</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 先确定与场景交点</span></span><br><span class="line">    Intersection obj_inter = Scene::<span class="built_in">intersect</span>(ray);</span><br><span class="line">    <span class="keyword">if</span> (!obj_inter.happened) <span class="keyword">return</span> <span class="built_in">Vector3f</span>(<span class="number">0.0</span>);</span><br><span class="line">    <span class="comment">// 若直接看到光源就取其光照</span></span><br><span class="line">    <span class="keyword">if</span> (obj_inter.m-&gt;<span class="built_in">hasEmission</span>()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (depth == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> obj_inter.m-&gt;<span class="built_in">getEmission</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 深度 &gt; 0 说明为反射 ray，已经在计算直接光照时纳入</span></span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Vector3f</span>(<span class="number">0.0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 采样光源</span></span><br><span class="line">    Intersection inter;</span><br><span class="line">    <span class="keyword">float</span> pdf_light;</span><br><span class="line">    Scene::<span class="built_in">sampleLight</span>(inter, pdf_light);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义第一次反射计算的各个值</span></span><br><span class="line">    Vector3f wi = ray.direction, wo = <span class="built_in">normalize</span>(inter.coords - obj_inter.coords);</span><br><span class="line">    Vector3f &amp;NN = inter.normal, &amp;N = obj_inter.normal;</span><br><span class="line">    Material *m = obj_inter.m;</span><br><span class="line">    <span class="function">Ray <span class="title">out_ray</span><span class="params">(obj_inter.coords, wo)</span></span>;</span><br><span class="line">    Intersection obj2L = Scene::<span class="built_in">intersect</span>(out_ray);</span><br><span class="line"></span><br><span class="line">    <span class="function">Vector3f <span class="title">L_dir</span><span class="params">(<span class="number">0.0</span>)</span>, <span class="title">L_indir</span><span class="params">(<span class="number">0.0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断反射击中光源，需要有 intersection 并且到光源距离足够近</span></span><br><span class="line">    <span class="keyword">if</span> (obj2L.happened &amp;&amp; (obj2L.coords - inter.coords).<span class="built_in">norm</span>() &lt; <span class="number">1e-2</span>) &#123;</span><br><span class="line">        L_dir = inter.emit * m-&gt;<span class="built_in">eval</span>(wi, wo, N) * <span class="built_in">dotProduct</span>(wo, N) * <span class="built_in">dotProduct</span>(-wo, NN)</span><br><span class="line">         / <span class="built_in">powf</span>((inter.coords - obj_inter.coords).<span class="built_in">norm</span>(), <span class="number">2.0</span>) / pdf_light;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 概率消亡</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">get_random_float</span>() &gt; RussianRoulette) &#123;</span><br><span class="line">        <span class="keyword">return</span> L_dir + L_indir;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Vector3f wd = <span class="built_in">normalize</span>(m-&gt;<span class="built_in">sample</span>(wi, N));</span><br><span class="line">    <span class="function">Ray <span class="title">dif_ray</span><span class="params">(obj_inter.coords, wd)</span></span>;</span><br><span class="line">    Intersection dif_inter = Scene::<span class="built_in">intersect</span>(dif_ray);</span><br><span class="line">    <span class="comment">// 仅考虑反射后非光源</span></span><br><span class="line">    <span class="keyword">if</span> (dif_inter.happened &amp;&amp; !dif_inter.m-&gt;<span class="built_in">hasEmission</span>()) &#123;</span><br><span class="line">        L_indir = Scene::<span class="built_in">castRay</span>(dif_ray, depth + <span class="number">1</span>) * m-&gt;<span class="built_in">eval</span>(wi, wd, N) * <span class="built_in">dotProduct</span>(wd, N) / m-&gt;<span class="built_in">pdf</span>(wi, wd, N) / RussianRoulette;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> L_dir + L_indir;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="作业中犯的错误"><a href="#作业中犯的错误" class="headerlink" title="作业中犯的错误"></a>作业中犯的错误</h3><ol>
+<li>借用算法判断射线是否相交三角形时，叉乘写成了点乘</li>
+<li>BVH 到有相交的叶子节点忘记写 return</li>
 </ol>
 
         </div>
@@ -401,7 +411,7 @@ L_o(p, \omega_o)=L_e(p,\omega_o)+\int_{\Omega^+} L_i(p,\omega_i)f_r(p,\omega_i,\
                     <a class="tag-none-link" href="/tags/games/" rel="tag">games</a>, <a class="tag-none-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag">计算机图形学</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-05-31</span>
+                <span>最后编辑：2022-06-01</span>
                 </div>
             </div>
         </footer>
@@ -413,6 +423,10 @@ L_o(p, \omega_o)=L_e(p,\omega_o)+\int_{\Omega^+} L_i(p,\omega_i)f_r(p,\omega_i,\
                 <a title=" Games101-计算机图形学（三）" href="/2022/05/29/Games/101计算机图形学/Games101-计算机图形学（三）/">&lt; 上一篇</a>
             </div>
             
+            
+            <div class="nav-next clearfix">
+                <a title=" Games101-计算机图形学（五）" href="/2022/06/02/Games/101计算机图形学/Games101-计算机图形学（五）/">下一篇 &gt;</a>
+            </div>
             
         </nav>
     
@@ -449,7 +463,7 @@ L_o(p, \omega_o)=L_e(p,\omega_o)+\int_{\Omega^+} L_i(p,\omega_i)f_r(p,\omega_i,\
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphic/">Games-Graphic</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphic/">Games-Graphic</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -458,7 +472,7 @@ L_o(p, \omega_o)=L_e(p,\omega_o)+\int_{\Omega^+} L_i(p,\omega_i)f_r(p,\omega_i,\
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.67em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/functional/" style="font-size: 0.6em;">functional</a> <a href="/tags/games/" style="font-size: 0.73em;">games</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a>
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.7em;">Pre-Process</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/functional/" style="font-size: 0.6em;">functional</a> <a href="/tags/games/" style="font-size: 0.8em;">games</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a>
       </div>
   </aside>
 
@@ -469,6 +483,24 @@ L_o(p, \omega_o)=L_e(p,\omega_o)+\int_{\Omega^+} L_i(p,\omega_i)f_r(p,\omega_i,\
   <div class="tab-content">
       <ul class="list-group">
         
+        
+          
+          
+            <a class="list-group-item" href="/2022/06/04/C++/Cpp%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B/"><i class="fa  fa-book"></i> Cpp环境配置及编译流程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/06/04/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E5%85%AD%EF%BC%89/"><i class="fa  fa-book"></i> Games101-计算机图形学（六）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/06/02/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E4%BA%94%EF%BC%89/"><i class="fa  fa-book"></i> Games101-计算机图形学（五）</a>
+            
+          
         
           
           
@@ -483,23 +515,11 @@ L_o(p, \omega_o)=L_e(p,\omega_o)+\int_{\Omega^+} L_i(p,\omega_i)f_r(p,\omega_i,\
           
         
           
-          
-            <a class="list-group-item" href="/2022/05/28/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E4%BA%8C%EF%BC%89/"><i class="fa  fa-book"></i> Games101-计算机图形学（二）</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/05/23/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> Games101-计算机图形学（一）</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2022/04/30/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/"><i class="fa  fa-book"></i> unity游戏开发（3）</a>
             
-          
-        
           
             
           
