@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
 <meta property="article:published_time" content="2022-04-12T04:11:58.000Z">
-<meta property="article:modified_time" content="2022-06-06T10:04:01.055Z">
+<meta property="article:modified_time" content="2022-07-07T14:29:12.928Z">
 <meta property="article:author" content="Mikyi">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="opencv">
@@ -167,7 +167,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~6.94K
+                        ~6.73K
                     
                     字
                 </li>
@@ -176,7 +176,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1654509841055"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1657204152928"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -305,7 +305,52 @@
 <p>分别卷积扫描（padding=1）后得到两个同大小的新矩阵；对两个分量进行均方求和或者绝对值求和来近似梯度</p>
 <ul>
 <li>Sobel(src, ddepth, dx, dy[, dst, ksize, scale, delta, borderType])<ul>
-<li>ksize 设置为 -1 就得到 Scharr 算子<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">dx = cv2.Sobel(img, -<span class="number">1</span>, dx=<span class="number">1</span>, dy=<span class="number">0</span>, ksize=<span class="number">3</span>)</span><br><span class="line">dy = cv2.Sobel(img, -<span class="number">1</span>, dx=<span class="number">0</span>, dy=<span class="number">1</span>, ksize=<span class="number">3</span>)</span><br><span class="line">sm_grad = cv2.addWeighted(dx, <span class="number">0.5</span>, dy, <span class="number">0.5</span>, gamma=<span class="number">0</span>)</span><br><span class="line">sq_grad = (dx ** <span class="number">2</span> + dy ** <span class="number">2</span>) ** <span class="number">0.5</span> <span class="comment"># 貌似这个运算改变了数据类型</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;cmp&#x27;</span>, np.hstack((img, dx, dy)))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;grad&#x27;</span>, np.hstack((sm_grad, sq_grad)))</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### Scharr 算子</span></span><br><span class="line"></span><br><span class="line">当内核大小为 <span class="number">3</span> 时，Sobel 算子误差较大；Scharr 算子针对 <span class="number">3</span> 大小做了优化，使用了不同的 kernel（水平如下，纵向类似）</span><br><span class="line"></span><br><span class="line">\[\[-<span class="number">3</span>, <span class="number">0</span>, +<span class="number">3</span>],</span><br><span class="line">\[-<span class="number">10</span>, <span class="number">0</span>, +<span class="number">10</span>],</span><br><span class="line">\[-<span class="number">3</span>, <span class="number">0</span>, +<span class="number">3</span>]]</span><br><span class="line"></span><br><span class="line">- Scharr(src, ddepth, dx, dy\[, dst, scale, delta, borderType]) 不允许修改卷积核大小，仅允许 <span class="number">3</span> × <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#### 拉普拉斯算子</span></span><br><span class="line"></span><br><span class="line">寻找二阶导数为 <span class="number">0</span> 的位置判断为边缘（但二阶导为 <span class="number">0</span> 也可能是噪声点，可以之后结合高斯滤波处理）</span><br><span class="line"></span><br><span class="line">- 拉普拉斯算子求导（卷积核为左阵，用它去点乘感受野）</span><br><span class="line">![](/images/OpenCV/Laplace-Twice-grad.png)</span><br><span class="line"></span><br><span class="line">- Laplacian(src, ddepth\[, dst, ksize, scale, delta, borderType]) 同时求两个方向的边缘</span><br><span class="line">	- 对噪声敏感，一般需要结合去噪的滤波算法</span><br><span class="line"></span><br><span class="line"><span class="comment">### 边缘检测 Canny</span></span><br><span class="line"></span><br><span class="line">- 由 John F. Canny 于 <span class="number">1986</span> 年开发的多级边缘检测算法，被认为是最优的；边缘检测的三个主要评价标准：</span><br><span class="line">	- 低错误率：标识出尽可能多的实际边缘，同时尽可能的减少噪声产生</span><br><span class="line">	- 高定位性：标识出的边缘要与图像中的实际边缘尽可能接近</span><br><span class="line">	- 最小响应：图像中的边缘只能标识一次</span><br><span class="line">- 执行算法的一般步骤</span><br><span class="line">	<span class="number">1.</span> 使用高斯滤波器，以平滑图像，滤除噪声</span><br><span class="line">	<span class="number">2.</span> 计算图像中每个像素点的梯度强度和方向：对平滑后的图像采用 sobel 算子计算梯度和方向</span><br><span class="line">		- $G = \sqrt &#123;G^2_x+G^2_y&#125;$ 为了方便一般可用绝对值</span><br><span class="line">		- $\theta = arctan(\frac&#123;G_y&#125;&#123;G_x&#125;)$</span><br><span class="line">		- 梯度方向被归为四类：竖直，水平，和两个对角线方向</span><br><span class="line">	<span class="number">3.</span> 应用非极大值（Non-Maximum Suppression）抑制，以消除边缘检测带来的杂散响应：扫描所有计算后的像素点，检查该点是否是其梯度方向（分解成四种）上的极大值，若是则保留到下一阶段，若不是则抑制（置为<span class="number">0</span>）</span><br><span class="line">	<span class="number">4.</span> 应用双阈值（Double-Threshold）检测来确定真实的和潜在的边缘：设置上下阈值 maxVal 和 minVal，大于上阈值必定为边缘点，小于下阈值必定非边缘，范围内的点根据连通性归类（是否与边缘点相连通）</span><br><span class="line">	<span class="number">5.</span> 通过抑制孤立的弱边缘最终完成边缘检测</span><br><span class="line"></span><br><span class="line">- Canny(image, threshold1, threshold2\[, edges, apertureSize, L2gradient]) 调用 Canny 算法进行边缘检测</span><br><span class="line">	- 两个阈值依次为 minVal 和 maxVal</span><br><span class="line">	- apertureSize 标识过程中 Sobel 算子的核大小</span><br><span class="line">	- L2gradient 表示计算梯度方法，默认 <span class="literal">False</span> 使用绝对值和</span><br><span class="line">```python</span><br><span class="line">cny_img = cv2.Canny(img, <span class="number">100</span>, <span class="number">200</span>) <span class="comment"># 会得到仅二维的结果</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;org&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;grad&#x27;</span>, cny_img)</span><br></pre></td></tr></table></figure>
+<li>ksize 设置为 -1 就得到 Scharr 算子<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dx = cv2.Sobel(img, -<span class="number">1</span>, dx=<span class="number">1</span>, dy=<span class="number">0</span>, ksize=<span class="number">3</span>)</span><br><span class="line">dy = cv2.Sobel(img, -<span class="number">1</span>, dx=<span class="number">0</span>, dy=<span class="number">1</span>, ksize=<span class="number">3</span>)</span><br><span class="line">sm_grad = cv2.addWeighted(dx, <span class="number">0.5</span>, dy, <span class="number">0.5</span>, gamma=<span class="number">0</span>)</span><br><span class="line">sq_grad = (dx ** <span class="number">2</span> + dy ** <span class="number">2</span>) ** <span class="number">0.5</span> <span class="comment"># 貌似这个运算改变了数据类型</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;cmp&#x27;</span>, np.hstack((img, dx, dy)))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;grad&#x27;</span>, np.hstack((sm_grad, sq_grad)))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Scharr-算子"><a href="#Scharr-算子" class="headerlink" title="Scharr 算子"></a>Scharr 算子</h4><p>当内核大小为 3 时，Sobel 算子误差较大；Scharr 算子针对 3 大小做了优化，使用了不同的 kernel（水平如下，纵向类似）</p>
+<p>[[-3, 0, +3],<br>[-10, 0, +10],<br>[-3, 0, +3]]</p>
+<ul>
+<li>Scharr(src, ddepth, dx, dy[, dst, scale, delta, borderType]) 不允许修改卷积核大小，仅允许 3 × 3</li>
+</ul>
+<h4 id="拉普拉斯算子"><a href="#拉普拉斯算子" class="headerlink" title="拉普拉斯算子"></a>拉普拉斯算子</h4><p>寻找二阶导数为 0 的位置判断为边缘（但二阶导为 0 也可能是噪声点，可以之后结合高斯滤波处理）</p>
+<ul>
+<li><p>拉普拉斯算子求导（卷积核为左阵，用它去点乘感受野）<br><img src="/images/OpenCV/Laplace-Twice-grad.png" alt=""></p>
+</li>
+<li><p>Laplacian(src, ddepth[, dst, ksize, scale, delta, borderType]) 同时求两个方向的边缘</p>
+<ul>
+<li>对噪声敏感，一般需要结合去噪的滤波算法</li>
+</ul>
+</li>
+</ul>
+<h3 id="边缘检测-Canny"><a href="#边缘检测-Canny" class="headerlink" title="边缘检测 Canny"></a>边缘检测 Canny</h3><ul>
+<li>由 John F. Canny 于 1986 年开发的多级边缘检测算法，被认为是最优的；边缘检测的三个主要评价标准：<ul>
+<li>低错误率：标识出尽可能多的实际边缘，同时尽可能的减少噪声产生</li>
+<li>高定位性：标识出的边缘要与图像中的实际边缘尽可能接近</li>
+<li>最小响应：图像中的边缘只能标识一次</li>
+</ul>
+</li>
+<li><p>执行算法的一般步骤</p>
+<ol>
+<li>使用高斯滤波器，以平滑图像，滤除噪声</li>
+<li>计算图像中每个像素点的梯度强度和方向：对平滑后的图像采用 sobel 算子计算梯度和方向<ul>
+<li>$G = \sqrt {G^2_x+G^2_y}$ 为了方便一般可用绝对值</li>
+<li>$\theta = arctan(\frac{G_y}{G_x})$</li>
+<li>梯度方向被归为四类：竖直，水平，和两个对角线方向</li>
+</ul>
+</li>
+<li>应用非极大值（Non-Maximum Suppression）抑制，以消除边缘检测带来的杂散响应：扫描所有计算后的像素点，检查该点是否是其梯度方向（分解成四种）上的极大值，若是则保留到下一阶段，若不是则抑制（置为0）</li>
+<li>应用双阈值（Double-Threshold）检测来确定真实的和潜在的边缘：设置上下阈值 maxVal 和 minVal，大于上阈值必定为边缘点，小于下阈值必定非边缘，范围内的点根据连通性归类（是否与边缘点相连通）</li>
+<li>通过抑制孤立的弱边缘最终完成边缘检测</li>
+</ol>
+</li>
+<li><p>Canny(image, threshold1, threshold2[, edges, apertureSize, L2gradient]) 调用 Canny 算法进行边缘检测</p>
+<ul>
+<li>两个阈值依次为 minVal 和 maxVal</li>
+<li>apertureSize 标识过程中 Sobel 算子的核大小</li>
+<li>L2gradient 表示计算梯度方法，默认 False 使用绝对值和<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cny_img = cv2.Canny(img, <span class="number">100</span>, <span class="number">200</span>) <span class="comment"># 会得到仅二维的结果</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;org&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;grad&#x27;</span>, cny_img)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -446,7 +491,7 @@ warpAffine(src, M,...`;
                     <a class="tag-none-link" href="/tags/opencv/" rel="tag">opencv</a>, <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-06-06</span>
+                <span>最后编辑：2022-07-07</span>
                 </div>
             </div>
         </footer>
