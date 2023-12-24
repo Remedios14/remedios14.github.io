@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.webp">
+  <title>Games101-计算机图形学（四） | Mikyi喵喵呜~</title>
+  <meta name="author" content="Mikyi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="games, 计算机图形学" />
+  
+  <meta name="description" content="博客图片及学习路径来源 Gamse 101课程，在此记录以方便个人查阅为主，强烈建议自行观看学习 光线追踪是类比光栅化的另一种成像方式，主要为了解决光栅化的问题：软阴影、光线的多次反射效果；其实现效果比光栅化更佳，但相应的效率更低 在图形学中几个关于光线的假设（非现实物理）：  光线仅直线运动 光线交叉时不会互相影响 光线从光源处运动到视野点（光路可逆）  回顾光栅化模型中的阴影生成方法 —— 由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Games101-计算机图形学（四）">
+<meta property="og:url" content="http://remedios14.github.io/2022/05/31/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E5%9B%9B%EF%BC%89/index.html">
+<meta property="og:site_name" content="Mikyi喵喵呜~">
+<meta property="og:description" content="博客图片及学习路径来源 Gamse 101课程，在此记录以方便个人查阅为主，强烈建议自行观看学习 光线追踪是类比光栅化的另一种成像方式，主要为了解决光栅化的问题：软阴影、光线的多次反射效果；其实现效果比光栅化更佳，但相应的效率更低 在图形学中几个关于光线的假设（非现实物理）：  光线仅直线运动 光线交叉时不会互相影响 光线从光源处运动到视野点（光路可逆）  回顾光栅化模型中的阴影生成方法 —— 由">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
+<meta property="article:published_time" content="2022-05-31T05:52:31.000Z">
+<meta property="article:modified_time" content="2022-06-26T15:19:38.000Z">
+<meta property="article:author" content="Mikyi">
+<meta property="article:tag" content="games">
+<meta property="article:tag" content="计算机图形学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  <script id="MathJax-script" <strong>async</strong>src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Mikyi喵喵呜~" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Mikyi喵喵呜~</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Mikyi喵喵呜~</h2> <br />
+                        <span>So we beat on, boats against the current, borne back ceaselessly into the past.</span>
+                        <!--<span class="typeWriter" data-end="3000" data-text='["So we beat on, boats against the current, borne back ceaselessly into the past.", "我们奋力前行,小舟逆水而上,不断地被浪潮推回到过去。", "Aureliano, está lloviendo en Macondo.", "演者はセリフの傀儡だ"]'></span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">Games101-计算机图形学（四）</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-05-31</li>
+                <li><i class="fa fa-user"></i> 作者 Mikyi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~9.91K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1656256778000"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <p><strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1X7411F744?p=1&amp;spm_id_from=pageDriver">博客图片及学习路径来源 Gamse 101课程，在此记录以方便个人查阅为主，强烈建议自行观看学习</a></strong></p>
+<p>光线追踪是类比光栅化的另一种成像方式，主要为了解决光栅化的问题：软阴影、光线的多次反射效果；其实现效果比光栅化更佳，但相应的效率更低</p>
+<p>在图形学中几个关于光线的假设（非现实物理）：</p>
+<ol>
+<li>光线仅直线运动</li>
+<li>光线交叉时不会互相影响</li>
+<li>光线从光源处运动到视野点（光路可逆）</li>
+</ol>
+<p>回顾光栅化模型中的阴影生成方法 —— 由点光源确定可见点的深度，然后对相机可见点逆投射去检查是否有阴影 —— 光线追踪则从视野点穿过成像平面得到可见点，然后去检查该点对光源的可见性，以此来确定着色</p>
+<h2 id="Whitted-Style-Ray-Tracing"><a href="#Whitted-Style-Ray-Tracing" class="headerlink" title="Whitted-Style Ray Tracing"></a>Whitted-Style Ray Tracing</h2><p>一个现代使用的递归式光线追踪方法，视线穿过物体时若可以折射则执行之，最终将所有同一条视线的可见点的着色效果累加得到成像平面上的像素点效果</p>
+<p><img src="/images/CG/Whitted-Style-Ray-Tracing.png" alt=""></p>
+<p>在此模型下有几个关键的技术问题要解决</p>
+<h3 id="光线与物体的交点"><a href="#光线与物体的交点" class="headerlink" title="光线与物体的交点"></a>光线与物体的交点</h3><p>数学上认为光线是一条射线，从光源处出发，因此其表达式写为</p>
+<script type="math/tex; mode=display">
+\mathbf{r} (t)=\mathbf{o} + t\mathbf{d} , \space 0 \leq t \lt \infty</script><p>考虑光线与不同的物体交点的计算：</p>
+<ul>
+<li>球面：即到达某个点 c 的距离为 R，将光线上点的表达式代入即可得到方程来求解 t；根据解的个数判断光线与球的相交模式<script type="math/tex; mode=display">
+\mathbf{d} \cdot \mathbf{d} *t^2 + 2(\mathbf{o}-\mathbf{c})\cdot \mathbf{d}*t + (\mathbf{o}-\mathbf{c})\cdot(\mathbf{o}-\mathbf{c})-\mathbf{R}^2=0</script><ul>
+<li>一般性的隐式表面都可以通过表达式求解来得到交点的 t</li>
+</ul>
+</li>
+<li>显式表面，转为判断光线和三角形求交，进而先转为光线对平面求交，然后判断是否在三角形内，而一个显式平面可以由一个法向量 N 和平面上任意一个点 p’ 确定，最终相应的表达式及求解的方程为<script type="math/tex; mode=display">
+\begin{align} 
+\mathbf{p}:(\mathbf{p}-\mathbf{p}')\cdot\mathbf{N}=0 \\
+(\mathbf{o}+t\mathbf{d}-\mathbf{p}')  \cdot\mathbf{N}=0
+\end{align}</script></li>
+<li><strong>Moller-Trumbore</strong> 算法 ：而针对三角形求交还有一个更快的方法，借助重心坐标表示来求出重心坐标的三个系数，只要三个系数均为正则交点在三角形内</li>
+</ul>
+<p><img src="/images/CG/Moller-Trumbore-Algorithm.png" alt=""></p>
+<p>然而实际操作中，模型表面有巨量的三角形，更何况场景中有很多物体，且成像平面也有众多像素点，若逐一运算判断交点效率太低，因此需要加速方法</p>
+<h3 id="Acceleration-Ray-Surface-Intersection"><a href="#Acceleration-Ray-Surface-Intersection" class="headerlink" title="Acceleration Ray-Surface Intersection"></a>Acceleration Ray-Surface Intersection</h3><p>考虑一个三角形的包围盒，通常取用轴对齐的长方体来包围，当光线不与长方体相交时，显然不会与三角形相交</p>
+<ul>
+<li>轴对齐包围盒 ：Axis-Aligned Bounding Box 即每个边都和一个轴共线构成的长方体包围盒</li>
+</ul>
+<p>为了判断光线是否进入包围盒，先将包围盒视为三组对立平行平面，则每一组平面都可以很容易计算出进入和离开的 t （直觉上可以看作时间），当最大的进入时间小于最小的离开时间即可知光线进入包围盒，当离开时间有负值则不可能进入包围盒</p>
+<h4 id="空间划分"><a href="#空间划分" class="headerlink" title="空间划分"></a>空间划分</h4><p>既然使用 AABB 能很方便地判断光线是否进入，那很自然地会想到用更多的包围盒来跟随一条光线，只需要处理光线经过的包围盒，判断其内部是否有光物相交；基于此想法先产生了对空间均等划分的思想，为了平衡效率在三维上经验性地取 <code>物体数\*27</code> 的均等划分</p>
+<ul>
+<li>KD-Tree ：均等化分又有一个问题，即比较多的包围盒与物体完全不相交，因此后续引入了 KD-树 来划分（三维即三个轴平面轮流循环划分）</li>
+</ul>
+<p><img src="/images/CG/Spatial-Partitioning-Examples.png" alt=""></p>
+<p>完成划分后，一条光线即沿着树的根节点开始搜索，只要在某个节点处判断光线进入包围盒，就需要检查该节点的子节点，直到到达叶子节点</p>
+<p><strong>注意</strong>：由于 KD-Tree 仍有较多问题，如一个物体可能出现在多个节点处、建树方法并不容易等，因此现代已基本不再使用其来划分</p>
+<ul>
+<li><p>Bounding Volume Hierarchy (BVH) 层级式地分割物体为两组创建新一级的包围盒</p>
+<ol>
+<li>全部物体划分进一个包围盒，相当于根节点</li>
+<li>递归地将物体集分割成两个子集</li>
+<li>重新计算创建子集的包围盒（可以有重叠）</li>
+<li>必要时停止，通常是每个子集包含的物体个数小于阈值时</li>
+<li>将所有物体储存在树结构的叶子节点</li>
+</ol>
+<ul>
+<li>启发式的分割算法：总是选择最长的轴来进行分割；每次分割尽可能等分<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Intersect(Ray ray, BVH node) &#123;</span><br><span class="line">	if (ray misses node.bbox) return;</span><br><span class="line">	if (node is a leaf node) &#123;</span><br><span class="line">		text intersection with all objs;</span><br><span class="line">		return closest intersection;</span><br><span class="line">	&#125;</span><br><span class="line">	hit1 = Intersect(ray, node.child1);</span><br><span class="line">	hit2 = Intersect(ray, node.child2);</span><br><span class="line">	return the closer of hit1, hit2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Surface Area Heuristic (SAH) 一个同样非常不错的提升效率算法，自行搜索补充</p>
+</li>
+</ul>
+<h2 id="辐射度量学-Basic-Radiometry"><a href="#辐射度量学-Basic-Radiometry" class="headerlink" title="辐射度量学 Basic Radiometry"></a>辐射度量学 Basic Radiometry</h2><p>相当于为光照建立了一个完整的度量体系和单位，有以下几个新增术语</p>
+<p>Radiant flux，intensity，irradiance，radiance</p>
+<p>并给出一个物理上合理的计算逻辑</p>
+<h3 id="度量概念"><a href="#度量概念" class="headerlink" title="度量概念"></a>度量概念</h3><ul>
+<li>Radiant Energy and Flux ：辐射的能量以 <strong>焦耳 Joule</strong> 为单位，flux 可以理解为<strong>通量</strong>或功率，表示单位时间内产生、反射、传输或接收的能量，其度量和单位如下 ‘瓦特或流明 luminous’<script type="math/tex; mode=display">
+\Phi \equiv \frac{dQ}{dt}\space[W=Watt][lm=lumen]^*</script></li>
+<li>Intensity ：衡量单位立体角范围内发散出的功率，由于空间中光源向所有方向都均匀发射，规定了一个立体角 solid angle 作为角度单位，公式如下 <script type="math/tex; mode=display">
+I(\omega )\equiv \frac{d\Phi}{d\omega} \space[\frac{W}{sr}][\frac{lm}{sr}=cd=candela]</script><ul>
+<li>立体角类比二维中弧度的确定，其定义式表达式为 $\Omega=\frac{A}{r^2}$ ，即球面上的区域面积除以半径的平方；一个完全发散的立体角大小为 4π steradians</li>
+<li>考虑球面坐标系，使用两个角度 θ 和 φ 分别表示和 y 轴正向及 z 轴正向的夹角，由此计算出单位立体角 $d\omega=sin\theta \space d\theta \space d\phi$</li>
+<li>Intensity 最终即为总功率 Φ 除以 4π<br><img src="/images/CG/Differential-Solid-Angles.png" alt="微分立体角"></li>
+</ul>
+</li>
+<li>Irradiance ：衡量光落到单位面积的表面上的功率，其中功率的具体大小根据方向需要转换成与表面垂直的分量（回顾 Lambert’s cosine law），面积取平方米为单位，得到公式如下<script type="math/tex; mode=display">
+E(\mathbf{x})\equiv \frac{d\Phi(\mathbf{x})}{dA}\space [\frac{W}{m^2}][\frac{lm}{m^2}=lux]</script><ul>
+<li>回顾着色模型，实际上随距离衰减的是单位面积的 irradiance</li>
+</ul>
+</li>
+<li>Radiance ：衡量光沿着一条射线运动的强度；the power emitted … by a surface, per unit solid angle, per projected unit area；大致理解为通过单位面积表面的光线向单位立体角放出的功率<br><img src="/images/CG/Radiance-Defination-Formula.png" alt="Radiance 表达式"></li>
+</ul>
+<p>理解上可以参考下图，即将 Radiance 理解为 Irradiance 在半球体上各个单位立体角上的分解；或者反之理解为积分</p>
+<p><img src="/images/CG/IrradianceVsRadiance.png" alt=""></p>
+<h4 id="双向反射分布函数"><a href="#双向反射分布函数" class="headerlink" title="双向反射分布函数"></a>双向反射分布函数</h4><p>Bidirectional Reflectance Distribution Function；规定了从某个方向 $\omega_i$ 入射的 radiance 经过物体表面反射到某个方向 $\omega_r$ 得到的 radiance 的运算函数，相当于描述了一个材质用于实现着色效果</p>
+<script type="math/tex; mode=display">
+f_r(\omega_i \rightarrow \omega_r) = \frac{dL_r(\omega_r)}{dE_i(\omega_i)}=\frac{dL_r(\omega_r)}{L_i(\omega_i)cos\theta_i d\omega_i} \space [\frac{1}{sr}]</script><p>将所有半球方向的入射光线经过 <strong>BRDF</strong> 反射到摄像机方向即得到总体反射的效果</p>
+<p><img src="/images/CG/Ray-Reflection-Equation.png" alt="光追中的光线反射"></p>
+<p>在此基础上，再考虑环境中其他物体反射到该点的光就会更复杂</p>
+<h4 id="渲染方程-The-Rendering-Equation"><a href="#渲染方程-The-Rendering-Equation" class="headerlink" title="渲染方程 The Rendering Equation"></a>渲染方程 The Rendering Equation</h4><p>在反射的基础上加上物体自身可能辐射的值得到渲染方程，式中的 p 表示着色点（其中为了计算方便几个出入向量 ω 都取向外）：</p>
+<script type="math/tex; mode=display">
+L_o(p, \omega_o)=L_e(p,\omega_o)+\int_{\Omega^+} L_i(p,\omega_i)f_r(p,\omega_i,\omega_o)(n\cdot \omega_i)d\omega_i</script><p>当递归地考虑所有物体表面的反射时，将上方等式的积分部分近似地写成算子形式，经过数学上移项以及后续的展开得到<strong>全局光照</strong>的表达式</p>
+<p><img src="/images/CG/Global-Light-Equation.png" alt="全局光照效果和光栅化部分"></p>
+<p>表达式将光照的视觉效果按照光线的反射次数分成了无穷项，当考虑所有项时即为全局光照效果，仅直接光照和单次弹射即为光栅化的原理</p>
+<h4 id="蒙特卡洛积分-Monte-Carlo-Integral"><a href="#蒙特卡洛积分-Monte-Carlo-Integral" class="headerlink" title="蒙特卡洛积分 Monte Carlo Integral"></a>蒙特卡洛积分 Monte Carlo Integral</h4><p>实现渲染方程的展开和求解的方法</p>
+<p>首先简单介绍<strong>蒙特卡洛积分</strong>：</p>
+<ol>
+<li>对于一个要求积分的函数 f(x) 及片段 [a, b]</li>
+<li>引入积分域上的独立同分布随机变量 $X_i \sim p(x)$</li>
+<li>近似的蒙特卡洛估计 $\int f(x)dx = F<em>N = \frac{1}{N}\sum^N</em>{i=1}\frac{f(X_i)}{p(X_i)}$</li>
+</ol>
+<h3 id="路径追踪-Path-Tracing"><a href="#路径追踪-Path-Tracing" class="headerlink" title="路径追踪 Path Tracing"></a>路径追踪 Path Tracing</h3><p>回顾 Whitted-Style 光线追踪，其没有实现光线在多个表面的重复漫反射效果，很多实现结果不符合现实，而渲染方程则能符合实际物理，其求解有两个关键点：1. 在半球面上积分；2. 递归地执行；为此借助蒙特卡洛积分方法</p>
+<p>考虑 “反射等式” 部分，其为半球面上的积分，引入蒙特卡洛积分方法，选取半球面上的均匀分布 $F(\omega_i)=\frac{1}{2\pi}$，则将积分式转为求和式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">shade(p, wo)</span><br><span class="line">	Randomly choose one directions wi-pdf</span><br><span class="line">	Trace a ray r(p, wi)</span><br><span class="line">	if ray r hit the light</span><br><span class="line">		Return L_i * f_r * cosine / pdf(wi)</span><br><span class="line">	# 递归部分，若 wi 角度指向其他物体则考虑其反射光</span><br><span class="line">	Else if ray r hit an object at q</span><br><span class="line">		Return shade(q, -wi) * f_r * cosine / pdf(wi)</span><br></pre></td></tr></table></figure>
+<p>上述伪代码会轻易地因 N 次采样而指数爆炸，因此取 <strong>N=1</strong> 并在条件判断后直接 return 相应计算结果；仅执行一次采样即变成了对单条光线的<strong>路径追踪</strong></p>
+<p>上述伪代码的递归仍然有两个问题：1. 单次采样方差较大；2. 递归没有重点； 各自的解决方法如下</p>
+<ul>
+<li><strong>像素点上采样</strong>：然而对积分的单次采样计算显然是不太理想的，会产生较大的方差；因此多次采样的工作转到像素点上 —— 因为最终在像素点上成像，我们在像素点上采样 N 个点并以相机到样本点的路径追踪光线，将追踪结果综合起来得到该像素点的成像结果</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ray_generation(camPos, pixel)</span><br><span class="line">	Uniformly choose N sample positions within the pixel</span><br><span class="line">	pixel_radiance = 0.0</span><br><span class="line">	For each sample in the pixel</span><br><span class="line">		Shoot a ray r(camPos, cam_to_sample)</span><br><span class="line">		if ray r hit the scene at p</span><br><span class="line">			pixel_radiance += 1 / N * shade(p, sample_to_cam)</span><br><span class="line">	Return pixel_radiance</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>引入生存概率</strong>：引入一个伯努利分布服从参数 P_RR，在每一步递归中，都从 [0, 1] 中取随机数 ksi，若该值大于 P_RR 则认为光线“消亡”而终止递归，否则将原本的返回值除以 P_RR，此方法具体的返回值期望为 $E(Lo) = P \times Lo / P + (1 - P) \times 0.0 = Lo$ 与原值无差异</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Manually specify a probability P_RR</span><br><span class="line">shade(p, wo)</span><br><span class="line">	Randomly select ksi in a uniform dist. in [0, 1]</span><br><span class="line">	if (ksi &gt; P_RR) return 0.0;</span><br><span class="line">	</span><br><span class="line">	Randomly choose One direction wi-pdf(w)</span><br><span class="line">	Trace a ray r(p, wi)</span><br><span class="line">	If ray r hit the light</span><br><span class="line">		Return L_i * f_r * cosine / pdf(wi) / P_RR</span><br><span class="line">	Else if ray r hit an object at q</span><br><span class="line">		Return shade(q, -wi) * f_r * cosine / pdf(wi) / P_RR</span><br></pre></td></tr></table></figure>
+<p>至此得到了正确的路径追踪算法</p>
+<h4 id="Sampling-the-Light-效率提升"><a href="#Sampling-the-Light-效率提升" class="headerlink" title="Sampling the Light 效率提升"></a>Sampling the Light 效率提升</h4><p>上述路径追踪的实现效果受到单个像素点的采样量（samples per pixel）影响，因为每个像素点上的采样对应的 ray 到达着色点时，仅执行后续一次采样，这个单次采样不容易指向光源，造成其着色效果不佳；下述的方法主要针对 shade 部分</p>
+<p>在 PT 中通常考虑面光源（点光源始终是难点，课程推荐是视作非常小的面光源），当考虑着色时的直接光照，原先的方法是在半球面上采样立体角，问题即不容易指向光源；更有效的方法是采样光源上的面积，转换成立体角的微分即可代入原本的计算式</p>
+<p><img src="/images/CG/Sampling-the-Light.png" alt="对光源面采样"></p>
+<p>观察上面的积分公式中的积分变换，显然 A 仅针对光源面，对其积分表示了直接光照的部分，因此还需要考虑非光源物体的反射光；最终实现的时候再追加一步，在计算直接光照时判断是否有其他物体遮挡，完成总的代码流程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">shade(p, wo)</span><br><span class="line">	# Contribution from the light source.</span><br><span class="line">	Uniformly sample the light at x&#x27; (pdf_light = 1 / A)</span><br><span class="line">	Shoot a ray from p to x&#x27;</span><br><span class="line">	If the ray is not blocked in the middle</span><br><span class="line">		L_dir = L_i * f_r * cos θ * cos θ&#x27; / |x&#x27; - p|^2 / pdf_light</span><br><span class="line">	</span><br><span class="line">	# Contribution from other reflections.</span><br><span class="line">	L_indir = 0.0</span><br><span class="line">	Test Russian Roulette with probability P_RR</span><br><span class="line">	Uniformly sample the hemisphere toward wi (pdf_hemi = 1 / 2pi)</span><br><span class="line">	Trace a ray r(p, wi)</span><br><span class="line">	If ray r hit a non-emitting object at q</span><br><span class="line">		L_indir = shade(q, -wi) * f_r * cos θ / pdf_hemi / P_RR</span><br><span class="line">	</span><br><span class="line">	Return L_dir + L_indir</span><br></pre></td></tr></table></figure>
+<h3 id="Further-Learning"><a href="#Further-Learning" class="headerlink" title="Further Learning"></a>Further Learning</h3><p>Path Tracing 是当前工业界实际使用的且已经证实过其重现真实感的方法，只要能正确实现就已经能取得相当好的效果；而凡是上面提到的采样积分，都可以引入 <strong>重要性采样</strong> 来取得更好的效果</p>
+<p>学术界上还有更深入的研究</p>
+<ul>
+<li>The general solution of light transport, including<ul>
+<li>Unidirectional &amp; bidirectional path tracing</li>
+<li>Photon mapping</li>
+<li>Metropolis light transport</li>
+<li>VCM / UPBP…</li>
+</ul>
+</li>
+</ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>回顾整体流程，可以独立实现的部分有：</p>
+<ol>
+<li>空间划分 + 射线与面相交判断</li>
+<li>物体表面着色 + 像素点采样成像</li>
+</ol>
+<h3 id="射线与-AABB-相交判断"><a href="#射线与-AABB-相交判断" class="headerlink" title="射线与 AABB 相交判断"></a>射线与 AABB 相交判断</h3><p>分三个轴向计算进入和离开时间，根据逻辑判断即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Bounds3::IntersectP</span><span class="params">(<span class="type">const</span> Ray&amp; ray, <span class="type">const</span> Vector3f&amp; invDir, <span class="type">const</span> std::array&lt;<span class="type">int</span>, <span class="number">3</span>&gt;&amp; dirIsNeg)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// invDir: ray direction(x,y,z), invDir=(1.0/x,1.0/y,1.0/z), use this because Multiply is faster that Division</span></span><br><span class="line">    <span class="comment">// dirIsNeg: ray direction(x,y,z), dirIsNeg=[int(x&gt;0),int(y&gt;0),int(z&gt;0)], use this to simplify your logic</span></span><br><span class="line">    <span class="type">float</span> tEnter = - std::numeric_limits&lt;<span class="type">float</span>&gt;::<span class="built_in">infinity</span>();</span><br><span class="line">    <span class="type">float</span> tExit = std::numeric_limits&lt;<span class="type">float</span>&gt;::<span class="built_in">infinity</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; ++i) &#123;</span><br><span class="line">        <span class="type">float</span> <span class="type">in_t</span> = (pMin[i] - ray.origin[i]) * invDir[i];</span><br><span class="line">        <span class="type">float</span> <span class="type">out_t</span> = (pMax[i] - ray.origin[i]) * invDir[i];</span><br><span class="line">        <span class="keyword">if</span> (!dirIsNeg[i]) &#123;</span><br><span class="line">            std::<span class="built_in">swap</span>(<span class="type">in_t</span>, <span class="type">out_t</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        tEnter = std::<span class="built_in">max</span>(tEnter, <span class="type">in_t</span>);</span><br><span class="line">        tExit = std::<span class="built_in">min</span>(tExit, <span class="type">out_t</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tEnter &lt; tExit &amp;&amp; tExit &gt;= <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="递归的路径追踪函数"><a href="#递归的路径追踪函数" class="headerlink" title="递归的路径追踪函数"></a>递归的路径追踪函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Vector3f <span class="title">Scene::castRay</span><span class="params">(<span class="type">const</span> Ray &amp;ray, <span class="type">int</span> depth)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TO DO Implement Path Tracing Algorithm here</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 先确定与场景交点</span></span><br><span class="line">    Intersection obj_inter = Scene::<span class="built_in">intersect</span>(ray);</span><br><span class="line">    <span class="keyword">if</span> (!obj_inter.happened) <span class="keyword">return</span> <span class="built_in">Vector3f</span>(<span class="number">0.0</span>);</span><br><span class="line">    <span class="comment">// 若直接看到光源就取其光照</span></span><br><span class="line">    <span class="keyword">if</span> (obj_inter.m-&gt;<span class="built_in">hasEmission</span>()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (depth == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> obj_inter.m-&gt;<span class="built_in">getEmission</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 深度 &gt; 0 说明为反射 ray，已经在计算直接光照时纳入</span></span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Vector3f</span>(<span class="number">0.0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 采样光源</span></span><br><span class="line">    Intersection inter;</span><br><span class="line">    <span class="type">float</span> pdf_light;</span><br><span class="line">    Scene::<span class="built_in">sampleLight</span>(inter, pdf_light);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义第一次反射计算的各个值</span></span><br><span class="line">    Vector3f wi = ray.direction, wo = <span class="built_in">normalize</span>(inter.coords - obj_inter.coords);</span><br><span class="line">    Vector3f &amp;NN = inter.normal, &amp;N = obj_inter.normal;</span><br><span class="line">    Material *m = obj_inter.m;</span><br><span class="line">    <span class="function">Ray <span class="title">out_ray</span><span class="params">(obj_inter.coords, wo)</span></span>;</span><br><span class="line">    Intersection obj2L = Scene::<span class="built_in">intersect</span>(out_ray);</span><br><span class="line"></span><br><span class="line">    <span class="function">Vector3f <span class="title">L_dir</span><span class="params">(<span class="number">0.0</span>)</span>, <span class="title">L_indir</span><span class="params">(<span class="number">0.0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断反射击中光源，需要有 intersection 并且到光源距离足够近</span></span><br><span class="line">    <span class="keyword">if</span> (obj2L.happened &amp;&amp; (obj2L.coords - inter.coords).<span class="built_in">norm</span>() &lt; <span class="number">1e-2</span>) &#123;</span><br><span class="line">        L_dir = inter.emit * m-&gt;<span class="built_in">eval</span>(wi, wo, N) * <span class="built_in">dotProduct</span>(wo, N) * <span class="built_in">dotProduct</span>(-wo, NN)</span><br><span class="line">         / <span class="built_in">powf</span>((inter.coords - obj_inter.coords).<span class="built_in">norm</span>(), <span class="number">2.0</span>) / pdf_light;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 概率消亡</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">get_random_float</span>() &gt; RussianRoulette) &#123;</span><br><span class="line">        <span class="keyword">return</span> L_dir + L_indir;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Vector3f wd = <span class="built_in">normalize</span>(m-&gt;<span class="built_in">sample</span>(wi, N));</span><br><span class="line">    <span class="function">Ray <span class="title">dif_ray</span><span class="params">(obj_inter.coords, wd)</span></span>;</span><br><span class="line">    Intersection dif_inter = Scene::<span class="built_in">intersect</span>(dif_ray);</span><br><span class="line">    <span class="comment">// 仅考虑反射后非光源</span></span><br><span class="line">    <span class="keyword">if</span> (dif_inter.happened &amp;&amp; !dif_inter.m-&gt;<span class="built_in">hasEmission</span>()) &#123;</span><br><span class="line">        L_indir = Scene::<span class="built_in">castRay</span>(dif_ray, depth + <span class="number">1</span>) * m-&gt;<span class="built_in">eval</span>(wi, wd, N) * <span class="built_in">dotProduct</span>(wd, N) / m-&gt;<span class="built_in">pdf</span>(wi, wd, N) / RussianRoulette;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> L_dir + L_indir;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="作业中犯的错误"><a href="#作业中犯的错误" class="headerlink" title="作业中犯的错误"></a>作业中犯的错误</h3><ol>
+<li>借用算法判断射线是否相交三角形时，叉乘写成了点乘</li>
+<li>BVH 到有相交的叶子节点忘记写 return</li>
+</ol>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://remedios14.github.io/2022/05/31/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E5%9B%9B%EF%BC%89/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://remedios14.github.io/2022/05/31/Games/101%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Games101-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%EF%BC%88%E5%9B%9B%EF%BC%89/";
+            const title         = "「Games101-计算机图形学（四）」";
+            const excerpt       = `博客图片及学习路径来源 Gamse 101课程，在此记录以方便个人查阅为主，强烈建议自行观看学习
+光线追踪是类比光栅化的另一种成像方式，主要为了解决光栅化的问题：软阴影、光线的多次反射效果；其实现效果比光栅化更佳，但相应的效率更低
+在...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/games/" rel="tag">games</a>, <a class="tag-none-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag">计算机图形学</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-06-26</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Games101-计算机图形学（三）" href="/2022/05/29/Games/101计算机图形学/Games101-计算机图形学（三）/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Games101-计算机图形学（五）" href="/2022/06/02/Games/101计算机图形学/Games101-计算机图形学（五）/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Game-Engine/">Game-Engine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphics/">Games-Graphics</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WebGL/">WebGL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.73em;">Pre-Process</a> <a href="/tags/QuickStart/" style="font-size: 0.6em;">QuickStart</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/algorithm/" style="font-size: 0.6em;">algorithm</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/data-analysing/" style="font-size: 0.67em;">data analysing</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/11/Graphics/WebGL-%E5%85%A5%E9%97%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> WebGL-入门环境搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Golang-常规算法实现</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/03/Golang/Golang-QuickIntro/"><i class="fa  fa-book"></i> Golang-QuickIntro</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/"><i class="fa  fa-book"></i> Shader入门精要-常用编写</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E6%A6%82%E8%BF%B0/"><i class="fa  fa-book"></i> Shader入门精要-概述</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Remedios14"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 Mikyi喵喵呜~ 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Mikyi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2377259266"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.webp">
+  <title>OpenCV简述及接口（二） | Mikyi喵喵呜~</title>
+  <meta name="author" content="Mikyi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="opencv, python" />
+  
+  <meta name="description" content="OpenCV 内设计了一个数据结构用于更好地适配各类图片和视频数据；在 C++ 底层中使用 mat 来保存图片，而 python 中转换成了 numpy 的 ndarray OpenCv 的重要数据结构 —— Mat后续用变量 mat 来替换 img 等 123456789class CV_EXPORTS Mat &amp;#123;public:	...	int dims;	int rows, cols">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV简述及接口（二）">
+<meta property="og:url" content="http://remedios14.github.io/2022/04/11/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="Mikyi喵喵呜~">
+<meta property="og:description" content="OpenCV 内设计了一个数据结构用于更好地适配各类图片和视频数据；在 C++ 底层中使用 mat 来保存图片，而 python 中转换成了 numpy 的 ndarray OpenCv 的重要数据结构 —— Mat后续用变量 mat 来替换 img 等 123456789class CV_EXPORTS Mat &amp;#123;public:	...	int dims;	int rows, cols">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
+<meta property="article:published_time" content="2022-04-11T02:15:56.000Z">
+<meta property="article:modified_time" content="2022-04-17T15:15:02.000Z">
+<meta property="article:author" content="Mikyi">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="opencv">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  <script id="MathJax-script" <strong>async</strong>src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Mikyi喵喵呜~" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Mikyi喵喵呜~</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Mikyi喵喵呜~</h2> <br />
+                        <span>So we beat on, boats against the current, borne back ceaselessly into the past.</span>
+                        <!--<span class="typeWriter" data-end="3000" data-text='["So we beat on, boats against the current, borne back ceaselessly into the past.", "我们奋力前行,小舟逆水而上,不断地被浪潮推回到过去。", "Aureliano, está lloviendo en Macondo.", "演者はセリフの傀儡だ"]'></span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">OpenCV简述及接口（二）</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-04-11</li>
+                <li><i class="fa fa-user"></i> 作者 Mikyi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~10.57K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1650208502000"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <p>OpenCV 内设计了一个数据结构用于更好地适配各类图片和视频数据；在 C++ 底层中使用 mat 来保存图片，而 python 中转换成了 numpy 的 ndarray</p>
+<h2 id="OpenCv-的重要数据结构-——-Mat"><a href="#OpenCv-的重要数据结构-——-Mat" class="headerlink" title="OpenCv 的重要数据结构 —— Mat"></a>OpenCv 的重要数据结构 —— Mat</h2><p>后续用变量 mat 来替换 img 等</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CV_EXPORTS</span> Mat &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	...</span><br><span class="line">	<span class="type">int</span> dims;</span><br><span class="line">	<span class="type">int</span> rows, cols;</span><br><span class="line">	uchar *data;</span><br><span class="line">	<span class="type">int</span> *refcount; <span class="comment">// 引用计数</span></span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>其他属性：</p>
+<ul>
+<li>depth ：像素的位深</li>
+<li>channels ：通道数， RGB 是 3</li>
+<li>size ：矩阵大小</li>
+<li>type ：dep + dt + chs CV_8UC3</li>
+</ul>
+<p>但实际上在 python 中只能访问到 ndarray 的几个属性如 ：ndim、shape、dtype 等</p>
+<h3 id="拷贝操作"><a href="#拷贝操作" class="headerlink" title="拷贝操作"></a>拷贝操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;./resource/wsrd.png&#x27;</span>)</span><br><span class="line">img2 = img.view() <span class="comment"># 浅拷贝</span></span><br><span class="line">img3 = img.copy() <span class="comment"># 深拷贝</span></span><br><span class="line">img[<span class="number">10</span>:<span class="number">100</span>, <span class="number">10</span>: <span class="number">100</span>] = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>]</span><br><span class="line">cv2.imshow(<span class="string">&#x27;imgs&#x27;</span>, np.hstack((img, img2, img3)))</span><br></pre></td></tr></table></figure>
+<h3 id="图像的分割与融合"><a href="#图像的分割与融合" class="headerlink" title="图像的分割与融合"></a>图像的分割与融合</h3><ul>
+<li>split(mat) ：返回多个通道下值的 ndarray</li>
+<li>merge((b, g, r)) ：将通道的元组融合，返回一个 mat<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">img = np.zeros((<span class="number">200</span>, <span class="number">200</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line">b, g, r = cv2.split(img)</span><br><span class="line">b[<span class="number">10</span>:<span class="number">100</span>, <span class="number">10</span>:<span class="number">100</span>] = <span class="number">128</span></span><br><span class="line">g[<span class="number">40</span>:<span class="number">130</span>, <span class="number">40</span>:<span class="number">130</span>] = <span class="number">255</span></span><br><span class="line">img2 = cv2.merge((b, g, r))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img1&#x27;</span>, np.hstack((b, g)))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img2&#x27;</span>, np.hstack((img, img2)))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>单通道的 ndarray 可能相当于灰度图，只有黑白之间</p>
+<h3 id="为图像设置边框"><a href="#为图像设置边框" class="headerlink" title="为图像设置边框"></a>为图像设置边框</h3><p>在图像的整体边界创建边框</p>
+<ul>
+<li>copyMakeBorder(src, top, bottom, left, right, borderType[, dst, value]) <ul>
+<li>top、bottom、left、right 设置边界宽度（像素数）</li>
+<li>borderType 以 BORDER 开头的边框类型</li>
+<li>value 当类型为 BORDER_CONST 时此参数给出边框颜色<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;./resource/logo.png&#x27;</span>)</span><br><span class="line">replicate = cv2.copyMakeBorder(img, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, cv2.BORDER_REPLICATE)</span><br><span class="line">reflect = cv2.copyMakeBorder(img, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, cv2.BORDER_REFLECT)</span><br><span class="line">reflect101 = cv2.copyMakeBorder(img, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, cv2.BORDER_REFLECT_101)</span><br><span class="line">wrap = cv2.copyMakeBorder(img, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, cv2.BORDER_WRAP)</span><br><span class="line">constant = cv2.copyMakeBorder(img, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, cv2.BORDER_CONSTANT, value=(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;cmp&#x27;</span>, np.hstack((replicate, reflect, reflect101, wrap, constant)))</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="绘制图形"><a href="#绘制图形" class="headerlink" title="绘制图形"></a>绘制图形</h3><p>利用 OpenCV 提供的绘制图形 API 可以轻松在图像上绘制图形，结合鼠标动作的捕获可以完成框选等</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 实现鼠标动作捕捉来绘制，添加 TrackBar 来选择类型以及文本说明</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> 封装一下，布局也不太美观，后面学了能改再改</span></span><br><span class="line">drawType = <span class="number">0</span></span><br><span class="line">startPos = (<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">l_color = (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mouse_callback</span>(<span class="params">event, x, y, flags, userdata</span>):</span><br><span class="line">    <span class="comment"># 声明全局变量到函数体内</span></span><br><span class="line">    <span class="keyword">global</span> startPos, drawType, l_color</span><br><span class="line">    <span class="keyword">if</span> event == cv2.EVENT_LBUTTONDOWN:</span><br><span class="line">        startPos = (x, y)</span><br><span class="line">    <span class="keyword">elif</span> event == cv2.EVENT_LBUTTONUP:</span><br><span class="line">        <span class="keyword">if</span> drawType == <span class="number">0</span>:</span><br><span class="line">            cv2.line(img, startPos, (x,y), l_color, <span class="number">3</span>)</span><br><span class="line">        <span class="keyword">elif</span> drawType == <span class="number">1</span>:</span><br><span class="line">            cv2.rectangle(img, startPos, (x, y), l_color, <span class="number">3</span>)</span><br><span class="line">        <span class="keyword">elif</span> drawType == <span class="number">2</span>:</span><br><span class="line">            a = x - startPos[<span class="number">0</span>]</span><br><span class="line">            b = y - startPos[<span class="number">1</span>]</span><br><span class="line">            radius = <span class="built_in">int</span>((a ** <span class="number">2</span> + b ** <span class="number">2</span>) ** <span class="number">0.5</span>)</span><br><span class="line">            cv2.circle(img, startPos, radius, l_color, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tb_callback</span>(<span class="params">value</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;mouse_draw&#x27;</span>)</span><br><span class="line">cv2.setMouseCallback(<span class="string">&#x27;mouse_draw&#x27;</span>, mouse_callback, <span class="string">&#x27;nothing&#x27;</span>)</span><br><span class="line">img = np.full((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), <span class="number">255</span>, dtype=np.uint8)</span><br><span class="line">cv2.createTrackbar(<span class="string">&#x27;drawType&#x27;</span>, <span class="string">&#x27;mouse_draw&#x27;</span>, <span class="number">0</span>, <span class="number">2</span>, tb_callback)</span><br><span class="line">cv2.createTrackbar(<span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;mouse_draw&#x27;</span>, <span class="number">0</span>, <span class="number">255</span>, tb_callback)</span><br><span class="line">cv2.createTrackbar(<span class="string">&#x27;G&#x27;</span>, <span class="string">&#x27;mouse_draw&#x27;</span>, <span class="number">0</span>, <span class="number">255</span>, tb_callback)</span><br><span class="line">cv2.createTrackbar(<span class="string">&#x27;R&#x27;</span>, <span class="string">&#x27;mouse_draw&#x27;</span>, <span class="number">0</span>, <span class="number">255</span>, tb_callback)</span><br><span class="line">cv2.putText(img, <span class="string">&#x27;0 for line, 1 for rectangle and 2 for circle&#x27;</span>, (<span class="number">0</span>, <span class="number">20</span>), cv2.FONT_HERSHEY_PLAIN, <span class="number">1</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>))</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    b = cv2.getTrackbarPos(<span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;mouse_draw&#x27;</span>)</span><br><span class="line">    g = cv2.getTrackbarPos(<span class="string">&#x27;G&#x27;</span>, <span class="string">&#x27;mouse_draw&#x27;</span>)</span><br><span class="line">    r = cv2.getTrackbarPos(<span class="string">&#x27;R&#x27;</span>, <span class="string">&#x27;mouse_draw&#x27;</span>)</span><br><span class="line">    drawType = cv2.getTrackbarPos(<span class="string">&#x27;drawType&#x27;</span>, <span class="string">&#x27;mouse_draw&#x27;</span>)</span><br><span class="line">    l_color = (b, g, r)</span><br><span class="line">    cv2.imshow(<span class="string">&#x27;mouse_draw&#x27;</span>, img)</span><br><span class="line">    key = cv2.waitKey(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> key == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>line(mat, pt1, pt2, color[, thickness, lineType, shift]) 绘制直线，中括号内参数可选<ul>
+<li>mat ：图对象</li>
+<li>pt1, pt2 ：点坐标，（基本）二元的</li>
+<li>color ：BGR 颜色，三元组</li>
+<li>thickness ：整数</li>
+<li>lineType ：线类型，必须为 2 的次幂整数（感觉越大越光滑，无锯齿）</li>
+<li>shift ：缩放比</li>
+</ul>
+</li>
+<li>rectangle() 参数同上，点为左上右下</li>
+<li>circle(mat, center, radius, color[, thickness, lineType, shift]) 画圆时半径必须为整数</li>
+<li>ellipse(mat, center, axes, angle, startAngle, endAngle, color[, thickness, lineType, shift])<ul>
+<li>axes ：二元组，两个值为长宽的一半</li>
+<li>angle ：椭圆的长轴顺时针旋转的角度</li>
+<li>startAngle, endAngle ：可以不画完整椭圆，也是顺时针角度</li>
+</ul>
+</li>
+<li>polylines(img, pts, isClosed, color[…]) 省略部分一致<ul>
+<li>pts ：多边形的点集，必须是 int32，且必须是三维的</li>
+</ul>
+</li>
+<li>fillPoly(img, pts, color[, lineType, shift, offset]) 填充多边形，类似上一个</li>
+<li>putText(img, text, org, fontFace, fontScale, color[, thickness, lineType, bottomLeftOrigin])<ul>
+<li>text ：是文本内容，字符串格式，因为没有中文字体所以不支持</li>
+<li>org ：文本左下角的坐标位置</li>
+<li>fontFace ：字体，以 FONT 开头的枚举</li>
+<li>fontScale ：尺寸系数，会乘以字体的基本大小<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line">cv2.line(img, (<span class="number">10</span>, <span class="number">20</span>), (<span class="number">300</span>, <span class="number">400</span>), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">cv2.line(img, (<span class="number">80</span>, <span class="number">100</span>), (<span class="number">380</span>, <span class="number">480</span>), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">3</span>, <span class="number">16</span>)</span><br><span class="line">cv2.rectangle(img, (<span class="number">40</span>, <span class="number">40</span>), (<span class="number">240</span>, <span class="number">240</span>), (<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="number">3</span>, <span class="number">8</span>)</span><br><span class="line"><span class="comment"># cv2.circle(img, (320, 240), 50, (128, 128, 0), 3, 2)</span></span><br><span class="line">cv2.ellipse(img, (<span class="number">320</span>, <span class="number">240</span>), (<span class="number">100</span>, <span class="number">50</span>), <span class="number">45</span>, <span class="number">0</span>, <span class="number">270</span>, (<span class="number">0</span>, <span class="number">128</span>, <span class="number">128</span>), <span class="number">3</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">pts = np.array([(<span class="number">250</span>, <span class="number">100</span>), (<span class="number">150</span>, <span class="number">300</span>), (<span class="number">50</span>, <span class="number">280</span>)], np.int32)</span><br><span class="line"><span class="comment"># cv2.polylines(img, [pts], True, (128, 0, 128), 3)</span></span><br><span class="line">cv2.fillPoly(img, [pts], (<span class="number">128</span>, <span class="number">0</span>, <span class="number">128</span>))</span><br><span class="line"></span><br><span class="line">cv2.putText(img, <span class="string">&#x27;Hello OpenCV&#x27;</span>, (<span class="number">50</span>, <span class="number">400</span>), cv2.FONT_HERSHEY_PLAIN, <span class="number">2</span>, (<span class="number">0</span>, <span class="number">56</span>, <span class="number">167</span>))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>中文文本</strong>：使用 <code>pip install pillow</code> 然后如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageFont, ImageDraw, Image</span><br><span class="line"><span class="comment"># 纯白</span></span><br><span class="line">img = np.full((<span class="number">200</span>, <span class="number">200</span>, <span class="number">3</span>), fill_value=<span class="number">255</span>, dtype=np.uint8)</span><br><span class="line"><span class="comment"># 导入字体文件，用的时候再搜</span></span><br><span class="line">font = ImageFont.truetype(<span class="string">&#x27;./msyhbd.ttc&#x27;</span>, <span class="number">15</span>)</span><br><span class="line"><span class="comment"># 创建一个 pillow 图片</span></span><br><span class="line">img_pil = Image.fromarray(img)</span><br><span class="line">draw = ImageDraw.Draw(img_pil)</span><br><span class="line"><span class="comment"># 利用 draw 绘制中文</span></span><br><span class="line">draw.text((<span class="number">10</span>,<span class="number">150</span>), <span class="string">&#x27;你好，世界&#x27;</span>, font=font, fill=(<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line"><span class="comment"># 重新变回 ndarray</span></span><br><span class="line">img = np.array(img_pil)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img) <span class="comment"># ...</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="图像-Mat-的算数运算"><a href="#图像-Mat-的算数运算" class="headerlink" title="图像 Mat 的算数运算"></a>图像 Mat 的算数运算</h3><h4 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h4><ul>
+<li>add(src1, src2[dst, mask, dtype]) ：执行图像的加法运算，即遵循矩阵规则，要求 shape 相同；如果超过 255 会变成 255（会容易变得很亮）<ul>
+<li>dst 可以指定输出到哪个变量，一般用不到</li>
+</ul>
+</li>
+<li>subtract(src1, src2[…])：逐元减法，小于 0 会统一变成 0</li>
+<li>multiply(src1, src2)：逐元乘法，同</li>
+<li>divide(src1, src2)：逐元除法（取整），同</li>
+</ul>
+<p>也可以直接对 mat 对象使用 <code>+</code> 进行运算，此时超过 255 会取模；实际上是基于 ndarray 运算然后取模，所以减等符号也能用</p>
+<h4 id="组合运算"><a href="#组合运算" class="headerlink" title="组合运算"></a>组合运算</h4><p>即进行线性加权运算</p>
+<ul>
+<li>addWeighted(src1, alpha, src2, beta, gamma) 进行矩阵线性运算 w1 * x1 + w2 * x2 + bias；然而如果几个系数都是用常数，完全可以用运算符完成</li>
+</ul>
+<h4 id="位运算（逻辑运算）"><a href="#位运算（逻辑运算）" class="headerlink" title="位运算（逻辑运算）"></a>位运算（逻辑运算）</h4><p>对整数的 与、或、异或 都是转化成二进制数然后每一位进行的，因此与运算不会增大、或运算不会减小</p>
+<ul>
+<li>bitwise_not(mat) 返回一个取反运算的 mat 对象，具体取反操作是逐位向 255 求差，相当于 255 - mat</li>
+<li>bitwise_and(src1, src2) 逐元与</li>
+<li>bitwise_or(src1, src2) 逐元或</li>
+<li>bitwise_xor(src1, src2) 逐元异或</li>
+</ul>
+<h3 id="图像的基本变换"><a href="#图像的基本变换" class="headerlink" title="图像的基本变换"></a>图像的基本变换</h3><h4 id="图像的放大与缩小"><a href="#图像的放大与缩小" class="headerlink" title="图像的放大与缩小"></a>图像的放大与缩小</h4><ul>
+<li>resize(src, dsize[, dst, fx, fy, interpolation])<ul>
+<li>dsize：缩放后的图片大小，元组类</li>
+<li>fx、fy：x 轴和 y 轴的缩放比，可以写 dsize=None 然后给出缩放比例</li>
+<li>interpolation：插值算法，放大时的填充方法，主要有以下几种<ul>
+<li>INTER_NEAREST，邻近插值，速度快，效果差</li>
+<li>INTER_LINEAR，双线性插值，使用原图中的四个点进行插值，默认方法</li>
+<li>INTER_CUBIC，三次插值，取 16个点</li>
+<li>INTER_AREA，区域插值，效果最好，计算时间最长</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="图像的翻转与旋转"><a href="#图像的翻转与旋转" class="headerlink" title="图像的翻转与旋转"></a>图像的翻转与旋转</h4><ul>
+<li>flip(src, flipCode) 返回图像翻转的对象；也可直接用 np 的切片实现<ul>
+<li>flipCode = 0 时上下翻转，&gt; 0 时左右翻转，&lt; 0 时同时上下左右翻转</li>
+</ul>
+</li>
+<li>rotate(src, rotateCode) 旋转操作<ul>
+<li>ROTATE_90_CLOCKWISE 顺时针旋转 90°</li>
+<li>ROTATE_180</li>
+<li>ROTATE_90_COUNTERCLOCKWISE 逆时针 90°</li>
+</ul>
+</li>
+</ul>
+<h2 id="图像轮廓综合"><a href="#图像轮廓综合" class="headerlink" title="图像轮廓综合"></a>图像轮廓综合</h2><p>轮廓可以理解为连接具有相同颜色或强度的所有连续点的曲线，是用于形状分析以及对象检测和识别的有用工具</p>
+<ul>
+<li>为了获得更高的准确性，请使用二进制图像。因此，在找到轮廓之前，请应用阈值或canny边缘检测</li>
+<li>从OpenCV 3.2开始，findContours()不再修改源图像。</li>
+<li>在OpenCV中，找到轮廓就像从黑色背景中找到白色物体。因此请记住，要找到的对象应该是白色，背景应该是黑色。</li>
+</ul>
+<h3 id="获取及绘制轮廓"><a href="#获取及绘制轮廓" class="headerlink" title="获取及绘制轮廓"></a>获取及绘制轮廓</h3><ul>
+<li>findContours(src, mode, method) 先使用该函数找到轮廓，返回值有两个 —— 等高线（图像中所有轮廓的 tuple，每个轮廓是 (x, y) 坐标的 ndarray 对象；以及层次结构<ul>
+<li>mode 轮廓检索模式，以 RETR_ 开头</li>
+<li>method 轮廓接近方法，以 CHAIN<em>APPROX</em> 开头，一般用 SIMPLE 即可</li>
+</ul>
+</li>
+<li>drawContours(src, contours, contourIdx, color) 基于轮廓边界点绘制<ul>
+<li>contours 作为 tuple 的轮廓列表，使用 find 的第一个返回值即可</li>
+<li>countourIdx 轮廓的索引，传入 -1 会绘制所有轮廓<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;./resource/logo.png&#x27;</span>)</span><br><span class="line">imgray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">ret, thresh = cv2.threshold(imgray, <span class="number">127</span>, <span class="number">255</span>, <span class="number">0</span>)</span><br><span class="line">contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line">ctr = cv2.drawContours(imgray, contours, <span class="number">7</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">3</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;imctr&#x27;</span>, cv2.add(imgray, ctr))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h4><p>捕获轮廓时可能出现某些轮廓被包围在其他轮廓中，此时把外部的称为父类，内部的称为子类；这种父子关系就是层次结构</p>
+<h5 id="分级表示"><a href="#分级表示" class="headerlink" title="分级表示"></a>分级表示</h5><p>上方的 findContours 函数返回的 hierarchy 每个表示一个轮廓的信息，是一个四元数组 —— [Next, Previous, First_Child, Parent] 其中 Next 表示同一层次的下一个轮廓（若没有则 -1）</p>
+<h5 id="检索模式和逼近方法"><a href="#检索模式和逼近方法" class="headerlink" title="检索模式和逼近方法"></a>检索模式和逼近方法</h5><ul>
+<li>轮廓检索模式<ol>
+<li>RETR_LIST ：仅检索轮廓，不创建亲子关系；所有轮廓属于同一层级</li>
+<li>RETR_EXTERNAL ：仅返回最外部层级的轮廓</li>
+<li>RETR_CCOMP ：分两级 —— 顶层是各部分的外部边界，第二层是内部空洞的边界</li>
+<li>RETR_TREE ：最完整的层次结构，完全分级</li>
+</ol>
+</li>
+<li>轮廓逼近方法<ol>
+<li>CHAIN_APPROX_NONE ：以 Freeman 链码的方式输出轮廓，所有其他方法输出多边形（顶点的序列）</li>
+<li>CHAIN_APPROX_SIMPLE ：压缩水平的、垂直的和斜的部分，仅保留轮廓终点部分</li>
+</ol>
+</li>
+</ul>
+<h3 id="轮廓特征"><a href="#轮廓特征" class="headerlink" title="轮廓特征"></a>轮廓特征</h3><p>轮廓的特征包括面积、周长、质心、边界框等</p>
+<p>列出的函数有：矩、面积、长度、近似、凸包、</p>
+<ol>
+<li>moments(array) 计算数组或（灰度或二值）图像的矩<ul>
+<li>当数组为点集时，会视其为一条完整轮廓</li>
+<li>返回一个字典得到多阶原点矩、中心距和归一化中心矩<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">M = cv2.moments(contours[<span class="number">7</span>])</span><br><span class="line"><span class="comment"># 质心位置</span></span><br><span class="line">cx = <span class="built_in">int</span>(M[<span class="string">&#x27;m10&#x27;</span>]/M[<span class="string">&#x27;m00&#x27;</span>])</span><br><span class="line">cy = <span class="built_in">int</span>(M[<span class="string">&#x27;m01&#x27;</span>]/M[<span class="string">&#x27;m00&#x27;</span>])</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>contourArea(contour) 传入一个轮廓，返回面积，其值等同于上面的 <code>M[&#39;m00&#39;]</code></li>
+<li>arcLength(contour, closed) 轮廓长度，第二个布尔参数表示是闭合图形还是曲线</li>
+<li>approxPolyDP(curve, epsilon, closed) 轮廓近似，将原轮廓在一定的接受度下近似为较平滑的其他轮廓<ul>
+<li>考虑一个弧线，若用直线近似则弧线上有一个到直线最远的点，其距离若大于阈值则可以再分个点来近似直线；递归判断</li>
+<li>epsilon 从轮廓到近似轮廓的最大距离，可以试试长度的一定比例</li>
+</ul>
+</li>
+<li>convexHull(points[, hull, clockwise, returnPoints]) 轮廓凸包，检查曲线是否存在凸凹缺陷并进行校正（看文档吧） </li>
+<li>isContourConvex(contour) 检查是否凸出，返回布尔</li>
+<li>边界矩形：分为横纵向的矩形和考虑旋转的矩形<ul>
+<li>boundingRect(contour) 返回 四个值依次为 x, y, w, h</li>
+<li>minAreaRect(contour) 返回一个 Box2D 结构，再借助 boxPoints 函数得到四角点<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rect = cv2.minAreaRect(cnt)</span><br><span class="line">box = cv2.boxPoints(rect)</span><br><span class="line">box = np.int0(box)</span><br><span class="line">cv2.drawContours(img,[box],<span class="number">0</span>,(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>),<span class="number">2</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>minClosingCircle(points) 包含对象的最小圆，返回 x, y, r；<code>(x, y), radius = cv2.minClosingCircle(cnt)</code> 要注意将 x、y、r 转为 int 才能画圆</li>
+<li>fitEllipse(points) 拟合椭圆</li>
+<li>fitLine(points, distType, param, reps, aeps[, line]) 最小二乘拟合直线</li>
+</ol>
+<h3 id="轮廓属性"><a href="#轮廓属性" class="headerlink" title="轮廓属性"></a>轮廓属性</h3><p>坚实度、等效直径、掩模图像、平均强度等</p>
+<ol>
+<li>长宽比：由 boundingRect 结果计算</li>
+<li>范围：面积 / boundingRect 的面积</li>
+<li>坚实度：面积与凸包面积之比，使用 convecxHull 然后计算面积</li>
+<li>等效直径：面积与轮廓面积相同的圆的直径，由原面积计算即可</li>
+<li>取向：物体指向的角度，由拟合椭圆推出</li>
+<li>掩码和像素点：获取构成该对象的所有点<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mask = np.zeros(imgray.shape,np.uint8)</span><br><span class="line">cv.drawContours(mask,[cnt],<span class="number">0</span>,<span class="number">255</span>,-<span class="number">1</span>)</span><br><span class="line">pixelpoints = np.transpose(np.nonzero(mask))</span><br><span class="line"><span class="comment">#pixelpoints = cv.findNonZero(mask) # 和上面结果一样</span></span><br></pre></td></tr></table></figure></li>
+<li>最大、最小值及位置：借助掩码图像得到<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">min_val, max_val, min_loc, max_loc = cv.minMaxLoc(imgray,mask = mask)</span><br></pre></td></tr></table></figure></li>
+<li>平均颜色或平均强度： <code>mean_val = cv2.mean(im, mask=mask)</code></li>
+<li>极端点：最顶、最底、最左、最右点的坐标：借助 ndarray 的 argmin 等即可</li>
+</ol>
+<h3 id="轮廓更多属性"><a href="#轮廓更多属性" class="headerlink" title="轮廓更多属性"></a>轮廓更多属性</h3><h4 id="凸性缺陷"><a href="#凸性缺陷" class="headerlink" title="凸性缺陷"></a>凸性缺陷</h4><p>轮廓凸包上的任何偏差都可以被认为是凸性缺陷（原图像到凸包的凹陷），使用 convexityDefects 函数得到</p>
+<ul>
+<li>convexityDefects(cnt, hull) 返回一个数组，每行由此构成 —— [起点，终点，最远点，到最远点的近似距离]</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">img = cv.imread(<span class="string">&#x27;star.jpg&#x27;</span>)</span><br><span class="line">img_gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)</span><br><span class="line">ret,thresh = cv.threshold(img_gray, <span class="number">127</span>, <span class="number">255</span>,<span class="number">0</span>)</span><br><span class="line">contours,hierarchy = cv.findContours(thresh,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">cnt = contours[<span class="number">0</span>]</span><br><span class="line">hull = cv.convexHull(cnt,returnPoints = <span class="literal">False</span>)</span><br><span class="line">defects = cv.convexityDefects(cnt,hull)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(defects.shape[<span class="number">0</span>]):</span><br><span class="line">	s,e,f,d = defects[i,<span class="number">0</span>]</span><br><span class="line">	start = <span class="built_in">tuple</span>(cnt[s][<span class="number">0</span>])</span><br><span class="line">    end = <span class="built_in">tuple</span>(cnt[e][<span class="number">0</span>])</span><br><span class="line">    far = <span class="built_in">tuple</span>(cnt[f][<span class="number">0</span>])</span><br><span class="line">    cv.line(img,start,end,[<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>],<span class="number">2</span>)</span><br><span class="line">    cv.circle(img,far,<span class="number">5</span>,[<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>],-<span class="number">1</span>)</span><br><span class="line">cv.imshow(<span class="string">&#x27;img&#x27;</span>,img)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br><span class="line">cv.destroyAllWindows()</span><br><span class="line">dist = cv.pointPolygonTest(cnt,(<span class="number">50</span>,<span class="number">50</span>),<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="点多边形测试"><a href="#点多边形测试" class="headerlink" title="点多边形测试"></a>点多边形测试</h4><ul>
+<li>pointPolygonTest(contour, pt, measureDist) 返回一点到轮廓的最短距离；若点在轮廓外则为负，反之为正<ul>
+<li>measureDist 为 False 时仅返回 -1、0、1 结果，不计算距离<br><code>dist = cv2.pointPolygonTest(cnt,(50,50),True)</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="形状匹配"><a href="#形状匹配" class="headerlink" title="形状匹配"></a>形状匹配</h4><ul>
+<li>matchShapes(contour1, contour2, method, parameter) 比较两个轮廓的相似度并返回度量，越小越相似（根据矩计算）</li>
+</ul>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://remedios14.github.io/2022/04/11/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%BA%8C%EF%BC%89/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://remedios14.github.io/2022/04/11/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%BA%8C%EF%BC%89/";
+            const title         = "「OpenCV简述及接口（二）」";
+            const excerpt       = `OpenCV 内设计了一个数据结构用于更好地适配各类图片和视频数据；在 C++ 底层中使用 mat 来保存图片，而 python 中转换成了 numpy 的 ndarray
+OpenCv 的重要数据结构 —— Mat后续用变量 mat...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/opencv/" rel="tag">opencv</a>, <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-04-17</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" OpenCV简述及接口（一）" href="/2022/04/10/OpenCV/OpenCV简述及接口（一）/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" OpenCV简述及接口（三）" href="/2022/04/12/OpenCV/OpenCV简述及接口（三）/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Game-Engine/">Game-Engine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphics/">Games-Graphics</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WebGL/">WebGL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.73em;">Pre-Process</a> <a href="/tags/QuickStart/" style="font-size: 0.6em;">QuickStart</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/algorithm/" style="font-size: 0.6em;">algorithm</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/data-analysing/" style="font-size: 0.67em;">data analysing</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/11/Graphics/WebGL-%E5%85%A5%E9%97%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> WebGL-入门环境搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Golang-常规算法实现</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/03/Golang/Golang-QuickIntro/"><i class="fa  fa-book"></i> Golang-QuickIntro</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/"><i class="fa  fa-book"></i> Shader入门精要-常用编写</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E6%A6%82%E8%BF%B0/"><i class="fa  fa-book"></i> Shader入门精要-概述</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Remedios14"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 Mikyi喵喵呜~ 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Mikyi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2377259266"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

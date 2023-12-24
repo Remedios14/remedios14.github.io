@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.webp">
+  <title>机器学习基础-综述 | Mikyi喵喵呜~</title>
+  <meta name="author" content="Mikyi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="机器学习, 综述" />
+  
+  <meta name="description" content="综述一些机器学习思想和 sklearn 中常用的命令形式 工程流程 获取数据，明确判断目标（分类、回归等），查看特征的缺失情况和统计分布 train.info() \ train.describe() （维度较低或一定程度可解释时）绘制条形图或散点图来观察特征与标签的关系，如分类问题绘制条形图等 数据预处理，特征选择 将名义变量进行编码，离差较大的连续型变量进行离散化，适中的连续型变量进行缩放或中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基础-综述">
+<meta property="og:url" content="http://remedios14.github.io/2022/02/22/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E7%BB%BC%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Mikyi喵喵呜~">
+<meta property="og:description" content="综述一些机器学习思想和 sklearn 中常用的命令形式 工程流程 获取数据，明确判断目标（分类、回归等），查看特征的缺失情况和统计分布 train.info() \ train.describe() （维度较低或一定程度可解释时）绘制条形图或散点图来观察特征与标签的关系，如分类问题绘制条形图等 数据预处理，特征选择 将名义变量进行编码，离差较大的连续型变量进行离散化，适中的连续型变量进行缩放或中">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
+<meta property="article:published_time" content="2022-02-22T07:24:26.000Z">
+<meta property="article:modified_time" content="2022-05-07T07:23:30.000Z">
+<meta property="article:author" content="Mikyi">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="综述">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  <script id="MathJax-script" <strong>async</strong>src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Mikyi喵喵呜~" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Mikyi喵喵呜~</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Mikyi喵喵呜~</h2> <br />
+                        <span>So we beat on, boats against the current, borne back ceaselessly into the past.</span>
+                        <!--<span class="typeWriter" data-end="3000" data-text='["So we beat on, boats against the current, borne back ceaselessly into the past.", "我们奋力前行,小舟逆水而上,不断地被浪潮推回到过去。", "Aureliano, está lloviendo en Macondo.", "演者はセリフの傀儡だ"]'></span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">机器学习基础-综述</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-02-22</li>
+                <li><i class="fa fa-user"></i> 作者 Mikyi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~3.54K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1651908210000"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <p>综述一些机器学习思想和 sklearn 中常用的命令形式</p>
+<h2 id="工程流程"><a href="#工程流程" class="headerlink" title="工程流程"></a>工程流程</h2><ol>
+<li>获取数据，明确判断目标（分类、回归等），查看特征的缺失情况和统计分布 <code>train.info()</code> \ <code>train.describe()</code></li>
+<li>（维度较低或一定程度可解释时）绘制条形图或散点图来观察特征与标签的关系，如分类问题绘制条形图等</li>
+<li>数据预处理，特征选择<ol>
+<li>将名义变量进行编码，离差较大的连续型变量进行离散化，适中的连续型变量进行缩放或中心化；适当地处理缺失值（填充或放弃特征），先尝试一些通用模型查看基础效果</li>
+<li>根据特征量确定是否要过滤，若要过滤则推荐先方差过滤，然后根据互信息过滤，并再过滤过程中观察交叉验证比较平均效果</li>
+</ol>
+</li>
+</ol>
+<h3 id="模型性质"><a href="#模型性质" class="headerlink" title="模型性质"></a>模型性质</h3><p>最近邻 KNN，决策树，支持向量机 SVM，神经网络，回归算法，都需要遍历特征或升维来进行运算，此类算法在应用前的特征选择尤为重要</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>sklearn 的训练和测试基本遵循一个流程：</p>
+<ol>
+<li>从模型对应的子模块下实例化（指定一些模型超参）</li>
+<li>用实例化对象学习训练数据集（.fit(trainX,trainY)）</li>
+<li>观察当前训练结果在测试集上的表现（.score(testX,testY)）</li>
+<li>直至感觉对了后用于模型预测或其他（.predict(realX,realY)）</li>
+</ol>
+<h3 id="评分指标"><a href="#评分指标" class="headerlink" title="评分指标"></a>评分指标</h3><p>可以查看所有可用于评估模型效果的指标</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sklearn</span><br><span class="line"><span class="built_in">sorted</span>(sklearn.metrics.SCORERS.keys())</span><br></pre></td></tr></table></figure>
+<p>在交叉验证中用 <code>scoring=...</code> 传入</p>
+<h3 id="数据划分"><a href="#数据划分" class="headerlink" title="数据划分"></a>数据划分</h3><p>对于监督学习，通常我们拥有一部分已经标注完成的数据，希望从此处学习到一些特征性来预测未进行标注的新数据，而为了评估学习器的成果，我们也只能在已经标注好的数据中取部分来评估，因此在最终预测前总是在和已标注数据玩儿</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split <span class="comment"># 导入该函数</span></span><br><span class="line">Xtrain, Xtest, Ytrain, Ytest = train_test_split(data, label, test_size=<span class="number">0.3</span>) <span class="comment"># 输出顺序要注意</span></span><br></pre></td></tr></table></figure>
+<p>手动划分通常也需要进行多次不同的划分来取平均的结果，因此可以采用交叉验证来快速实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line">cross_val_score(model, data, label, cv=n, scoring=...) </span><br></pre></td></tr></table></figure>
+<p>按照传入的交叉验证次数 n 随机均分数据集，每次取其中一份作为测试集，其余为训练集来学习，最终返回各次在测试集上的得分，此处若不指定 <code>scoring</code> 参数则会按照模型自己的评分来给出</p>
+<p>交叉验证也可以用于选择合适的超参数，若在当前组的交叉验证结果都比较相近，说明模型的效果不依赖于样本的划分，可以具有较好的泛化性能，此时若测试效果可以接受，则能一定程度上接纳超参数</p>
+<h3 id="超参数确定"><a href="#超参数确定" class="headerlink" title="超参数确定"></a>超参数确定</h3><p>基本所有的模型超参数以及一些随机数种子都在实例化时候指定，为了搜索合适的超参数通常都是在一定值的范围内去控制变量将结果绘图</p>
+<p>在一般时期（理解不深，时间充裕）情况下可以采用遍历绘图或网格搜索来检索测试集上最优的参数；而对模型参数有较深理解后，可以根据当前的模型表现来平衡偏差和方差</p>
+<h4 id="网格搜索"><a href="#网格搜索" class="headerlink" title="网格搜索"></a>网格搜索</h4><p>。。。</p>
+<h4 id="偏差方差平衡"><a href="#偏差方差平衡" class="headerlink" title="偏差方差平衡"></a>偏差方差平衡</h4><script type="math/tex; mode=display">
+E(f ; D)=\operatorname{bias}^{2}(x)+\operatorname{var}(x)+\varepsilon^{2}</script><ul>
+<li>偏差：模型的预测值与真实值之间的差异，过拟合时通常偏差较低，此时方差接近数据本身分布情况</li>
+<li>方差：模型预测结果与该次预测平均的误差水平（解释的不如不解释），欠拟合的时候容易方差较低（比如唯一值预测）</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>偏差大</th>
+<th>偏差小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方差大</td>
+<td>模型对此数据不合适，换模型</td>
+<td>过拟合；模型太复杂；</td>
+</tr>
+<tr>
+<td>方差小</td>
+<td>欠拟合；模型太简单；预测稳定但很不准确</td>
+<td>非常理想的模型适配</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h2><p>通常对监督学习中的分类问题和回归问题，各有一套常用指标评估模型效果</p>
+<h3 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h3><p>分类问题直觉上即有一些评估指标衡量分类的准确性，具体如下</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>预测1</th>
+<th>预测0</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真实1</td>
+<td>11</td>
+<td>10</td>
+<td>总真实1：11+10</td>
+</tr>
+<tr>
+<td>真实0</td>
+<td>01</td>
+<td>00</td>
+<td>总真实0：01+00</td>
+</tr>
+<tr>
+<td></td>
+<td>预测1：11+01</td>
+<td>预测0：10+00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="通用指标"><a href="#通用指标" class="headerlink" title="通用指标"></a>通用指标</h4><p>准确率 Accuracy：预测正确的样本占总样本比例</p>
+<script type="math/tex; mode=display">
+\text { Accuracy }=\frac{11+00}{11+10+01+00}</script><h4 id="捕捉少数类水平"><a href="#捕捉少数类水平" class="headerlink" title="捕捉少数类水平"></a>捕捉少数类水平</h4><ul>
+<li>精确度 Precision：真正为 1 样本占预测为 1 的样本比例，越低越反映误伤了 0</li>
+</ul>
+<script type="math/tex; mode=display">
+\text { Precision }=\frac{11}{11+01}</script><ul>
+<li>召回率 Recall：对真样本预测正确的样本占所有真样本的比例，<strong>当期望尽可能找出少数类时重视更高的召回率</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+\text { Recall }=\frac{11}{11+10}</script><ul>
+<li>F1 measure：由于召回率和精确度此消彼长，因此追求平衡产生了综合指标，追求<strong>较高</strong>的该度量能使得其中两个指标都比较高</li>
+</ul>
+<script type="math/tex; mode=display">
+F-\text { measure }=\frac{2}{\frac{1}{\text { Precision }}+\frac{1}{\text { Recall }}}=\frac{2 * \text { Precision } * \text { Recall }}{\text { Precision }+\text { Recall }}</script><h4 id="判断多数类的考量"><a href="#判断多数类的考量" class="headerlink" title="判断多数类的考量"></a>判断多数类的考量</h4><ul>
+<li>特异度 Specificity：对 0 样本预测正确的样本占所有 0 样本的比例，衡量了模型将多数类判断正确的能力</li>
+</ul>
+<script type="math/tex; mode=display">
+\text { Specificity }=\frac{00}{01+00}</script><ul>
+<li>假正率 False positive rate：1 - 特异度，衡量模型将多数类判断错误的能力</li>
+</ul>
+<script type="math/tex; mode=display">
+F P R=\frac{01}{01+00}</script><h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h4><p>度量基本都在 <code>sklearn.metrics</code> 中</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>confusion_matrix</td>
+<td>混淆矩阵</td>
+</tr>
+<tr>
+<td>accuracy_score</td>
+<td>准确率</td>
+</tr>
+<tr>
+<td>precision_score</td>
+<td>精确度</td>
+</tr>
+<tr>
+<td>recall_score</td>
+<td>召回率</td>
+</tr>
+<tr>
+<td>precision_recall_curve</td>
+<td>精确度-召回率平衡曲线</td>
+</tr>
+<tr>
+<td>f1_socre</td>
+<td>F1 measure</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix <span class="keyword">as</span> CM, precision_score <span class="keyword">as</span> PS, recall_score <span class="keyword">as</span> RS</span><br><span class="line"></span><br><span class="line">CM(y_true, y_pred, label=[<span class="number">1</span>,<span class="number">0</span>]) <span class="comment"># 返回 2 * 2，label 指定原数据哪个为真</span></span><br><span class="line">PS(y_true, y_pred, label=[<span class="number">1</span>,<span class="number">0</span>]) <span class="comment"># 返回结果</span></span><br><span class="line">RS(y_true, y_pred, label=[<span class="number">1</span>,<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<h5 id="绘制-ROC-曲线，计算-AUC-面积"><a href="#绘制-ROC-曲线，计算-AUC-面积" class="headerlink" title="绘制 ROC 曲线，计算 AUC 面积"></a>绘制 ROC 曲线，计算 AUC 面积</h5><p>ROC 曲线以 FPR 为横坐标，Recall 为纵坐标绘制曲线，下方面积越大越优，取对角线切点为最优点</p>
+<p><code>sklearn,metrics.roc_curve(y_true,y_score,pos_label=None,sample_weight=None,drop_intermediate=True)</code></p>
+<ul>
+<li>y_true：数组，形状=[n_samples]，真实标签</li>
+<li>y_score：数组，置信度分数，可以是正类样本的概率值，或置信度分数（如SVM 的 decision_function 返回的距离</li>
+<li>pos_label：整数或字符串，默认 None，描述正类样本</li>
+<li>sample_weight：形如 [n_samples] 样本权重</li>
+<li>drop_intermediate：默认 True，会舍弃一些 ROC 曲线上不显示的阈值点</li>
+</ul>
+<p>返回三个值：FPR、Recall、阈值（视输入为概率阈值或距离阈值）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_curve</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_auc_score <span class="keyword">as</span> AUC <span class="comment"># 计算 AUC 面积</span></span><br><span class="line"></span><br><span class="line">FPR, recall, thresholds = roc_curve(y,clf_proba.decision_function(X), pos_label=<span class="number">1</span>)</span><br><span class="line">auc = AUC(y,clf_proba.decision_function(X))</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://remedios14.github.io/2022/02/22/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E7%BB%BC%E8%BF%B0/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://remedios14.github.io/2022/02/22/Machine-Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E7%BB%BC%E8%BF%B0/";
+            const title         = "「机器学习基础-综述」";
+            const excerpt       = `综述一些机器学习思想和 sklearn 中常用的命令形式
+工程流程
+获取数据，明确判断目标（分类、回归等），查看特征的缺失情况和统计分布 train.info() \ train.describe()
+（维度较低或一定程度可解释时）绘...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>, <a class="tag-none-link" href="/tags/%E7%BB%BC%E8%BF%B0/" rel="tag">综述</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-05-07</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 机器学习基础-决策树" href="/2022/02/22/Machine-Learning/机器学习基础-决策树/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 机器学习基础-随机森林" href="/2022/02/22/Machine-Learning/机器学习基础-随机森林/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Game-Engine/">Game-Engine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphics/">Games-Graphics</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WebGL/">WebGL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.73em;">Pre-Process</a> <a href="/tags/QuickStart/" style="font-size: 0.6em;">QuickStart</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/algorithm/" style="font-size: 0.6em;">algorithm</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/data-analysing/" style="font-size: 0.67em;">data analysing</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/11/Graphics/WebGL-%E5%85%A5%E9%97%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> WebGL-入门环境搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Golang-常规算法实现</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/03/Golang/Golang-QuickIntro/"><i class="fa  fa-book"></i> Golang-QuickIntro</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/"><i class="fa  fa-book"></i> Shader入门精要-常用编写</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E6%A6%82%E8%BF%B0/"><i class="fa  fa-book"></i> Shader入门精要-概述</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Remedios14"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 Mikyi喵喵呜~ 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Mikyi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2377259266"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

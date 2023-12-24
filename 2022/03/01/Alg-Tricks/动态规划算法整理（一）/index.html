@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.webp">
+  <title>动态规划算法整理 | Mikyi喵喵呜~</title>
+  <meta name="author" content="Mikyi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="折磨, 算法, 面试" />
+  
+  <meta name="description" content="注：主要编题顺序及算法模板来自公众号「代码随想录 」，强推！ 动态规划，Dynamic Programming ，如果某一问题有很多重叠子问题，使用动态规划是最有效的。 动态规划中每一个状态一定是由上一个状态推导出来的 取或不取得问题通常可以抽象成 0-1 背包问题，明确各物品的价值和取物品的容量 阶段分类 位置转移：包括在已知转移花费时确定总花费、已知位置时确定路径数等 取舍问题：典型的背包问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划算法整理">
+<meta property="og:url" content="http://remedios14.github.io/2022/03/01/Alg-Tricks/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Mikyi喵喵呜~">
+<meta property="og:description" content="注：主要编题顺序及算法模板来自公众号「代码随想录 」，强推！ 动态规划，Dynamic Programming ，如果某一问题有很多重叠子问题，使用动态规划是最有效的。 动态规划中每一个状态一定是由上一个状态推导出来的 取或不取得问题通常可以抽象成 0-1 背包问题，明确各物品的价值和取物品的容量 阶段分类 位置转移：包括在已知转移花费时确定总花费、已知位置时确定路径数等 取舍问题：典型的背包问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
+<meta property="article:published_time" content="2022-03-01T11:46:01.000Z">
+<meta property="article:modified_time" content="2022-09-03T01:45:40.000Z">
+<meta property="article:author" content="Mikyi">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="折磨">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  <script id="MathJax-script" <strong>async</strong>src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Mikyi喵喵呜~" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Mikyi喵喵呜~</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Mikyi喵喵呜~</h2> <br />
+                        <span>So we beat on, boats against the current, borne back ceaselessly into the past.</span>
+                        <!--<span class="typeWriter" data-end="3000" data-text='["So we beat on, boats against the current, borne back ceaselessly into the past.", "我们奋力前行,小舟逆水而上,不断地被浪潮推回到过去。", "Aureliano, está lloviendo en Macondo.", "演者はセリフの傀儡だ"]'></span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">动态规划算法整理</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-03-01</li>
+                <li><i class="fa fa-user"></i> 作者 Mikyi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~10.81K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1662169540000"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <p><strong>注：主要编题顺序及算法模板来自公众号「<a target="_blank" rel="noopener" href="https://programmercarl.com/">代码随想录</a> 」，强推！</strong></p>
+<p>动态规划，Dynamic Programming ，如果某一问题有很多重叠子问题，使用动态规划是最有效的。</p>
+<p>动态规划中每一个状态一定是由上一个状态推导出来的</p>
+<p>取或不取得问题通常可以抽象成 0-1 背包问题，明确各物品的价值和取物品的容量</p>
+<h3 id="阶段分类"><a href="#阶段分类" class="headerlink" title="阶段分类"></a>阶段分类</h3><ol>
+<li>位置转移：包括在已知转移花费时确定总花费、已知位置时确定路径数等</li>
+<li>取舍问题：典型的背包问题延申，注意抽象化成背包问题的取舍<ol>
+<li>价值最大化：取舍的价值最大化通常由已搜出的结果单值转移（474重量约束为二维，可以看看）</li>
+<li><strong>组合数</strong>搜索：搜索目标容量的组合数通常要对所有已搜出的结果累加</li>
+</ol>
+</li>
+<li>完全背包：物品无限取，首先即是对容量的遍历要改为从小到大<ul>
+<li>求组合数：必须外层遍历物品，内层遍历容量</li>
+<li>求排列数：必须外层遍历容量，内层遍历物品</li>
+<li>求组合的最小元素数：遍历顺序不影响，但要注意初始化</li>
+</ul>
+</li>
+</ol>
+<h4 id="关于完全背包的组合和排列问题的解释"><a href="#关于完全背包的组合和排列问题的解释" class="headerlink" title="关于完全背包的组合和排列问题的解释"></a>关于完全背包的组合和排列问题的解释</h4><p><del>纯个人理解，可能有偏差</del></p>
+<p>求组合个数则需要外层物品内层背包；求排列数（不同排列但数相同视为两种）则需要外层背包内层物品；而仅考虑所有组合中的最小组时则不在意顺序</p>
+<p>对于求组合的问题 —— 尝试考虑物品重量组合 [1,3]</p>
+<ul>
+<li>外层处理 1 重量物品时，无论容量如何都只能有计数 一</li>
+<li>外层处理 3 重量物品时，仅会在容量达到 4、7 等值发生 +1 计数，而无关物品顺序</li>
+</ul>
+<p>对于求排列的问题 —— 尝试思考物品重量组合 [1,3] </p>
+<ul>
+<li>当外层达到容量 3. 时，毫无争议地有 [1,1,1] 和 [3] 两种组合</li>
+<li>当外层达到容量 4. 时，先考虑 1 重量物品，则由 3. 容量的两种组合得到同样计数 二，再考虑 3 重量物品得到计数 一，此时总共的组合有 [1,1,1,1], [3,1], [1,3]，已经可以初见端弥</li>
+<li>当外层容量达到 5. 时，显然对 1 重量物品有计数 三 [1,1,1,1,1], [3,1,1], [1,3,1]，而对 3 重量物品有计数 一 [1,1,3]，排列性质由此体现</li>
+</ul>
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
+<li>确定 dp 数组内容及下标的含义</li>
+<li>确定递推公式</li>
+<li>dp 数组如何初始化</li>
+<li>确定遍历顺序</li>
+<li>举例推导 dp 数组</li>
+</ol>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><p>原本的 0-1 背包用二维数组求解，随后发现 i+1 维的数组更新时仅依赖于 i 维数组的已更新值，因此可以用一维的 dp 数组逐次更新，此时要注意内循环要反向来确保物品只取用一次</p>
+<ul>
+<li><ol>
+<li>不同的二叉搜索树：转移公式考虑以各个数做根能如何组合</li>
+</ol>
+</li>
+</ul>
+<h2 id="背包题组"><a href="#背包题组" class="headerlink" title="背包题组"></a>背包题组</h2><h4 id="位置转移"><a href="#位置转移" class="headerlink" title="位置转移"></a>位置转移</h4><ul>
+<li><ol>
+<li>斐波那契数：略</li>
+</ol>
+</li>
+<li><ol>
+<li>爬楼梯：略</li>
+</ol>
+</li>
+<li><ol>
+<li>使用最小花费爬楼梯：每个阶梯有 cost[i]，花费体力后可以向上一个或两个，初始可选 0 或 1，求最小花费<ul>
+<li>解法：i 处由 dp[i-1] + cost[i-1] 和 dp[i-2] + cost[i-2] 的较小者确定<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minCostClimbingStairs</span><span class="params">(<span class="type">int</span>[] cost)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[cost.length+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt; dp.length; i++) &#123;</span><br><span class="line">            dp[i] = Math.min(dp[i-<span class="number">2</span>]+cost[i-<span class="number">2</span>],dp[i-<span class="number">1</span>]+cost[i-<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[cost.length];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>不同路径：从 m*n 网格左上角，每次只能向下一格或向右一格，有几种路径到右下角<ul>
+<li>解法：从右下角往回动态规划，两条边初始化都为 1</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>不同路径Ⅱ：中间有障碍物在数组中用 1 标记<ul>
+<li>解法：保证障碍物格对应解始终为 0，注意障碍物在边上的情况</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>整数拆分：给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。如 10 = 3 + 3 + 4<ul>
+<li>解法：dp[i] 表示数字 i 可拆分后的最大乘积，则 dp[i] = max(dp[i],max(dp[i-k]<em>k,(i-k)</em>k)) 需要遍历所有小于 i 的 k 得到<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">integerBreak</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">3</span>; i &lt;= n ; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(dp[i], <span class="built_in">max</span>((i - j) * j, dp[i - j] * j));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>不同的二叉搜索树：给定一个整数 n，求以 1…n 为节点组成的二叉搜索树有多少种<ul>
+<li>解法：<br>dp[3]，就是 元素1为头结点搜索树的数量 + 元素2为头结点搜索树的数量 + 元素3为头结点搜索树的数量</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>元素1为头结点搜索树的数量 = 右子树有2个元素的搜索树数量 * 左子树有0个元素的搜索树数量</p>
+<p>元素2为头结点搜索树的数量 = 右子树有1个元素的搜索树数量 * 左子树有1个元素的搜索树数量</p>
+<p>元素3为头结点搜索树的数量 = 右子树有0个元素的搜索树数量 * 左子树有2个元素的搜索树数量</p>
+<p>有2个元素的搜索树数量就是dp[2]。</p>
+<p>有1个元素的搜索树数量就是dp[1]。</p>
+<p>有0个元素的搜索树数量就是dp[0]。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; j++) &#123;</span><br><span class="line">                dp[i] += dp[j - <span class="number">1</span>] * dp[i - j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="0-1-背包问题"><a href="#0-1-背包问题" class="headerlink" title="0-1 背包问题"></a>0-1 背包问题</h4><ul>
+<li>物品重量和价值，单物品最多取一次，求定容下最大价值<ul>
+<li>解法：</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>定义数组：用 dp[i][j] 表示从 [0-i] 号物品中取，容量为 j 时的最大价值</li>
+<li>转移规则：对每个 i 物品，若不将 i 放入背包则等价于 dp[i-1][j] ，若将 i 放入背包则等价于 value[i] + dp[i-1][j-weight[i]]；从而确定递推公式 dp[i][j] = max(dp[i-1][j], dp[i-1][j-weight[i]] + value[i])</li>
+<li>初始化：j = 0 时显然对任意 i 都为 0；当 j &lt; weight[0] 时都有 dp[0][j] = 0 —— 初始边际行列初始化完毕</li>
+<li>确定遍历顺序：从物品遍历和从重量遍历都可以</li>
+<li>举例推导：自己动手打草稿试试</li>
+</ol>
+<p>最好固定先遍历物品，在遍历重量</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test_2_wei_bag_problem1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; weight = &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; value = &#123;<span class="number">15</span>, <span class="number">20</span>, <span class="number">30</span>&#125;;</span><br><span class="line">    <span class="type">int</span> bagweight = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 二维数组</span></span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(weight.<span class="built_in">size</span>(), <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(bagweight + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = weight[<span class="number">0</span>]; j &lt;= bagweight; j++) &#123;</span><br><span class="line">        dp[<span class="number">0</span>][j] = value[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// weight数组的大小 就是物品个数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; weight.<span class="built_in">size</span>(); i++) &#123; <span class="comment">// 遍历物品</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt;= bagweight; j++) &#123; <span class="comment">// 遍历背包容量</span></span><br><span class="line">            <span class="keyword">if</span> (j &lt; weight[i]) dp[i][j] = dp[i - <span class="number">1</span>][j];</span><br><span class="line">            <span class="keyword">else</span> dp[i][j] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][j], dp[i - <span class="number">1</span>][j - weight[i]] + value[i]);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; dp[weight.<span class="built_in">size</span>() - <span class="number">1</span>][bagweight] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">test_2_wei_bag_problem1</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用一维数组时要严格先遍历物品，且重量要从后往前遍历</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test_1_wei_bag_problem</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; weight = &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; value = &#123;<span class="number">15</span>, <span class="number">20</span>, <span class="number">30</span>&#125;;</span><br><span class="line">    <span class="type">int</span> bagweight = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(bagweight+<span class="number">1</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; weight.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = bagweight; j &gt;= weight[i]; j--) &#123;</span><br><span class="line">            dp[j] = <span class="built_in">max</span>(dp[j], dp[j-weight[i]] + value[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; dp[bagweight] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">test_1_wei_bag_problem</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><ol>
+<li>分割等和子集：非空数组仅包含正整数，是否可以分割成两个和相同的子集<ul>
+<li>解法：回溯用一个整数统计取到的和，只要找到和为 sum/2 的组合即有解（超时了）；</li>
+<li>抽象成 0-1 背包问题，每个元素仅允许一次放入，背包容量 sum/2 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">canPartition</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">            sum += num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (sum % <span class="number">2</span> == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[sum / <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> sum/<span class="number">2</span>; j &gt;= nums[i]; j--) &#123;</span><br><span class="line">                dp[j] = Math.max(dp[j], dp[j-nums[i]]+nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[sum/<span class="number">2</span>] == sum/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>最后一块石头的重量Ⅱ：有一堆石头，每块石头的重量都是正整数。每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &lt;= y。那么粉碎的可能结果如下：如果 x == y，那么两块石头都会被完全粉碎； 如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。 最后，最多只会剩下一块石头。返回此石头最小的可能重量。如果没有石头剩下，就返回 0。<ul>
+<li>解法：尽量将石头分成重量相同（或相近）的两堆</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>目标和：给定一个非负整数数组，a1, a2, …, an, 和一个目标数，S。现在你有两个符号 + 和 -。对于数组中的任意一个整数，你都可以从 + 或 -中选择一个符号添加在前面。返回可以使最终数组和为目标数 S 的所有添加符号的方法数。<ul>
+<li>解法：回溯法超时；抽象成 0-1 背包，分两组 left - right = target = left - (sum - left) =&gt; left = (sum + target) / 2 ；这里的 left 即应当分为正组的和</li>
+<li>抽象步骤：<ol>
+<li>明确数组：dp[j] 表示要达成和为 j 有 dp[j] 种组合方法</li>
+<li>递推公式：dp[j] += dp[j-nums[i]]，即对所有不大于 j 的 nums[i]，都可由 dp[j-nums[i]] 对应一种组合，从而要全部累加</li>
+<li>初始化：dp[0] 表示达成和为 0 的正数组合，不取正数即得到，因此为 1</li>
+<li>确定遍历顺序：nums 在外，target 在内且倒序</li>
+<li>举例实验<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findTargetSumWays</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> S)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) sum += nums[i];</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">abs</span>(S) &gt; sum) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 此时没有方案</span></span><br><span class="line">        <span class="keyword">if</span> ((S + sum) % <span class="number">2</span> == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 此时没有方案</span></span><br><span class="line">        <span class="type">int</span> bagSize = (S + sum) / <span class="number">2</span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(bagSize + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = bagSize; j &gt;= nums[i]; j--) &#123;</span><br><span class="line">                dp[j] += dp[j - nums[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[bagSize];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>一和零：一个二进制字符串数组 strs 和两个整数 m、n；从 strs 中取子集，使得子集中最多有 m 个 0 和 n 个 1，求最大的子集大小<ul>
+<li>解法：认为是关于容量有两条约束的 0-1 背包，每个字符串元素取或不取</li>
+<li>抽象：<ol>
+<li>dp[i][j] : i 为 0 容量，j 为 1 容量，存值表示最大子集大小</li>
+<li>用 zero[k], one[k] 表示元素包含的 0， 1 数量，则转移规则 dp[i][j] = max(dp[i][j], dp[i-zero[k]][j-one[k]]+1) —— 可以遍历时单个统计而非一开始先统计好</li>
+<li>物品价值可抽象为每个字符串元素对子集大小的贡献，恒定为 1 ，故初始化为 0</li>
+<li>遍历顺序</li>
+<li>举例实验</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h4><ul>
+<li>每种物品有无限个的背包问题，和 0-1 背包的主要区别在于遍历顺序：之前都是在内层对容量逆序遍历，为了确保物品仅添加一次，现在改为正序遍历，当遍历时容量足够仍可能加上已经放入过的物品；<del>初始化也有一点不同，即第一层可以重复放入物品 i = 0</del>；实际上在第一层循环就进行了重复放入</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先遍历物品，在遍历背包</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test_CompletePack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; weight = &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; value = &#123;<span class="number">15</span>, <span class="number">20</span>, <span class="number">30</span>&#125;;</span><br><span class="line">    <span class="type">int</span> bagWeight = <span class="number">4</span>;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(bagWeight + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; weight.<span class="built_in">size</span>(); i++) &#123; <span class="comment">// 遍历物品</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = weight[i]; j &lt;= bagWeight; j++) &#123; <span class="comment">// 遍历背包容量</span></span><br><span class="line">            dp[j] = <span class="built_in">max</span>(dp[j], dp[j - weight[i]] + value[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; dp[bagWeight] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">test_CompletePack</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><ol>
+<li>零钱兑换Ⅱ：不同面额硬币和总金额，求达成总金额的组合数<ul>
+<li>解法：完全背包，注意初始化（dp[0] = 1）和转移（因为是求组合数所以累加）；循环顺序严格要物品在外，确保不重复组合</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>组合总和Ⅳ：给定一个由正整数组成且不存在重复数字的数组，找出和为给定目标正整数的组合的个数。（数字可重复，相同数字不同排列视为不同）<ul>
+<li>解法：排序后同上<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">combinationSum4</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(target + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= target; i++) &#123; <span class="comment">// 遍历背包</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; nums.<span class="built_in">size</span>(); j++) &#123; <span class="comment">// 遍历物品</span></span><br><span class="line">                <span class="keyword">if</span> (i - nums[j] &gt;= <span class="number">0</span> &amp;&amp; dp[i] &lt; INT_MAX - dp[i - nums[j]]) &#123;</span><br><span class="line">                    dp[i] += dp[i - nums[j]];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[target];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>零钱兑换：面值 coins 和金额 amount，求组合的最少硬币个数，不能组合则返回 -1<ul>
+<li>解法：容易想到贪心；用完全背包做时，由于考虑个数，其转移为取最小值，因此无关排序或组合，遍历顺序没有影响，初始化时则要全部取最大值</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>完全平方数：给定正整数 n，找到若干个完全平方数（比如 1, 4, 9, 16, …）使得它们的和等于 n。你需要让组成和的完全平方数的个数最少。给你一个整数 n ，返回和为 n 的完全平方数的 最少数量 。<ul>
+<li>解法：容量为 n，而物品为顺序排列的完全平方数</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numSquares</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, INT_MAX)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i * i &lt;= n; i++) &#123; <span class="comment">// 遍历物品</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123; <span class="comment">// 遍历背包</span></span><br><span class="line">                <span class="keyword">if</span> (j - i * i &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                    dp[j] = <span class="built_in">min</span>(dp[j - i * i] + <span class="number">1</span>, dp[j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><ol>
+<li>单词拆分：给定一个非空字符串 s 和一个包含非空单词的列表 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。<ul>
+<li>解法：将字符串看作背包，单词为物品，可以重复取用，尽量装满背包<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">wordBreak</span><span class="params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>&#123;</span><br><span class="line">        <span class="function">unordered_set&lt;string&gt; <span class="title">wordSet</span><span class="params">(wordDict.begin(), wordDict.end())</span></span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">dp</span><span class="params">(s.size() + <span class="number">1</span>, <span class="literal">false</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= s.<span class="built_in">size</span>(); i++) &#123;   <span class="comment">// 遍历背包</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;       <span class="comment">// 遍历物品</span></span><br><span class="line">                string word = s.<span class="built_in">substr</span>(j, i - j); <span class="comment">//substr(起始位置，截取的个数)</span></span><br><span class="line">                <span class="keyword">if</span> (wordSet.<span class="built_in">find</span>(word) != wordSet.<span class="built_in">end</span>() &amp;&amp; dp[j]) &#123;</span><br><span class="line">                    dp[i] = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[s.<span class="built_in">size</span>()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h4><p>在完全背包和 0-1 背包之间加上了物品个数约束，可以从 0-1 背包衍生而来，对物品个数遍历</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test_multi_pack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; weight = &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; value = &#123;<span class="number">15</span>, <span class="number">20</span>, <span class="number">30</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; nums = &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>&#125;;</span><br><span class="line">    <span class="type">int</span> bagWeight = <span class="number">10</span>;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(bagWeight + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; weight.<span class="built_in">size</span>(); i++) &#123; <span class="comment">// 遍历物品</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = bagWeight; j &gt;= weight[i]; j--) &#123; <span class="comment">// 遍历背包容量</span></span><br><span class="line">            <span class="comment">// 以上为01背包，然后加一个遍历个数</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= nums[i] &amp;&amp; (j - k * weight[i]) &gt;= <span class="number">0</span>; k++) &#123; <span class="comment">// 遍历个数</span></span><br><span class="line">                dp[j] = <span class="built_in">max</span>(dp[j], dp[j - k * weight[i]] + k * value[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 打印一下dp数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= bagWeight; j++) &#123;</span><br><span class="line">            cout &lt;&lt; dp[j] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; dp[bagWeight] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">test_multi_pack</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://remedios14.github.io/2022/03/01/Alg-Tricks/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://remedios14.github.io/2022/03/01/Alg-Tricks/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89/";
+            const title         = "「动态规划算法整理」";
+            const excerpt       = `注：主要编题顺序及算法模板来自公众号「代码随想录 」，强推！
+动态规划，Dynamic Programming ，如果某一问题有很多重叠子问题，使用动态规划是最有效的。
+动态规划中每一个状态一定是由上一个状态推导出来的
+取或不取得问题...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/%E6%8A%98%E7%A3%A8/" rel="tag">折磨</a>, <a class="tag-none-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>, <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-09-03</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 贪心算法整理" href="/2022/03/01/Alg-Tricks/贪心算法整理/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 动态规划算法整理（二）" href="/2022/03/02/Alg-Tricks/动态规划算法整理（二）/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Game-Engine/">Game-Engine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphics/">Games-Graphics</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WebGL/">WebGL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.73em;">Pre-Process</a> <a href="/tags/QuickStart/" style="font-size: 0.6em;">QuickStart</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/algorithm/" style="font-size: 0.6em;">algorithm</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/data-analysing/" style="font-size: 0.67em;">data analysing</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/11/Graphics/WebGL-%E5%85%A5%E9%97%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> WebGL-入门环境搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Golang-常规算法实现</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/03/Golang/Golang-QuickIntro/"><i class="fa  fa-book"></i> Golang-QuickIntro</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/"><i class="fa  fa-book"></i> Shader入门精要-常用编写</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E6%A6%82%E8%BF%B0/"><i class="fa  fa-book"></i> Shader入门精要-概述</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Remedios14"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 Mikyi喵喵呜~ 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Mikyi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2377259266"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

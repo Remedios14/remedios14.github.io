@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.webp">
+  <title>Cpp基础 | Mikyi喵喵呜~</title>
+  <meta name="author" content="Mikyi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="cpp, tips" />
+  
+  <meta name="description" content="编写习惯命名通常使用 驼峰命名法  小驼峰：在一个完整标识符中第二个单词起首字母大写，常用于函数、方法名 大驼峰：每个单词首字母大写，常用于类名、命名空间等  个人习惯：对于属性变量使用下划线命名法，私有属性在末尾再加一个下划线以作区分 编辑格式 运算符、括号 等符号总是留出空格方便阅读 代码块的左括号置于关键词或函数行末，右括号另起一行（个人习惯） 命名空间结束行位置追加注释 文件末尾留单空行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cpp基础">
+<meta property="og:url" content="http://remedios14.github.io/2022/03/28/C++/Cpp%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Mikyi喵喵呜~">
+<meta property="og:description" content="编写习惯命名通常使用 驼峰命名法  小驼峰：在一个完整标识符中第二个单词起首字母大写，常用于函数、方法名 大驼峰：每个单词首字母大写，常用于类名、命名空间等  个人习惯：对于属性变量使用下划线命名法，私有属性在末尾再加一个下划线以作区分 编辑格式 运算符、括号 等符号总是留出空格方便阅读 代码块的左括号置于关键词或函数行末，右括号另起一行（个人习惯） 命名空间结束行位置追加注释 文件末尾留单空行">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
+<meta property="article:published_time" content="2022-03-28T11:35:48.000Z">
+<meta property="article:modified_time" content="2022-06-04T13:04:06.000Z">
+<meta property="article:author" content="Mikyi">
+<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="tips">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  <script id="MathJax-script" <strong>async</strong>src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Mikyi喵喵呜~" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Mikyi喵喵呜~</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Mikyi喵喵呜~</h2> <br />
+                        <span>So we beat on, boats against the current, borne back ceaselessly into the past.</span>
+                        <!--<span class="typeWriter" data-end="3000" data-text='["So we beat on, boats against the current, borne back ceaselessly into the past.", "我们奋力前行,小舟逆水而上,不断地被浪潮推回到过去。", "Aureliano, está lloviendo en Macondo.", "演者はセリフの傀儡だ"]'></span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">Cpp基础</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-03-28</li>
+                <li><i class="fa fa-user"></i> 作者 Mikyi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~7.73K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1654347846000"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <h2 id="编写习惯"><a href="#编写习惯" class="headerlink" title="编写习惯"></a>编写习惯</h2><h3 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h3><p>通常使用 <strong>驼峰命名法</strong></p>
+<ul>
+<li>小驼峰：在一个完整标识符中第二个单词起首字母大写，常用于函数、方法名</li>
+<li>大驼峰：每个单词首字母大写，常用于类名、命名空间等</li>
+</ul>
+<p>个人习惯：对于属性变量使用下划线命名法，私有属性在末尾再加一个下划线以作区分</p>
+<h3 id="编辑格式"><a href="#编辑格式" class="headerlink" title="编辑格式"></a>编辑格式</h3><ul>
+<li>运算符、括号 等符号总是留出空格方便阅读</li>
+<li>代码块的左括号置于关键词或函数行末，右括号另起一行（个人习惯）</li>
+<li>命名空间结束行位置追加注释</li>
+<li>文件末尾留单空行</li>
+<li>引入文件总是按首字母字典序，且库文件在前，工程文件在后</li>
+</ul>
+<h2 id="复合数据类型"><a href="#复合数据类型" class="headerlink" title="复合数据类型"></a>复合数据类型</h2><p>在基本的整型、浮点型、字符之外的复合数据类型，包括数组、字符串等</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>声明如 <code>typeName arrName[arrSize];</code> ，只有在声明时可以初始化，其后只能通过赋值来操作，例句</p>
+<p><code>char tlifs[4] &#123;&#39;h&#39;, &#39;i&#39;, 112, &#39;\0&#39;&#125;;</code></p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>传统的 C 式字符串是 char 数组，并且在存储中严格要求以 <code>&#39;\0&#39;</code> 字符作为结尾，即长度总是比字符数多一个</p>
+<p>而封装的 string 类则可以动态调整大小，是更方便的用法</p>
+<h3 id="结构体-struct"><a href="#结构体-struct" class="headerlink" title="结构体 struct"></a>结构体 struct</h3><p>主要用于存储成员（变量）组合的一类对象，定义、实例化、访问如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">myStruct</span> &#123;</span><br><span class="line">    string name;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    <span class="type">double</span> length;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    myStruct me &#123;<span class="string">&quot;Mikyi&quot;</span>, <span class="number">17</span>, <span class="number">16.5</span>&#125;;</span><br><span class="line">	myStruct emp;</span><br><span class="line">	emp.name = <span class="string">&quot;why&quot;</span>;</span><br><span class="line">	emp.age = <span class="number">24</span>;</span><br><span class="line">	emp.length = <span class="number">18.0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="共用体-union"><a href="#共用体-union" class="headerlink" title="共用体 union"></a>共用体 union</h3><p>是一种数据格式，可以存储不同的数据类型，但一个对象同一时刻只能代表一种（相当于延展了对象的使用范围，但没见用过）；在声明对象的时候申请空间，按照共生体能存储的最大类型的空间申请，可以实现节约空间的效果（一个空间反复使用）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="title class_">one4all</span> &#123;</span><br><span class="line">    <span class="type">int</span> int_val;</span><br><span class="line">    <span class="type">long</span> long_val;</span><br><span class="line">    <span class="type">double</span> double_val;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    one4all pail;</span><br><span class="line">    pail.int_val = <span class="number">15</span>;</span><br><span class="line">    cout &lt;&lt; pail.int_val;</span><br><span class="line">    pail.double_val = <span class="number">1.38&#x27;</span>;</span><br><span class="line">    cout &lt;&lt; pail.double_val;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="枚举-enum"><a href="#枚举-enum" class="headerlink" title="枚举 enum"></a>枚举 enum</h3><p>一种新类型，用整数值来代表符号常量（枚举常量可以转为 int 用于运算和赋值，但反之不行），具体代表的整数值可以在定义时给出，不给出则默认按顺序递增</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">bits</span> &#123;one = <span class="number">1</span>, two = <span class="number">2</span>, four = <span class="number">4</span>, eight = <span class="number">8</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="指针和自由存储空间"><a href="#指针和自由存储空间" class="headerlink" title="指针和自由存储空间"></a>指针和自由存储空间</h3><p>计算机在存储数据时必须跟踪三种基本属性：</p>
+<ul>
+<li>①：信息存储的内存位置（在赋值给变量时会派生出地址，以十六进制存储）</li>
+<li>②：存储的值</li>
+<li>③：存储数据表示的类型</li>
+</ul>
+<p>指针即是一个存储地址作为值 ② 的变量，对于一个常规的变量如 var，通过地址运算符即可得到其地址值 <code>&amp;var</code>，此时又对应一个解引用符，可以将获取指针变量所存储地址上的变量</p>
+<p>下面的例子</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> var = <span class="number">5</span>;</span><br><span class="line"><span class="type">int</span> *v_ptr = &amp;var; <span class="comment">// 此时 v_ptr 是一个指针变量，调用得到的是 var 的地址</span></span><br><span class="line">cout &lt;&lt; *v_ptr;</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：一定要在对指针解引用之前，将指针初始化为一个确定的、适当的地址<br><strong>注意</strong>：<code>*++pt</code> 和 <code>++*pt</code> 是不同的，前者是先由指针指向下一位再解引用，后者是先解引用取得值再自增；<code>(*pt)++</code> 没有争议，而 <code>*pt++</code> 实际上的表达式值和前者一样，但是此后会对 pt 自增（因为自增优先级更高，但是在完成表达式后执行）</p>
+<h4 id="const-指针"><a href="#const-指针" class="headerlink" title="const 指针"></a>const 指针</h4><p>有两种方式将 const 关键字用于指针</p>
+<ul>
+<li>指针指向一个 const 常量对象：防止指针被用于修改其指向的值，实际上并非指针指向的值为常量，并且仍然允许修改指针的指向（const 变量的地址只能赋给 const 指针，而不能给非 const 指针）<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> age = <span class="number">18</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *pt = &amp;age; <span class="comment">// a pointer to const int</span></span><br><span class="line"><span class="comment">// *pt += 1; // 非法</span></span><br><span class="line">age = <span class="number">17</span>; <span class="comment">// 合法</span></span><br><span class="line"><span class="type">int</span> mage = <span class="number">80</span>;</span><br><span class="line">pt = &amp;mage; <span class="comment">// 合法，但仍不能用 *pt 来修改</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">float</span> g = <span class="number">9.80</span>;</span><br><span class="line"><span class="comment">// float *pm = &amp;g; // 非法</span></span><br><span class="line"><span class="type">const</span> <span class="type">float</span> *pm = &amp;g; <span class="comment">// 合法</span></span><br></pre></td></tr></table></figure></li>
+<li>将指针本身声明为 const 常量：防止改变指针指向的位置，可以用指针去修改其指向的值<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> sloth = <span class="number">3</span>;</span><br><span class="line"><span class="type">int</span> * <span class="type">const</span> finger = &amp;sloth; <span class="comment">// a const pointer to int</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> * <span class="type">const</span> stick = &amp;sloth; <span class="comment">// a const pointer to const int</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="动态数组"><a href="#动态数组" class="headerlink" title="动态数组"></a>动态数组</h4><p>使用 new 关键字可以创建动态数组，其仅在实际使用时才创建真实数据，区别于在编译时就给数组分配内存的静态数组</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *pt = <span class="keyword">new</span> <span class="type">int</span>;</span><br><span class="line"><span class="type">double</span> *ps = <span class="keyword">new</span> <span class="type">double</span>[<span class="number">500</span>]; <span class="comment">// ps 指向数组的第一个元素，但可以正常索引访问</span></span><br><span class="line">ps[<span class="number">1</span>] = <span class="number">2.2</span>;</span><br><span class="line"><span class="keyword">delete</span> pt;</span><br><span class="line"><span class="keyword">delete</span> [] ps;</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：对于一个数组名如 arr，其实际上是指向该数组第一个元素的指针，<code>arr[n]</code> 相当于 <code>*(arr + n)</code> 也即对第一个元素移动 n 位类型长度得到的值</p>
+<h2 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h2><p>循环体语法略</p>
+<p>tips：</p>
+<ul>
+<li>do…while 循环可以用于持续接受输入判断是否符合条件</li>
+</ul>
+<h3 id="逗号表达式"><a href="#逗号表达式" class="headerlink" title="逗号表达式"></a>逗号表达式</h3><p>cpp 允许在一个语句中用逗号来同时执行多个表达式，其会严格按照顺序完成，并且整体语句的返回值为第二个表达式，例如</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cata = <span class="number">17</span>, <span class="number">420</span>; <span class="comment">// cata 为 17</span></span><br><span class="line">cats = (<span class="number">17</span>, <span class="number">420</span>); <span class="comment">// cats 为 420</span></span><br></pre></td></tr></table></figure>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><ul>
+<li>decltype ：可以用于声明修改变量的类型，格式如 <code>decltype(expression) var;</code> 能将 var 的类型设置为表达式的类型<ul>
+<li>在定义优先队列时也可以用于将自定义的排序函数作为类型传入 <code>priority_queue&lt;T, Container, decltype(&amp;cmp)&gt; pq(cmp);</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="内存模型和命名空间"><a href="#内存模型和命名空间" class="headerlink" title="内存模型和命名空间"></a>内存模型和命名空间</h2><p><code>#include</code> 导入头文件即可</p>
+<h3 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h3><p>与其将结构声明加入到每一个文件中，不如将其放在头文件中，然后在每一个源代码文件中包含该头文件，通常将程序分成两个主要文件：</p>
+<ul>
+<li>头文件：包含结构声明和使用这些结构的函数的原型<ul>
+<li>函数原型</li>
+<li>使用 #define 或 const 定义的符号常量</li>
+<li>结构声明</li>
+<li>类声明</li>
+<li>模板声明</li>
+<li>内联函数</li>
+</ul>
+</li>
+<li>源代码文件：包含与结构有关的函数代码和其调用函数代码</li>
+</ul>
+<p><strong>注意：</strong>不要使用 #include 来包含源代码文件，会导致多重声明</p>
+<h4 id="预处理器编译指令"><a href="#预处理器编译指令" class="headerlink" title="预处理器编译指令"></a>预处理器编译指令</h4><p><code>#ifndef</code> 用于避免多次定义同一个变量名，相当于预处理的条件语句</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> COORDIN_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> COORDIN_H_</span></span><br><span class="line"><span class="comment">// place include file contents here</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><ul>
+<li><p>自动存储持续性变量：一般的常规变量都是在代码块内作用，且内层的代码块中定义的同名变量具有更高的优先级；若定义在代码块外部则可以被其他文件访问</p>
+</li>
+<li><p>静态持续变量：有三种链接性，均在整个程序执行期间存在，寿命更长</p>
+<ul>
+<li>外部链接性（可在其他文件中访问）：在代码块外声明即可</li>
+<li>内部链接性（只能在当前文件中访问）：在代码块外使用 static 限定符声明即可</li>
+<li>无链接性（只能在当前函数或代码块中访问）：在代码块内使用 static 声明即可<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> global = <span class="number">1000</span>; <span class="comment">// static external</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> one_file = <span class="number">50</span>; <span class="comment">// static internal</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">funct1</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> count = <span class="number">0</span>; <span class="comment">// static no linkage</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="说明符和限定符"><a href="#说明符和限定符" class="headerlink" title="说明符和限定符"></a>说明符和限定符</h4><p>一些存储说明符（以及 cv-限定符）提供了其他有关存储的信息，在同一个声明中不能使用多个说明符（可以和 cv 符一起）：</p>
+<ul>
+<li>auto：用于自动类型推断</li>
+<li>register：指示寄存器存储</li>
+<li>static：静态声明</li>
+<li>extern：引用声明，即引用在其他地方定义的变量</li>
+<li>thread loacl：用于线程上，相当于 static 用于变量</li>
+<li>cv-限定符：<ul>
+<li>const：避免程序修改已经初始化的内存；同时将全局变量的链接性变为内部的（每个文件都可以有自己的一组常量），可以用 extern 引用其他文件的常量</li>
+<li>volatile：用于改善编译器的优化能力 —— 一般若某个变量被多次使用，编译器会将其值缓存到寄存器中，而非多次查找；加上该关键词则不会这样</li>
+</ul>
+</li>
+<li>mutable：用于结构或类变量的成员，即使结构体对象为 const，用该关键词声明的成员也可以进行修改</li>
+</ul>
+<h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><p>用于控制名称的作用域</p>
+<h4 id="传统命名空间"><a href="#传统命名空间" class="headerlink" title="传统命名空间"></a>传统命名空间</h4><ul>
+<li>声明区域(declaration region)：可以在其中进行声明的区域。例如全局变量的声明区域为整个文件</li>
+<li>潜在作用域(potential scope)：从声明点开始到声明区域的结尾</li>
+<li>作用域(scope)：变量对程序实际可见的范围（可能内层再套代码块而不可见）</li>
+</ul>
+<h4 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h4><p>通过定义一种新的声明区域来创建命名的名称空间。可以是全局的，也可以位于另一个名称空间中，但不能位于代码块中。</p>
+<p>命名空间是开放的，可以后续完成定义或添加内容</p>
+<p>通常通过作用域解析运算符 <code>::</code> 来访问</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> Jack &#123;</span><br><span class="line">	<span class="type">double</span> pail;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">fetch</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="type">int</span> pal;</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">Well</span> &#123;...&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> Jack &#123;</span><br><span class="line">	<span class="type">char</span> *goose&#123;<span class="type">const</span> <span class="type">char</span> *&#125;;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">fetch</span><span class="params">()</span> </span>&#123;...&#125;;</span><br><span class="line">&#125;</span><br><span class="line">Jack::pail = <span class="number">12.34</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>using 声明和 using 编译指令<ul>
+<li>using 声明：<code>using Jack::pail;</code> 则相当于在代码块中可用 pail 访问到 Jail 中已经声明的该变量</li>
+<li>using 编译指令：<code>using namespace Jack;</code> 相当于使名称空间中所有名称都可用</li>
+</ul>
+</li>
+</ul>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>比较经典的就是以 0 做除数的异常，需要程序员在可能出现异常的位置先进行判断并设置好异常处理的逻辑；有一下几种选择</p>
+<h3 id="调用-abort"><a href="#调用-abort" class="headerlink" title="调用 abort()"></a>调用 abort()</h3><p>位于 cstdlib 头文件的函数，其典型实现是项标准错误流 cerr 发送消息 “abnormal program termination” 然后终止程序</p>
+<p>使用时先 <code>#include &lt;cstdlib&gt;</code> 然后在判断异常后直接调用该函数即可</p>
+<h3 id="返回错误码"><a href="#返回错误码" class="headerlink" title="返回错误码"></a>返回错误码</h3><p>根据函数的返回值来指出问题，例如 istream 的 get（void） 方法通常返回下一个输入字符的 ASCII 码，但到达文件尾时将返回特殊值 EOF</p>
+<p>自己编写时则可以新增一个指针用于传递，当发生异常时将其地址上的值改为特定的值以便检测</p>
+<h3 id="异常机制"><a href="#异常机制" class="headerlink" title="异常机制"></a>异常机制</h3><p>对异常的处理包括三个部分：</p>
+<ul>
+<li>引发异常（使用 throw 关键字引发特定类型对象异常）<ul>
+<li>异常类型可以是字符串，通常为一个类</li>
+</ul>
+</li>
+<li>使用处理程序捕获异常（使用 catch 关键字和其后括号中的类型声明捕获特定异常）</li>
+<li>使用 try 块</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// error3.cpp -- using an exception</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">hmean</span><span class="params">(<span class="type">double</span> a, doube b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">double</span> x, y, z;</span><br><span class="line">	</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Enter two numbers: &quot;</span>;</span><br><span class="line">	<span class="keyword">while</span> (std::cin &gt;&gt; x &gt;&gt; y) &#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			z = <span class="built_in">hmean</span>(x, y);</span><br><span class="line">		&#125; <span class="built_in">catch</span> (<span class="type">const</span> <span class="type">char</span> * s) &#123;</span><br><span class="line">			std::cout &lt;&lt; s &lt;&lt; std::endl;</span><br><span class="line">			std:;cout &lt;&lt; <span class="string">&quot;Enter a new pair of numbers: &quot;</span>;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;Harmonic mean of &quot;</span> &lt;&lt; x &lt; <span class="string">&quot; and &quot;</span> &lt;&lt; y &lt;&lt; <span class="string">&quot; is &quot;</span> &lt;&lt; z &lt;&lt; std::endl;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;Enter next set of numbers &lt;q to quit&gt;: &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Bye!\n&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">hmean</span><span class="params">(<span class="type">double</span> a, <span class="type">double</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a == b) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="string">&quot;bad hmean() arguments: a = -b not allowed&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">2.0</span> * a * b / (a + b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="异常类型"><a href="#异常类型" class="headerlink" title="异常类型"></a>异常类型</h3><p>通常可以定义异常类来存储异常时的数据，以便区分不同情况下的异常并提供解决异常的信息</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">bad_hmean</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">double</span> v1;</span><br><span class="line">	<span class="type">double</span> v2;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">bad_hmean</span>(<span class="type">double</span> a = <span class="number">0</span>, <span class="type">double</span> b = <span class="number">0</span>) : <span class="built_in">v1</span>(a), <span class="built_in">v2</span>(b) &#123;&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">mesg</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">bad_hmean::mesg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;hmean(&quot;</span> &lt;&lt; v1 &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; v2 &lt;&lt; <span class="string">&quot;): invalid arguments: a = -b\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>捕获到异常时只需要调用对象方法即可</p>
+<h3 id="exception-类"><a href="#exception-类" class="headerlink" title="exception 类"></a>exception 类</h3><p>在 exception 头文件中有该类，可以作为其他异常类的基类，方便 catch；有一个 what() 的虚函数，返回一个字符串，其特征随实现而异，可以在子类中重新定义</p>
+<p>在捕获的时候可以统一调用 what 方法返回异常信息<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">bad_hmean</span> : <span class="keyword">public</span> std::exception &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">const</span> <span class="type">char</span> * <span class="title">what</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="string">&quot;bad arguments to hmean()&quot;</span>; &#125;</span><br><span class="line">...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>C++ 库定义了很多基于 exception 的异常类型</p>
+<ol>
+<li>stdexception 异常类：位于头文件 stdexception 中，派生出 logic_error 和 runtime_error 类，再各自派生出一些异常类型；都可以传入 string 构造对象，what 方法打印该 string<ul>
+<li>logic_error：编写逻辑异常<ul>
+<li>domain_error：定义域异常</li>
+<li>invalid_argument：非法参数传递</li>
+<li>length_error：空间不足</li>
+<li>out_of_bounds：用于指示索引错误</li>
+</ul>
+</li>
+<li>runtime_error：运行时异常<ul>
+<li>range_error</li>
+<li>overflow_error：计算结果超过某种类型的最大数量级</li>
+<li>underflow_error</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>bad_alloc 异常和 new：对于使用 new 导致的内存分配问题，C++ 的最新处理方式是让 new 引发 bad_alloc 异常</li>
+<li>空指针和 new</li>
+</ol>
+<h2 id="RTTI"><a href="#RTTI" class="headerlink" title="RTTI"></a>RTTI</h2><p>运行阶段类型识别（Runtime Type Identification），是新添加的特性之一，旨在为程序在运行阶段确定对象的类型提供一种标准方式</p>
+<h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><p>auto_ptr（不再推荐使用）、unique_ptr 和 shared_ptr 是 C++11 创建出来用于表示指针的类，因为是类从而可以方便地通过析构函数管理释放内存；</p>
+<p>使用时需要导入 memory 头文件，几个智能指针类的构造函数都接受一个类型的指针对象（可以使用 new 创建）作为参数来构造，该构造由 explicit 声明，不支持自动转换；位于命名空间 std 中</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="function">unique_ptr&lt;<span class="type">double</span>&gt; <span class="title">pdu</span><span class="params">(<span class="keyword">new</span> <span class="type">double</span>)</span></span>;</span><br><span class="line">string str = <span class="string">&quot;a string&quot;</span>;</span><br><span class="line"><span class="function">shared_ptr&lt;string&gt; <span class="title">pss</span><span class="params">(<span class="keyword">new</span> string(str))</span></span>;</span><br></pre></td></tr></table></figure>
+<p>后续使用时可以和一般指针一样，整体上对释放内存做了优化</p>
+<p>unique_ptr 不允许两个对象指向同一个内存地址，即在编译阶段拒绝了此类操作；但是当函数返回 unique_ptr 对象时允许将其赋给新声明的对象，随后快速销毁函数返回的临时 unique_ptr<br>shared_ptr 则允许</p>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://remedios14.github.io/2022/03/28/C++/Cpp%E5%9F%BA%E7%A1%80/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://remedios14.github.io/2022/03/28/C++/Cpp%E5%9F%BA%E7%A1%80/";
+            const title         = "「Cpp基础」";
+            const excerpt       = `编写习惯命名通常使用 驼峰命名法
+
+小驼峰：在一个完整标识符中第二个单词起首字母大写，常用于函数、方法名
+大驼峰：每个单词首字母大写，常用于类名、命名空间等
+
+个人习惯：对于属性变量使用下划线命名法，私有属性在末尾再加一个下划线以作区...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/cpp/" rel="tag">cpp</a>, <a class="tag-none-link" href="/tags/tips/" rel="tag">tips</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-06-04</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Cpp容器类" href="/2022/03/28/C++/Cpp容器类/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 职业概述-测试开发" href="/2022/03/29/Career-Intro/职业概述-测试开发/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Game-Engine/">Game-Engine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphics/">Games-Graphics</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WebGL/">WebGL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.73em;">Pre-Process</a> <a href="/tags/QuickStart/" style="font-size: 0.6em;">QuickStart</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/algorithm/" style="font-size: 0.6em;">algorithm</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/data-analysing/" style="font-size: 0.67em;">data analysing</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/11/Graphics/WebGL-%E5%85%A5%E9%97%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> WebGL-入门环境搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Golang-常规算法实现</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/03/Golang/Golang-QuickIntro/"><i class="fa  fa-book"></i> Golang-QuickIntro</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/"><i class="fa  fa-book"></i> Shader入门精要-常用编写</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E6%A6%82%E8%BF%B0/"><i class="fa  fa-book"></i> Shader入门精要-概述</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Remedios14"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 Mikyi喵喵呜~ 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Mikyi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2377259266"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.webp">
+  <title>Shader入门精要-常用编写 | Mikyi喵喵呜~</title>
+  <meta name="author" content="Mikyi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="图形学应用, 着色器" />
+  
+  <meta name="description" content="Shader 常用编写标准光照模型逐像素光照 和 逐顶点光照；通常逐像素的效果略佳  环境光部分 fixed3 ambient &#x3D; UNITY_LIGHTMODEL_AMBIENT.xyz;  Lambert 反射考虑环境光和漫反射的着色模型，环境光视作常量，漫反射的光源视作平行光，反射光量由入射角度和法向的余弦值确定，即两个单位向量点积 将计算过程置于 vertex 部分或 fragment 部">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shader入门精要-常用编写">
+<meta property="og:url" content="http://remedios14.github.io/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/index.html">
+<meta property="og:site_name" content="Mikyi喵喵呜~">
+<meta property="og:description" content="Shader 常用编写标准光照模型逐像素光照 和 逐顶点光照；通常逐像素的效果略佳  环境光部分 fixed3 ambient &#x3D; UNITY_LIGHTMODEL_AMBIENT.xyz;  Lambert 反射考虑环境光和漫反射的着色模型，环境光视作常量，漫反射的光源视作平行光，反射光量由入射角度和法向的余弦值确定，即两个单位向量点积 将计算过程置于 vertex 部分或 fragment 部">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
+<meta property="article:published_time" content="2022-07-14T15:19:10.000Z">
+<meta property="article:modified_time" content="2022-07-14T15:19:12.000Z">
+<meta property="article:author" content="Mikyi">
+<meta property="article:tag" content="图形学应用">
+<meta property="article:tag" content="着色器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  <script id="MathJax-script" <strong>async</strong>src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Mikyi喵喵呜~" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Mikyi喵喵呜~</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Mikyi喵喵呜~</h2> <br />
+                        <span>So we beat on, boats against the current, borne back ceaselessly into the past.</span>
+                        <!--<span class="typeWriter" data-end="3000" data-text='["So we beat on, boats against the current, borne back ceaselessly into the past.", "我们奋力前行,小舟逆水而上,不断地被浪潮推回到过去。", "Aureliano, está lloviendo en Macondo.", "演者はセリフの傀儡だ"]'></span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">Shader入门精要-常用编写</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-07-14</li>
+                <li><i class="fa fa-user"></i> 作者 Mikyi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~4.20K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1657811952000"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <h2 id="Shader-常用编写"><a href="#Shader-常用编写" class="headerlink" title="Shader 常用编写"></a>Shader 常用编写</h2><h3 id="标准光照模型"><a href="#标准光照模型" class="headerlink" title="标准光照模型"></a>标准光照模型</h3><p><strong>逐像素光照</strong> 和 <strong>逐顶点光照</strong>；通常逐像素的效果略佳</p>
+<ul>
+<li>环境光部分 <code>fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;</code></li>
+</ul>
+<h4 id="Lambert-反射"><a href="#Lambert-反射" class="headerlink" title="Lambert 反射"></a>Lambert 反射</h4><p>考虑环境光和漫反射的着色模型，环境光视作常量，漫反射的光源视作平行光，反射光量由入射角度和法向的余弦值确定，即<strong>两个单位向量点积</strong></p>
+<p>将计算过程置于 vertex 部分或 fragment 部分就是顶点着色和像素着色的区别，不过需要的信息都是一样的；对顶点较少的简单模型通常其像素着色效果更佳，而复杂模型则差不多</p>
+<ul>
+<li>Half Lambert 模型 ：初始的 Lambert 模型对负的余弦值直接取 0 做成纯黑，实际视觉效果不好；该方法即将 [-1,1] 的余弦值缩放平移到 [0,1] 来对负的值也进行着色</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">o.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);</span><br><span class="line">...</span><br><span class="line">fixed3 worldNormal = normalize(i.worldNormal);</span><br><span class="line">fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);</span><br><span class="line">fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * saturate(dot(worldNormal, worldLightDir));</span><br></pre></td></tr></table></figure>
+<h4 id="Specular-反射"><a href="#Specular-反射" class="headerlink" title="Specular 反射"></a>Specular 反射</h4><p>镜面反射，能计算出高光的出射角，当视线方向在出射角附近时能观察到高光，此附近判断通过计算角度代入一个<strong>指数函数的基</strong>得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">o.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);</span><br><span class="line">o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz; // 模型世界坐标</span><br><span class="line">...</span><br><span class="line">fixed3 reflectDir = normalize(reflect(-worldLightDir, worldNormal));</span><br><span class="line">fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos.xyz);</span><br><span class="line">fixed3 specular = _LightColor0.rbg * _Specular.rgb * pow(saturate(dot(reflectDir, viewDir)), _Gloss);</span><br></pre></td></tr></table></figure>
+<h4 id="Blinn-Phong-光照模型"><a href="#Blinn-Phong-光照模型" class="headerlink" title="Blinn-Phong 光照模型"></a>Blinn-Phong 光照模型</h4><p>简化反射角度的计算，使用光照和视线向量的和 v_sum，若视线接近出射角度则 v_sum 和法线比较接近，因此可以使用 v_sum 点积 normal 来代入上面的指数基</p>
+<p><strong>感觉高光范围更大一点</strong></p>
+<h3 id="纹理映射"><a href="#纹理映射" class="headerlink" title="纹理映射"></a>纹理映射</h3><p>一个模型的顶点通常都会定义 纹理坐标 texcoord 属性，描述该模型的平面展开图到一个 [0,1]^2 范围的映射，而在应用纹理时即通过这个值得到纹理细节分布；纹理 ST 通常为 (1,1,0,0) 表示无缩放无偏移</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">_MainTex (&quot;Main tex&quot;, 2D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">...</span><br><span class="line">sampler2D _MainTex;</span><br><span class="line">float4 _MainTex_ST;</span><br><span class="line">...</span><br><span class="line">o.uv = v.texcoord.xy * _MainTex_ST.xy * _MainTex_ST.zw;</span><br><span class="line">...</span><br><span class="line">fixed3 albedo = tex2D(_MainTex, i.uv).rgb * _Color.rgb;</span><br><span class="line">fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;</span><br><span class="line">fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(worldNormal, worldLightDir));</span><br><span class="line">fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0, dot(worldNormal, halfDir)), _Gloss);</span><br></pre></td></tr></table></figure>
+<p>环境光和漫反射部分受材质影响，但镜反射高光与材质颜色无关，为什么呢？</p>
+<h4 id="凹凸纹理"><a href="#凹凸纹理" class="headerlink" title="凹凸纹理"></a>凹凸纹理</h4><p>o.uv 前两个值存 <code>_MainTex</code> 的纹理坐标，后两个存 <code>_BumpMap</code> 的（实际上通常使用同一组纹理坐标）；后续同样要 <code>tex2D(_BumpMap, i.uv.zw)</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">_BumpMap (&quot;Normal Map&quot;, 2D) = &quot;bump&quot; &#123;&#125;</span><br><span class="line">_BumpScale (&quot;Bump Scale&quot;, Float) = 1.0</span><br><span class="line">...</span><br><span class="line">sampler2D _BumpMap;</span><br><span class="line">float4 _BumpMap_ST;</span><br><span class="line">float _BumpScale;</span><br><span class="line">...</span><br><span class="line">float4 tangent : TANGENT;</span><br><span class="line">...</span><br><span class="line">o.uv.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;</span><br><span class="line">o.uv.zw = v.texcoord.xy * _BumpMap_ST.xy + _BumpMap_ST.zw;</span><br><span class="line">// 计算副法线并建立模型空间到法线空间的变换（就是三个方向轴组合矩阵）</span><br><span class="line">float3 binormal = cross(normalize(v.normal), normalize(v.tangent.xyz)) * v.tangent.w;</span><br><span class="line">float3x3 rotation = float3x3(v.tangent.xyz, binormal, v.normal);</span><br><span class="line">o.lightDir = mul(rotation, ObjSpaceLightDir(v.vertex)).xyz;</span><br><span class="line">o.viewDir = mul(rotation, ObjeSpaceViewDir(v.vertex)).xyz;</span><br><span class="line">...</span><br><span class="line">// 切线空间的两个 dir 要先 normalize，这里略</span><br><span class="line">fixed4 packedNormal = tex2D(_BumpMap, i.uv.zw);</span><br><span class="line">fixed3 tangentNormal;</span><br><span class="line">tangentNormal.xy = (packedNormal.xy * 2 - 1) * _BumpScale;</span><br><span class="line">tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h4 id="渐变纹理"><a href="#渐变纹理" class="headerlink" title="渐变纹理"></a>渐变纹理</h4><p>下面实现了渐变的漫反射颜色</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fixed halfLambert = 0.5 * dot(worldNormal, worldLightDir) + 0.5;</span><br><span class="line">fixed3 diffuseColor = tex2D(_RampTex, fixed2(halfLambert, halfLambert)).rgb * _Color.rgb;</span><br><span class="line">fixed3 diffuse = _LightColor0.rgb * diffuseColor;</span><br></pre></td></tr></table></figure>
+<h4 id="遮罩纹理"><a href="#遮罩纹理" class="headerlink" title="遮罩纹理"></a>遮罩纹理</h4><p>实际使用中通常可以充分利用 mask_tex 的每个通道</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fixed specularMask = tex2D(_SpecularMask, i.uv).r * _SpecularScale;</span><br><span class="line">fixed3 specular = ... * specularMask;</span><br></pre></td></tr></table></figure>
+<h3 id="透明效果"><a href="#透明效果" class="headerlink" title="透明效果"></a>透明效果</h3><p>必要声明</p>
+<ul>
+<li>透明度测试效果<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SubShader &#123;</span><br><span class="line">	Tags &#123; &quot;Queue&quot;=&quot;AlphaTest&quot; &#125;</span><br><span class="line">	Pass &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>透明度混合效果（ZWrite Off 也可以写在 SubShader 中）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SubShader &#123;</span><br><span class="line">	Tags &#123; &quot;Queue&quot;=&quot;Transparent&quot; &#125;</span><br><span class="line">	Pass &#123; </span><br><span class="line">	ZWrite Off </span><br><span class="line">	... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Alpha-Test"><a href="#Alpha-Test" class="headerlink" title="Alpha Test"></a>Alpha Test</h4><p>使用 CG 语言中的 clip，其可传入标量或向量，只要任一分量小于 0 就舍弃该片元；其他实现没啥差别</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">clip(texColor.a - _Cutoff);</span><br><span class="line">// Equal to</span><br><span class="line">// if ((texColor.a - _Cutoff) &lt; 0.0) &#123;</span><br><span class="line">//     discard;</span><br><span class="line">// &#125;</span><br><span class="line">...</span><br><span class="line">Fallback &quot;Transparent/Cutout/VertexLit&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="Alpha-Blend"><a href="#Alpha-Blend" class="headerlink" title="Alpha Blend"></a>Alpha Blend</h4><p>Tags {“Queue”=”Transparent” “IgnoreProjector”=”True” “RenderType”=”Transparent”}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Pass &#123;</span><br><span class="line">Zwrite Off</span><br><span class="line">Blend SrcAlpha OneMinusSrcAlpha</span><br><span class="line">...</span><br><span class="line">return fixed4(ambient+diffuse, texColor.a * _AlphaScale);</span><br><span class="line">...</span><br><span class="line">Fallback &quot;Transparent/VertexLit&quot;</span><br></pre></td></tr></table></figure>
+<p>不需要 cutoff 部分，只要在 Pass 内声明，并在片元着色器中给透明度赋值即可由内部完成</p>
+<h4 id="开启深度写入的-Alpha-Blending"><a href="#开启深度写入的-Alpha-Blending" class="headerlink" title="开启深度写入的 Alpha Blending"></a>开启深度写入的 Alpha Blending</h4><p>使用两个 Pass，在第一个 Pass 内仅声明 <code>ZWrite On</code> 和 <code>ColorMask 0</code> 来写入深度并且不输出颜色，第二个 Pass 和通常的 Alpha Blending 一致</p>
+<ul>
+<li>ColorMask 后接 RGBA 的任意组合或 0，设置颜色通道的写掩码(write mask)</li>
+</ul>
+<h4 id="混合模式"><a href="#混合模式" class="headerlink" title="混合模式"></a>混合模式</h4><p>感觉可以另起一篇，回去看第八章最后再写吧</p>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://remedios14.github.io/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://remedios14.github.io/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/";
+            const title         = "「Shader入门精要-常用编写」";
+            const excerpt       = `Shader 常用编写标准光照模型逐像素光照 和 逐顶点光照；通常逐像素的效果略佳
+
+环境光部分 fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
+
+Lambert 反射考虑环境光和漫反射的...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%BA%94%E7%94%A8/" rel="tag">图形学应用</a>, <a class="tag-none-link" href="/tags/%E7%9D%80%E8%89%B2%E5%99%A8/" rel="tag">着色器</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-07-14</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Shader入门精要-概述" href="/2022/07/14/Games/Shader入门精要/Shader入门精要-概述/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Golang-QuickIntro" href="/2022/09/03/Golang/Golang-QuickIntro/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Game-Engine/">Game-Engine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphics/">Games-Graphics</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WebGL/">WebGL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.73em;">Pre-Process</a> <a href="/tags/QuickStart/" style="font-size: 0.6em;">QuickStart</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/algorithm/" style="font-size: 0.6em;">algorithm</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/data-analysing/" style="font-size: 0.67em;">data analysing</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/11/Graphics/WebGL-%E5%85%A5%E9%97%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> WebGL-入门环境搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Golang-常规算法实现</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/03/Golang/Golang-QuickIntro/"><i class="fa  fa-book"></i> Golang-QuickIntro</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/"><i class="fa  fa-book"></i> Shader入门精要-常用编写</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E6%A6%82%E8%BF%B0/"><i class="fa  fa-book"></i> Shader入门精要-概述</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Remedios14"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 Mikyi喵喵呜~ 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Mikyi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2377259266"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

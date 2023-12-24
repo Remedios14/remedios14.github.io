@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.webp">
+  <title>unity游戏开发（2） | Mikyi喵喵呜~</title>
+  <meta name="author" content="Mikyi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="入门介绍, 游戏脚本" />
+  
+  <meta name="description" content="区分于游戏的基本元素，所有的动态交互行为都由脚本负责完成 推荐在 Assets 资源目录下创建 Scripts 目录专门保存脚本，根据功能不同还可以继续深入目录层级 脚本 API 脚本使用醒目注意 Unity 中一般使用 float 而非 double，在脚本中指定参数时要使用 f 结尾，如 0.8f 脚本也是对象的一个组件，因此一个脚本文件中的 this 总是指向该组件，要获取实际的对象使用 t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="unity游戏开发（2）">
+<meta property="og:url" content="http://remedios14.github.io/2022/03/16/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/index.html">
+<meta property="og:site_name" content="Mikyi喵喵呜~">
+<meta property="og:description" content="区分于游戏的基本元素，所有的动态交互行为都由脚本负责完成 推荐在 Assets 资源目录下创建 Scripts 目录专门保存脚本，根据功能不同还可以继续深入目录层级 脚本 API 脚本使用醒目注意 Unity 中一般使用 float 而非 double，在脚本中指定参数时要使用 f 结尾，如 0.8f 脚本也是对象的一个组件，因此一个脚本文件中的 this 总是指向该组件，要获取实际的对象使用 t">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
+<meta property="article:published_time" content="2022-03-16T15:56:00.000Z">
+<meta property="article:modified_time" content="2022-04-29T05:46:46.000Z">
+<meta property="article:author" content="Mikyi">
+<meta property="article:tag" content="入门介绍">
+<meta property="article:tag" content="游戏脚本">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  <script id="MathJax-script" <strong>async</strong>src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Mikyi喵喵呜~" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Mikyi喵喵呜~</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Mikyi喵喵呜~</h2> <br />
+                        <span>So we beat on, boats against the current, borne back ceaselessly into the past.</span>
+                        <!--<span class="typeWriter" data-end="3000" data-text='["So we beat on, boats against the current, borne back ceaselessly into the past.", "我们奋力前行,小舟逆水而上,不断地被浪潮推回到过去。", "Aureliano, está lloviendo en Macondo.", "演者はセリフの傀儡だ"]'></span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">unity游戏开发（2）</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-03-16</li>
+                <li><i class="fa fa-user"></i> 作者 Mikyi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~5.29K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1651211206000"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <p>区分于游戏的基本元素，所有的动态交互行为都由脚本负责完成</p>
+<p>推荐在 Assets 资源目录下创建 Scripts 目录专门保存脚本，根据功能不同还可以继续深入目录层级</p>
+<p><a target="_blank" rel="noopener" href="https://docs.unity.cn/cn/current/ScriptReference/index.html">脚本 API</a></p>
+<h2 id="脚本使用"><a href="#脚本使用" class="headerlink" title="脚本使用"></a>脚本使用</h2><h3 id="醒目注意"><a href="#醒目注意" class="headerlink" title="醒目注意"></a>醒目注意</h3><ol>
+<li>Unity 中一般使用 float 而非 double，在脚本中指定参数时要使用 f 结尾，如 <code>0.8f</code></li>
+<li>脚本也是对象的一个组件，因此一个脚本文件中的 this 总是指向该组件，要获取实际的对象使用 <code>this.gameObject</code></li>
+</ol>
+<h3 id="脚本构成"><a href="#脚本构成" class="headerlink" title="脚本构成"></a>脚本构成</h3><p>创建一个 <em>脚本文件</em> 后会自动继承 <code>MonoBehaviour</code> 父类（规定所有脚本都需要），其中会自带一些必须要覆写的事件方法</p>
+<ul>
+<li><code>void Start()</code> : 脚本初始化（在第一帧更新之前）时会执行一次</li>
+<li><code>void Update()</code> : 每一帧都会调用一次，Unity 会尽可能快地刷新游戏，但帧率基本不固定</li>
+</ul>
+<p>public 属性可以在外部访问，在其上一行追加 <code>[ Tooltip(&quot;tip paragraphs&quot;) ]</code> 可以补充注解以便外部理解变量</p>
+<h3 id="脚本挂载"><a href="#脚本挂载" class="headerlink" title="脚本挂载"></a>脚本挂载</h3><p>选中对象后在其 Inspector 中增加组件可以挂载脚本；或者直接拖拽完成；同一个脚本可以挂载到多个对象</p>
+<ul>
+<li>脚本中的 public 属性可以直接在 Inspector 内修改其值；private 属性则不能访问<ul>
+<li>属性可以设置为数组，如 <code>public AudioClip[] songs;</code>，在外部可增删内容</li>
+</ul>
+</li>
+<li>属性可以设置为图片资源、游戏对象等引用类型，并且也在此处修改；可以在 Editor 中拖拽赋值</li>
+<li>一个挂载好的脚本也是一个组件（类对象），可以同组件的方法访问和操作</li>
+</ul>
+<h3 id="脚本调试"><a href="#脚本调试" class="headerlink" title="脚本调试"></a>脚本调试</h3><p>可以使用 Visual Studio 的断点调试，连接到 unity 进程实现运行过程中的调试，步骤如下</p>
+<ol>
+<li>在 VS 中添加断点，然后在上方选择附加到（Attach） Unity 进程</li>
+<li>在 Unity 中运行，由该进程执行脚本调用</li>
+<li>在 VS 中逐步调试；完成后点击停止调试（Detach）可以断开连接，Unity 仍正常运行</li>
+</ol>
+<h2 id="脚本常用命令"><a href="#脚本常用命令" class="headerlink" title="脚本常用命令"></a>脚本常用命令</h2><p>因为 C# 的语法也像 C++ 一样有命名空间，在此用这个分组来记录常用功能，对应功能的使用需要在变量名前加上或者在文件头部加上 <code>using ...;</code></p>
+<h3 id="对象获取及修改"><a href="#对象获取及修改" class="headerlink" title="对象获取及修改"></a>对象获取及修改</h3><h4 id="操作挂载对象"><a href="#操作挂载对象" class="headerlink" title="操作挂载对象"></a>操作挂载对象</h4><p><code>this</code> 变量总是指向该脚本挂载的对象，也像类内部编写一样可以在无歧义时省略，可以调用其 <code>GetComponent</code> 方法来获取并实例化其组件，其中涉及到泛型，例如</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SpriteRenderer renderer = <span class="keyword">this</span>.GetComponent&lt;SpriteRender&gt;();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建对象：一般基于绑定预制体调用 Instantiate 函数创建</li>
+<li>销毁对象：<code>GameObject.Destroy(this.gameObject);</code> 传入一个对象来销毁</li>
+</ul>
+<h4 id="获取任意对象"><a href="#获取任意对象" class="headerlink" title="获取任意对象"></a>获取任意对象</h4><ul>
+<li>按照名字来获取对象：<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GameObject obj = GameObjet.Find(<span class="string">&quot;/path/of/target&quot;</span>); <span class="comment">// 具体路径根据 Scene 中目录确定</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="获取当前的父、子对象"><a href="#获取当前的父、子对象" class="headerlink" title="获取当前的父、子对象"></a>获取当前的父、子对象</h4><p>由于 Unity 中与位置有关的操作都是相对于一个父对象的（默认画布对象），因此获取父子对象都在 transform 中实现</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GameObject parent = <span class="keyword">this</span>.transform.parent.GameObject;</span><br><span class="line"><span class="comment">// 查找当前的子节点</span></span><br><span class="line">Transform child1 = <span class="keyword">this</span>.transform.GetChild(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// 按照父子层级查找</span></span><br><span class="line">Transform bb = <span class="keyword">this</span>.transform.Find(<span class="string">&quot;bb&quot;</span>);</span><br><span class="line">Transform cc = <span class="keyword">this</span>.transform.Fine(<span class="string">&quot;bb/cc&quot;</span>); <span class="comment">// 找到 bb 的子节点 cc</span></span><br><span class="line"><span class="comment">// 遍历子对象</span></span><br><span class="line"><span class="keyword">foreach</span> (Transform child <span class="keyword">in</span> transform) &#123;</span><br><span class="line">    child.position += Vector3.up * <span class="number">10.0f</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 修改父节点</span></span><br><span class="line"><span class="keyword">this</span>.transform.SetParent(<span class="literal">null</span>); <span class="comment">// 挂载到场景根节点</span></span><br></pre></td></tr></table></figure>
+<h4 id="坐标与旋转"><a href="#坐标与旋转" class="headerlink" title="坐标与旋转"></a>坐标与旋转</h4><p>UnityEngine 模块中有数据类型 Vector3 用于表示一个三维向量</p>
+<p>一个对象的坐标存储在 position 中，<code>Euler Angles</code> 是三维欧拉角度（界面内的 rotation 是四维的，比较复杂）；欧拉角度各个维的值表示以相应轴逆时针旋转角度</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">transform.position = <span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">1.0f</span>, <span class="number">0</span>);</span><br><span class="line">transform.eulerAngles = <span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">0</span>, <span class="number">90f</span>);</span><br><span class="line">Vector3 heading = transform.up; <span class="comment">// 返回物体 y 轴指向的标准化向量， x 轴有 right 属性，z 轴有 forward</span></span><br></pre></td></tr></table></figure>
+<p>以上修改都是世界坐标；本地坐标则是以父节点中心展开坐标系来计算，变量以 local 开头：<code>transform.localPosition;</code></p>
+<p><strong>补充</strong>：transform.LookAt 可以直接转向某一个物体的方向，实际是让物体的 z 轴指向目标</p>
+<p>调用 transform.Rotate 方法也可实现旋转，传入三个方向上所需的旋转角度值以及可以选的参考系；其中角度可以由向量运算</p>
+<p>以上的旋转都是物体自转；而对一个父对象自转</p>
+<h4 id="物体运动"><a href="#物体运动" class="headerlink" title="物体运动"></a>物体运动</h4><p>调用 transform 组件的 Translate 方法；通用地传入三值坐标以及可选的参考坐标系</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transform.Translate(<span class="number">0</span>, <span class="number">0.2f</span>, <span class="number">0</span>, Space.Self); <span class="comment">// 以自身为坐标系</span></span><br><span class="line">transform.Translate(<span class="number">0</span>, <span class="number">0.2f</span>, <span class="number">0</span>, Space.World); <span class="comment">// 世界坐标系</span></span><br></pre></td></tr></table></figure>
+<h3 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h3><h4 id="鼠标事件处理"><a href="#鼠标事件处理" class="headerlink" title="鼠标事件处理"></a>鼠标事件处理</h4><p>所有的 Unity 脚本都是继承自 Monobegaviour 类，而需要绑定对鼠标事件响应的功能时，可以覆写几个函数完成；部分事件的触发随 3D 和 2D 有所区别：</p>
+<ul>
+<li>OnMouseEnter：鼠标移入 GUI 控件或者碰撞体时调用</li>
+<li>OnMouseOver：鼠标停留在 GUI 控件或者碰撞体时每帧调用</li>
+<li>OnMouseExit：鼠标离开 GUI 控件或碰撞体时调用</li>
+<li>OnMouseDown：鼠标在 GUI 或碰撞器上按键按下时调用</li>
+<li>OnMouseUp：鼠标按键释放时调用</li>
+<li>OnMouseDrag：当鼠标在 GUI 或碰撞器上按下并保持拖拽时每帧调用</li>
+<li>OnMouseUpAsButton：仅当在同一 GUI 或碰撞体上按下鼠标然后松开按键时调用</li>
+</ul>
+<p><strong>补充</strong>：另外可以使用 Input 类来捕获外部的输入，其中就包括捕获鼠标、键盘输入，此内容在 Unity Engine 中简述</p>
+<h4 id="键盘事件处理"><a href="#键盘事件处理" class="headerlink" title="键盘事件处理"></a>键盘事件处理</h4><p>参考下方 Input 类内容</p>
+<h4 id="通用脚本事件"><a href="#通用脚本事件" class="headerlink" title="通用脚本事件"></a>通用脚本事件</h4><p>系统主动调用的事件函数：</p>
+<ul>
+<li>Awake()：初始化时调用；即使脚本组件被禁用也仍会调用</li>
+<li>Start()：初始化时调用；被禁用时不会调用</li>
+<li>Update()</li>
+<li>FixedUpdated()</li>
+</ul>
+<p>余下的都在具体事件发生时回调，可以分为脚本文件本身的事件和脚本绑定对象的事件</p>
+<ul>
+<li>脚本本身：<ul>
+<li>OnDestroy：脚本销毁时调用</li>
+</ul>
+</li>
+<li>绑定对象：<ul>
+<li>OnBecameVisible：对于任意一个相机可见时调用</li>
+<li>OnBecameInvisible：对于任意一个相机不可见时调用</li>
+<li>OnEnable：每当对象启用或者激活时调用一次</li>
+<li>OnDisable：对象禁用或者取消激活时调用</li>
+</ul>
+</li>
+</ul>
+<h3 id="延迟调用"><a href="#延迟调用" class="headerlink" title="延迟调用"></a>延迟调用</h3><p>Invoke 相关函数实现延迟调用函数，是 MonoBehaviour 已经实现的方法，可以直接执行</p>
+<ul>
+<li>Invoke(func, secs) ：传入函数名字符串，要求至少有一个无参的重载；第二个参数是等待的时间</li>
+<li>InvokeRepeating(func, wait, gap) ：等待后重复调用</li>
+<li>IsInvoking(func) ：检查是否已经在延迟调用；用于避免重复</li>
+<li>CancleInvoking(func) ：若不传参数则取消全部</li>
+</ul>
+<h3 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h3><p>有两种碰撞检测：1. 物理学的碰撞检测 Dynamic 刚体；2. 运动学的碰撞检测 Kinematic 刚体（例如设置为自机）</p>
+<ol>
+<li>一般需要为对象的 RigidBody 组件勾选 Kinematic 并为 Collider 组件勾选 Trigger 来启用</li>
+<li>挂载脚本覆写 <code>OnTriggerEnter / Stay / Exit(Collider obj)</code> 来编写响应逻辑（对 2D 游戏有专门的 OnTriggerEnter2D 和 Collider2D 类）</li>
+<li>obj.GameObject 等属性可以访问到发生碰撞的对象</li>
+</ol>
+<p><strong>补充</strong>：通常对场景中的不同对象在 Inspector 中添加 Tag 来实现分组，方便如碰撞检测时执行不同的操作</p>
+<h3 id="常用模块"><a href="#常用模块" class="headerlink" title="常用模块"></a>常用模块</h3><h4 id="UnityEngine"><a href="#UnityEngine" class="headerlink" title="UnityEngine"></a>UnityEngine</h4><h5 id="核心类（MonoBehaviour-和-GameObject）"><a href="#核心类（MonoBehaviour-和-GameObject）" class="headerlink" title="核心类（MonoBehaviour 和 GameObject）"></a>核心类（MonoBehaviour 和 GameObject）</h5><p>MonoBehaviour 是所有 Unity 脚本的父类，其大多数方法用于覆写来提供给引擎调用</p>
+<ul>
+<li>Invoke：用于延迟调用方法，传入方法名的字符串和等待的秒数；相关的还有 IsInvoking、InvokeRepeating 等</li>
+</ul>
+<p>GameObject 则是 Unity 场景中所有实体的基类，在脚本中访问其他对象以及其组件都可以经过该类</p>
+<ul>
+<li>操控游戏主控对象：通常可以创建一个不带其他资源的对象来记录游戏得分、时间线等信息，此时使用一个脚本来保存和修改各个属性；调用脚本类的方法有两种（推荐后者）<ul>
+<li>获取到脚本组件然后调用公开方法<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GameObject main = GameObject.Find(<span class="string">&quot;游戏主控&quot;</span>);</span><br><span class="line">MyGame myGame = main.GetComponent&lt;MyGame&gt;();</span><br><span class="line">myGame.AddScore(<span class="number">1</span>);</span><br></pre></td></tr></table></figure></li>
+<li>调用 GameObject 实例的 SendMessage 方法，实现消息调用<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GameObject main = GameObject.Find(<span class="string">&quot;游戏主控&quot;</span>);</span><br><span class="line">main.SendMessage(<span class="string">&quot;AddScore&quot;</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>SendMessage 方法查找目标方法并执行：1. 遍历该对象上所有的 MonoBehaviour 组件； 2. 检查该组件上是否有目标方法； 3. 如果有此方法则执行（没找到则报错）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="内置类"><a href="#内置类" class="headerlink" title="内置类"></a>内置类</h5><ul>
+<li>向量类对象：包括 Vector2、Vector3 等<ul>
+<li><code>new Vector3(0, 0, 0);</code> 创建对象</li>
+<li>x、y、z 直接访问属性；magnitude 长度属性</li>
+<li>normalized 返回归一化对象</li>
+<li>Vector3.up、right、forward 创建指定方向的静态常量对象，分别 y、x、z 轴向；可以在计算旋转角度时使用</li>
+<li>重载了 <code>+ -</code> 和标量 <code>* /</code> ；另有 Dot 、Cross 静态运算方法</li>
+<li>静态方法 <code>SignedAngle</code> 和 <code>Angle</code> 计算旋转角度</li>
+</ul>
+</li>
+<li>屏幕对象： Screen<ul>
+<li><code>Screen.width</code> 和 height 返回整型的像素值</li>
+<li>获取相对屏幕的坐标（左下角为 0,0）<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector3 pos = transform.position;</span><br><span class="line">Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>输入捕获对象： Input<ul>
+<li>鼠标动作捕获（静态）方法，通常接受整型参数 0 表示左键、1 表示右键、2 表示中键<ul>
+<li>GetMouseButton() 对应按键处于按下状态持续为 true</li>
+<li>GetMouseButtonDown() 对应按键按下单帧为 true</li>
+<li>GetMouseButtonUp() 松开对应按键时单帧为 true</li>
+</ul>
+</li>
+<li>键盘动作捕获方法：其中的 key 有如 KeyCode.LeftArrow 等，用到时智能补全即可<ul>
+<li>GetKeyDown(key) 按下帧触发一次</li>
+<li>GetKeyUp(key) 抬起帧出发一次</li>
+<li>GetKey(key) 处于按下状态时持续触发</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>游戏对象： GameObject<ul>
+<li><code>activeSelf</code> 检查当前对象是否处于激活状态的属性；<code>SetActive(bool)</code> 进行修改</li>
+</ul>
+</li>
+</ul>
+<h4 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h4><p>全局变量</p>
+<ul>
+<li>targetFrameRate : 给出固定值则全局尽可能以此帧率</li>
+</ul>
+<h4 id="Time"><a href="#Time" class="headerlink" title="Time"></a>Time</h4><ul>
+<li>time ：当前游戏时间，从 0 开始计</li>
+<li>deltaTime ：显示距前一次执行的时间差</li>
+</ul>
+<h4 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h4><ul>
+<li>Range(left, right) ：随机数</li>
+</ul>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://remedios14.github.io/2022/03/16/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://remedios14.github.io/2022/03/16/Unity/unity%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/";
+            const title         = "「unity游戏开发（2）」";
+            const excerpt       = `区分于游戏的基本元素，所有的动态交互行为都由脚本负责完成
+推荐在 Assets 资源目录下创建 Scripts 目录专门保存脚本，根据功能不同还可以继续深入目录层级
+脚本 API
+脚本使用醒目注意
+Unity 中一般使用 float ...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/" rel="tag">入门介绍</a>, <a class="tag-none-link" href="/tags/%E6%B8%B8%E6%88%8F%E8%84%9A%E6%9C%AC/" rel="tag">游戏脚本</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-04-29</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 面试知识点-数学" href="/2022/03/15/Interview/面试知识点-数学/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Python网络爬虫（1）" href="/2022/03/20/Web-Crawler/Python网络爬虫（1）/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Game-Engine/">Game-Engine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphics/">Games-Graphics</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WebGL/">WebGL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.73em;">Pre-Process</a> <a href="/tags/QuickStart/" style="font-size: 0.6em;">QuickStart</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/algorithm/" style="font-size: 0.6em;">algorithm</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/data-analysing/" style="font-size: 0.67em;">data analysing</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/11/Graphics/WebGL-%E5%85%A5%E9%97%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> WebGL-入门环境搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Golang-常规算法实现</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/03/Golang/Golang-QuickIntro/"><i class="fa  fa-book"></i> Golang-QuickIntro</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/"><i class="fa  fa-book"></i> Shader入门精要-常用编写</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E6%A6%82%E8%BF%B0/"><i class="fa  fa-book"></i> Shader入门精要-概述</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Remedios14"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 Mikyi喵喵呜~ 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Mikyi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2377259266"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

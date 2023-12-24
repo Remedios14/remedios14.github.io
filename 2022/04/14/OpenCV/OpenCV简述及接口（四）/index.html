@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.webp">
+  <title>OpenCV简述及接口（四） | Mikyi喵喵呜~</title>
+  <meta name="author" content="Mikyi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="opencv, python" />
+  
+  <meta name="description" content="直方图灰度直方图 calcHist(images, channels, mask, histSize, ranges[, hist, accumulate]) 根据图片得到灰度（或颜色值）的分箱，返回 histSize × 1 的数组 images 应当以 mat 对象的列表形式给出 channels 直方图的通道的索引（灰度图传 [0]），以列表给出 mask 通常为 None 来全局统计，否则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV简述及接口（四）">
+<meta property="og:url" content="http://remedios14.github.io/2022/04/14/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E5%9B%9B%EF%BC%89/index.html">
+<meta property="og:site_name" content="Mikyi喵喵呜~">
+<meta property="og:description" content="直方图灰度直方图 calcHist(images, channels, mask, histSize, ranges[, hist, accumulate]) 根据图片得到灰度（或颜色值）的分箱，返回 histSize × 1 的数组 images 应当以 mat 对象的列表形式给出 channels 直方图的通道的索引（灰度图传 [0]），以列表给出 mask 通常为 None 来全局统计，否则">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
+<meta property="article:published_time" content="2022-04-14T05:37:47.000Z">
+<meta property="article:modified_time" content="2022-05-24T07:19:54.000Z">
+<meta property="article:author" content="Mikyi">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="opencv">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  <script id="MathJax-script" <strong>async</strong>src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Mikyi喵喵呜~" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Mikyi喵喵呜~</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Mikyi喵喵呜~</h2> <br />
+                        <span>So we beat on, boats against the current, borne back ceaselessly into the past.</span>
+                        <!--<span class="typeWriter" data-end="3000" data-text='["So we beat on, boats against the current, borne back ceaselessly into the past.", "我们奋力前行,小舟逆水而上,不断地被浪潮推回到过去。", "Aureliano, está lloviendo en Macondo.", "演者はセリフの傀儡だ"]'></span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">OpenCV简述及接口（四）</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-04-14</li>
+                <li><i class="fa fa-user"></i> 作者 Mikyi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~6.83K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1653376794000"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <h2 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h2><h3 id="灰度直方图"><a href="#灰度直方图" class="headerlink" title="灰度直方图"></a>灰度直方图</h3><ul>
+<li>calcHist(images, channels, mask, histSize, ranges[, hist, accumulate]) 根据图片得到灰度（或颜色值）的分箱，返回 histSize × 1 的数组<ul>
+<li>images 应当以 mat 对象的列表形式给出</li>
+<li>channels 直方图的通道的索引（灰度图传 [0]），以列表给出</li>
+<li>mask 通常为 None 来全局统计，否则给出区域的掩码图像</li>
+<li>histSize 表示 bin 计数，通常 [256]</li>
+<li>ranges 各像素点的取值范围 [0, 256]<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 灰度图可以直接由 matplotlib 实现</span></span><br><span class="line">plt.hist(imgray.ravel(),<span class="number">256</span>,[<span class="number">0</span>,<span class="number">256</span>])</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 彩色图可以分颜色实现</span></span><br><span class="line">color = (<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> i, col <span class="keyword">in</span> <span class="built_in">enumerate</span>(color):</span><br><span class="line">    histr = cv2.calcHist([img],[i],<span class="literal">None</span>,[<span class="number">256</span>],[<span class="number">0</span>,<span class="number">256</span>])</span><br><span class="line">    plt.plot(histr,color=col)</span><br><span class="line">    plt.xlim([<span class="number">0</span>,<span class="number">256</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="直方图均衡"><a href="#直方图均衡" class="headerlink" title="直方图均衡"></a>直方图均衡</h3><p>将集中分布（像素值接近）的直方图拉伸到两端（像素值范围广）形成较均衡的直方图；通常会提高图像的对比度；对于图像像素值局限在一个区域的对象效果最好</p>
+<p>使用一个均衡化函数将各像素值转变，因此是可逆的；原理是根据累积分布函数将图像的原始分布范围展开到 [0,255] 范围</p>
+<script type="math/tex; mode=display">
+S_k = \sum^k_{j=0}\frac{n_j}{n} \space k=0,1,2,...,L-1</script><ul>
+<li>numpy 实现：借助掩码数组获取到映射来完成<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hist,bins = np.histogram(img.flatten(),<span class="number">256</span>,[<span class="number">0</span>,<span class="number">256</span>])</span><br><span class="line">cdf = hist.cumsum()</span><br><span class="line">cdf_m = np.ma.masked_equal(cdf, <span class="number">0</span>)</span><br><span class="line">cdf_m = (cdf_m - cdf_m.<span class="built_in">min</span>()) * <span class="number">255</span> / (cdf_m.<span class="built_in">max</span>()-cdf_m.<span class="built_in">min</span>())</span><br><span class="line">cdf = np.ma.filled(cdf_m, <span class="number">0</span>).astype(<span class="string">&#x27;uint8&#x27;</span>) <span class="comment"># 小数转为整数</span></span><br><span class="line">img2 = cdf[img]</span><br></pre></td></tr></table></figure></li>
+<li>opencv 实现：封装好函数了，直接用就行<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">equ = cv2.equalizeHist(img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;res&#x27;</span>, np.hstack((img, equ)))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="CLAHE"><a href="#CLAHE" class="headerlink" title="CLAHE"></a>CLAHE</h4><p>对比度受限的自适应直方图均衡：将图像分成多个小块然后分别进行直方图均衡（opencv 中默认 8 × 8），为了避免小范围内的噪声而加上了对比度限制 —— 若某个直方图的 bins 数超过对比度限制（默认 40） 则先裁切像素并分配到其他 bin</p>
+<ul>
+<li>createCLAHE([, clipLimit, tileGridSize]) 创建一个 CLANE 对象（类似卷积核），然后可调用其 apply 方法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">clahe = cv.createCLAHE(clipLimit=<span class="number">2.0</span>, tileGridSize=(<span class="number">8</span>,<span class="number">8</span>))</span><br><span class="line">cl1 = clahe.apply(img)</span><br><span class="line">cv.imshow(<span class="string">&#x27;clahe_2&#x27;</span>,cl1)</span><br></pre></td></tr></table></figure>
+<h3 id="二维直方图"><a href="#二维直方图" class="headerlink" title="二维直方图"></a>二维直方图</h3><p>通常用于处理每个像素的 <strong>色相和饱和度</strong> 两个特征</p>
+<p>仍使用 calcHist 函数计算，传入二维时做出相应的修改（或者 np 也有）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hsv = cv.cvtColor(img,cv.COLOR_BGR2HSV)</span><br><span class="line">hist = cv.calcHist([hsv], [<span class="number">0</span>, <span class="number">1</span>], <span class="literal">None</span>, [<span class="number">180</span>, <span class="number">256</span>], [<span class="number">0</span>, <span class="number">180</span>, <span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line"><span class="comment"># hist, xbins, ybins = np.histogram2d(h.ravel(), s.ravel(),[180,256],[[0,180],[0,256]])</span></span><br><span class="line">plt.imshow(hist, interpolation = <span class="string">&#x27;nearest&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<p>其中 色相值介于 0 到 180；饱和度介于 0 到 256</p>
+<h3 id="直方图反投影"><a href="#直方图反投影" class="headerlink" title="直方图反投影"></a>直方图反投影</h3><p>一个论文中给出的方法，用于图像分割或在图像中查找感兴趣的对象。其创建一个与输入图像同大小的单通道图像，每个像素位置表示该点属于目标物体的概率。与 camshift 等算法配合使用</p>
+<ul>
+<li>calcBackProject(images, channels, hist, ranges, scale)<ul>
+<li>可以切片原图的一个区域来代替下例的 rose<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">roi = cv2.imread(<span class="string">&#x27;rose_red.png&#x27;</span>)</span><br><span class="line">hsv = cv2.cvtColor(roi,cv.COLOR_BGR2HSV)</span><br><span class="line">target = cv2.imread(<span class="string">&#x27;rose.png&#x27;</span>)</span><br><span class="line">hsvt = cv2.cvtColor(target,cv.COLOR_BGR2HSV)</span><br><span class="line"><span class="comment"># 计算对象的直方图</span></span><br><span class="line">roihist = cv2.calcHist([hsv],[<span class="number">0</span>, <span class="number">1</span>], <span class="literal">None</span>, [<span class="number">180</span>, <span class="number">256</span>], [<span class="number">0</span>, <span class="number">180</span>, <span class="number">0</span>, <span class="number">256</span>] )</span><br><span class="line"><span class="comment"># 直方图归一化并利用反传算法</span></span><br><span class="line">cv2.normalize(roihist,roihist,<span class="number">0</span>,<span class="number">255</span>,cv.NORM_MINMAX)</span><br><span class="line">dst = cv2.calcBackProject([hsvt],[<span class="number">0</span>,<span class="number">1</span>],roihist,[<span class="number">0</span>,<span class="number">180</span>,<span class="number">0</span>,<span class="number">256</span>],<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 用圆盘进行卷积</span></span><br><span class="line">disc = cv2.getStructuringElement(cv.MORPH_ELLIPSE,(<span class="number">5</span>,<span class="number">5</span>))</span><br><span class="line">cv2.filter2D(dst,-<span class="number">1</span>,disc,dst)</span><br><span class="line"><span class="comment"># 应用阈值作与操作</span></span><br><span class="line">ret,thresh = cv2.threshold(dst,<span class="number">50</span>,<span class="number">255</span>,<span class="number">0</span>)</span><br><span class="line">thresh = cv2.merge((thresh,thresh,thresh))</span><br><span class="line">res = cv2.bitwise_and(target,thresh)</span><br><span class="line">res = np.vstack((target,thresh,res))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;res&#x27;</span>,res)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="进阶接口"><a href="#进阶接口" class="headerlink" title="进阶接口"></a>进阶接口</h2><p>简述原理和调用方法，很多高效图像算法都已封装完成</p>
+<h3 id="傅里叶变换"><a href="#傅里叶变换" class="headerlink" title="傅里叶变换"></a>傅里叶变换</h3><h4 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h4><p>忽视时间上的顺序，仅考虑时域内的频率，构成一个频域；用于分析各种滤波器的频率特性</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19763358">参考知乎链接</a></p>
+<ul>
+<li>作用<ul>
+<li>高频表示变化剧烈的灰度分量，比如轮廓边界</li>
+<li>低频表示变化缓慢的灰度分量，例如一片草原</li>
+</ul>
+</li>
+<li>滤波器<ul>
+<li>低通滤波器仅保留低频，会使图像模糊</li>
+<li>高通滤波器仅保留高频，会使图像细节增强</li>
+</ul>
+</li>
+</ul>
+<h4 id="Numpy-实现"><a href="#Numpy-实现" class="headerlink" title="Numpy 实现"></a>Numpy 实现</h4><ul>
+<li>np.fft.fft2(a, s=None, axes=(-2, -1), norm=None)<ul>
+<li>输入一个数组（我们使用灰度图像）</li>
+<li>s 表示输出大小，会依据大小进行填充 0 或裁切；默认 None 则和输入大小一致</li>
+</ul>
+</li>
+</ul>
+<h4 id="OpenCV-实现"><a href="#OpenCV-实现" class="headerlink" title="OpenCV 实现"></a>OpenCV 实现</h4><p>传入对象需要转为至少 np.float32 格式</p>
+<ul>
+<li>dtf() ：执行正向傅里叶变换，返回的结果是双通道的（实部，虚部），需要转换成图像格式</li>
+<li>idft() ：逆向傅里叶变换</li>
+</ul>
+<p><strong>注意</strong>：得到的结果中频率为 0 的部分会在左上角，通常要转换到中心位置，通过 shift 变换来实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;lena.webp&#x27;</span>,<span class="number">0</span>)</span><br><span class="line">img_float32 = np.float32(img)</span><br><span class="line">dft = cv2.dft(img_float32, flags = cv2.DFT_COMPLEX_OUTPUT)</span><br><span class="line">dft_shift = np.fft.fftshift(dft) <span class="comment"># 执行 shift 变换</span></span><br><span class="line"></span><br><span class="line">magnitude_spectrum = <span class="number">20</span>*np.log(cv2.magnitude(dft_shift[:,:,<span class="number">0</span>], dft_shift[:,:,<span class="number">1</span>])) </span><br><span class="line"><span class="comment"># cv2.imshow(&#x27;ftt&#x27;, magnitude_spectrum) # 仅查看频率图</span></span><br><span class="line"></span><br><span class="line">rows, cols = img.shape</span><br><span class="line">crow, ccol = <span class="built_in">int</span>(rows/<span class="number">2</span>), <span class="built_in">int</span>(cols/<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 低通滤波，以中心保留 30 像素作为掩码（中心最低）</span></span><br><span class="line">mask_l = np.zeros((rows, cols, <span class="number">2</span>), np.uint8)</span><br><span class="line">mask_l[crow-<span class="number">30</span>:crow+<span class="number">30</span>, ccol-<span class="number">30</span>:ccol+<span class="number">30</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">fshift = dft_shift*mask</span><br><span class="line">f_ishift = np.fft.ifftshift(fshift) <span class="comment"># 要逆 shift 变换</span></span><br><span class="line">img_l = cv2.idft(f_ishift)</span><br><span class="line">img_l = cv2.magnitude(img_l[:,:,<span class="number">0</span>], img_l[:,:,<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 高通滤波，类比低通滤波，外部作为 1 即可</span></span><br><span class="line">mask_h = np.ones((rows, cols, <span class="number">2</span>), np.uint8)</span><br><span class="line">mask_h[crow-<span class="number">30</span>:crow+<span class="number">30</span>, ccol-<span class="number">30</span>:ccol+<span class="number">30</span>] = <span class="number">0</span></span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+<h3 id="模板匹配"><a href="#模板匹配" class="headerlink" title="模板匹配"></a>模板匹配</h3><p>使用模板图像在目标图像中查找；可以理解为将模板图像在目标中滑动比较来得到较匹配的位置</p>
+<h4 id="OpenCV-中的模板匹配"><a href="#OpenCV-中的模板匹配" class="headerlink" title="OpenCV 中的模板匹配"></a>OpenCV 中的模板匹配</h4><ul>
+<li>matchTemplate(image, templ, method) 返回一个灰度图像，每个像素表示该像素的邻域与模板匹配的程度，结合 minMaxLoc() 来定位最匹配位置的左上角</li>
+<li>上函数中的可选 method<ul>
+<li>TM_CCOEFF</li>
+<li>TM_CCOEFF_NORMED</li>
+<li>TM_CCORR —— 效果不佳</li>
+<li>TM_CCORR_NORMED</li>
+<li>TM_SQDIFF —— 平方误差和做损失，使用此方法时应找最低值表示最匹配</li>
+<li>TM_SQDIFF_NORMED</li>
+</ul>
+</li>
+</ul>
+<h4 id="多对象的模板匹配"><a href="#多对象的模板匹配" class="headerlink" title="多对象的模板匹配"></a>多对象的模板匹配</h4><p>当目标图像存在多个匹配位置时，应当使用阈值化来定位</p>
+<h3 id="霍夫曼变换"><a href="#霍夫曼变换" class="headerlink" title="霍夫曼变换"></a>霍夫曼变换</h3><p>在二维坐标系上的直线可以由垂线的角度和距离表示</p>
+<p><img src="/images/OpenCV/Hough-Line.png" alt=""></p>
+<p>其中 $\rho = x cos\theta + y sin\theta$ 的 θ 为垂线到横轴的逆时针角度</p>
+<p>霍夫曼变换即是以 ρ 和 θ 两个参数来检索图像中的线条的算法，其接收的图像应当是二进制的，因此先使用阈值变换或 Canny 边缘检测</p>
+<ul>
+<li>HoughLines(image, rho, theta, threshold）输出 (ρ, θ) 值对的数组<ul>
+<li>rho 和 theta 分别表示参数精度，即单位值大小</li>
+<li>threshold 表示接受构成一条线的票数，票数由线上的点个数确定<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">img = cv.imread(cv.samples.findFile(<span class="string">&#x27;sudoku.png&#x27;</span>))</span><br><span class="line">gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)</span><br><span class="line">edges = cv.Canny(gray,<span class="number">50</span>,<span class="number">150</span>,apertureSize = <span class="number">3</span>)</span><br><span class="line">lines = cv.HoughLines(edges,<span class="number">1</span>,np.pi/<span class="number">180</span>,<span class="number">200</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    rho,theta = line[<span class="number">0</span>]</span><br><span class="line">    a = np.cos(theta)</span><br><span class="line">    b = np.sin(theta)</span><br><span class="line">    x0 = a*rho</span><br><span class="line">    y0 = b*rho</span><br><span class="line">    x1 = <span class="built_in">int</span>(x0 + <span class="number">1000</span>*(-b))</span><br><span class="line">    y1 = <span class="built_in">int</span>(y0 + <span class="number">1000</span>*(a))</span><br><span class="line">    x2 = <span class="built_in">int</span>(x0 - <span class="number">1000</span>*(-b))</span><br><span class="line">    y2 = <span class="built_in">int</span>(y0 - <span class="number">1000</span>*(a))</span><br><span class="line">    cv.line(img,(x1,y1),(x2,y2),(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>),<span class="number">2</span>)</span><br><span class="line">cv.imwrite(<span class="string">&#x27;houghlines3.jpg&#x27;</span>,img)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="概率霍夫曼变换"><a href="#概率霍夫曼变换" class="headerlink" title="概率霍夫曼变换"></a>概率霍夫曼变换</h4><p>基于前者的优化，采用随机的点子集来减轻计算，相应的需要放宽阈值</p>
+<ul>
+<li>HoughLinesP(image, rho, theta, threshold[, lines, minLineLength, maxLineGap])<ul>
+<li>minLineLength 表示最小线长度</li>
+<li>maxLineGap 表示线段之间允许将他们视为一条线的最大间隙<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">img = cv.imread(cv.samples.findFile(<span class="string">&#x27;sudoku.png&#x27;</span>))</span><br><span class="line">gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)</span><br><span class="line">edges = cv.Canny(gray,<span class="number">50</span>,<span class="number">150</span>,apertureSize = <span class="number">3</span>)</span><br><span class="line">lines = cv.HoughLinesP(edges,<span class="number">1</span>,np.pi/<span class="number">180</span>,<span class="number">100</span>,minLineLength=<span class="number">100</span>,maxLineGap=<span class="number">10</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    x1,y1,x2,y2 = line[<span class="number">0</span>]</span><br><span class="line">    cv.line(img,(x1,y1),(x2,y2),(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>),<span class="number">2</span>)</span><br><span class="line">cv.imwrite(<span class="string">&#x27;houghlines5.jpg&#x27;</span>,img)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="霍夫圈变换"><a href="#霍夫圈变换" class="headerlink" title="霍夫圈变换"></a>霍夫圈变换</h3><ul>
+<li>HoughCircles(image, method, dp, minDist[, circles, param1, param2, minRadius, maxRadius]) 查找图像中的圈<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">img = cv.imread(<span class="string">&#x27;opencv-logo-white.png&#x27;</span>,<span class="number">0</span>)</span><br><span class="line">img = cv.medianBlur(img,<span class="number">5</span>)</span><br><span class="line">cimg = cv.cvtColor(img,cv.COLOR_GRAY2BGR)</span><br><span class="line">circles = cv.HoughCircles(img,cv.HOUGH_GRADIENT,<span class="number">1</span>,<span class="number">20</span>,</span><br><span class="line">                            param1=<span class="number">50</span>,param2=<span class="number">30</span>,minRadius=<span class="number">0</span>,maxRadius=<span class="number">0</span>)</span><br><span class="line">circles = np.uint16(np.around(circles))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> circles[<span class="number">0</span>,:]:</span><br><span class="line">    <span class="comment"># 绘制外圆</span></span><br><span class="line">    cv.circle(cimg,(i[<span class="number">0</span>],i[<span class="number">1</span>]),i[<span class="number">2</span>],(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>),<span class="number">2</span>)</span><br><span class="line">    <span class="comment"># 绘制圆心</span></span><br><span class="line">    cv.circle(cimg,(i[<span class="number">0</span>],i[<span class="number">1</span>]),<span class="number">2</span>,(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>),<span class="number">3</span>)</span><br><span class="line">cv.imshow(<span class="string">&#x27;detected circles&#x27;</span>,cimg)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="图像分割与-Watershed-算法"><a href="#图像分割与-Watershed-算法" class="headerlink" title="图像分割与 Watershed 算法"></a>图像分割与 Watershed 算法</h3><p>分水岭算法，类似于等高线找轮廓；对图像中的噪声或其他不规则性可能产生过度分割，因此具体实现时增加了标记方法</p>
+<ul>
+<li>watershed(image, markers) （TODO：看上去蛮复杂，用到的时候看文档，用过再补充）</li>
+</ul>
+<h3 id="交互式前景提取-GrabCut-算法"><a href="#交互式前景提取-GrabCut-算法" class="headerlink" title="交互式前景提取 GrabCut 算法"></a>交互式前景提取 GrabCut 算法</h3><p>一种抠图算法，可以在过程中补充操作来保留或剔除部分内容</p>
+<ul>
+<li>grabCut(img, mask, rect, bgdModel, fgdModel, iterCount[, mode])</li>
+</ul>
+<h2 id="理解特征"><a href="#理解特征" class="headerlink" title="理解特征"></a>理解特征</h2><p>类似于一些图像中物体的边角或中心平坦区域的特征，重点在于为计算机提供一个区分的途径</p>
+<h3 id="哈里斯角检测"><a href="#哈里斯角检测" class="headerlink" title="哈里斯角检测"></a>哈里斯角检测</h3><p>Harris Corner Detection</p>
+<ul>
+<li>cornerHarris(src, blockSize, ksize, k、, dst, borderType])</li>
+<li>cornerSubPix(image, corners, winSize, zeroZone, criteria)</li>
+</ul>
+<h3 id="Shi-tomas-拐角检测器和易于跟踪的特征"><a href="#Shi-tomas-拐角检测器和易于跟踪的特征" class="headerlink" title="Shi-tomas 拐角检测器和易于跟踪的特征"></a>Shi-tomas 拐角检测器和易于跟踪的特征</h3><ul>
+<li>goodFeaturesToTrack(image, maxCorners, qualityLevel, minDistance[, corners, mask, blockSize, useHarrisDetector, k])</li>
+</ul>
+<h3 id="SIFT-尺度不变特征变换"><a href="#SIFT-尺度不变特征变换" class="headerlink" title="SIFT 尺度不变特征变换"></a>SIFT 尺度不变特征变换</h3><p>例如拐角特征是旋转不变的，但对于平滑弧线形式的拐角，尺度放大之后接近一般曲线，失去拐角特征；</p>
+<p>此算法即针对尺度变换下仍保持不变的图像特征</p>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://remedios14.github.io/2022/04/14/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E5%9B%9B%EF%BC%89/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://remedios14.github.io/2022/04/14/OpenCV/OpenCV%E7%AE%80%E8%BF%B0%E5%8F%8A%E6%8E%A5%E5%8F%A3%EF%BC%88%E5%9B%9B%EF%BC%89/";
+            const title         = "「OpenCV简述及接口（四）」";
+            const excerpt       = `直方图灰度直方图
+calcHist(images, channels, mask, histSize, ranges[, hist, accumulate]) 根据图片得到灰度（或颜色值）的分箱，返回 histSize × 1 的数组...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/opencv/" rel="tag">opencv</a>, <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-05-24</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" OpenCV简述及接口（三）" href="/2022/04/12/OpenCV/OpenCV简述及接口（三）/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" OpenCV功能分类链接" href="/2022/04/16/OpenCV/OpenCV速查表及项目（一）/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Game-Engine/">Game-Engine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphics/">Games-Graphics</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WebGL/">WebGL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.73em;">Pre-Process</a> <a href="/tags/QuickStart/" style="font-size: 0.6em;">QuickStart</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/algorithm/" style="font-size: 0.6em;">algorithm</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/data-analysing/" style="font-size: 0.67em;">data analysing</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/11/Graphics/WebGL-%E5%85%A5%E9%97%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> WebGL-入门环境搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Golang-常规算法实现</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/03/Golang/Golang-QuickIntro/"><i class="fa  fa-book"></i> Golang-QuickIntro</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/"><i class="fa  fa-book"></i> Shader入门精要-常用编写</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E6%A6%82%E8%BF%B0/"><i class="fa  fa-book"></i> Shader入门精要-概述</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Remedios14"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 Mikyi喵喵呜~ 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Mikyi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2377259266"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

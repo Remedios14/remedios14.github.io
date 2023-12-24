@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.webp">
+  <title>Cpp面向对象（二） | Mikyi喵喵呜~</title>
+  <meta name="author" content="Mikyi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="cpp, 代码重用" />
+  
+  <meta name="description" content="代码重用面向对象编程的一大目标就是更高效的代码重用 has-a 类结构在一个类中使用其他类的大致编程结构 几种继承方式的区别     特征 公有继承 保护继承 私有继承     公有成员-&gt; 子类的公有成员 子类的保护成员 子类的私有成员   保护成员-&gt; 子类保护成员 子类的保护成员 子类的私有成员   私有成员-&gt; 只能通过基类接口访问 只能通过基类接口访问 只能通过基类接口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cpp面向对象（二）">
+<meta property="og:url" content="http://remedios14.github.io/2022/04/06/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="Mikyi喵喵呜~">
+<meta property="og:description" content="代码重用面向对象编程的一大目标就是更高效的代码重用 has-a 类结构在一个类中使用其他类的大致编程结构 几种继承方式的区别     特征 公有继承 保护继承 私有继承     公有成员-&gt; 子类的公有成员 子类的保护成员 子类的私有成员   保护成员-&gt; 子类保护成员 子类的保护成员 子类的私有成员   私有成员-&gt; 只能通过基类接口访问 只能通过基类接口访问 只能通过基类接口">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
+<meta property="article:published_time" content="2022-04-06T03:25:41.000Z">
+<meta property="article:modified_time" content="2022-04-07T05:02:38.000Z">
+<meta property="article:author" content="Mikyi">
+<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="代码重用">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  <script id="MathJax-script" <strong>async</strong>src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Mikyi喵喵呜~" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Mikyi喵喵呜~</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Mikyi喵喵呜~</h2> <br />
+                        <span>So we beat on, boats against the current, borne back ceaselessly into the past.</span>
+                        <!--<span class="typeWriter" data-end="3000" data-text='["So we beat on, boats against the current, borne back ceaselessly into the past.", "我们奋力前行,小舟逆水而上,不断地被浪潮推回到过去。", "Aureliano, está lloviendo en Macondo.", "演者はセリフの傀儡だ"]'></span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">Cpp面向对象（二）</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-04-06</li>
+                <li><i class="fa fa-user"></i> 作者 Mikyi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~5.92K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1649307758000"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <h2 id="代码重用"><a href="#代码重用" class="headerlink" title="代码重用"></a>代码重用</h2><p>面向对象编程的一大目标就是更高效的代码重用</p>
+<h3 id="has-a-类结构"><a href="#has-a-类结构" class="headerlink" title="has-a 类结构"></a>has-a 类结构</h3><p>在一个类中使用其他类的大致编程结构</p>
+<p>几种继承方式的区别</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>公有继承</th>
+<th>保护继承</th>
+<th>私有继承</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>公有成员-&gt;</td>
+<td>子类的公有成员</td>
+<td>子类的保护成员</td>
+<td>子类的私有成员</td>
+</tr>
+<tr>
+<td>保护成员-&gt;</td>
+<td>子类保护成员</td>
+<td>子类的保护成员</td>
+<td>子类的私有成员</td>
+</tr>
+<tr>
+<td>私有成员-&gt;</td>
+<td>只能通过基类接口访问</td>
+<td>只能通过基类接口访问</td>
+<td>只能通过基类接口访问</td>
+</tr>
+<tr>
+<td>能否隐式向上转换</td>
+<td>是</td>
+<td>是（但只能在子类中）</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="包含对象成员的类"><a href="#包含对象成员的类" class="headerlink" title="包含对象成员的类"></a>包含对象成员的类</h4><p>可以使用 C++ 库提供的如 string、vector 等类对象作为成员（更推荐），也可以使用自定义的类</p>
+<p>这个直接用就行，略</p>
+<h4 id="私有继承"><a href="#私有继承" class="headerlink" title="私有继承"></a>私有继承</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> : <span class="keyword">private</span> std::string, <span class="keyword">private</span> std::valarray&lt;<span class="type">double</span>&gt; &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">typedef</span> std::valarray&lt;<span class="type">double</span>&gt; ArrayDb;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>初始化基类组件</li>
+</ol>
+<p>使用私有继承，基类的公有成员和保护成员都将成为子类的私有成员。写法同公有继承，使用 private 或省略默认私有</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Student</span>(<span class="type">const</span> <span class="type">char</span> *str; <span class="type">const</span> <span class="type">double</span> *pd, <span class="type">int</span> n) : std::<span class="built_in">string</span>(str), <span class="built_in">ArrayDb</span>(pd, n) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>访问基类的方法</li>
+</ol>
+<p>由于未进行成员声明，在初始化列表中使用类名代替，后续要调用类方法时则要使用类名和作用域解析运算符</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">Student::Average</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (ArrayDb::<span class="built_in">size</span>() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> ArrayDb::<span class="built_in">sum</span>() / ArrayDb::<span class="built_in">size</span>();</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>访问基类对象</li>
+</ol>
+<p>使用强制类型转换来将指向本对象的指针转换为私有继承过来的类</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> string &amp;<span class="title">Student::Name</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (<span class="type">const</span> string&amp;) *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>访问基类的友元函数</li>
+</ol>
+<p>类似第三条可以显式地转换对象为基类完成，重新定义一个友元函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ostream &amp;<span class="keyword">operator</span>&lt;&lt;(ostream &amp;os, <span class="type">const</span> Student &amp;stu) &#123;</span><br><span class="line">	os &lt;&lt; <span class="string">&quot;Scores for &quot;</span> &lt;&lt; (<span class="type">const</span> string&amp;) stu &lt;&lt; <span class="string">&quot;;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：私有继承和包含类成员的外部使用基本一致，对编写者而言通常使用包含，更易于理解内容</p>
+<h4 id="保护继承"><a href="#保护继承" class="headerlink" title="保护继承"></a>保护继承</h4><p>继承中使用 protected 关键字；基类的公有成员和保护成员都将成为子类的保护成员</p>
+<p>可以重新定义方法去访问保护成员的接口，也可以使用 using 来重新定义访问权限</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">double</span> <span class="title">Student::sum</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> std::valarray&lt;<span class="type">double</span>&gt;::<span class="built_in">sum</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">using</span> std::valarray&lt;<span class="type">double</span>&gt;::min;</span><br><span class="line">	<span class="keyword">using</span> std::valarray&lt;<span class="type">double</span>&gt;::max;</span><br></pre></td></tr></table></figure>
+<h3 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h3><p>Multi Inheritance 描述的是有多个直接基类的类</p>
+<p>使用时主要解决两个问题：从多个不同基类继承同名方法；从多个基类继承同一个类的不同实例</p>
+<p><del>暂略</del></p>
+<h3 id="类模板"><a href="#类模板" class="headerlink" title="类模板"></a>类模板</h3><p>类似容器类可以使用泛型来定义类模板</p>
+<ul>
+<li>定义类模板：使用 <code>template &lt;class Type&gt;</code> 来告诉编译器准备定义一个模板，其中 Type 可以替换成任意变量名 T<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// stacktp.h -- a stack template</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> STACKTP_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> STACKTP_H_</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">Type</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Stack</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">enum</span> &#123;MAX = <span class="number">10</span>&#125;; <span class="comment">// 仅供类使用的常量</span></span><br><span class="line">	Type items[MAX];</span><br><span class="line">	<span class="comment">// Type *items; // 也可以使用指针类型</span></span><br><span class="line">	<span class="type">int</span> top;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Stack</span>();</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">isempty</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">isfull</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">push</span><span class="params">(<span class="type">const</span> Type &amp;item)</span></span>;</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">pop</span><span class="params">(Type &amp;item)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">Type</span>&gt; <span class="comment">// 外部定义每个方法时都应该追加</span></span><br><span class="line">Stack&lt;Type&gt;::<span class="built_in">Stack</span>() &#123;</span><br><span class="line">	top = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></li>
+<li>使用模板类：传入具体的类型来实例化对象<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stack&lt;<span class="type">int</span>&gt; kernels;</span><br><span class="line">Stack&lt;string&gt; colonels;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>模板可以递归使用，如 <code>vector&lt;vector&lt;int&gt;&gt;</code></li>
+<li>可以使用多个类型参数，如 <code>unordered_map&lt;int, int&gt;</code></li>
+<li>可以设置默认类型，如 <code>template &lt;class T1, class T2 = int&gt;</code></li>
+</ul>
+</li>
+<li>模板的具体化：使用具体的类型生成类声明<ul>
+<li>隐式实例化：声明一个或多个对象，指出所需的类型，而编译器使用通用模板提供的处方生成具体的类定义</li>
+<li>显式实例化：使用关键字 template 指出所需类型，此时编译器会实际完成对应类的声明；<code>template class ArrayTP&lt;string, 100&gt;;</code></li>
+<li>显式具体化：为特定类型给出显式的定义，实现和模板不同的功能；<code>template &lt;&gt; class Classname&lt;specialized-type-name&gt; &#123;...&#125;;</code> 其余按照类定义重新编写</li>
+<li>部分具体化：给几个类型参数指定具体的类型，部分限制模板的通用性；<code>template &lt;class T1&gt; class Pair&lt;T1, int&gt; &#123;...&#125;;</code></li>
+</ul>
+</li>
+<li>成员模板：模板可用作结构体、类或模板类的成员</li>
+<li>将模板用作参数：<code>template &lt;template &lt;typename T&gt; class Thing&gt; class Crab</code> 中需要传入一个模板类 King 来声明 <code>Crab&lt;King&gt; legs;</code></li>
+<li>模板类和友元<ul>
+<li>非模板友元<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt; <span class="keyword">class</span> <span class="title class_">HasFriend</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">counts</span><span class="params">()</span></span>; <span class="comment">// 与模板无关，与类有关</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>约束模板友元：即友元的类型取决于类被实例化时的类型 —— 先在类定义前声明每个模板函数；再在函数中将模板声明为友元；再为友元函数提供模板定义<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="type">void</span> <span class="title">counts</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="type">void</span> <span class="title">report</span><span class="params">(T &amp;)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> TT&gt; <span class="keyword">class</span> <span class="title class_">HasFriendT</span> &#123; ...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">friend</span> <span class="type">void</span> <span class="built_in">counts</span>&lt;TT&gt;();</span><br><span class="line">	<span class="keyword">friend</span> <span class="type">void</span> report&lt;&gt;(HasFriendT&lt;TT&gt; &amp;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">counts</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;template size: &quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(HasFriendT&lt;T&gt;) &lt;&lt; <span class="string">&quot;;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>非约束模板友元：即友元的所有具体化都是类的友元 —— 在类内部使用不同的模板类型参数声明模板<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">class</span> <span class="title class_">ManyFriend</span> &#123; ...</span><br><span class="line">	<span class="keyword">template</span> &lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> D&gt; <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">show2</span><span class="params">(C &amp;, D &amp;)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line">ManyFriend&lt;<span class="type">double</span>&gt; hfd;</span><br><span class="line">ManyFriend&lt;<span class="type">int</span>&gt; hfi;</span><br><span class="line"><span class="built_in">show2</span>(hfd, hfi); <span class="comment">// 调用即可</span></span><br></pre></td></tr></table></figure></li>
+<li>模板别名：即使用 typedef 来指定别名，如 <code>typedef std::array&lt;double, 12&gt; arrd;</code> 后续用 arrd 声明即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h2><p>友元是在类定义中声明，允许外部访问该类的私有部分的特性</p>
+<h3 id="友元类"><a href="#友元类" class="headerlink" title="友元类"></a>友元类</h3><p>一个类能允许其友元类的所有方法访问原始类的非公有部分，也可以进一步限制仅允许特定方法成为友元</p>
+<p>举例电视机和遥控器，并不存在继承或包含关系，但遥控器能控制电视机，应当将遥控器设置为电视机的友元</p>
+<ul>
+<li>声明友元类：在原始类定义的任意部分声明均可，<code>friend class FC;</code><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tv.h -- Tv and Remote classes</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> TV_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TV_H_</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Tv</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">Remote</span>;</span><br><span class="line">	<span class="keyword">enum</span> &#123;Off, On&#125;; <span class="keyword">enum</span> &#123;MinVal, MaxVal = <span class="number">20</span>&#125;;</span><br><span class="line">	<span class="keyword">enum</span> &#123;Antenna, Cable&#125;; <span class="keyword">enum</span> &#123;TV, DVD&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">Tv</span>(<span class="type">int</span> s = Off, <span class="type">int</span> mc = <span class="number">125</span>) : <span class="built_in">state</span>(s), <span class="built_in">volume</span>(<span class="number">5</span>), <span class="built_in">maxchannel</span>(mc), <span class="built_in">channel</span>(<span class="number">2</span>), <span class="built_in">mode</span>(Cable), <span class="built_in">input</span>(TV) &#123;&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">onoff</span><span class="params">()</span> </span>&#123;state = (state == On) ? Off : On;&#125;</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">ison</span><span class="params">()</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> state == On;&#125;</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">volup</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">voldown</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">chanup</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">chandown</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">set_mode</span><span class="params">()</span> </span>&#123;mode = (mode == Antenna) ? Cable : Antenna;&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">set_input</span><span class="params">()</span> </span>&#123;input = (input == TV) ? DVD : TV;&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">settings</span><span class="params">()</span> <span class="type">const</span></span>; <span class="comment">// display all settings</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> state;</span><br><span class="line">	<span class="type">int</span> volume;</span><br><span class="line">	<span class="type">int</span> maxchannel;</span><br><span class="line">	<span class="type">int</span> channel;</span><br><span class="line">	<span class="type">int</span> mode;</span><br><span class="line">	<span class="type">int</span> input;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Remote</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> mode;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Remote</span>(<span class="type">int</span> m = Tv::Tv) : <span class="built_in">mode</span>(m) &#123;&#125;</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">volup</span><span class="params">(TV &amp;t)</span> </span>&#123;<span class="keyword">return</span> t.<span class="built_in">volup</span>();&#125;</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">voldown</span><span class="params">(Tv &amp;t)</span> </span>&#123;<span class="keyword">return</span> t.<span class="built_in">voldown</span>();&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">onoff</span><span class="params">(Tv &amp;t)</span> </span>&#123;t.<span class="built_in">onoff</span>();&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">chanup</span><span class="params">(Tv &amp;t)</span> </span>&#123;t.<span class="built_in">chanup</span>();&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">chandown</span><span class="params">(Tv &amp;t)</span> </span>&#123;t.<span class="built_in">chandown</span>();&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">set_chan</span><span class="params">(Tv &amp;<span class="number">99</span>t, <span class="type">int</span> c)</span> </span>&#123;t.channel = c;&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">set_mode</span><span class="params">(Tv &amp;t)</span> </span>&#123;t.<span class="built_in">set_mode</span>();&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">set_input</span><span class="params">(Tv &amp;t)</span> </span>&#123;t.<span class="built_in">set_input</span>();&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> </span></span><br></pre></td></tr></table></figure></li>
+<li>友元方法：上例中实际上只有 set_chan 直接访问了 Tv 类的私有成员，可以仅声明该方法为友元 <code>friend void Remote::set_chan(Tv &amp;t, int c);</code> 但实际上会造成循环依赖的问题（Remote 类定义需要有 Tv 类，Tv 类中友元函数的声明又需要 Remote 类方法声明），因此需要使用 <strong>前向声明</strong><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Tv</span>; <span class="comment">// 仅声明</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Remote</span> &#123;...&#125;; <span class="comment">// 顺序不能变，此处仅做声明，在 Tv 定义后再定义内联方法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Tv</span> &#123;...&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>其他友元关系：可以两个类互为友元，编写时注意声明顺序</li>
+<li>共同的友元：同时作为多个类的友元</li>
+</ul>
+<h2 id="嵌套类"><a href="#嵌套类" class="headerlink" title="嵌套类"></a>嵌套类</h2><p>在另一个类中声明的类被称为嵌套类（nested class）；可以避免名称冲突</p>
+<ul>
+<li>包含类（外部的）中可以创建和使用被嵌套类的对象</li>
+<li>仅当嵌套类声明位于公有部分才可以在包含类外部使用，且必须使用作用域解析运算符</li>
+</ul>
+<h3 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h3><p>嵌套类的声明位置决定了其作用域；嵌套类内也使用 public 等来控制</p>
+<h3 id="模板中的嵌套"><a href="#模板中的嵌套" class="headerlink" title="模板中的嵌套"></a>模板中的嵌套</h3><p>模板类中也可以使用嵌套，并且该嵌套可以使用泛型来作为成员等</p>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://remedios14.github.io/2022/04/06/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%BA%8C%EF%BC%89/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://remedios14.github.io/2022/04/06/C++/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%BA%8C%EF%BC%89/";
+            const title         = "「Cpp面向对象（二）」";
+            const excerpt       = `代码重用面向对象编程的一大目标就是更高效的代码重用
+has-a 类结构在一个类中使用其他类的大致编程结构
+几种继承方式的区别
+
+
+
+
+特征
+公有继承
+保护继承
+私有继承
+
+
+
+
+公有成员-&gt;
+子类的公有成员
+子类的保护成员
+子类...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/cpp/" rel="tag">cpp</a>, <a class="tag-none-link" href="/tags/%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8/" rel="tag">代码重用</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-04-07</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Cpp面向对象（一）" href="/2022/04/02/C++/Cpp面向对象（一）/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 机器学习基础-提升方法" href="/2022/04/06/Machine-Learning/机器学习基础-提升方法/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Game-Engine/">Game-Engine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphics/">Games-Graphics</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WebGL/">WebGL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.73em;">Pre-Process</a> <a href="/tags/QuickStart/" style="font-size: 0.6em;">QuickStart</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/algorithm/" style="font-size: 0.6em;">algorithm</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/data-analysing/" style="font-size: 0.67em;">data analysing</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/11/Graphics/WebGL-%E5%85%A5%E9%97%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> WebGL-入门环境搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Golang-常规算法实现</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/03/Golang/Golang-QuickIntro/"><i class="fa  fa-book"></i> Golang-QuickIntro</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/"><i class="fa  fa-book"></i> Shader入门精要-常用编写</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E6%A6%82%E8%BF%B0/"><i class="fa  fa-book"></i> Shader入门精要-概述</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Remedios14"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 Mikyi喵喵呜~ 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Mikyi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2377259266"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.webp">
+  <title>Python-游戏脚本 | Mikyi喵喵呜~</title>
+  <meta name="author" content="Mikyi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="game-script" />
+  
+  <meta name="description" content="基于 opencv、pillow、pywin 来捕获图像并模拟按键操作 星露谷物语钓鱼脚本设计工作流程：（确保预先调整好钓鱼位置并切换到钓竿）  获取窗体并正常显示后置于最前 执行单次钓鱼流程 模拟鼠标左击并等到蓄力满时模拟释放左键 等待画面，人物头顶出现感叹号时模拟左击，鱼上钩 追踪钓鱼条直到完成捕获   循环执行钓鱼流程，等待终止命令  细节完成模拟蓄力目前使用 time.sleep(1.03">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-游戏脚本">
+<meta property="og:url" content="http://remedios14.github.io/2022/06/08/OpenCV/Python-%E6%B8%B8%E6%88%8F%E8%84%9A%E6%9C%AC/index.html">
+<meta property="og:site_name" content="Mikyi喵喵呜~">
+<meta property="og:description" content="基于 opencv、pillow、pywin 来捕获图像并模拟按键操作 星露谷物语钓鱼脚本设计工作流程：（确保预先调整好钓鱼位置并切换到钓竿）  获取窗体并正常显示后置于最前 执行单次钓鱼流程 模拟鼠标左击并等到蓄力满时模拟释放左键 等待画面，人物头顶出现感叹号时模拟左击，鱼上钩 追踪钓鱼条直到完成捕获   循环执行钓鱼流程，等待终止命令  细节完成模拟蓄力目前使用 time.sleep(1.03">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://remedios14.github.io/images/logo.webp">
+<meta property="article:published_time" content="2022-06-08T11:51:41.000Z">
+<meta property="article:modified_time" content="2022-07-07T00:41:12.000Z">
+<meta property="article:author" content="Mikyi">
+<meta property="article:tag" content="game-script">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://remedios14.github.io/images/logo.webp">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typelighter.min.js"></script>
+  <script id="MathJax-script" <strong>async</strong>src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Mikyi喵喵呜~" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Mikyi喵喵呜~</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Mikyi喵喵呜~</h2> <br />
+                        <span>So we beat on, boats against the current, borne back ceaselessly into the past.</span>
+                        <!--<span class="typeWriter" data-end="3000" data-text='["So we beat on, boats against the current, borne back ceaselessly into the past.", "我们奋力前行,小舟逆水而上,不断地被浪潮推回到过去。", "Aureliano, está lloviendo en Macondo.", "演者はセリフの傀儡だ"]'></span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">Python-游戏脚本</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-06-08</li>
+                <li><i class="fa fa-user"></i> 作者 Mikyi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~13.05K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1657154472000"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <p>基于 opencv、pillow、pywin 来捕获图像并模拟按键操作</p>
+<h2 id="星露谷物语钓鱼脚本"><a href="#星露谷物语钓鱼脚本" class="headerlink" title="星露谷物语钓鱼脚本"></a>星露谷物语钓鱼脚本</h2><p>设计工作流程：（确保预先调整好钓鱼位置并切换到钓竿）</p>
+<ol>
+<li>获取窗体并正常显示后置于最前</li>
+<li>执行单次钓鱼流程<ol>
+<li>模拟鼠标左击并等到蓄力满时模拟释放左键</li>
+<li>等待画面，人物头顶出现感叹号时模拟左击，鱼上钩</li>
+<li>追踪钓鱼条直到完成捕获</li>
+</ol>
+</li>
+<li>循环执行钓鱼流程，等待终止命令</li>
+</ol>
+<h3 id="细节完成"><a href="#细节完成" class="headerlink" title="细节完成"></a>细节完成</h3><p>模拟蓄力目前使用 <code>time.sleep(1.03)</code> 来完成了，实际中偶尔出现卡顿而发生偏差。<del>但不蓄满力不影响钓上鱼，暂且先不管了</del></p>
+<hr>
+<p>捕获感叹号：目前截取屏幕中央的矩形区域，采样后发现叹号出现约 0.6+ 秒，考虑刚出现叹号的帧，用较小区域内的像素变化来捕获</p>
+<p>当场景背景深色时前后截图的差较小，场景背景亮色时前后截图的差较大，暂且凭感觉根据负相关性给出一个阈值了</p>
+<ul>
+<li>TODOs：<ul>
+<li>部分钓鱼点由于处在游戏区域边缘，人物模型不在屏幕中央，改进矩形捕获位置 —— 可以试试轮廓检测能否捕获到人物位置所在矩形，然后以此确定叹号位置</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>捕获鱼条位置：</p>
+<ul>
+<li>由于鱼条的绿色不纯正，还经常变成浅色，与背景框混淆，目前采用通道 g - r 同时将鱼条和鱼都捕获，然后根据尺寸区分</li>
+<li>鱼块比较容易确定，定位后比较位置来判断执行左键按下或抬起</li>
+</ul>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> win32api</span><br><span class="line"><span class="keyword">import</span> win32con</span><br><span class="line"><span class="keyword">import</span> win32gui</span><br><span class="line"><span class="keyword">import</span> win32print</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageGrab</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">intLerp</span>(<span class="params">a, b, t</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>((<span class="number">1</span>-t)*a+t*b)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">varCompare</span>(<span class="params">pre, cur, l = <span class="number">0</span></span>):</span><br><span class="line">    hist1 = cv2.calcHist([pre], [l], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">    hist2 = cv2.calcHist([cur], [l], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">    </span><br><span class="line">    h1 = hist1[:, <span class="number">0</span>]</span><br><span class="line">    h2 = hist2[:, <span class="number">0</span>]</span><br><span class="line">    <span class="comment"># 这里理论上不应该用前一帧该通道的均值，而用其值与黄色在该通道下的值的差值更好，但是我也就说说</span></span><br><span class="line">    res = (h2 - h1).var() / <span class="number">256</span></span><br><span class="line">    res = res / pre[:, :, l].mean()</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FishBar</span>():</span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> 捕鱼的操作可以再优化一下；如果能检测出鱼框上下边界，考虑进碰撞的反弹，那可以试试强化学习    </span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.cur_speed = <span class="number">0.0</span></span><br><span class="line">        self.last_top = <span class="number">420</span></span><br><span class="line">        self.vert_mid = <span class="number">0</span></span><br><span class="line">        self.inited = <span class="literal">False</span></span><br><span class="line">        self.mouse_down = <span class="literal">False</span></span><br><span class="line">    <span class="comment"># 控制钓鱼条，可以优化</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self, brect, frect, dt</span>):</span><br><span class="line">        bar2f = brect[<span class="number">1</span>] - (frect[<span class="number">1</span>] + frect[<span class="number">3</span>])</span><br><span class="line">        fish2b = frect[<span class="number">1</span>] - (brect[<span class="number">1</span>] + brect[<span class="number">3</span>])</span><br><span class="line">        self.cur_speed = (self.last_top - brect[<span class="number">1</span>]) / dt</span><br><span class="line">        self.last_top = brect[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> bar2f &gt; <span class="number">0</span>:</span><br><span class="line">            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> fish2b &gt; <span class="number">0</span>:</span><br><span class="line">            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> self.cur_speed &lt; <span class="number">0</span> <span class="keyword">or</span> \</span><br><span class="line">                (frect[<span class="number">1</span>] + frect[<span class="number">3</span>] / <span class="number">2</span>) &lt; (brect[<span class="number">1</span>] + brect[<span class="number">3</span>] / <span class="number">4</span>):</span><br><span class="line">                win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">clear</span>(<span class="params">self</span>):</span><br><span class="line">        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FishingScript</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.whandle = <span class="literal">None</span></span><br><span class="line">        self.left_top = (<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">        self.h_width = <span class="number">0</span></span><br><span class="line">        self.h_height = <span class="number">0</span></span><br><span class="line">        self.wind_prop = <span class="number">1.0</span></span><br><span class="line">        <span class="comment"># 识别叹号的阈值，越大越不容易误识别，可视输出调整</span></span><br><span class="line">        self.marker_thresh = <span class="number">0.3</span></span><br><span class="line">        self.shot_t = <span class="number">0.1</span></span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> 有机会再追加函数确定人物所在位置</span></span><br><span class="line">        self.cha_hmid = <span class="number">0</span></span><br><span class="line">        self.cha_vmid = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 激活窗口并放置鼠标</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">activateWnd</span>(<span class="params">self, hsv</span>):</span><br><span class="line">        l, t, r, b = win32gui.GetWindowRect(hsv)</span><br><span class="line">        <span class="comment"># 若处于缩略窗口就先切换正常显示</span></span><br><span class="line">        <span class="keyword">if</span> r &lt; <span class="number">0</span>:</span><br><span class="line">            win32gui.ShowWindow(hsv, win32con.SW_SHOWNORMAL)</span><br><span class="line">        win32gui.SetForegroundWindow(hsv)</span><br><span class="line">        l, t, r, b = win32gui.GetWindowRect(hsv)</span><br><span class="line">        proportion = <span class="built_in">round</span>(win32print.GetDeviceCaps(win32gui.GetDC(<span class="number">0</span>), win32con.DESKTOPHORZRES)/win32api.GetSystemMetrics(<span class="number">0</span>), <span class="number">2</span>)</span><br><span class="line">        </span><br><span class="line">        self.setWindowProp((l, t, r, b), proportion)</span><br><span class="line">        win32api.SetCursorPos((intLerp(l, r, <span class="number">0.5</span>), intLerp(t, b, <span class="number">0.5</span>)))</span><br><span class="line">        win32gui.SetForegroundWindow(self.whandle)</span><br><span class="line">        cv2.waitKey(<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 截屏整个游戏窗口</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">grabFullImg</span>(<span class="params">self</span>):</span><br><span class="line">        l, t, r, b = win32gui.GetWindowRect(self.whandle)</span><br><span class="line">        l = <span class="built_in">int</span>(l * self.wind_prop)</span><br><span class="line">        t = <span class="built_in">int</span>(t * self.wind_prop)</span><br><span class="line">        r = <span class="built_in">int</span>(r * self.wind_prop)</span><br><span class="line">        b = <span class="built_in">int</span>(b * self.wind_prop)</span><br><span class="line">        bbox = (l, t, r, b)</span><br><span class="line">        img = ImageGrab.grab(bbox)</span><br><span class="line">        img_cv = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)</span><br><span class="line">        <span class="keyword">return</span> img_cv</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 定时甩杆</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">FisherOut</span>(<span class="params">self, svtime = <span class="number">1.03</span></span>):</span><br><span class="line">        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">        time.sleep(svtime) <span class="comment"># 1.02 和 1.03 都能 max；不知道是否和钓鱼等级有关</span></span><br><span class="line">        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 赋值</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">setWindowProp</span>(<span class="params">self, bbox, prop</span>):</span><br><span class="line">        self.left_top = (bbox[<span class="number">0</span>], bbox[<span class="number">1</span>])</span><br><span class="line">        self.h_width = bbox[<span class="number">2</span>] - bbox[<span class="number">0</span>]</span><br><span class="line">        self.h_height = bbox[<span class="number">3</span>] - bbox[<span class="number">1</span>]</span><br><span class="line">        self.wind_prop = prop</span><br><span class="line">        self.cha_hmid = self.left_top[<span class="number">0</span>] + self.h_width // <span class="number">2</span></span><br><span class="line">        self.cha_vmid = self.left_top[<span class="number">1</span>] + self.h_height // <span class="number">2</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 截屏部分窗口</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">grabRangeImg</span>(<span class="params">self, bbox</span>):</span><br><span class="line">        img = ImageGrab.grab(bbox)</span><br><span class="line">        img_cv = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)</span><br><span class="line">        <span class="keyword">return</span> img_cv</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 前期测试时截屏采样用</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">debugShot</span>(<span class="params">self, bbox, shape, nums = <span class="number">20</span></span>):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(nums):</span><br><span class="line">            time.sleep(self.shot_t)</span><br><span class="line">            img = self.grabRangeImg(bbox)</span><br><span class="line">            <span class="keyword">if</span> shape[<span class="number">0</span>] != <span class="number">0</span>:</span><br><span class="line">                img = cv2.resize(img, dsize = shape)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;image write &quot;</span>, i)</span><br><span class="line">            cv2.imwrite(<span class="string">&quot;tmp/no&#123;&#125;.png&quot;</span>.<span class="built_in">format</span>(i), img)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 等待🐟上钩，即叹号出现</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">waitMarker</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> 目前仅考虑人物位于屏幕中央，条件允许后续加上检测，如识别人物的轮廓转换为矩形区域来确定叹号区域</span></span><br><span class="line">        width = self.h_width / <span class="number">80</span></span><br><span class="line">        height = self.h_height / <span class="number">16</span></span><br><span class="line">        h_mid = self.left_top[<span class="number">0</span>] + self.h_width / <span class="number">2</span></span><br><span class="line">        v_mid = self.left_top[<span class="number">1</span>] + self.h_height / <span class="number">2</span></span><br><span class="line">        val_list = [self.cha_hmid, self.cha_vmid - height * <span class="number">2</span>, self.cha_hmid + width, self.cha_vmid - height]</span><br><span class="line">        bbox = <span class="built_in">tuple</span>(<span class="built_in">int</span>(x * self.wind_prop) <span class="keyword">for</span> x <span class="keyword">in</span> val_list)</span><br><span class="line">        <span class="comment"># self.debugShot(bbox,(60, 180))</span></span><br><span class="line">        pre = cv2.resize(self.grabRangeImg(bbox), dsize=(<span class="number">60</span>, <span class="number">180</span>))</span><br><span class="line">        timer = <span class="number">0.0</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            time.sleep(self.shot_t)</span><br><span class="line">            timer += self.shot_t</span><br><span class="line">            cur = cv2.resize(self.grabRangeImg(bbox), dsize=(<span class="number">60</span>, <span class="number">180</span>))</span><br><span class="line">            vared = self.imgCompare(pre, cur)</span><br><span class="line">            pre = cur</span><br><span class="line">            <span class="keyword">if</span> vared:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;fish caught!&quot;</span>)</span><br><span class="line">                time.sleep(<span class="number">0.2</span>) </span><br><span class="line">                <span class="comment"># 捕获到感叹号有时没法正确发送左击指令，可能是 python 非严格串行的原因，多执行几次得到解决</span></span><br><span class="line">                win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, <span class="built_in">int</span>(h_mid), <span class="built_in">int</span>(v_mid))</span><br><span class="line">                win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, <span class="number">0</span>, <span class="number">0</span>) </span><br><span class="line">                win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, <span class="built_in">int</span>(h_mid), <span class="built_in">int</span>(v_mid))</span><br><span class="line">                win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, <span class="built_in">int</span>(h_mid), <span class="built_in">int</span>(v_mid))</span><br><span class="line">                <span class="comment"># win32gui.SendMessage(self.whandle, win32con.WM_LBUTTONDOWN,win32con.MK_LBUTTON,win32api.MAKELONG(8,30))</span></span><br><span class="line">                time.sleep(<span class="number">0.1</span>)</span><br><span class="line">                win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">                <span class="comment"># win32gui.SendMessage(self.whandle,win32con.WM_LBUTTONUP,win32con.MK_LBUTTON,win32api.MAKELONG(8,30))</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> timer &gt; <span class="number">7.0</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;Wait for too long, might too large threshold&quot;</span>)</span><br><span class="line">                self.marker_thresh -= <span class="number">0.05</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> timer &lt; <span class="number">0.2</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Too fast, might occured misdetection&quot;</span>)</span><br><span class="line">            self.marker_thresh += <span class="number">0.05</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            </span><br><span class="line">    <span class="comment"># 用于判断是否出现叹号</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">imgCompare</span>(<span class="params">self, pre, cur</span>):</span><br><span class="line">        jv1 = varCompare(pre, cur)</span><br><span class="line">        jv2 = varCompare(pre, cur, <span class="number">1</span>)</span><br><span class="line">        jv3 = varCompare(pre, cur, <span class="number">2</span>)</span><br><span class="line">        <span class="built_in">print</span>(jv1, jv2, jv3)</span><br><span class="line">        blue = jv1 &gt; self.marker_thresh</span><br><span class="line">        green = jv2 &gt; self.marker_thresh</span><br><span class="line">        red = jv3 &gt; self.marker_thresh</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">int</span>(blue) + <span class="built_in">int</span>(green) + <span class="built_in">int</span>(red) &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 追踪鱼条执行鼠标动作</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">traceBar</span>(<span class="params">self</span>):</span><br><span class="line">        fb = FishBar()</span><br><span class="line">        width = self.h_width / <span class="number">8</span></span><br><span class="line">        height = self.h_height / <span class="number">20</span></span><br><span class="line">        val_list = [self.cha_hmid - width, self.cha_vmid - <span class="number">7</span> * height, self.cha_hmid + width, self.cha_vmid + <span class="number">5</span>*height]</span><br><span class="line">        bbox = <span class="built_in">tuple</span>(<span class="built_in">int</span>(x * self.wind_prop) <span class="keyword">for</span> x <span class="keyword">in</span> val_list)</span><br><span class="line">        box_w = <span class="number">320</span></span><br><span class="line">        box_h = <span class="number">460</span></span><br><span class="line">        </span><br><span class="line">        round_ticker = <span class="number">0</span> <span class="comment"># 连续三次未捕获到符合的目标则退出该函数</span></span><br><span class="line">        smknl = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line">        lgknl = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">15</span>, <span class="number">15</span>))</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            time.sleep(self.shot_t)</span><br><span class="line">            round_ticker += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> round_ticker &gt; <span class="number">3</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># 先确定鱼</span></span><br><span class="line">            cur = cv2.resize(self.grabRangeImg(bbox),dsize=(box_w, box_h))</span><br><span class="line">            b, g, r = cv2.split(cur)</span><br><span class="line">            fish = cv2.subtract(cv2.subtract(b, r), cv2.subtract(b, g))</span><br><span class="line">            fish = cv2.threshold(fish, <span class="number">100</span>, <span class="number">255</span>, cv2.THRESH_BINARY)[<span class="number">1</span>]</span><br><span class="line">            fish = cv2.morphologyEx(fish, cv2.MORPH_OPEN, smknl)</span><br><span class="line">            fish = cv2.dilate(fish, lgknl)</span><br><span class="line">            fcons, _ = cv2.findContours(fish, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(fcons) &lt; <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;Fish miss detected, need further check&quot;</span>)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            frect = cv2.boundingRect(fcons[<span class="number">0</span>])</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> fb.inited:</span><br><span class="line">                fb.vert_mid = frect[<span class="number">0</span>] + frect[<span class="number">2</span>] // <span class="number">2</span></span><br><span class="line">                fb.inited = <span class="literal">True</span></span><br><span class="line">            <span class="comment"># 再对比确定浮标</span></span><br><span class="line">            bina = cv2.threshold(cv2.subtract(g, r), <span class="number">50</span>, <span class="number">255</span>, cv2.THRESH_BINARY)[<span class="number">1</span>]</span><br><span class="line">            erd = cv2.erode(bina, smknl)</span><br><span class="line">            adjed = cv2.morphologyEx(erd, cv2.MORPH_CLOSE, lgknl)</span><br><span class="line">            cons, _ = cv2.findContours(adjed, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line">            rect_list = []</span><br><span class="line">            <span class="keyword">for</span> (i, c) <span class="keyword">in</span> <span class="built_in">enumerate</span>(cons):</span><br><span class="line">                rect = cv2.boundingRect(c)</span><br><span class="line">                <span class="comment"># 根据位置、形状筛选</span></span><br><span class="line">                <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                if rect[2] &gt; 32 or rect[3] &gt; 200:</span></span><br><span class="line"><span class="string">                    continue</span></span><br><span class="line"><span class="string">                if (rect[0] &gt; 80 and rect[0] &lt; 240):</span></span><br><span class="line"><span class="string">                    continue</span></span><br><span class="line"><span class="string">                if rect[0] &lt; 20 or rect[0] &gt; 280:</span></span><br><span class="line"><span class="string">                    continue</span></span><br><span class="line"><span class="string">                if rect[3] &lt; rect[2] / 2 or rect[3] &lt; 32:</span></span><br><span class="line"><span class="string">                    continue</span></span><br><span class="line"><span class="string">                &quot;&quot;&quot;</span></span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">abs</span>(rect[<span class="number">0</span>] - fb.vert_mid) &gt; frect[<span class="number">2</span>]:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(rect_list) == <span class="number">0</span>:</span><br><span class="line">                    rect_list.append(rect)</span><br><span class="line">                <span class="keyword">elif</span> rect_list[-<span class="number">1</span>][<span class="number">3</span>] &lt; rect[<span class="number">3</span>]:</span><br><span class="line">                    rect_list.append(rect)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(rect_list) &lt; <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;Bar miss detected, need further check&quot;</span>)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            fb.update(rect_list[-<span class="number">1</span>], frect, self.shot_t * round_ticker)</span><br><span class="line">            round_ticker = <span class="number">0</span> <span class="comment"># 顺利更新，归 0</span></span><br><span class="line">        fb.clear()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 确定抓到🐟就左击一下收进背包，否则不用左击</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fishComfirm</span>(<span class="params">self</span>):</span><br><span class="line">        box_w = self.h_width / <span class="number">10</span></span><br><span class="line">        box_h = self.h_height / <span class="number">12</span></span><br><span class="line">        val_list = [self.cha_hmid - box_w, self.cha_vmid - <span class="number">3.5</span> * box_h, self.cha_hmid + box_w, self.cha_vmid - box_h]</span><br><span class="line">        bbox = <span class="built_in">tuple</span>(<span class="built_in">int</span>(x * self.wind_prop) <span class="keyword">for</span> x <span class="keyword">in</span> val_list)</span><br><span class="line">        img = self.grabRangeImg(bbox)</span><br><span class="line">        knl = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">15</span>, <span class="number">15</span>))</span><br><span class="line">        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">        bing = cv2.threshold(gray, <span class="number">230</span>, <span class="number">255</span>, cv2.THRESH_BINARY)[<span class="number">1</span>]</span><br><span class="line">        res = cv2.dilate(bing, knl)</span><br><span class="line">        cons, _ = cv2.findContours(res, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(cons) &lt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        rects = []</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> cons:</span><br><span class="line">            rect = cv2.boundingRect(c)</span><br><span class="line">            sur = rect[<span class="number">2</span>] * rect[<span class="number">3</span>]</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(rects) &lt; <span class="number">1</span>:</span><br><span class="line">                rects.append(rect)</span><br><span class="line">            <span class="keyword">elif</span> rects[-<span class="number">1</span>][<span class="number">2</span>] * rects[-<span class="number">1</span>][<span class="number">3</span>] &lt; sur:</span><br><span class="line">                rects.append(rect)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> rects[-<span class="number">1</span>][<span class="number">2</span>] * rects[-<span class="number">1</span>][<span class="number">3</span>] * <span class="number">2</span> &gt; img.shape[<span class="number">0</span>] * img.shape[<span class="number">1</span>]:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">loop</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Start one loop&quot;</span>)</span><br><span class="line">            self.FisherOut()</span><br><span class="line">            time.sleep(<span class="number">1.5</span>) <span class="comment"># 完成下杆</span></span><br><span class="line">            caught = self.waitMarker()</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> caught:</span><br><span class="line">                self.FisherOut(<span class="number">0.01</span>)</span><br><span class="line">                time.sleep(<span class="number">1.5</span>)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            time.sleep(<span class="number">1.2</span>) <span class="comment"># 进入浮标控制</span></span><br><span class="line">            self.traceBar()</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">            confirmed = self.fishComfirm()</span><br><span class="line">            <span class="keyword">if</span> confirmed:</span><br><span class="line">                <span class="comment"># 这个函数只是定时左击，所以写在这里代替了</span></span><br><span class="line">                self.FisherOut(<span class="number">0.01</span>)</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Finish one loop&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">work</span>(<span class="params">self</span>):</span><br><span class="line">        hsv = win32gui.FindWindow(<span class="string">&quot;SDL_app&quot;</span>, <span class="string">&quot;Stardew Valley&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> hsv == <span class="number">0</span>:</span><br><span class="line">            win32api.MessageBeep()</span><br><span class="line">            ret = win32api.MessageBox(<span class="number">0</span>, <span class="string">&quot;未找到运行中的窗口，请打开游戏再运行此脚本&quot;</span>, <span class="string">&quot;注意&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> ret == <span class="number">1</span>:</span><br><span class="line">                sys.exit(<span class="number">0</span>)</span><br><span class="line">        self.whandle = hsv</span><br><span class="line">        self.activateWnd(hsv)</span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> 可以加上按键终止、启动循环</span></span><br><span class="line">        self.loop()</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    fs = FishingScript()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Object created&quot;</span>)</span><br><span class="line">    fs.work()</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">other</span>():</span><br><span class="line">    imglist = []</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>):</span><br><span class="line">        imglist.append(cv2.imread(<span class="string">&quot;tmp/no&#123;&#125;.png&quot;</span>.<span class="built_in">format</span>(j)))</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="死亡细胞自动格挡脚本"><a href="#死亡细胞自动格挡脚本" class="headerlink" title="死亡细胞自动格挡脚本"></a>死亡细胞自动格挡脚本</h2>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://remedios14.github.io/2022/06/08/OpenCV/Python-%E6%B8%B8%E6%88%8F%E8%84%9A%E6%9C%AC/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://remedios14.github.io/2022/06/08/OpenCV/Python-%E6%B8%B8%E6%88%8F%E8%84%9A%E6%9C%AC/";
+            const title         = "「Python-游戏脚本」";
+            const excerpt       = `基于 opencv、pillow、pywin 来捕获图像并模拟按键操作
+星露谷物语钓鱼脚本设计工作流程：（确保预先调整好钓鱼位置并切换到钓竿）
+
+获取窗体并正常显示后置于最前
+执行单次钓鱼流程
+模拟鼠标左击并等到蓄力满时模拟释放左键
+...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/game-script/" rel="tag">game-script</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-07-07</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Cpp环境配置及编译流程" href="/2022/06/04/C++/Cpp环境配置及编译流程/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Games104-游戏引擎中的渲染、动画、物理" href="/2022/06/12/Games/104现代游戏引擎/Games104-游戏引擎中的渲染、动画、物理/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Alg-Tricks/">Alg-Tricks</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Career-Intro/">Career-Intro</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data/">Data</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Game-Engine/">Game-Engine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games-Graphics/">Games-Graphics</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine-Learning</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Crawler/">Web-Crawler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WebGL/">WebGL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/short-cuts/">short-cuts</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 0.6em;">3D游戏</a> <a href="/tags/Expression/" style="font-size: 0.6em;">Expression</a> <a href="/tags/Functions/" style="font-size: 0.6em;">Functions</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/Hive-Spark/" style="font-size: 0.6em;">Hive/Spark</a> <a href="/tags/Intro/" style="font-size: 0.6em;">Intro</a> <a href="/tags/Matplotlib/" style="font-size: 0.6em;">Matplotlib</a> <a href="/tags/Numpy/" style="font-size: 0.6em;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 0.6em;">Pandas</a> <a href="/tags/Pre-Process/" style="font-size: 0.73em;">Pre-Process</a> <a href="/tags/QuickStart/" style="font-size: 0.6em;">QuickStart</a> <a href="/tags/Short-cuts/" style="font-size: 0.6em;">Short-cuts</a> <a href="/tags/algorithm/" style="font-size: 0.6em;">algorithm</a> <a href="/tags/boosting/" style="font-size: 0.6em;">boosting</a> <a href="/tags/career/" style="font-size: 0.6em;">career</a> <a href="/tags/containers/" style="font-size: 0.6em;">containers</a> <a href="/tags/cpp/" style="font-size: 0.8em;">cpp</a> <a href="/tags/data-analysing/" style="font-size: 0.67em;">data analysing</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/11/Graphics/WebGL-%E5%85%A5%E9%97%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> WebGL-入门环境搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Golang-常规算法实现</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/03/Golang/Golang-QuickIntro/"><i class="fa  fa-book"></i> Golang-QuickIntro</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99/"><i class="fa  fa-book"></i> Shader入门精要-常用编写</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/07/14/Games/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81/Shader%E5%85%A5%E9%97%A8%E7%B2%BE%E8%A6%81-%E6%A6%82%E8%BF%B0/"><i class="fa  fa-book"></i> Shader入门精要-概述</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Remedios14"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 Mikyi喵喵呜~ 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Mikyi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2377259266"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
