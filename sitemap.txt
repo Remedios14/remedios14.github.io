@@ -1,3 +1,8 @@
+http://remedios14.github.io/2025/08/14/music-life/harmonica/secret-base-%E5%8F%A3%E7%90%B4%E8%B0%B1/
+http://remedios14.github.io/2025/08/14/music-life/harmonica/%E7%BE%8E%E4%B8%BD%E4%B9%8B%E7%89%A9-%E5%8F%A3%E7%90%B4%E8%B0%B1/
+http://remedios14.github.io/2025/08/14/music-life/harmonica/%E6%A8%B1%E8%8A%B1%E6%A8%B1%E8%8A%B1%E6%83%B3%E8%A7%81%E4%BD%A0-%E5%8F%A3%E7%90%B4%E8%B0%B1/
+http://remedios14.github.io/2023/12/24/FrontEnd/Npm-%E6%A6%82%E8%BF%B0/
+http://remedios14.github.io/2023/12/24/FrontEnd/React/React-QuickIntro/
 http://remedios14.github.io/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/
 http://remedios14.github.io/2022/09/11/Graphics/WebGL-%E5%85%A5%E9%97%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/
 http://remedios14.github.io/2022/02/26/Alg-Tricks/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/
@@ -130,6 +135,9 @@ http://remedios14.github.io/tags/game-script/
 http://remedios14.github.io/tags/%E6%B8%B8%E6%88%8F%E8%84%9A%E6%9C%AC/
 http://remedios14.github.io/tags/https/
 http://remedios14.github.io/tags/3D%E6%B8%B8%E6%88%8F/
+http://remedios14.github.io/tags/%E5%89%8D%E7%AB%AF/
+http://remedios14.github.io/tags/React/
+http://remedios14.github.io/tags/%E9%9F%B3%E4%B9%90/
 http://remedios14.github.io/categories/Cpp/
 http://remedios14.github.io/categories/Games-Graphics/
 http://remedios14.github.io/categories/Game-Engine/
@@ -146,3 +154,6 @@ http://remedios14.github.io/categories/Linux/
 http://remedios14.github.io/categories/Machine-Learning/
 http://remedios14.github.io/categories/OpenCV/
 http://remedios14.github.io/categories/Web-Crawler/
+http://remedios14.github.io/categories/%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7/
+http://remedios14.github.io/categories/React/
+http://remedios14.github.io/categories/%E5%8F%A3%E7%90%B4/
