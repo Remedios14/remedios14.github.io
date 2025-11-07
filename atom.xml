@@ -6,7 +6,7 @@
   <link href="http://remedios14.github.io/atom.xml" rel="self"/>
   
   <link href="http://remedios14.github.io/"/>
-  <updated>2025-11-02T16:36:41.855Z</updated>
+  <updated>2025-11-07T14:45:15.591Z</updated>
   <id>http://remedios14.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ありがとう</title>
+    <link href="http://remedios14.github.io/2025/11/07/music-life/harmonica/%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86/"/>
+    <id>http://remedios14.github.io/2025/11/07/music-life/harmonica/%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86/</id>
+    <published>2025-11-07T13:26:48.000Z</published>
+    <updated>2025-11-07T14:45:15.591Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="原链接"><a href="#原链接" class="headerlink" title="原链接"></a><a href="https://www.bilibili.com/video/BV1Jx411Q7KT/">原链接</a></h1><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">212 256#6221(#6)</span><br><span class="line">(#6)5555-4-5212</span><br><span class="line">2222122 256#6221(#6)</span><br><span class="line">(#6)5555-4-521(#6)</span><br><span class="line">2221122 256#6221(#6)</span><br><span class="line">(#6)5555-4-5212</span><br><span class="line">22122 256#6221(#6)</span><br><span class="line">(#6)5555-4-521(#6)</span><br><span class="line">#6655-41-2</span><br><span class="line">#66555-55-44</span><br><span class="line">#6655-555-44 245 5454</span><br><span class="line">4#66#6 4[2][1][1]-#6</span><br><span class="line">212 256#6221(#6)</span><br><span class="line">(#6)5555-4-5212</span><br><span class="line">22212 256#6#6[2][1]#6</span><br><span class="line">4445555554-#66#6#6</span><br><span class="line">#6655-41-2</span><br><span class="line">#66555-55-44</span><br><span class="line">#6655-555-44 245 5454</span><br><span class="line">4#66#6 4[2][1][1]-#6</span><br><span class="line">#6655-41-2</span><br><span class="line">#66555-55-44</span><br><span class="line">#6655-555-44 245 5454</span><br><span class="line">#6655-41-2</span><br><span class="line">#66555-55-44</span><br><span class="line">#6655-555-44 245 5454</span><br><span class="line">4#66#6 4[2][1][1]-#6</span><br><span class="line">2212 256#6221(#6)</span><br><span class="line">(4)(5)(#6)(#6)121(#6)(6)(#6)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;原链接&quot;&gt;&lt;a href=&quot;#原链接&quot; class=&quot;headerlink&quot; title=&quot;原链接&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1Jx411Q7KT/&quot;&gt;原链接&lt;/a&gt;&lt;/h1&gt;&lt;figure cl</summary>
+      
+    
+    
+    
+    <category term="口琴" scheme="http://remedios14.github.io/categories/%E5%8F%A3%E7%90%B4/"/>
+    
+    
+    <category term="音乐" scheme="http://remedios14.github.io/tags/%E9%9F%B3%E4%B9%90/"/>
+    
+  </entry>
   
   <entry>
     <title>星之所在</title>
@@ -465,32 +489,6 @@
     
     <category term="WebGL" scheme="http://remedios14.github.io/categories/WebGL/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Golang-常规算法实现</title>
-    <link href="http://remedios14.github.io/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"/>
-    <id>http://remedios14.github.io/2022/09/10/Golang/Golang-%E5%B8%B8%E8%A7%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/</id>
-    <published>2022-09-10T15:20:41.000Z</published>
-    <updated>2023-12-24T07:14:33.342Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="暂时不更新"><a href="#暂时不更新" class="headerlink" title="暂时不更新"></a>暂时不更新</h1><p>虽然没有变成很厉害的程序员，但是已经开始工作了，非必要情况下反而没意愿去实现算法了，所以此篇章可能长期保持不更新状态</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;暂时不更新&quot;&gt;&lt;a href=&quot;#暂时不更新&quot; class=&quot;headerlink&quot; title=&quot;暂时不更新&quot;&gt;&lt;/a&gt;暂时不更新&lt;/h1&gt;&lt;p&gt;虽然没有变成很厉害的程序员，但是已经开始工作了，非必要情况下反而没意愿去实现算法了，所以此篇章可能长期保持不更新状态</summary>
-      
-    
-    
-    
-    <category term="Golang" scheme="http://remedios14.github.io/categories/Golang/"/>
-    
-    
-    <category term="algorithm" scheme="http://remedios14.github.io/tags/algorithm/"/>
-    
-    <category term="datastruct" scheme="http://remedios14.github.io/tags/datastruct/"/>
     
   </entry>
   
